@@ -4,34 +4,35 @@ import OutlinedCard from "../card";
 function Companies() {
   const companiesData = [
     {
-      companyName: "Doller",
+      name: "Doller",
+      email: "company@gmail.com",
     },
     {
-      companyName: "Dear",
+      name: "Dear",
+      email: "company1@gmail.com",
     },
     {
-      companyName: "Walls",
+      name: "Walls",
+      email: "company2@gmail.com",
     },
     {
-      companyName: "Food Panda",
+      name: "Food Panda",
+      email: "company3@gmail.com",
     },
     {
-      companyName: "CY",
+      name: "CY",
+      email: "company4@gmail.com",
     },
   ];
 
   return (
-    <div>
+    <>
       <h1>Companies</h1>
-      <OutlinedCard
-        data={companiesData}
-        btnText={
-          <>
-            <b>Details</b>
-          </>
-        }
-      />
-    </div>
+      {companiesData &&
+        companiesData.map((data, index) => {
+          return <OutlinedCard campusData={data} />;
+        })}
+    </>
   );
 }
 

@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import { useSelector } from "react-redux";
+import { object } from "yup";
 
 const useStyles = makeStyles({
   root: {
@@ -38,178 +39,75 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OutlinedCard(props) {
+export default function OutlinedCard({ campusData }) {
   const state = useSelector((state) => state);
-  console.log(state.addUser.loginUser.role);
-  const {
-    data,
-    companyName,
-    lastDate,
-    jobTitle,
-    description,
-    salary,
-    btnText,
-  } = props;
   const classes = useStyles();
-  // console.log(props);
-  // console.log(window.location);
   const student = state.addUser.loginUser.role === "student";
-  console.log("student", student);
   const company = state.addUser.loginUser.role === "company";
+
+  console.log(state.addUser.loginUser.role);
+  console.log(campusData);
+  console.log("student", student);
   console.log("company", company);
 
   return (
     <Grid container justifyContent="center">
-      {window.location.pathname === "/studentProfile" ? (
-        <Grid item xl={2} md={4} sm={6} xs={12}>
-          <Card className={classes.root} variant="outlined">
-            <CardContent>
-              {student === "student" ? (
-                <>
-                  <div className={classes.main_img_div}>
-                    <div className={classes.profileImg}>
-                      <p>H</p>
-                    </div>
-                  </div>
-                  <div className={classes.card_content1}>
-                    <div>
-                      <Typography variant="body2" component="p">
-                        {props.userName}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.eMail}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.pHone}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.rOle}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.cGpa}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.dOb}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.eDucation}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.eXperience}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sKills}
-                      </Typography>
-                    </div>
-                    <div>
-                      <Typography variant="body2" component="p">
-                        {props.sName}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sEmail}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sPhone}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sRole}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sCgpa}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sDob}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sEducation}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sExperience}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {props.sSkills}
-                      </Typography>
-                    </div>
-                  </div>
-                </>
-              ) : null}
-            </CardContent>
-            <div className={classes.modal_div}>
-              <div>
-                <CardActions>
-                  <CustomizedDialogs />
-                  {/* <Button size="small">{btnText}</Button> */}
-                </CardActions>
+      <Grid item xl={2} md={4} sm={6} xs={12}>
+        <Card className={classes.root} variant="outlined">
+          <CardContent>
+            <div className={classes.main_img_div}>
+              <div className={classes.profileImg}>
+                <p>H</p>
               </div>
             </div>
-          </Card>
-        </Grid>
-      ) : window.location.pathname === "/" ? (
-        ///////////////
-        props.students &&
-        props.students.map((value, key) => {
-          console.log(value, "value", key, "key");
-          return (
-            <Grid item xl={2} md={4} sm={6} xs={12}>
-              <Card className={classes.root} variant="outlined">
-                <CardContent>
-                  <div className={classes.card_content1}>
-                    <div>
-                      <Typography variant="body2" component="p">
-                        <h1>Students Show krwany hy..</h1>
-                      </Typography>
-                    </div>
-                  </div>
-                </CardContent>
-                <div className={classes.modal_div}>
-                  <div>
-                    <CardActions>
-                      <CustomizedDialogs />
-                      {/* <Button size="small">{btnText}</Button> */}
-                    </CardActions>
-                  </div>
-                </div>
-              </Card>
-            </Grid>
-          );
-        })
-      ) : (
-        ////////////////////
-        props.data.map((value, key) => {
-          // console.log("value", value, "key", key);
-          return (
-            <Grid item xl={2} md={4} sm={6} xs={12}>
-              <Card className={classes.root} variant="outlined">
-                <CardContent>
-                  {/* <div className={classes.profileImg}>
-                    <p>H</p>
-                  </div> */}
-                  <div>
-                    <Typography variant="body2" component="p">
-                      {companyName} {value.companyName}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      {lastDate} {value.lastDate}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      {jobTitle} {value.jobTitle}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      {description} {value.description}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      {salary} {value.salary}
-                    </Typography>
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">{btnText}</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          );
-        })
-      )}
+            <div className={classes.card_content1}>
+              <div>
+                <Typography variant="body2" component="p">
+                  Name : {campusData.name}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Email : {campusData?.email}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.jobTitle
+                    ? `Available Jobs : ${campusData.jobTitle}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.dob
+                    ? `Date Of Birth : ${campusData.dob}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.education
+                    ? `Education : ${campusData.education}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.cgpa
+                    ? `CGPA : ${campusData.cgpa}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.skills
+                    ? `Skills : ${campusData.skills}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.experience
+                    ? `Experience : ${campusData.experience}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.phone
+                    ? `Phone : ${campusData.phone}`
+                    : null}
+                </Typography>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </Grid>
     </Grid>
   );
 }

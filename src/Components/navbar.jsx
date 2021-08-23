@@ -118,7 +118,7 @@ export default function ButtonAppBar() {
               <Link to="/companies" className={classes.btnColor}>
                 <Button className={classes.btnColor}>Companies</Button>
               </Link>
-              <Link to="/studentProfile" className={classes.btnColor}>
+              <Link to="/profile" className={classes.btnColor}>
                 <Button className={classes.btnColor}>Profile</Button>
               </Link>
               <Button className={classes.btnColor} onClick={logout}>
@@ -133,6 +133,22 @@ export default function ButtonAppBar() {
             </>
           ) : null}
           {user?.loginStatus === true && user?.loginUser?.role === "company" ? (
+            <>
+              <Link to="/" className={classes.btnColor}>
+                <Button className={classes.btnColor}>Students</Button>
+              </Link>
+              <Link to="/jobpost" className={classes.btnColor}>
+                <Button className={classes.btnColor}>Job Post</Button>
+              </Link>
+              <Link to="/profile" className={classes.btnColor}>
+                <Button className={classes.btnColor}>Profile</Button>
+              </Link>
+              <Button className={classes.btnColor} onClick={logout}>
+                Logout
+              </Button>
+            </>
+          ) : null}
+          {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
             <>
               <Link to="/" className={classes.btnColor}>
                 <Button className={classes.btnColor}>Students</Button>

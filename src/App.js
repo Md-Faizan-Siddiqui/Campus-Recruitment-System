@@ -7,11 +7,8 @@ import { useEffect, useState } from 'react';
 import { auth, database } from './Config/firebaseConfig';
 import { userDetails } from './Redux/Action/userAction';
 import Loader from './Components/loader'
-import StudentProfile from '../src/Components/Student/studentProfile';
-import AdminProfile from './Components/Admin/adminProfile';
-import CompanyProfile from './Components/Company/companyProfile';
-// import HomePage from './Pages/homePage';
-import Vacancies from '../src/Components/vacancies';
+import Profile from './Components/Student/Profile';
+import Vacancies from './Components/Student/vacancies';
 import Companies from './Components/Student/companies';
 import Students from './Components/Company/students';
 import JobPost from './Components/Company/jobPost';
@@ -76,7 +73,7 @@ function App() {
           <>
             <Switch>
               <Route exact path='/' component={Vacancies} />
-              <Route path='/studentProfile' component={StudentProfile} />
+              <Route path='/profile' component={Profile} />
               <Route path='/companies' component={Companies} />
               {/* <Route path='/profileUpdate' component={ProfileUpdate} /> */}
               {/* <Route path='*'>
@@ -88,7 +85,7 @@ function App() {
         {user.loginStatus === true && user.loginUser.role === "admin" ?
           <>
             <Switch>
-              <Route exact path='/' component={AdminProfile} />
+              <Route exact path='/' component={Profile} />
               {/* <Route path='*'>
                 <Redirect to='/' />
               </Route> */}
@@ -99,17 +96,13 @@ function App() {
           <>
             <Switch>
               <Route exact path='/' component={Students} />
-              <Route path='/profile' component={CompanyProfile} />
+              <Route path='/profile' component={Profile} />
               <Route path='/jobpost' component={JobPost} />
               {/* <Route path='*'>
                 <Redirect to='/' />
               </Route> */}
             </Switch>
           </> : null}
-
-
-
-
       </BrowserRouter>
     </div>
   );

@@ -42,9 +42,12 @@ function Students() {
   return (
     <div>
       <h1>Students</h1>
-      <OutlinedCard students={allStudents} />
+
+      <OutlinedCard campusData={allStudents} />
     </div>
   );
 }
 
 export default Students;
+
+// students={allStudents}
