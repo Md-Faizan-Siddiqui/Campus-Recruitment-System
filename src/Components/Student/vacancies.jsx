@@ -80,7 +80,7 @@ function vacancies() {
       <h1>Vacancies</h1>
       {CPJD &&
         CPJD?.map((data, index) => {
-          return <OutlinedCard campusData={data} />;
+          return <OutlinedCard campusData={data} apply />;
         })}
     </div>
   );

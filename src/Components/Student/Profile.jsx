@@ -8,7 +8,7 @@ function Profile() {
   return (
     <>
       <h1>{user.loginUser.role} Profile</h1>
-      <OutlinedCard campusData={user.loginUser} />
+      <OutlinedCard campusData={user.loginUser} updateBtn />
     </>
   );
 }

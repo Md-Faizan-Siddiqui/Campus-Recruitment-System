@@ -35,20 +35,29 @@ const useStyles = makeStyles({
   },
   modal_div: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    paddingTop: "20px",
+    // boxShadow: "0 0 10px gray",
   },
 });
 
-export default function OutlinedCard({ campusData }) {
+export default function OutlinedCard({
+  campusData,
+  updateBtn,
+  apply,
+  details,
+}) {
   const state = useSelector((state) => state);
   const classes = useStyles();
   const student = state.addUser.loginUser.role === "student";
   const company = state.addUser.loginUser.role === "company";
+  const admin = state.addUser.loginUser.role === "admin";
 
   console.log(state.addUser.loginUser.role);
   console.log(campusData);
   console.log("student", student);
   console.log("company", company);
+  console.log("admin", admin);
 
   return (
     <Grid container justifyContent="center">
@@ -103,8 +112,54 @@ export default function OutlinedCard({ campusData }) {
                     ? `Phone : ${campusData.phone}`
                     : null}
                 </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.description
+                    ? `Job Description : ${campusData.description}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.lastDate
+                    ? `Last Date : ${campusData.lastDate}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {student && campusData?.salary
+                    ? `Salary : ${campusData.salary}`
+                    : null}
+                </Typography>
               </div>
             </div>
+            {updateBtn ? (
+              <div className={classes.modal_div}>
+                <div>
+                  <CardActions>
+                    <CustomizedDialogs />
+                  </CardActions>
+                </div>
+              </div>
+            ) : null}
+            {apply ? (
+              <div className={classes.modal_div}>
+                <div>
+                  <CardActions>
+                    <Button variant="contained" color="primary">
+                      Apply Now
+                    </Button>
+                  </CardActions>
+                </div>
+              </div>
+            ) : null}
+            {details ? (
+              <div className={classes.modal_div}>
+                <div>
+                  <CardActions>
+                    <Button variant="contained" color="primary">
+                      Details
+                    </Button>
+                  </CardActions>
+                </div>
+              </div>
+            ) : null}
           </CardContent>
         </Card>
       </Grid>

@@ -30,7 +30,7 @@ function Companies() {
       <h1>Companies</h1>
       {companiesData &&
         companiesData.map((data, index) => {
-          return <OutlinedCard campusData={data} />;
+          return <OutlinedCard campusData={data} details />;
         })}
     </>
   );

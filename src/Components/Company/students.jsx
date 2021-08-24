@@ -40,14 +40,15 @@ function Students() {
     });
   }, []);
   return (
-    <div>
+    <>
       <h1>Students</h1>
-
-      <OutlinedCard campusData={allStudents} />
-    </div>
+      {allStudents &&
+        allStudents.map((data, index) => {
+          return <OutlinedCard campusData={data} details />;
+          console.log(data);
+        })}
+    </>
   );
 }
 
 export default Students;
-
-// students={allStudents}

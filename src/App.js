@@ -42,7 +42,6 @@ function App() {
               setUserData([]);
               console.log("No data available");
             }
-            // console.log(auth.currentUser.uid);
           });
       }
     });
@@ -52,16 +51,13 @@ function App() {
   if (loader === true) {
     return <Loader />
   }
-  // console.log("loader ", loader)
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        {/* <HomePage /> */}
         {user.loginStatus === false ?
           <>
             <Switch>
-              {/* <Route exact path="/" component={HomePage} /> */}
               <Route exact path="/" component={SignUp} />
               <Route path="/login" component={SignIn} />
               <Route path='*' >
@@ -75,10 +71,6 @@ function App() {
               <Route exact path='/' component={Vacancies} />
               <Route path='/profile' component={Profile} />
               <Route path='/companies' component={Companies} />
-              {/* <Route path='/profileUpdate' component={ProfileUpdate} /> */}
-              {/* <Route path='*'>
-                <Redirect to='/' />
-              </Route> */}
             </Switch>
           </> : null}
 
@@ -86,9 +78,6 @@ function App() {
           <>
             <Switch>
               <Route exact path='/' component={Profile} />
-              {/* <Route path='*'>
-                <Redirect to='/' />
-              </Route> */}
             </Switch>
           </> : null}
 
@@ -98,9 +87,6 @@ function App() {
               <Route exact path='/' component={Students} />
               <Route path='/profile' component={Profile} />
               <Route path='/jobpost' component={JobPost} />
-              {/* <Route path='*'>
-                <Redirect to='/' />
-              </Route> */}
             </Switch>
           </> : null}
       </BrowserRouter>

@@ -12,7 +12,10 @@ import "./Student/imgUpload.css";
 function ProfileUpdate(props) {
   const user = useSelector((state) => state.addUser);
   const [url, setUrl] = useState("");
+  const role = user.loginUser.role;
+
   console.log(user);
+  console.log(role);
   const history = useHistory();
   //   const dispatch = useDispatch();
   const phoneRegExp =
@@ -50,7 +53,6 @@ function ProfileUpdate(props) {
     // }),
 
     onSubmit: (values) => {
-      //   alert("fsfs");
       const { email, dob, education, cgpa, skills, name, experience, phone } =
         values;
       console.log("values are ", values);
@@ -70,7 +72,6 @@ function ProfileUpdate(props) {
         .then((res) => {
           console.log(res);
           props.handleClose();
-          history.push("/studentProfile");
         })
         .catch((err) => {
           console.log(err);
@@ -121,32 +122,36 @@ function ProfileUpdate(props) {
                 {formik.errors.name}
               </p>
             )}
-            <TextField
-              label="CGPA"
-              placeholder="CGPA"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="cgpa"
-              value={formik.values.cgpa}
-              onChange={formik.handleChange("cgpa")}
-            />
-            <TextField
-              label="Education"
-              placeholder="Education"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="education"
-              value={formik.values.education}
-              onChange={formik.handleChange("education")}
-            />
+            {role === "student" ? (
+              <TextField
+                label="CGPA"
+                placeholder="CGPA"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="cgpa"
+                value={formik.values.cgpa}
+                onChange={formik.handleChange("cgpa")}
+              />
+            ) : null}
+            {role === "student" ? (
+              <TextField
+                label="Education"
+                placeholder="Education"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="education"
+                value={formik.values.education}
+                onChange={formik.handleChange("education")}
+              />
+            ) : null}
             <TextField
               label="Phone"
               placeholder="Phone"
@@ -165,45 +170,51 @@ function ProfileUpdate(props) {
                 {formik.errors.phone}
               </p>
             )}
-            <TextField
-              label="Date Of Birth"
-              placeholder="D.O.B"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="dob"
-              value={formik.values.dob}
-              onChange={formik.handleChange("dob")}
-            />
-            <TextField
-              label="Skills"
-              placeholder="Skills"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="skills"
-              value={formik.values.skills}
-              onChange={formik.handleChange("skills")}
-            />
-            <TextField
-              label="Experience"
-              placeholder="Experience"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="experience"
-              value={formik.values.experience}
-              onChange={formik.handleChange("experience")}
-            />
+            {role === "student" ? (
+              <TextField
+                label="Date Of Birth"
+                placeholder="D.O.B"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="dob"
+                value={formik.values.dob}
+                onChange={formik.handleChange("dob")}
+              />
+            ) : null}
+            {role === "student" ? (
+              <TextField
+                label="Skills"
+                placeholder="Skills"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="skills"
+                value={formik.values.skills}
+                onChange={formik.handleChange("skills")}
+              />
+            ) : null}
+            {role === "student" ? (
+              <TextField
+                label="Experience"
+                placeholder="Experience"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="experience"
+                value={formik.values.experience}
+                onChange={formik.handleChange("experience")}
+              />
+            ) : null}
             <form>
               <label for="fileToUpload">
                 <div

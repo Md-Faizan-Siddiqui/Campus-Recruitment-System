@@ -68,7 +68,12 @@ export default function CustomizedDialogs() {
 
   return (
     <div>
-      <Button variant="" color="" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        color="primary"
+        // size="small"
+        onClick={handleClickOpen}
+      >
         {/* {<img className="img" src={imgURL} alt="updateProfile" />} */}
         Update Profile
       </Button>
