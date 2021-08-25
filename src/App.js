@@ -22,6 +22,7 @@ function App() {
   const [userData, setUserData] = useState({});
   console.log(userData)
 
+  // get current user and dispatch
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -47,6 +48,32 @@ function App() {
     });
   }, []);
   console.log(userData)
+
+  // get all user from database and dispatch in redux..
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        database
+          .ref("/CRA")
+          .child("users")
+          .on("value", (snapshot) => {
+            if (snapshot.exists()) {
+              console.log(snapshot.val());
+              dispatch(
+                userDetails({
+                  allUsers: snapshot.val(),
+                })
+              );
+            } else {
+              console.log("No data available");
+            }
+          });
+      }
+    });
+  }, []);
+
+  // get and dispatch end...
 
   if (loader === true) {
     return <Loader />

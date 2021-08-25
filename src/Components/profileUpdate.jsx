@@ -60,15 +60,24 @@ function ProfileUpdate(props) {
       database
         .ref("/CRA")
         .child("users/" + user.loginUser.id)
-        .update({
-          dob: dob,
-          education: education,
-          cgpa: cgpa,
-          skills: skills,
-          name: name,
-          phone: phone,
-          experience: experience,
-        })
+        .update(
+          role === "student"
+            ? {
+                dob: dob,
+                education: education,
+                cgpa: cgpa,
+                skills: skills,
+                name: name,
+                phone: phone,
+                experience: experience,
+              }
+            : role === "company"
+            ? {
+                name: name,
+                phone: phone,
+              }
+            : null
+        )
         .then((res) => {
           console.log(res);
           props.handleClose();

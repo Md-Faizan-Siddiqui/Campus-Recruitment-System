@@ -64,18 +64,22 @@ export default function OutlinedCard({
       <Grid item xl={2} md={4} sm={6} xs={12}>
         <Card className={classes.root} variant="outlined">
           <CardContent>
-            <div className={classes.main_img_div}>
+            {/* <div className={classes.main_img_div}>
               <div className={classes.profileImg}>
                 <p>H</p>
               </div>
-            </div>
+            </div> */}
             <div className={classes.card_content1}>
               <div>
                 <Typography variant="body2" component="p">
-                  Name : {campusData.name}
+                  {(company || student) && details
+                    ? campusData.name
+                    : `Name : ${campusData.name}`}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  Email : {campusData?.email}
+                  {(company || student) && details
+                    ? null
+                    : `Email : ${campusData?.email}`}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.jobTitle
@@ -108,9 +112,9 @@ export default function OutlinedCard({
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {student && campusData?.phone
-                    ? `Phone : ${campusData.phone}`
-                    : null}
+                  {(company || student) && details
+                    ? null
+                    : `Phone : ${campusData.phone}`}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.description
@@ -142,7 +146,7 @@ export default function OutlinedCard({
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>
-                    <Button variant="contained" color="primary">
+                    <Button size="small" variant="contained" color="primary">
                       Apply Now
                     </Button>
                   </CardActions>
@@ -153,7 +157,7 @@ export default function OutlinedCard({
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>
-                    <Button variant="contained" color="primary">
+                    <Button size="small" variant="contained" color="primary">
                       Details
                     </Button>
                   </CardActions>

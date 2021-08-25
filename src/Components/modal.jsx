@@ -71,7 +71,7 @@ export default function CustomizedDialogs() {
       <Button
         variant="contained"
         color="primary"
-        // size="small"
+        size="small"
         onClick={handleClickOpen}
       >
         {/* {<img className="img" src={imgURL} alt="updateProfile" />} */}

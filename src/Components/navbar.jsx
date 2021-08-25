@@ -14,6 +14,7 @@ import { userDetails } from "../Redux/Action/userAction";
 import { Drawer } from "@material-ui/core";
 import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
+
 // import CustomizedDialogs from "./modal";
 // import StudentProfile from "./Student/studentProfile";
 
@@ -23,6 +24,15 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "block",
+    },
+  },
+  navBtn: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
   },
   title: {
     flexGrow: 1,
@@ -34,6 +44,21 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: "200px",
     textAlign: "center",
+    // backgroundColor: "#3f51b5",
+  },
+  toggleBtnColor: {
+    color: "#3f51b5",
+    textDecoration: "none",
+  },
+  toggleHeading: {
+    backgroundColor: "#3f51b5",
+    color: "white",
+    margin: 0,
+    padding: "8px",
+  },
+  toggleLogoutBtn: {
+    color: "white",
+    backgroundColor: "#3f51b5",
   },
 }));
 
@@ -49,15 +74,71 @@ export default function ButtonAppBar() {
   };
   const list = () => (
     <div onClick={toggleDrawer(false)} className={classes.drawer}>
-      <h1>ToggleDrawer</h1>
-      <List>
-        <ListItem button> it's work</ListItem>
-        <ListItem button> it's work</ListItem>
-        <ListItem button> it's work</ListItem>
-        <ListItem button> it's work</ListItem>
-        <ListItem button> it's work</ListItem>
-        <ListItem button> it's work</ListItem>
-      </List>
+      <h1 className={classes.toggleHeading}>CRS</h1>
+      {user.loginStatus === false ? (
+        <>
+          <Link to="/" className={classes.toggleBtnColor}>
+            <ListItem button>SignUp</ListItem>
+          </Link>
+          <Link to="/login" className={classes.toggleBtnColor}>
+            <ListItem button>Login</ListItem>
+          </Link>
+        </>
+      ) : null}
+      {user?.loginStatus === true && user?.loginUser?.role === "student" ? (
+        <>
+          <List>
+            <Link to="/" className={classes.toggleBtnColor}>
+              <ListItem button>Vacancies</ListItem>
+            </Link>
+            <Link to="/companies" className={classes.toggleBtnColor}>
+              <ListItem button>Companies</ListItem>
+            </Link>
+            <Link to="/profile" className={classes.toggleBtnColor}>
+              <ListItem button>Profile</ListItem>
+            </Link>
+            <ListItem
+              className={classes.toggleBtnColor}
+              onClick={logout}
+              button
+            >
+              Logout
+            </ListItem>
+          </List>
+        </>
+      ) : null}
+      {user?.loginStatus === true && user?.loginUser?.role === "company" ? (
+        <>
+          <Link to="/" className={classes.toggleBtnColor}>
+            <ListItem button>Students</ListItem>
+          </Link>
+          <Link to="/jobpost" className={classes.toggleBtnColor}>
+            <ListItem button>Job Post</ListItem>
+          </Link>
+          <Link to="/profile" className={classes.toggleBtnColor}>
+            <ListItem button>Profile</ListItem>
+          </Link>
+          <ListItem className={classes.toggleBtnColor} onClick={logout} button>
+            Logout
+          </ListItem>
+        </>
+      ) : null}
+      {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
+        <>
+          <Link to="/" className={classes.toggleBtnColor}>
+            <ListItem button>Students</ListItem>
+          </Link>
+          <Link to="/jobpost" className={classes.toggleBtnColor}>
+            <ListItem button>Job Post</ListItem>
+          </Link>
+          <Link to="/profile" className={classes.toggleBtnColor}>
+            <ListItem button>Profile</ListItem>
+          </Link>
+          <ListItem className={classes.toggleBtnColor} onClick={logout} button>
+            Logout
+          </ListItem>
+        </>
+      ) : null}
     </div>
   );
   // drawer //
@@ -100,70 +181,68 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             CRS
           </Typography>
-          {user.loginStatus === false ? (
-            <>
-              <Link to="/" className={classes.btnColor}>
-                <Button className={classes.btnColor}>SignUp</Button>
-              </Link>
-              <Link to="/login" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Login</Button>
-              </Link>
-            </>
-          ) : null}
-          {user?.loginStatus === true && user?.loginUser?.role === "student" ? (
-            <>
-              <Link to="/" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Vacancies</Button>
-              </Link>
-              <Link to="/companies" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Companies</Button>
-              </Link>
-              <Link to="/profile" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Profile</Button>
-              </Link>
-              <Button className={classes.btnColor} onClick={logout}>
-                Logout
-              </Button>
-              {/* <StudentProfile /> */}
-              {/* <CustomizedDialogs
-                imgURL={
-                  "https://www.clipartmax.com/png/middle/98-984206_profile-photo-facebook-profile-picture-icon.png"
-                }
-              /> */}
-            </>
-          ) : null}
-          {user?.loginStatus === true && user?.loginUser?.role === "company" ? (
-            <>
-              <Link to="/" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Students</Button>
-              </Link>
-              <Link to="/jobpost" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Job Post</Button>
-              </Link>
-              <Link to="/profile" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Profile</Button>
-              </Link>
-              <Button className={classes.btnColor} onClick={logout}>
-                Logout
-              </Button>
-            </>
-          ) : null}
-          {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
-            <>
-              <Link to="/" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Students</Button>
-              </Link>
-              <Link to="/jobpost" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Job Post</Button>
-              </Link>
-              <Link to="/profile" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Profile</Button>
-              </Link>
-              <Button className={classes.btnColor} onClick={logout}>
-                Logout
-              </Button>
-            </>
-          ) : null}
+          <div className={classes.navBtn}>
+            {user.loginStatus === false ? (
+              <>
+                <Link to="/" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>SignUp</Button>
+                </Link>
+                <Link to="/login" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Login</Button>
+                </Link>
+              </>
+            ) : null}
+            {user?.loginStatus === true &&
+            user?.loginUser?.role === "student" ? (
+              <>
+                <Link to="/" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Vacancies</Button>
+                </Link>
+                <Link to="/companies" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Companies</Button>
+                </Link>
+                <Link to="/profile" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Profile</Button>
+                </Link>
+                <Button className={classes.btnColor} onClick={logout}>
+                  Logout
+                </Button>
+              </>
+            ) : null}
+            {user?.loginStatus === true &&
+            user?.loginUser?.role === "company" ? (
+              <>
+                <Link to="/" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Students</Button>
+                </Link>
+                <Link to="/jobpost" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Job Post</Button>
+                </Link>
+                <Link to="/profile" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Profile</Button>
+                </Link>
+                <Button className={classes.btnColor} onClick={logout}>
+                  Logout
+                </Button>
+              </>
+            ) : null}
+            {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
+              <>
+                <Link to="/" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Students</Button>
+                </Link>
+                <Link to="/jobpost" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Job Post</Button>
+                </Link>
+                <Link to="/profile" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Profile</Button>
+                </Link>
+                <Button className={classes.btnColor} onClick={logout}>
+                  Logout
+                </Button>
+              </>
+            ) : null}
+          </div>
         </Toolbar>
       </AppBar>
     </div>

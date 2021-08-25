@@ -1,35 +1,37 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import OutlinedCard from "../card";
 
 function Companies() {
-  const companiesData = [
-    {
-      name: "Doller",
-      email: "company@gmail.com",
-    },
-    {
-      name: "Dear",
-      email: "company1@gmail.com",
-    },
-    {
-      name: "Walls",
-      email: "company2@gmail.com",
-    },
-    {
-      name: "Food Panda",
-      email: "company3@gmail.com",
-    },
-    {
-      name: "CY",
-      email: "company4@gmail.com",
-    },
-  ];
+  // get data from redux..
+
+  const allUsers = useSelector((state) => state.addUser.allUsers);
+  console.log(allUsers, "allUsers");
+
+  // filter companies..
+
+  const allCompanies = Object.values(allUsers)?.filter(
+    (userData) => userData.role === "company"
+  );
+  console.log(allCompanies);
 
   return (
     <>
       <h1>Companies</h1>
-      {companiesData &&
-        companiesData.map((data, index) => {
+      {/* {allCompanies &&
+        allCompanies.map((data, index) => {
+          return (
+            <>
+              <ul>
+                <li>
+                  {data.name} <button>Details</button>
+                </li>
+              </ul>
+            </>
+          );
+        })} */}
+      {allCompanies &&
+        allCompanies.map((data, index) => {
           return <OutlinedCard campusData={data} details />;
         })}
     </>
