@@ -9,6 +9,8 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import ProfileUpdate from "./profileUpdate";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import OutlinedCard from "./card";
 
 const styles = (theme) => ({
   root: {
@@ -54,7 +56,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs() {
+export default function CustomizedDialogs({ icons }) {
   // console.log("imgURL", imgURL);
 
   const [open, setOpen] = React.useState(false);
@@ -65,18 +67,23 @@ export default function CustomizedDialogs() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(icons);
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        onClick={handleClickOpen}
-      >
-        {/* {<img className="img" src={imgURL} alt="updateProfile" />} */}
-        Update Profile
-      </Button>
+      {icons ? (
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={handleClickOpen}
+        >
+          Update Profile
+        </Button>
+      ) : (
+        <Button onClick={handleClickOpen}>
+          <InfoOutlinedIcon color="primary" />
+        </Button>
+      )}
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -86,7 +93,11 @@ export default function CustomizedDialogs() {
           Registration Form
         </DialogTitle>
         <DialogContent dividers>
-          <ProfileUpdate handleClose={handleClose} />
+          {icons ? (
+            <ProfileUpdate handleClose={handleClose} />
+          ) : (
+            <OutlinedCard handleClose={handleClose} />
+          )}
         </DialogContent>
         {/* <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">

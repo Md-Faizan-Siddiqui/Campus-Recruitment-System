@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3f51b5",
     color: "white",
     margin: 0,
-    padding: "8px",
+    padding: "15px",
+    fontSize: "18px",
   },
   toggleLogoutBtn: {
     color: "white",
@@ -66,6 +67,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const user = useSelector((state) => state.addUser);
   const dispatch = useDispatch();
+  console.log(user?.loginUser?.name);
 
   // drawer //
   const [state, setState] = useState(false);
@@ -74,7 +76,7 @@ export default function ButtonAppBar() {
   };
   const list = () => (
     <div onClick={toggleDrawer(false)} className={classes.drawer}>
-      <h1 className={classes.toggleHeading}>CRS</h1>
+      <p className={classes.toggleHeading}>{user?.loginUser?.name}</p>
       {user.loginStatus === false ? (
         <>
           <Link to="/" className={classes.toggleBtnColor}>

@@ -9,6 +9,9 @@ import { Grid } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import { useSelector } from "react-redux";
 import { object } from "yup";
+import { List } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
+// import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +41,11 @@ const useStyles = makeStyles({
     justifyContent: "flex-end",
     paddingTop: "20px",
     // boxShadow: "0 0 10px gray",
+  },
+  show_C_S_Data: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });
 
@@ -73,8 +81,9 @@ export default function OutlinedCard({
               <div>
                 <Typography variant="body2" component="p">
                   {(company || student) && details
-                    ? campusData.name
-                    : `Name : ${campusData.name}`}
+                    ? null
+                    : `Name : ${campusData?.name}`}
+                  {/* {campusData.name ? `Name :${campusData.name}` : null} */}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {(company || student) && details
@@ -114,7 +123,7 @@ export default function OutlinedCard({
                 <Typography variant="body2" component="p">
                   {(company || student) && details
                     ? null
-                    : `Phone : ${campusData.phone}`}
+                    : `Phone : ${campusData?.phone}`}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.description
@@ -133,11 +142,25 @@ export default function OutlinedCard({
                 </Typography>
               </div>
             </div>
+            {(company || student) && details ? (
+              <div className={classes.show_C_S_Data}>
+                <div>
+                  <List>
+                    <ListItem>{campusData?.name}</ListItem>
+                  </List>
+                </div>
+                <div>
+                  <CardActions>
+                    <CustomizedDialogs />
+                  </CardActions>
+                </div>
+              </div>
+            ) : null}
             {updateBtn ? (
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>
-                    <CustomizedDialogs />
+                    <CustomizedDialogs icons />
                   </CardActions>
                 </div>
               </div>
@@ -153,7 +176,7 @@ export default function OutlinedCard({
                 </div>
               </div>
             ) : null}
-            {details ? (
+            {/* {details ? (
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>
@@ -163,7 +186,7 @@ export default function OutlinedCard({
                   </CardActions>
                 </div>
               </div>
-            ) : null}
+            ) : null} */}
           </CardContent>
         </Card>
       </Grid>
