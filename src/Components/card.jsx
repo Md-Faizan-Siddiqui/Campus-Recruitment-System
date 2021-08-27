@@ -54,6 +54,7 @@ export default function OutlinedCard({
   updateBtn,
   apply,
   details,
+  cardData,
 }) {
   const state = useSelector((state) => state);
   const classes = useStyles();
@@ -62,7 +63,8 @@ export default function OutlinedCard({
   const admin = state.addUser.loginUser.role === "admin";
 
   console.log(state.addUser.loginUser.role);
-  console.log(campusData);
+  // console.log(campusData);
+  // console.log("cardData=====>", cardData);
   console.log("student", student);
   console.log("company", company);
   console.log("admin", admin);
@@ -82,13 +84,13 @@ export default function OutlinedCard({
                 <Typography variant="body2" component="p">
                   {(company || student) && details
                     ? null
-                    : `Name : ${campusData?.name}`}
+                    : `Name : ${campusData?.name || cardData?.name}`}
                   {/* {campusData.name ? `Name :${campusData.name}` : null} */}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {(company || student) && details
                     ? null
-                    : `Email : ${campusData?.email}`}
+                    : `Email : ${campusData?.email || cardData?.email}`}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.jobTitle
@@ -97,33 +99,37 @@ export default function OutlinedCard({
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.dob
-                    ? `Date Of Birth : ${campusData.dob}`
+                    ? `Date Of Birth : ${campusData.dob || cardData?.dob}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.education
-                    ? `Education : ${campusData.education}`
+                    ? `Education : ${
+                        campusData.education || cardData?.education
+                      }`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.cgpa
-                    ? `CGPA : ${campusData.cgpa}`
+                    ? `CGPA : ${campusData.cgpa || cardData?.cgpa}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.skills
-                    ? `Skills : ${campusData.skills}`
+                    ? `Skills : ${campusData.skills || cardData?.skills}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.experience
-                    ? `Experience : ${campusData.experience}`
+                    ? `Experience : ${
+                        campusData.experience || cardData?.experience
+                      }`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {(company || student) && details
                     ? null
-                    : `Phone : ${campusData?.phone}`}
+                    : `Phone : ${campusData?.phone || cardData?.phone}`}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.description
@@ -151,7 +157,7 @@ export default function OutlinedCard({
                 </div>
                 <div>
                   <CardActions>
-                    <CustomizedDialogs />
+                    <CustomizedDialogs cardData={campusData} />
                   </CardActions>
                 </div>
               </div>
@@ -176,17 +182,6 @@ export default function OutlinedCard({
                 </div>
               </div>
             ) : null}
-            {/* {details ? (
-              <div className={classes.modal_div}>
-                <div>
-                  <CardActions>
-                    <Button size="small" variant="contained" color="primary">
-                      Details
-                    </Button>
-                  </CardActions>
-                </div>
-              </div>
-            ) : null} */}
           </CardContent>
         </Card>
       </Grid>

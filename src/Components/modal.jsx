@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import ProfileUpdate from "./profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
+import { useSelector } from "react-redux";
 
 const styles = (theme) => ({
   root: {
@@ -56,8 +57,11 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs({ icons }) {
+export default function CustomizedDialogs({ icons, cardData }) {
   // console.log("imgURL", imgURL);
+  const state = useSelector((state) => state);
+  // console.log(state.addUser.allUsers);
+  console.log(cardData, "cardData");
 
   const [open, setOpen] = React.useState(false);
 
@@ -67,7 +71,6 @@ export default function CustomizedDialogs({ icons }) {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(icons);
   return (
     <div>
       {icons ? (
@@ -77,7 +80,7 @@ export default function CustomizedDialogs({ icons }) {
           size="small"
           onClick={handleClickOpen}
         >
-          Update Profile
+          Edit Profile
         </Button>
       ) : (
         <Button onClick={handleClickOpen}>
@@ -90,13 +93,13 @@ export default function CustomizedDialogs({ icons }) {
         open={open}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Registration Form
+          {icons ? "Registration Form" : "Student Details"}
         </DialogTitle>
         <DialogContent dividers>
           {icons ? (
             <ProfileUpdate handleClose={handleClose} />
           ) : (
-            <OutlinedCard handleClose={handleClose} />
+            <OutlinedCard cardData={cardData} handleClose={handleClose} />
           )}
         </DialogContent>
         {/* <DialogActions>

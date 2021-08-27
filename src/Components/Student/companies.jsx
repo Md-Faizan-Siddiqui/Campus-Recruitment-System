@@ -18,18 +18,6 @@ function Companies() {
   return (
     <>
       <h1>Companies</h1>
-      {/* {allCompanies &&
-        allCompanies.map((data, index) => {
-          return (
-            <>
-              <ul>
-                <li>
-                  {data.name} <button>Details</button>
-                </li>
-              </ul>
-            </>
-          );
-        })} */}
       {allCompanies &&
         allCompanies.map((data, index) => {
           return <OutlinedCard campusData={data} details />;
@@ -37,5 +25,4 @@ function Companies() {
     </>
   );
 }
-
 export default Companies;
