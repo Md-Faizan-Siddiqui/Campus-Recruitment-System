@@ -3,26 +3,27 @@ import { TextField } from "@material-ui/core";
 import "../Style/student.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { auth, database } from "../Config/firebaseConfig";
+import { auth, database, Storage } from "../Config/firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import "./Student/imgUpload.css";
+import fallImage from "./Student/img/images.png";
 // import { userDetails } from "../Redux/Action/userAction";
 
 function ProfileUpdate(props) {
+  console.log(props, "<=======props");
   const user = useSelector((state) => state.addUser);
   const [url, setUrl] = useState("");
   const role = user.loginUser.role;
 
   console.log(user);
   console.log(role);
+  console.log(url);
   const history = useHistory();
   //   const dispatch = useDispatch();
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   console.log(user.loginUser.id);
-  const imgUrl =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhOaaBAY_yOcJXbL4jW0I_Y5sePbzagqN2aA&usqp=CAU";
   const formik = useFormik({
     initialValues: {
       name: user.loginUser.name ? user.loginUser.name : "",
@@ -53,8 +54,17 @@ function ProfileUpdate(props) {
     // }),
 
     onSubmit: (values) => {
-      const { email, dob, education, cgpa, skills, name, experience, phone } =
-        values;
+      const {
+        email,
+        dob,
+        education,
+        cgpa,
+        skills,
+        name,
+        experience,
+        phone,
+        fileToUpload,
+      } = values;
       console.log("values are ", values);
 
       database
@@ -70,11 +80,13 @@ function ProfileUpdate(props) {
                 name: name,
                 phone: phone,
                 experience: experience,
+                fileToUpload: fileToUpload,
               }
             : role === "company"
             ? {
                 name: name,
                 phone: phone,
+                fileToUpload: fileToUpload,
               }
             : null
         )
@@ -88,11 +100,11 @@ function ProfileUpdate(props) {
     },
   });
 
-  const uploadImg = (event) => {
-    let images = event.target.files[0];
+  const uploadImg = (e) => {
+    let images = e.target.files[0];
     let pics = images;
-    const picsname = Date.now();
-    Storage.ref("picture/" + images.name + picsname)
+    const uniqueName = Date.now();
+    Storage.ref("images/" + images.name + uniqueName)
       .put(pics)
       .then((snapshot) => {
         snapshot.ref.getDownloadURL().then((URL) => {
@@ -224,35 +236,32 @@ function ProfileUpdate(props) {
                 onChange={formik.handleChange("experience")}
               />
             ) : null}
-            <form>
+            {/* {props.image ? ( */}
+            <>
               <label for="fileToUpload">
                 <div
-                  class="profile-pic"
+                  className="profile-pic"
                   id="profilePic"
-                  style={
-                    {
-                      // backgroundImage: `url( ${
-                      //   state.userData.profilePic
-                      //     ? state.userData.profilePic
-                      //     : ProfilePic
-                      // } )`,
-                    }
-                  }
+                  style={{
+                    backgroundImage: `url( ${url ? url : fallImage} )`,
+                  }}
                 >
                   <span class="glyphicon glyphicon-camera"></span>
                   <span>Change Image</span>
                 </div>
               </label>
               <input
+                value={formik.values.fileToUpload}
                 type="File"
                 name="fileToUpload"
                 id="fileToUpload"
                 onChange={uploadImg}
               />
-            </form>
-            <div className="img_div">
+            </>
+            {/* ) : null} */}
+            {/* <div className="img_div">
               <img src={imgUrl} alt="" />
-            </div>
+            </div> */}
             <button type="submit">Update</button>
           </form>
         </div>

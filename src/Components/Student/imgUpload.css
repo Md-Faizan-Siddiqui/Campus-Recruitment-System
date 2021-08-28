@@ -11,6 +11,7 @@
   transition: all 0.3s ease;
   text-decoration: none;
   cursor: pointer;
+  border: 1px solid black !important;
 }
 
 .profile-pic:hover {
@@ -19,24 +20,29 @@
   color: #fff;
   transition: all 0.3s ease;
   text-decoration: none;
+  /* border: 1px solid black !important; */
 }
 
 .profile-pic span {
   display: inline-block;
   padding-top: 1em;
   padding-bottom: 4.5em;
+  /* border: 1px solid black !important; */
 }
 form input[type="file"] {
   display: none;
   cursor: pointer;
+  /* border: 1px solid black !important; */
 }
 .editForm {
   box-shadow: 0 0 10px grey;
   padding: 20px 20px 10px 20px;
+  /* border: 1px solid black; */
 }
 .profile {
   box-shadow: 0 0 10px grey;
   padding: 20px;
   text-align: center;
   height: 300px;
+  /* border: 1px solid black; */
 }

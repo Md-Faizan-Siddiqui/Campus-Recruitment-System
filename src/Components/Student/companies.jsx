@@ -20,7 +20,7 @@ function Companies() {
       <h1>Companies</h1>
       {allCompanies &&
         allCompanies.map((data, index) => {
-          return <OutlinedCard campusData={data} details />;
+          return <OutlinedCard campusData={data} details image />;
         })}
     </>
   );

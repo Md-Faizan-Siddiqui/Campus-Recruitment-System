@@ -15,7 +15,7 @@ function Students() {
       <h1>Students</h1>
       {allStudents &&
         allStudents.map((data, index) => {
-          return <OutlinedCard campusData={data} details />;
+          return <OutlinedCard campusData={data} details image />;
         })}
     </>
   );

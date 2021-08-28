@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { object } from "yup";
 import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
+import fallBackImage from "./Student/img/images.png";
 // import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 
 const useStyles = makeStyles({
@@ -19,13 +20,14 @@ const useStyles = makeStyles({
   },
   profileImg: {
     borderRadius: "50%",
-    border: "1px solid black",
+    // border: "1px solid black",
     width: "200px",
     height: "200px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 100,
+    overflow: "hidden",
+    // fontSize: 100,
   },
   card_content1: {
     display: "flex",
@@ -35,6 +37,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     marginBottom: "20px",
+    // border: "1px solid black",
   },
   modal_div: {
     display: "flex",
@@ -63,7 +66,7 @@ export default function OutlinedCard({
   const admin = state.addUser.loginUser.role === "admin";
 
   console.log(state.addUser.loginUser.role);
-  // console.log(campusData);
+  console.log("campusData=====>", campusData);
   // console.log("cardData=====>", cardData);
   console.log("student", student);
   console.log("company", company);
@@ -74,21 +77,21 @@ export default function OutlinedCard({
       <Grid item xl={2} md={4} sm={6} xs={12}>
         <Card className={classes.root} variant="outlined">
           <CardContent>
-            {/* <div className={classes.main_img_div}>
+            <div className={classes.main_img_div}>
               <div className={classes.profileImg}>
-                <p>H</p>
+                <img src={fallBackImage} alt="fallBackImage" />
               </div>
-            </div> */}
+            </div>
             <div className={classes.card_content1}>
               <div>
                 <Typography variant="body2" component="p">
-                  {(company || student) && details
+                  {details
                     ? null
                     : `Name : ${campusData?.name || cardData?.name}`}
                   {/* {campusData.name ? `Name :${campusData.name}` : null} */}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {(company || student) && details
+                  {details
                     ? null
                     : `Email : ${campusData?.email || cardData?.email}`}
                 </Typography>

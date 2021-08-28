@@ -10,6 +10,7 @@ function vacancies() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       salary: "0$",
       email: "company1@gmail.com",
+      phone: "3247236436",
     },
     {
       lastDate: "15-April-2022",
