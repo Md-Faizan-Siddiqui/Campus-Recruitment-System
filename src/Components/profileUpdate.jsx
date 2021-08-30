@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import "../Style/student.css";
 import * as Yup from "yup";
@@ -27,7 +27,6 @@ function ProfileUpdate(props) {
   const formik = useFormik({
     initialValues: {
       name: user.loginUser.name ? user.loginUser.name : "",
-      // email: user.loginUser.email ? user.loginUser.email : "",
       phone: user.loginUser.phone ? user.loginUser.phone : "",
       dob: user.loginUser.dob ? user.loginUser.dob : "",
       cgpa: user.loginUser.cgpa ? user.loginUser.cgpa : "",
@@ -54,17 +53,7 @@ function ProfileUpdate(props) {
     // }),
 
     onSubmit: (values) => {
-      const {
-        email,
-        dob,
-        education,
-        cgpa,
-        skills,
-        name,
-        experience,
-        phone,
-        fileToUpload,
-      } = values;
+      const { dob, education, cgpa, skills, name, experience, phone } = values;
       console.log("values are ", values);
 
       database
@@ -80,18 +69,17 @@ function ProfileUpdate(props) {
                 name: name,
                 phone: phone,
                 experience: experience,
-                fileToUpload: fileToUpload,
+                fileToUpload: url,
               }
             : role === "company"
             ? {
                 name: name,
                 phone: phone,
-                fileToUpload: fileToUpload,
+                fileToUpload: url,
               }
             : null
         )
         .then((res) => {
-          console.log(res);
           props.handleClose();
         })
         .catch((err) => {
@@ -101,22 +89,28 @@ function ProfileUpdate(props) {
   });
 
   const uploadImg = (e) => {
+    console.log(e.target.files[0]);
     let images = e.target.files[0];
-    let pics = images;
+    // let pics = images;
     const uniqueName = Date.now();
     Storage.ref("images/" + images.name + uniqueName)
-      .put(pics)
+      .put(images)
       .then((snapshot) => {
         snapshot.ref.getDownloadURL().then((URL) => {
           setUrl(URL);
+          console.log(URL);
         });
-        user.imageURL = url;
-        console.log(url);
       })
       .catch((err) => {
         console.log(err);
       });
+    // setUrl(images);
   };
+  console.log(user.loginUser.fileToUpload);
+
+  useEffect(() => {
+    setUrl(props.cardData.fileToUpload);
+  }, []);
 
   return (
     <div className="main_div">
@@ -237,13 +231,18 @@ function ProfileUpdate(props) {
               />
             ) : null}
             {/* {props.image ? ( */}
-            <>
+            <div className="updateImgDiv">
               <label for="fileToUpload">
                 <div
                   className="profile-pic"
                   id="profilePic"
                   style={{
                     backgroundImage: `url( ${url ? url : fallImage} )`,
+                    // backgroundImage: `url( ${
+                    //   props.cardData.fileToUpload
+                    //     ? props.cardData.fileToUpload
+                    //     : fallImage
+                    // } )`,
                   }}
                 >
                   <span class="glyphicon glyphicon-camera"></span>
@@ -257,7 +256,7 @@ function ProfileUpdate(props) {
                 id="fileToUpload"
                 onChange={uploadImg}
               />
-            </>
+            </div>
             {/* ) : null} */}
             {/* <div className="img_div">
               <img src={imgUrl} alt="" />

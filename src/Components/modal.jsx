@@ -61,7 +61,7 @@ export default function CustomizedDialogs({ icons, cardData }) {
   // console.log("imgURL", imgURL);
   const state = useSelector((state) => state);
   // console.log(state.addUser.allUsers);
-  console.log(cardData, "cardData");
+  console.log(cardData, "<======cardData");
 
   const [open, setOpen] = React.useState(false);
 
@@ -87,27 +87,29 @@ export default function CustomizedDialogs({ icons, cardData }) {
           <InfoOutlinedIcon color="primary" />
         </Button>
       )}
-      <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {icons ? "Registration Form" : "Student Details"}
-        </DialogTitle>
-        <DialogContent dividers>
-          {icons ? (
-            <ProfileUpdate handleClose={handleClose} />
-          ) : (
-            <OutlinedCard cardData={cardData} handleClose={handleClose} />
-          )}
-        </DialogContent>
-        {/* <DialogActions>
+      {open && (
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            {icons ? "Registration Form" : "Student Details"}
+          </DialogTitle>
+          <DialogContent dividers>
+            {icons ? (
+              <ProfileUpdate cardData={cardData} handleClose={handleClose} />
+            ) : (
+              <OutlinedCard cardData={cardData} handleClose={handleClose} />
+            )}
+          </DialogContent>
+          {/* <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
             Update
           </Button>
         </DialogActions> */}
-      </Dialog>
+        </Dialog>
+      )}
     </div>
   );
 }

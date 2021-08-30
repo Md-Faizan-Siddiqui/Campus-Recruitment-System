@@ -18,6 +18,12 @@ const useStyles = makeStyles({
   root: {
     margin: 10,
   },
+  main_img_div: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "20px",
+    // border: "1px solid black",
+  },
   profileImg: {
     borderRadius: "50%",
     // border: "1px solid black",
@@ -29,15 +35,13 @@ const useStyles = makeStyles({
     overflow: "hidden",
     // fontSize: 100,
   },
+  imgTag: {
+    width: "200px",
+    height: "200px",
+  },
   card_content1: {
     display: "flex",
     justifyContent: "center",
-  },
-  main_img_div: {
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: "20px",
-    // border: "1px solid black",
   },
   modal_div: {
     display: "flex",
@@ -67,7 +71,7 @@ export default function OutlinedCard({
 
   console.log(state.addUser.loginUser.role);
   console.log("campusData=====>", campusData);
-  // console.log("cardData=====>", cardData);
+  console.log("cardData=====>", cardData);
   console.log("student", student);
   console.log("company", company);
   console.log("admin", admin);
@@ -79,7 +83,19 @@ export default function OutlinedCard({
           <CardContent>
             <div className={classes.main_img_div}>
               <div className={classes.profileImg}>
-                <img src={fallBackImage} alt="fallBackImage" />
+                {campusData.fileToUpload ? (
+                  <img
+                    className={classes.imgTag}
+                    src={campusData.fileToUpload}
+                    alt="profilePic"
+                  />
+                ) : (
+                  <img
+                    className={classes.imgTag}
+                    src={fallBackImage}
+                    alt="fallBackImage"
+                  />
+                )}
               </div>
             </div>
             <div className={classes.card_content1}>
@@ -169,7 +185,7 @@ export default function OutlinedCard({
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>
-                    <CustomizedDialogs icons />
+                    <CustomizedDialogs cardData={campusData} icons />
                   </CardActions>
                 </div>
               </div>

@@ -11,9 +11,8 @@
   transition: all 0.3s ease;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid black !important;
+  /* border: 1px solid black !important; */
 }
-
 .profile-pic:hover {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10000;
@@ -22,7 +21,6 @@
   text-decoration: none;
   /* border: 1px solid black !important; */
 }
-
 .profile-pic span {
   display: inline-block;
   padding-top: 1em;
@@ -34,15 +32,21 @@ form input[type="file"] {
   cursor: pointer;
   /* border: 1px solid black !important; */
 }
-.editForm {
+.updateImgDiv {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.updateImgDiv label {
+  border-radius: 50%;
+}
+/* .editForm {
   box-shadow: 0 0 10px grey;
   padding: 20px 20px 10px 20px;
-  /* border: 1px solid black; */
-}
-.profile {
+} */
+/* .profile {
   box-shadow: 0 0 10px grey;
   padding: 20px;
   text-align: center;
   height: 300px;
-  /* border: 1px solid black; */
-}
+} */
