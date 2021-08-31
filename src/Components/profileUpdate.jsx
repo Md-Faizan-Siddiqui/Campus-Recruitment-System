@@ -8,22 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import "./Student/imgUpload.css";
 import fallImage from "./Student/img/images.png";
-// import { userDetails } from "../Redux/Action/userAction";
 
 function ProfileUpdate(props) {
-  console.log(props, "<=======props");
+  console.log("props====>", props);
   const user = useSelector((state) => state.addUser);
   const [url, setUrl] = useState("");
   const role = user.loginUser.role;
-
-  console.log(user);
-  console.log(role);
-  console.log(url);
   const history = useHistory();
-  //   const dispatch = useDispatch();
+
+  console.log("user===>", user);
+  console.log("role====>", role);
+  console.log("url====>", url);
+  console.log("Login User ID===>", user.loginUser.id);
+
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-  console.log(user.loginUser.id);
   const formik = useFormik({
     initialValues: {
       name: user.loginUser.name ? user.loginUser.name : "",
@@ -54,7 +53,7 @@ function ProfileUpdate(props) {
 
     onSubmit: (values) => {
       const { dob, education, cgpa, skills, name, experience, phone } = values;
-      console.log("values are ", values);
+      console.log("Values====>", values);
 
       database
         .ref("/CRA")
@@ -91,7 +90,6 @@ function ProfileUpdate(props) {
   const uploadImg = (e) => {
     console.log(e.target.files[0]);
     let images = e.target.files[0];
-    // let pics = images;
     const uniqueName = Date.now();
     Storage.ref("images/" + images.name + uniqueName)
       .put(images)
@@ -104,9 +102,8 @@ function ProfileUpdate(props) {
       .catch((err) => {
         console.log(err);
       });
-    // setUrl(images);
   };
-  console.log(user.loginUser.fileToUpload);
+  console.log("user======>", user.loginUser.fileToUpload);
 
   useEffect(() => {
     setUrl(props.cardData.fileToUpload);
@@ -230,7 +227,6 @@ function ProfileUpdate(props) {
                 onChange={formik.handleChange("experience")}
               />
             ) : null}
-            {/* {props.image ? ( */}
             <div className="updateImgDiv">
               <label for="fileToUpload">
                 <div
@@ -238,11 +234,6 @@ function ProfileUpdate(props) {
                   id="profilePic"
                   style={{
                     backgroundImage: `url( ${url ? url : fallImage} )`,
-                    // backgroundImage: `url( ${
-                    //   props.cardData.fileToUpload
-                    //     ? props.cardData.fileToUpload
-                    //     : fallImage
-                    // } )`,
                   }}
                 >
                   <span class="glyphicon glyphicon-camera"></span>
@@ -257,10 +248,6 @@ function ProfileUpdate(props) {
                 onChange={uploadImg}
               />
             </div>
-            {/* ) : null} */}
-            {/* <div className="img_div">
-              <img src={imgUrl} alt="" />
-            </div> */}
             <button type="submit">Update</button>
           </form>
         </div>

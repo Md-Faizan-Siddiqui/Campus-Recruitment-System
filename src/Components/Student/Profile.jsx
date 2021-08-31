@@ -4,7 +4,7 @@ import OutlinedCard from "../card";
 
 function Profile() {
   const user = useSelector((state) => state.addUser);
-  console.log(user.loginUser);
+  console.log("User===>", user.loginUser);
   return (
     <>
       <h1>{user.loginUser.role} Profile</h1>

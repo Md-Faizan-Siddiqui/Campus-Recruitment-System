@@ -57,8 +57,8 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs({ icons, cardData }) {
-  // console.log("imgURL", imgURL);
+export default function CustomizedDialogs({ icons, cardData, campusData }) {
+  console.log("Campus Data", campusData);
   const state = useSelector((state) => state);
   // console.log(state.addUser.allUsers);
   console.log(cardData, "<======cardData");
@@ -100,7 +100,11 @@ export default function CustomizedDialogs({ icons, cardData }) {
             {icons ? (
               <ProfileUpdate cardData={cardData} handleClose={handleClose} />
             ) : (
-              <OutlinedCard cardData={cardData} handleClose={handleClose} />
+              <OutlinedCard
+                campusData={campusData}
+                cardData={cardData}
+                handleClose={handleClose}
+              />
             )}
           </DialogContent>
           {/* <DialogActions>
