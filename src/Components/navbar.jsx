@@ -115,7 +115,7 @@ export default function ButtonAppBar() {
             <ListItem button>Students</ListItem>
           </Link>
           <Link to="/jobpost" className={classes.toggleBtnColor}>
-            <ListItem button>Job Post</ListItem>
+            <ListItem button>Jobs</ListItem>
           </Link>
           <Link to="/profile" className={classes.toggleBtnColor}>
             <ListItem button>Profile</ListItem>
@@ -131,7 +131,7 @@ export default function ButtonAppBar() {
             <ListItem button>Students</ListItem>
           </Link>
           <Link to="/jobpost" className={classes.toggleBtnColor}>
-            <ListItem button>Job Post</ListItem>
+            <ListItem button>Jobs</ListItem>
           </Link>
           <Link to="/profile" className={classes.toggleBtnColor}>
             <ListItem button>Profile</ListItem>
@@ -218,7 +218,7 @@ export default function ButtonAppBar() {
                   <Button className={classes.btnColor}>Students</Button>
                 </Link>
                 <Link to="/jobpost" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Job Post</Button>
+                  <Button className={classes.btnColor}>Jobs</Button>
                 </Link>
                 <Link to="/profile" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Profile</Button>
@@ -234,7 +234,7 @@ export default function ButtonAppBar() {
                   <Button className={classes.btnColor}>Students</Button>
                 </Link>
                 <Link to="/jobpost" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Job Post</Button>
+                  <Button className={classes.btnColor}>Jobs</Button>
                 </Link>
                 <Link to="/profile" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Profile</Button>

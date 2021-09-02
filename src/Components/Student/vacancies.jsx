@@ -88,15 +88,3 @@ function vacancies() {
 }
 
 export default vacancies;
-
-// data={CPJD}
-// name="Company Name :"
-// lastDate="Last Date :"
-// jobTitle="Job Tital :"
-// description="Description :"
-// salary="Salary :"
-// btnText={
-//   <>
-//     <b>Apply Now</b>
-//   </>
-// }

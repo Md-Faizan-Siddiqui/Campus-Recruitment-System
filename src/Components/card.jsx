@@ -184,6 +184,11 @@ export default function OutlinedCard({
                     ? `Salary : ${campusData.salary}`
                     : null}
                 </Typography>
+                <Typography variant="body2" component="p">
+                  {company && campusData?.website
+                    ? `Website : ${campusData.website}`
+                    : null}
+                </Typography>
               </div>
             </div>
             {(company || student) && details ? (

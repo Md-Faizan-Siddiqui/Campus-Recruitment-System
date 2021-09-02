@@ -12,6 +12,7 @@ import ProfileUpdate from "./profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
 import { useSelector } from "react-redux";
+import { yellow } from "@material-ui/core/colors";
 
 const styles = (theme) => ({
   root: {
@@ -57,7 +58,14 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs({ icons, cardData, campusData }) {
+export default function CustomizedDialogs({
+  formTitle,
+  icons,
+  cardData,
+  campusData,
+  btnText,
+  jobPost,
+}) {
   console.log("Campus Data", campusData);
   const state = useSelector((state) => state);
   // console.log(state.addUser.allUsers);
@@ -73,14 +81,14 @@ export default function CustomizedDialogs({ icons, cardData, campusData }) {
   };
   return (
     <div>
-      {icons ? (
+      {icons || btnText ? (
         <Button
           variant="contained"
           color="primary"
           size="small"
           onClick={handleClickOpen}
         >
-          Edit Profile
+          {btnText ? btnText : "Edit Profile"}
         </Button>
       ) : (
         <Button onClick={handleClickOpen}>
@@ -94,11 +102,20 @@ export default function CustomizedDialogs({ icons, cardData, campusData }) {
           open={open}
         >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            {icons ? "Registration Form" : "Student Details"}
+            {icons
+              ? "Registration Form"
+              : formTitle
+              ? formTitle
+              : "Student Details"}
           </DialogTitle>
           <DialogContent dividers>
-            {icons ? (
-              <ProfileUpdate cardData={cardData} handleClose={handleClose} />
+            {icons || btnText ? (
+              <ProfileUpdate
+                cardData={cardData}
+                handleClose={handleClose}
+                jobPost={jobPost}
+                btnText={btnText}
+              />
             ) : (
               <OutlinedCard
                 campusData={campusData}
