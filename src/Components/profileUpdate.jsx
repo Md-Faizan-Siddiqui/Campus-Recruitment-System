@@ -7,10 +7,8 @@ import { database, Storage } from "../Config/firebaseConfig";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import fallImage from "./Student/img/images.png";
-import CountrySelect from "./countryCode";
 import * as Yup from "yup";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+// import "react-phone-number-input/style.css";
 
 function ProfileUpdate(props) {
   console.log("props====>", props);
@@ -58,17 +56,8 @@ function ProfileUpdate(props) {
     // }),
 
     onSubmit: (values) => {
-      const {
-        dob,
-        education,
-        cgpa,
-        skills,
-        name,
-        experience,
-        phone,
-        email,
-        website,
-      } = values;
+      const { dob, education, cgpa, skills, name, experience, phone, website } =
+        values;
       console.log("Values====>", values);
 
       database
@@ -101,23 +90,6 @@ function ProfileUpdate(props) {
         .catch((err) => {
           console.log(err);
         });
-
-      // database
-      //   .ref("/CRA")
-      //   .child("jobs/" + user.loginUser.id)
-      //   .set({
-      //     name: a,
-      //     phone: a,
-      //     email: a,
-      //     jobTitle: a,
-      //     jobDescription: a,
-      //     website: a,
-      //     jobType: a,
-      //     lastDate: a,
-      //     experience: a,
-      //     education: a,
-      //     salary: a,
-      //   });
     },
   });
 
@@ -147,23 +119,24 @@ function ProfileUpdate(props) {
     <div className="main_div">
       <div className="form_div">
         <div>
-          {/* <h1>{props.jobPost ? null : "Edit Your Profile"}</h1> */}
           <form onSubmit={formik.handleSubmit}>
-            <TextField
-              type="text"
-              label="Name"
-              placeholder="Name"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              autoFocus
-              variant="outlined"
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange("name")}
-            />
+            {props.jobPost ? null : (
+              <TextField
+                type="text"
+                label="Name"
+                placeholder="Name"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                autoFocus
+                variant="outlined"
+                name="name"
+                value={formik.values.name}
+                onChange={formik.handleChange("name")}
+              />
+            )}
             {formik.errors.name && formik.touched.name && (
               <p style={{ color: "red", marginLeft: "5px" }}>
                 {formik.errors.name}
@@ -185,7 +158,7 @@ function ProfileUpdate(props) {
                 onChange={formik.handleChange("cgpa")}
               />
             ) : null}
-            {role === "student" || (role === "company" && props.jobPost) ? (
+            {role === "student" ? (
               <TextField
                 type="text"
                 label="Education"
@@ -213,19 +186,21 @@ function ProfileUpdate(props) {
               onChange={formik.handleChange("phone")}
             /> */}
             {/* <CountrySelect /> */}
-            <TextField
-              label="Phone"
-              placeholder="Phone"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="phone"
-              value={formik.values.phone}
-              onChange={formik.handleChange("phone")}
-            />
+            {props.jobPost ? null : (
+              <TextField
+                label="Phone"
+                placeholder="Phone"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="phone"
+                value={formik.values.phone}
+                onChange={formik.handleChange("phone")}
+              />
+            )}
             {formik.errors.phone && formik.touched.phone && (
               <p style={{ color: "red", marginLeft: "5px" }}>
                 {formik.errors.phone}
@@ -262,7 +237,7 @@ function ProfileUpdate(props) {
                 onChange={formik.handleChange("skills")}
               />
             ) : null}
-            {role === "student" || (role === "company" && props.jobPost) ? (
+            {role === "student" ? (
               <TextField
                 label="Experience"
                 placeholder="Experience"
@@ -277,54 +252,7 @@ function ProfileUpdate(props) {
                 onChange={formik.handleChange("experience")}
               />
             ) : null}
-            {/*  >>>>>>>>>>>>>>>>>>>>>>>>>>> Job post Field start<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  */}
-            {role === "company" && props.jobPost ? (
-              <TextField
-                label="Job Title"
-                placeholder="Job Title"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="jobTitle"
-                value={formik.values.jobTitle}
-                onChange={formik.handleChange("jobTitle")}
-              />
-            ) : null}
-            {role === "company" && props.jobPost ? (
-              <TextField
-                label="Job Description"
-                placeholder="Job Description"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="jobDescription"
-                value={formik.values.jobDescription}
-                onChange={formik.handleChange("jobDescription")}
-              />
-            ) : null}
-            {role === "company" && props.jobPost ? (
-              <TextField
-                label="Email"
-                placeholder="Email"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                // disabled
-                variant="outlined"
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange("email")}
-              />
-            ) : null}
-            {role === "company" || props.jobPost ? (
+            {role === "company" ? (
               <TextField
                 label="Website"
                 placeholder="Website"
@@ -339,85 +267,6 @@ function ProfileUpdate(props) {
                 onChange={formik.handleChange("website")}
               />
             ) : null}
-            {role === "company" && props.jobPost ? (
-              <TextField
-                label="Job Type"
-                placeholder="Job Type"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="jobType"
-                value={formik.values.jobType}
-                onChange={formik.handleChange("jobType")}
-              />
-            ) : null}
-            {/* {role === "company" && props.jobPost ? (
-              <TextField
-                label="Required Experience"
-                placeholder="Required Experience"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="requiredExperience"
-                value={formik.values.requiredExperience}
-                onChange={formik.handleChange("requiredExperience")}
-              />
-            ) : null} */}
-            {role === "company" && props.jobPost ? (
-              <TextField
-                type="date"
-                label="Last Date"
-                placeholder="Last Date"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="lastDate"
-                value={formik.values.lastDate}
-                onChange={formik.handleChange("lastDate")}
-              />
-            ) : null}
-            {role === "company" && props.jobPost ? (
-              <TextField
-                type="number"
-                label="Salary"
-                placeholder="Salary"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="salary"
-                value={formik.values.salary}
-                onChange={formik.handleChange("salary")}
-              />
-            ) : null}
-            {/* {role === "company" && props.jobPost ? (
-              <TextField
-                type="text"
-                label="Education"
-                placeholder="Education"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="education"
-                value={formik.values.education}
-                onChange={formik.handleChange("education")}
-              />
-            ) : null} */}
-            {/*  >>>>>>>>>>>>>>>>>>>>>>>>>>> Job post Field end<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  */}
             {props.jobPost ? null : (
               <div className="updateImgDiv">
                 <label for="fileToUpload">
@@ -441,7 +290,7 @@ function ProfileUpdate(props) {
                 />
               </div>
             )}
-            <button type="submit">{props.jobPost ? "Post" : "Update"}</button>
+            <button type="submit">Update</button>
           </form>
         </div>
       </div>

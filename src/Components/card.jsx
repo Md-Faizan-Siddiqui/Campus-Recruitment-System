@@ -54,6 +54,9 @@ export default function OutlinedCard({
   apply,
   details,
   cardData,
+  formTitle,
+  companyDetails,
+  studentDetails,
 }) {
   const state = useSelector((state) => state);
   const classes = useStyles();
@@ -203,6 +206,9 @@ export default function OutlinedCard({
                     <CustomizedDialogs
                       campusData={campusData}
                       cardData={campusData}
+                      formTitle={formTitle}
+                      companyDetails={companyDetails}
+                      studentDetails={studentDetails}
                     />
                   </CardActions>
                 </div>
@@ -212,7 +218,12 @@ export default function OutlinedCard({
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>
-                    <CustomizedDialogs cardData={campusData} icons />
+                    <CustomizedDialogs
+                      cardData={campusData}
+                      icons
+                      details={details}
+                      formTitle={formTitle}
+                    />
                   </CardActions>
                 </div>
               </div>

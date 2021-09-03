@@ -13,6 +13,7 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
 import { useSelector } from "react-redux";
 import { yellow } from "@material-ui/core/colors";
+import JobPost from "./Company/jobPost";
 
 const styles = (theme) => ({
   root: {
@@ -65,6 +66,9 @@ export default function CustomizedDialogs({
   campusData,
   btnText,
   jobPost,
+  details,
+  companyDetails,
+  studentDetails,
 }) {
   console.log("Campus Data", campusData);
   const state = useSelector((state) => state);
@@ -102,20 +106,13 @@ export default function CustomizedDialogs({
           open={open}
         >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            {icons
-              ? "Registration Form"
-              : formTitle
+            {icons || studentDetails || companyDetails || jobPost
               ? formTitle
-              : "Student Details"}
+              : null}
           </DialogTitle>
           <DialogContent dividers>
-            {icons || btnText ? (
-              <ProfileUpdate
-                cardData={cardData}
-                handleClose={handleClose}
-                jobPost={jobPost}
-                btnText={btnText}
-              />
+            {icons ? (
+              <ProfileUpdate cardData={cardData} handleClose={handleClose} />
             ) : (
               <OutlinedCard
                 campusData={campusData}

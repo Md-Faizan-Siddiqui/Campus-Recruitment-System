@@ -120,7 +120,7 @@ export default function SignUp() {
             })
             .then((res) => {
               console.log("res", res);
-              history.push("/login");
+              history.push("/");
               var user = userCredential;
               setLoader(false);
               setMessage("User Created Successful");
@@ -252,7 +252,7 @@ export default function SignUp() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link to="/login" variant="body2">
+              <Link to="/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

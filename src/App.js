@@ -82,17 +82,17 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        {user.loginStatus === false ?
+        {user?.loginStatus === false ?
           <>
             <Switch>
-              <Route exact path="/" component={SignUp} />
-              <Route path="/login" component={SignIn} />
+              <Route exact path="/" component={SignIn} />
+              <Route path="/signup" component={SignUp} />
               <Route path='*' >
                 <Redirect to='/' />
               </Route>
             </Switch>
           </> : null}
-        {user.loginStatus === true && user.loginUser.role === 'student' ?
+        {user?.loginUser?.role === 'student' ?
           <>
             <Switch>
               <Route exact path='/' component={Vacancies} />
@@ -101,14 +101,14 @@ function App() {
             </Switch>
           </> : null}
 
-        {user.loginStatus === true && user.loginUser.role === "admin" ?
+        {user?.loginUser?.role === "admin" ?
           <>
             <Switch>
               <Route exact path='/' component={Profile} />
             </Switch>
           </> : null}
 
-        {user.loginStatus === true && user.loginUser.role === "company" ?
+        {user?.loginUser?.role === "company" ?
           <>
             <Switch>
               <Route exact path='/' component={Students} />
