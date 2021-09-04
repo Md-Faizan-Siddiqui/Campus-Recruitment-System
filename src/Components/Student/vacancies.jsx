@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { database } from "../../Config/firebaseConfig";
+import { userDetails } from "../../Redux/Action/userAction";
 import OutlinedCard from "../card";
-function vacancies() {
+
+function Vacancies() {
+  const postedJobs = useSelector((state) => state);
+  console.log(postedJobs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    database
+      .ref("/CRA")
+      .child("jobs/")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          dispatch(
+            userDetails({
+              allJobs: snapshot.val(),
+            })
+          );
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const CPJD = [
     {
       lastDate: "13-May-2020",
@@ -87,4 +116,4 @@ function vacancies() {
   );
 }
 
-export default vacancies;
+export default Vacancies;

@@ -14,6 +14,7 @@ import OutlinedCard from "./card";
 import { useSelector } from "react-redux";
 import { yellow } from "@material-ui/core/colors";
 import JobPost from "./Company/jobPost";
+import JobPostForm from "./Company/jobPostForm";
 
 const styles = (theme) => ({
   root: {
@@ -113,6 +114,8 @@ export default function CustomizedDialogs({
           <DialogContent dividers>
             {icons ? (
               <ProfileUpdate cardData={cardData} handleClose={handleClose} />
+            ) : jobPost ? (
+              <JobPostForm handleClose={handleClose} />
             ) : (
               <OutlinedCard
                 campusData={campusData}

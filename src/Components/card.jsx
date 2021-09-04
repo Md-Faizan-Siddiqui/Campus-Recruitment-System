@@ -57,13 +57,14 @@ export default function OutlinedCard({
   formTitle,
   companyDetails,
   studentDetails,
+  allJobs,
+  companyPostJob,
 }) {
   const state = useSelector((state) => state);
   const classes = useStyles();
   const student = state.addUser.loginUser.role === "student";
   const company = state.addUser.loginUser.role === "company";
   const admin = state.addUser.loginUser.role === "admin";
-  const [imgUrl, setImgUrl] = useState("");
 
   // console.log(state.addUser.loginUser.role);
   // console.log("campusData=====>", campusData);
@@ -83,44 +84,30 @@ export default function OutlinedCard({
     "Card Data=====>",
     cardData
   );
-
-  // details p image show kraya h... student or compny ki...
-  // useEffect(() => {
-  //   setImgUrl(campusData?.fileToUpload);
-  //   details
-  //     ? setImgUrl(campusData?.fileToUpload)
-  //     : setImgUrl(cardData?.fileToUpload);
-  // }, []);
+  console.log("allJobs===>", allJobs, companyPostJob);
   console.log("Campus Data====>", campusData);
   console.log("Card Data====>", cardData);
 
-  // console.log("CampusData FileToUpload", campusData?.fileToUpload);
-  // console.log("CardData FileToUpload", cardData?.fileToUpload);
-  // console.log("Image URL====>", imgUrl);
   return (
     <Grid container justifyContent="center">
       <Grid item xl={2} md={4} sm={6} xs={12}>
         <Card className={classes.root} variant="outlined">
           <CardContent>
-            <div className={classes.main_img_div}>
-              <div className={classes.profileImg}>
-                {console.log(imgUrl)}
-                {/* <img
-                  className={classes.imgTag}
-                  src={imgUrl ? imgUrl : fallBackImage}
-                  alt="profilePic"
-                /> */}
-                <img
-                  className={classes.imgTag}
-                  src={
-                    campusData?.fileToUpload
-                      ? campusData.fileToUpload
-                      : fallBackImage
-                  }
-                  alt="profilePic"
-                />
+            {companyPostJob ? null : (
+              <div className={classes.main_img_div}>
+                <div className={classes.profileImg}>
+                  <img
+                    className={classes.imgTag}
+                    src={
+                      campusData?.fileToUpload
+                        ? campusData.fileToUpload
+                        : fallBackImage
+                    }
+                    alt="profilePic"
+                  />
+                </div>
               </div>
-            </div>
+            )}
             <div className={classes.card_content1}>
               <div>
                 <Typography variant="body2" component="p">
@@ -191,6 +178,34 @@ export default function OutlinedCard({
                   {company && campusData?.website
                     ? `Website : ${campusData.website}`
                     : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob ? `Job Title : ${cardData?.jobTitle}` : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob
+                    ? `Job Description : ${cardData?.jobDescription}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob ? `Job Type : ${cardData?.jobType}` : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob
+                    ? `Experience : ${cardData?.experience}`
+                    : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob ? `Website : ${cardData?.website}` : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob ? `Salary : ${cardData?.salary}` : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob ? `Last Date : ${cardData?.lastDate}` : null}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {companyPostJob ? `Education : ${cardData?.education}` : null}
                 </Typography>
               </div>
             </div>

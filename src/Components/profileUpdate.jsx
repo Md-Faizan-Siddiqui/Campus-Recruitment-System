@@ -9,6 +9,7 @@ import { useHistory } from "react-router";
 import fallImage from "./Student/img/images.png";
 import * as Yup from "yup";
 // import "react-phone-number-input/style.css";
+import { Button } from "@material-ui/core";
 
 function ProfileUpdate(props) {
   console.log("props====>", props);
@@ -290,7 +291,15 @@ function ProfileUpdate(props) {
                 />
               </div>
             )}
-            <button type="submit">Update</button>
+            {/* <button type="submit">Update</button> */}
+            <Button
+              type="submit"
+              size="small"
+              variant="contained"
+              color="primary"
+            >
+              Update
+            </Button>
           </form>
         </div>
       </div>

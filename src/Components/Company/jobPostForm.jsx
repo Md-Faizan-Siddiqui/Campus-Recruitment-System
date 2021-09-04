@@ -2,9 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { TextField } from "@material-ui/core";
-import "../Style/student.css";
+import { database } from "../../Config/firebaseConfig";
+import { Button } from "@material-ui/core";
+import { date } from "yup/lib/locale";
 
-function JobPostForm() {
+// import "../Style/student.css";
+
+function JobPostForm(props) {
+  console.log("props====>", props);
   const user = useSelector((state) => state.addUser);
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -13,12 +18,16 @@ function JobPostForm() {
       email: user.loginUser.email,
       name: user.loginUser.name ? user.loginUser.name : "",
       phone: user.loginUser.phone ? user.loginUser.phone : "",
-      dob: user.loginUser.dob ? user.loginUser.dob : "",
-      cgpa: user.loginUser.cgpa ? user.loginUser.cgpa : "",
       education: user.loginUser.education ? user.loginUser.education : "",
-      skills: user.loginUser.skills ? user.loginUser.skills : "",
       experience: user.loginUser.experience ? user.loginUser.experience : "",
       website: user.loginUser.website ? user.loginUser.website : "",
+      jobTitle: user.loginUser.jobTitle ? user.loginUser.jobTitle : "",
+      jobType: user.loginUser.jobType ? user.loginUser.jobType : "",
+      lastDate: user.loginUser.lastDate ? user.loginUser.lastDate : "",
+      salary: user.loginUser.salary ? user.loginUser.salary : "",
+      jobDescription: user.loginUser.jobDescription
+        ? user.loginUser.jobDescription
+        : "",
     },
     // validationSchema: Yup.object({
     //   name: Yup.string()
@@ -54,8 +63,8 @@ function JobPostForm() {
       } = values;
       console.log("Values====>", values);
       database
-        .ref("/CRA")
-        .child("jobs/" + user.loginUser.id)
+        .ref(`/CRA/jobs/${user.loginUser.id + Date.now()}`)
+        // .child("jobs/" + user.loginUser.id)
         .set({
           name: name,
           phone: phone,
@@ -68,6 +77,13 @@ function JobPostForm() {
           experience: experience,
           education: education,
           salary: salary,
+        })
+        .then((res) => {
+          //   console.log("updated=====>", res);
+          props.handleClose();
+        })
+        .catch((err) => {
+          console.log("error=====>", err);
         });
     },
   });
@@ -234,6 +250,14 @@ function JobPostForm() {
               value={formik.values.education}
               onChange={formik.handleChange("education")}
             />
+            <Button
+              type="submit"
+              size="small"
+              variant="contained"
+              color="primary"
+            >
+              Post
+            </Button>
           </form>
         </div>
       </div>

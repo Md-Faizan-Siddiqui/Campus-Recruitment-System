@@ -1,19 +1,17 @@
 import SignUp from '../src/Components/signUp';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import SignIn from '../src/Components/login';
 import Navbar from './Components/navbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { auth, database } from './Config/firebaseConfig';
-import { userDetails } from './Redux/Action/userAction';
 import Loader from './Components/loader'
 import Profile from './Components/Student/Profile';
 import Vacancies from './Components/Student/vacancies';
 import Companies from './Components/Student/companies';
 import Students from './Components/Company/students';
 import JobPost from './Components/Company/jobPost';
-
-
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { auth, database } from './Config/firebaseConfig';
+import { userDetails } from './Redux/Action/userAction';
 
 function App() {
   const user = useSelector((state) => state.addUser)

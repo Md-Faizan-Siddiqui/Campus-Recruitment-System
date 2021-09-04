@@ -3,7 +3,8 @@ let initialState = {
     loginStatus: false,
     isLoader: false,
     role: null,
-    allUsers: []
+    allUsers: [],
+    allJobs: []
 }
 
 const addUser = (state = initialState, action) => {
