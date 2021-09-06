@@ -63,7 +63,7 @@ function JobPostForm(props) {
       } = values;
       console.log("Values====>", values);
       database
-        .ref(`/CRA/jobs/${user.loginUser.id + Date.now()}`)
+        .ref(`/CRA/jobs/${user.loginUser.id}/${user.loginUser.id + Date.now()}`)
         // .child("jobs/" + user.loginUser.id)
         .set({
           name: name,

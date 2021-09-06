@@ -169,7 +169,7 @@ export default function ButtonAppBar() {
       </Drawer>
       {/* drawer */}
 
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             edge="start"

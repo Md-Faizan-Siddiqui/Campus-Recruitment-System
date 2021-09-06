@@ -11,7 +11,6 @@
   transition: all 0.3s ease;
   text-decoration: none;
   cursor: pointer;
-  /* border: 1px solid black !important; */
 }
 .profile-pic:hover {
   background-color: rgba(0, 0, 0, 0.5);
@@ -19,18 +18,15 @@
   color: #fff;
   transition: all 0.3s ease;
   text-decoration: none;
-  /* border: 1px solid black !important; */
 }
 .profile-pic span {
   display: inline-block;
   padding-top: 1em;
   padding-bottom: 4.5em;
-  /* border: 1px solid black !important; */
 }
 form input[type="file"] {
   display: none;
   cursor: pointer;
-  /* border: 1px solid black !important; */
 }
 .updateImgDiv {
   display: flex;
@@ -40,34 +36,3 @@ form input[type="file"] {
 .updateImgDiv label {
   border-radius: 50%;
 }
-/* .editForm {
-  box-shadow: 0 0 10px grey;
-  padding: 20px 20px 10px 20px;
-} */
-/* .profile {
-  box-shadow: 0 0 10px grey;
-  padding: 20px;
-  text-align: center;
-  height: 300px;
-} */
-/* .phoneInput:hover {
-  color: black;
-} */
-/* 
-.phoneInput {
-  font: inherit;
-  color: currentColor;
-  width: 100%;
-  border: 0;
-  height: 1.1876em;
-  margin: 0;
-  display: block;
-  padding: 6px 0 7px;
-  min-width: 0;
-  background: none;
-  box-sizing: content-box;
-  animation-name: mui-auto-fill-cancel;
-  letter-spacing: inherit;
-  animation-duration: 10ms;
-  -webkit-tap-highlight-color: transparent;
-} */

@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { List, ListItem, Grid } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "./Student/img/images.png";
+import JobPost from "./Company/jobPost";
 
 const useStyles = makeStyles({
   root: {
@@ -110,6 +111,7 @@ export default function OutlinedCard({
             )}
             <div className={classes.card_content1}>
               <div>
+                {companyPostJob ? <h1>Posted Job</h1> : null}
                 <Typography variant="body2" component="p">
                   {details
                     ? null
@@ -243,7 +245,7 @@ export default function OutlinedCard({
                 </div>
               </div>
             ) : null}
-            {apply ? (
+            {apply || companyPostJob ? (
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>

@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { userDetails } from "../../Redux/Action/userAction";
 import OutlinedCard from "../card";
+import "../../App.css";
 
 function Vacancies() {
-  const postedJobs = useSelector((state) => state);
-  console.log(postedJobs);
+  const user = useSelector((state) => state.addUser);
+  console.log(user);
   const dispatch = useDispatch();
   useEffect(() => {
     database
@@ -30,87 +31,15 @@ function Vacancies() {
       });
   }, []);
 
-  const CPJD = [
-    {
-      lastDate: "13-May-2020",
-      name: "Dear",
-      jobTitle: "computer oprator",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-      phone: "3247236436",
-    },
-    {
-      lastDate: "15-April-2022",
-      name: "ABC",
-      jobTitle: "Developer",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-    },
-    {
-      lastDate: "20-May-2020",
-      name: "EFG",
-      jobTitle: "Developer",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-    },
-    {
-      lastDate: "25-May-2020",
-      name: "XYZ",
-      jobTitle: "Developer",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-    },
-    {
-      lastDate: "25-May-2020",
-      name: "XYZ",
-      jobTitle: "Developer",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-    },
-    {
-      lastDate: "25-May-2020",
-      name: "XYZ",
-      jobTitle: "Developer",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-    },
-    {
-      lastDate: "25-May-2020",
-      name: "XYZ",
-      jobTitle: "Developer",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-    },
-    {
-      lastDate: "25-May-2020",
-      name: "XYZ",
-      jobTitle: "Developer",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      salary: "0$",
-      email: "company1@gmail.com",
-    },
-  ];
+  const allJobs = Object.values(user.allJobs);
+  console.log("allJobs====>", allJobs);
+
   return (
-    <div>
+    <div className="marginAdjustment">
       <h1>Vacancies</h1>
-      {CPJD &&
-        CPJD?.map((data, index) => {
-          return <OutlinedCard campusData={data} apply />;
+      {allJobs &&
+        allJobs?.reverse().map((data, index) => {
+          return <OutlinedCard cardData={data} apply />;
         })}
     </div>
   );

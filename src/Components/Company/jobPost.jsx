@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { userDetails } from "../../Redux/Action/userAction";
 import OutlinedCard from "../card";
+import FloatingActionButtonZoom from "../editButton";
 import CustomizedDialogs from "../modal";
-// import JobPostForm from "./jobPostForm";
+import "../../App.css";
 
 function JobPost() {
   const user = useSelector((state) => state.addUser);
@@ -14,11 +15,10 @@ function JobPost() {
   useEffect(() => {
     database
       .ref("/CRA")
-      .child("jobs/")
-      .get()
-      .then((snapshot) => {
+      .child(`jobs/${user.loginUser.id}`)
+      .on("value", (snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
+          console.log("jobs", snapshot.val());
           dispatch(
             userDetails({
               allJobs: snapshot.val(),
@@ -27,24 +27,23 @@ function JobPost() {
         } else {
           console.log("No data available");
         }
-      })
-      .catch((error) => {
-        console.error(error);
       });
   }, []);
 
   const allJobs = Object.values(user.allJobs);
   console.log("allJobs====>", allJobs);
 
+  // let showModal = true;
   return (
-    <div>
+    <div className="marginAdjustment">
       <h1>Job Post</h1>
       <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
-      {/* <OutlinedCard /> */}
       {allJobs &&
-        allJobs?.map((data, index) => {
+        allJobs?.reverse().map((data, index) => {
           return <OutlinedCard cardData={data} companyPostJob />;
         })}
+      {/* <button onClick={() => showModal}>hello</button> */}
+      {/* <FloatingActionButtonZoom onClick={() => console.log("object")} /> */}
     </div>
   );
 }

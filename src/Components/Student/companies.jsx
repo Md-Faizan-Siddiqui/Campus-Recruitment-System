@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../card";
+import "../../App.css";
 
 function Companies() {
   // get data from redux..
@@ -16,7 +17,7 @@ function Companies() {
   console.log(allCompanies);
 
   return (
-    <>
+    <div className="marginAdjustment">
       <h1>Companies</h1>
       {allCompanies &&
         allCompanies.map((data, index) => {
@@ -30,7 +31,7 @@ function Companies() {
             />
           );
         })}
-    </>
+    </div>
   );
 }
 export default Companies;

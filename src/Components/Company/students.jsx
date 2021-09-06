@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../card";
+import "../../App.css";
 
 function Students() {
   const allUsers = useSelector((state) => state.addUser.allUsers);
@@ -11,7 +12,7 @@ function Students() {
   );
   console.log(allStudents);
   return (
-    <>
+    <div className="marginAdjustment">
       <h1>Students</h1>
       {allStudents &&
         allStudents.map((data, index) => {
@@ -25,7 +26,7 @@ function Students() {
             />
           );
         })}
-    </>
+    </div>
   );
 }
 export default Students;
