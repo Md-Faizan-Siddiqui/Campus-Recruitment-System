@@ -30,17 +30,31 @@ function JobPost() {
       });
   }, []);
 
-  const allJobs = Object.values(user.allJobs);
-  console.log("allJobs====>", allJobs);
+  const deleteData = (key) => {
+    console.log(key);
+    database.ref(`/CRA/jobs/${user.loginUser.id}/${key}`).remove();
+    // alert("running");
+  };
+
+  const myPostedJobs = Object.values(user.allJobs);
+  console.log("My Posted Jobs====>", myPostedJobs);
 
   // let showModal = true;
   return (
     <div className="marginAdjustment">
       <h1>Job Post</h1>
       <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
-      {allJobs &&
-        allJobs?.reverse().map((data, index) => {
-          return <OutlinedCard cardData={data} companyPostJob />;
+      {myPostedJobs &&
+        myPostedJobs?.reverse().map((data, index) => {
+          console.log("data", data.jobId);
+          return (
+            <OutlinedCard
+              cardData={data}
+              btnText={"delete"}
+              deleteData={() => deleteData(data.jobId)}
+              companyPostJob
+            />
+          );
         })}
       {/* <button onClick={() => showModal}>hello</button> */}
       {/* <FloatingActionButtonZoom onClick={() => console.log("object")} /> */}

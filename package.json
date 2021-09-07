@@ -20,6 +20,7 @@
     "react-scripts": "4.0.3",
     "react-swipeable-views": "^0.14.0",
     "redux": "^4.1.0",
+    "uuidv4": "^6.2.12",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },

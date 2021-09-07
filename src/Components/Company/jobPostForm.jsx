@@ -62,10 +62,12 @@ function JobPostForm(props) {
         salary,
       } = values;
       console.log("Values====>", values);
+      const key = Date.now();
       database
-        .ref(`/CRA/jobs/${user.loginUser.id}/${user.loginUser.id + Date.now()}`)
+        .ref(`/CRA/jobs/${user.loginUser.id}/${key}`)
         // .child("jobs/" + user.loginUser.id)
         .set({
+          jobId: key,
           name: name,
           phone: phone,
           email: email,

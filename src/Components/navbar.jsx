@@ -15,9 +15,6 @@ import { Drawer } from "@material-ui/core";
 import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
 
-// import CustomizedDialogs from "./modal";
-// import StudentProfile from "./Student/studentProfile";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -44,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: "200px",
     textAlign: "center",
-    // backgroundColor: "#3f51b5",
   },
   toggleBtnColor: {
     color: "#3f51b5",

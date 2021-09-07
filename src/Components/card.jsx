@@ -50,16 +50,18 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
+  deleteData, //jobPost
+  btnText, //jobPost, vacancies
   campusData,
   updateBtn,
-  apply,
+  apply, // vacancies
   details,
-  cardData,
+  cardData, // vacancies
   formTitle,
   companyDetails,
   studentDetails,
   allJobs,
-  companyPostJob,
+  companyPostJob, //jobPost
 }) {
   const state = useSelector((state) => state);
   const classes = useStyles();
@@ -94,7 +96,7 @@ export default function OutlinedCard({
       <Grid item xl={2} md={4} sm={6} xs={12}>
         <Card className={classes.root} variant="outlined">
           <CardContent>
-            {companyPostJob ? null : (
+            {companyPostJob || apply ? null : (
               <div className={classes.main_img_div}>
                 <div className={classes.profileImg}>
                   <img
@@ -249,8 +251,13 @@ export default function OutlinedCard({
               <div className={classes.modal_div}>
                 <div>
                   <CardActions>
-                    <Button size="small" variant="contained" color="primary">
-                      Apply Now
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="primary"
+                      onClick={deleteData ? deleteData : null}
+                    >
+                      {companyPostJob || apply ? btnText : null}
                     </Button>
                   </CardActions>
                 </div>
