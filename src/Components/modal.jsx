@@ -8,13 +8,13 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
-import ProfileUpdate from "./profileUpdate";
+import ProfileUpdate from "../Pages/SharedPages/profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
 import { useSelector } from "react-redux";
 import { yellow } from "@material-ui/core/colors";
-import JobPost from "./Company/jobPost";
-import JobPostForm from "./Company/jobPostForm";
+import JobPost from "../Pages/Company/jobPost";
+import JobPostForm from "../Pages/jobPostForm";
 
 const styles = (theme) => ({
   root: {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { userDetails } from "../../Redux/Action/userAction";
-import OutlinedCard from "../card";
+import OutlinedCard from "../../Components/card";
 import "../../App.css";
 
 function Vacancies() {

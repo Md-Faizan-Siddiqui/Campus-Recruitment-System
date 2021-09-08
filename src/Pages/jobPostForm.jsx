@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { TextField } from "@material-ui/core";
-import { database } from "../../Config/firebaseConfig";
+import { database } from "../Config/firebaseConfig";
 import { Button } from "@material-ui/core";
 import { date } from "yup/lib/locale";
 

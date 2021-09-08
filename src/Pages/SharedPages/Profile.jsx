@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import OutlinedCard from "../card";
+import OutlinedCard from "../../Components/card";
 import "../../App.css";
 
 function Profile() {

@@ -13,11 +13,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link, useHistory } from "react-router-dom";
-import { auth } from "../Config/firebaseConfig";
+import { auth } from "../../Config/firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetails } from "../Redux/Action/userAction";
-import Alert from "../Components/snackBar";
-import Loader from "../Components/loader";
+import { userDetails } from "../../Redux/Action/userAction";
+import Alert from "../../Components/snackBar";
+import Loader from "../../Components/loader";
 
 // function Copyright() {
 //   return (

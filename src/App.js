@@ -1,12 +1,12 @@
-import SignUp from '../src/Components/signUp';
-import SignIn from '../src/Components/login';
+import SignUp from '../src/Pages/Auth/signUp';
+import SignIn from '../src/Pages/Auth/login';
 import Navbar from './Components/navbar';
 import Loader from './Components/loader'
-import Profile from './Components/Student/Profile';
-import Vacancies from './Components/Student/vacancies';
-import Companies from './Components/Student/companies';
-import Students from './Components/Company/students';
-import JobPost from './Components/Company/jobPost';
+import Profile from '../src/Pages/SharedPages/Profile';
+import Vacancies from '../src/Pages/Student/vacancies';
+import Companies from '../src/Pages/Student/companies';
+import Students from '../src/Pages/Company/students';
+import JobPost from './Pages/Company/jobPost';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';

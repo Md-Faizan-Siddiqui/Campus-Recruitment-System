@@ -8,8 +8,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { List, ListItem, Grid } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
-import fallBackImage from "./Student/img/images.png";
-import JobPost from "./Company/jobPost";
+import fallBackImage from "../Images/images.png";
+import JobPost from "../Pages/Company/jobPost";
 
 const useStyles = makeStyles({
   root: {
@@ -93,7 +93,7 @@ export default function OutlinedCard({
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xl={2} md={4} sm={6} xs={12}>
+      <Grid item xl={3} md={4} sm={12} xs={12} style={{ maxWidth: "100%" }}>
         <Card className={classes.root} variant="outlined">
           <CardContent>
             {companyPostJob || apply ? null : (

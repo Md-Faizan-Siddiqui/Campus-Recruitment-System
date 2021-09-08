@@ -1,12 +1,12 @@
-import "./Student/imgUpload.css";
-import "../Style/student.css";
+import "../../Style/imgUpload.css";
+import "../../Style/student.css";
 import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import { useFormik } from "formik";
-import { database, Storage } from "../Config/firebaseConfig";
+import { database, Storage } from "../../Config/firebaseConfig";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import fallImage from "./Student/img/images.png";
+import fallImage from "../../Images/images.png";
 import * as Yup from "yup";
 // import "react-phone-number-input/style.css";
 import { Button } from "@material-ui/core";

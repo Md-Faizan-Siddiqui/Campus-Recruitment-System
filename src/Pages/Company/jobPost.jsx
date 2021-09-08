@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { userDetails } from "../../Redux/Action/userAction";
-import OutlinedCard from "../card";
-import FloatingActionButtonZoom from "../editButton";
-import CustomizedDialogs from "../modal";
+import OutlinedCard from "../../Components/card";
+import FloatingActionButtonZoom from "../../Components/editButton";
+import CustomizedDialogs from "../../Components/modal";
 import "../../App.css";
 
 function JobPost() {
