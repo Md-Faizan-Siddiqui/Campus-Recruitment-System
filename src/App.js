@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { auth, database } from './Config/firebaseConfig';
 import { userDetails } from './Redux/Action/userAction';
+import PageNotFound from './Pages/pageNotFound';
 
 function App() {
   const user = useSelector((state) => state.addUser)
@@ -76,6 +77,8 @@ function App() {
   if (loader === true) {
     return <Loader />
   }
+  console.log("login status", user.loginStatus);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -96,6 +99,10 @@ function App() {
               <Route exact path='/' component={Vacancies} />
               <Route path='/profile' component={Profile} />
               <Route path='/companies' component={Companies} />
+              {/* <Route path='*' component={PageNotFound} /> */}
+              {/* <Route path='*' >
+                <PageNotFound />
+              </Route> */}
             </Switch>
           </> : null}
 
@@ -103,6 +110,10 @@ function App() {
           <>
             <Switch>
               <Route exact path='/' component={Profile} />
+              {/* <Route path='*' component={PageNotFound} /> */}
+              {/* <Route path='*' >
+                <PageNotFound />
+              </Route> */}
             </Switch>
           </> : null}
 
@@ -112,6 +123,10 @@ function App() {
               <Route exact path='/' component={Students} />
               <Route path='/profile' component={Profile} />
               <Route path='/jobpost' component={JobPost} />
+              {/* <Route path='*' component={PageNotFound} /> */}
+              {/* <Route path='*' >
+                <PageNotFound />
+              </Route> */}
             </Switch>
           </> : null}
       </BrowserRouter>

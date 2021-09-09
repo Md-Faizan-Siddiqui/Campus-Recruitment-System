@@ -1,14 +1,13 @@
 import "../../Style/imgUpload.css";
 import "../../Style/student.css";
 import React, { useState, useEffect } from "react";
-import { TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@material-ui/core";
 import { useFormik } from "formik";
 import { database, Storage } from "../../Config/firebaseConfig";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import fallImage from "../../Images/images.png";
+import fallBackImage from "../../Images/images.png";
 import * as Yup from "yup";
-// import "react-phone-number-input/style.css";
 import { Button } from "@material-ui/core";
 
 function ProfileUpdate(props) {
@@ -17,7 +16,6 @@ function ProfileUpdate(props) {
   const [url, setUrl] = useState("");
   const role = user.loginUser.role;
   const history = useHistory();
-  const [pCode, setPCode] = useState();
 
   console.log("user===>", user);
   console.log("role====>", role);
@@ -25,7 +23,7 @@ function ProfileUpdate(props) {
   console.log("Login User ID===>", user.loginUser.id);
 
   const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+    /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/;
   const formik = useFormik({
     initialValues: {
       email: user.loginUser.email,
@@ -38,23 +36,41 @@ function ProfileUpdate(props) {
       experience: user.loginUser.experience ? user.loginUser.experience : "",
       website: user.loginUser.website ? user.loginUser.website : "",
     },
-    // validationSchema: Yup.object({
-    //   name: Yup.string()
-    //     .max(30, "Must be 30 characters or less")
-    //     .required("Required"),
-    //   email: Yup.string()
-    //     .email("Invalid email address")
-    //     .required("Email is Required"),
-    //   //   role: Yup.mixed()
-    //   //     .required("Selection is Required")
-    //   //     .oneOf(["company", "student"]),
-    //   dob: Yup.string().required("Required"),
-    //   phone: Yup.string().matches(phoneRegExp, "Phone number is not valid"),
-    //   cgpa: Yup.string().required("Invalid CGPA"),
-    //   education: Yup.string().required("Required"),
-    //   skills: Yup.string().required("Required"),
-    //   experience: Yup.string().required("Required"),
-    // }),
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .max(30, "Must be 30 characters or less")
+        .required("Required Name"),
+      //
+      cgpa: Yup.number()
+        .min(0.1, "Invalid CGPA")
+        .max(4.0, "Invalid CGPA")
+        .required("Required CGPA"),
+      //
+      education: Yup.mixed()
+        .oneOf(["Matric", "Inter", "Graduate", "Master's"])
+        .required("Required Education"),
+      //
+      phone: Yup.string()
+        .matches(phoneRegExp, "Invalid Phone Number")
+        .required("Required Phone Number"),
+      //
+      dob: Yup.date()
+        .max(
+          new Date(Date.now() - 568111068000), // Task completed after 2.5 hours
+          "You must be at least 18 years"
+        )
+        .required("Required"),
+      //
+      skills: Yup.string().required("Required"),
+      //
+      experience: Yup.string().required("Required"),
+      // email: Yup.string()
+      //   .email("Invalid email address")
+      //   .required("Email is Required"),
+      //   role: Yup.mixed()
+      //     .required("Selection is Required")
+      //     .oneOf(["company", "student"]),
+    }),
 
     onSubmit: (values) => {
       const { dob, education, cgpa, skills, name, experience, phone, website } =
@@ -86,6 +102,7 @@ function ProfileUpdate(props) {
             : null
         )
         .then((res) => {
+          console.log(res);
           props.handleClose();
         })
         .catch((err) => {
@@ -119,9 +136,9 @@ function ProfileUpdate(props) {
   return (
     <div className="main_div">
       <div className="form_div">
-        <div>
-          <form onSubmit={formik.handleSubmit}>
-            {props.jobPost ? null : (
+        <form onSubmit={formik.handleSubmit}>
+          {props.jobPost ? null : (
+            <>
               <TextField
                 type="text"
                 label="Name"
@@ -137,13 +154,15 @@ function ProfileUpdate(props) {
                 value={formik.values.name}
                 onChange={formik.handleChange("name")}
               />
-            )}
-            {formik.errors.name && formik.touched.name && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.name}
-              </p>
-            )}
-            {role === "student" ? (
+              {formik.errors.name && formik.touched.name && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.name}
+                </p>
+              )}
+            </>
+          )}
+          {role === "student" ? (
+            <>
               <TextField
                 type="number"
                 label="CGPA"
@@ -158,8 +177,15 @@ function ProfileUpdate(props) {
                 value={formik.values.cgpa}
                 onChange={formik.handleChange("cgpa")}
               />
-            ) : null}
-            {role === "student" ? (
+              {formik.errors.cgpa && formik.touched.cgpa && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.cgpa}
+                </p>
+              )}
+            </>
+          ) : null}
+          {role === "student" ? (
+            <>
               <TextField
                 type="text"
                 label="Education"
@@ -173,21 +199,24 @@ function ProfileUpdate(props) {
                 name="education"
                 value={formik.values.education}
                 onChange={formik.handleChange("education")}
-              />
-            ) : null}
-            {/* <PhoneInput
-              // className="phoneInput"
-              international
-              defaultCountry="PK"
-              placeholder="Enter phone number"
-              // value={pCode}
-              // style={{ padding: "20px", border: "1px solid gray" }}
-              onInput={setPCode}
-              value={pCode + formik.values.phone}
-              onChange={formik.handleChange("phone")}
-            /> */}
-            {/* <CountrySelect /> */}
-            {props.jobPost ? null : (
+                id="select"
+                select
+              >
+                <MenuItem value="">Select One</MenuItem>
+                <MenuItem value="Matric">Matric</MenuItem>
+                <MenuItem value="Inter">Inter</MenuItem>
+                <MenuItem value="Graduate">Graduate</MenuItem>
+                <MenuItem value="Master's">Master's</MenuItem>
+              </TextField>
+              {formik.errors.education && formik.touched.education && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.education}
+                </p>
+              )}
+            </>
+          ) : null}
+          {props.jobPost ? null : (
+            <>
               <TextField
                 label="Phone"
                 placeholder="Phone"
@@ -201,13 +230,15 @@ function ProfileUpdate(props) {
                 value={formik.values.phone}
                 onChange={formik.handleChange("phone")}
               />
-            )}
-            {formik.errors.phone && formik.touched.phone && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.phone}
-              </p>
-            )}
-            {role === "student" ? (
+              {formik.errors.phone && formik.touched.phone && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.phone}
+                </p>
+              )}
+            </>
+          )}
+          {role === "student" ? (
+            <>
               <TextField
                 type="date"
                 label="Date Of Birth"
@@ -222,8 +253,15 @@ function ProfileUpdate(props) {
                 value={formik.values.dob}
                 onChange={formik.handleChange("dob")}
               />
-            ) : null}
-            {role === "student" ? (
+              {formik.errors.dob && formik.touched.dob && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.dob}
+                </p>
+              )}
+            </>
+          ) : null}
+          {role === "student" ? (
+            <>
               <TextField
                 label="Skills"
                 placeholder="Skills"
@@ -237,71 +275,76 @@ function ProfileUpdate(props) {
                 value={formik.values.skills}
                 onChange={formik.handleChange("skills")}
               />
-            ) : null}
-            {role === "student" ? (
-              <TextField
-                label="Experience"
-                placeholder="Experience"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="experience"
-                value={formik.values.experience}
-                onChange={formik.handleChange("experience")}
+              {formik.errors.skills && formik.touched.skills && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.skills}
+                </p>
+              )}
+            </>
+          ) : null}
+          {role === "student" ? (
+            <TextField
+              label="Experience"
+              placeholder="Experience"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="experience"
+              value={formik.values.experience}
+              onChange={formik.handleChange("experience")}
+            />
+          ) : null}
+          {role === "company" ? (
+            <TextField
+              label="Website"
+              placeholder="Website"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="website"
+              value={formik.values.website}
+              onChange={formik.handleChange("website")}
+            />
+          ) : null}
+          {props.jobPost ? null : (
+            <div className="updateImgDiv">
+              <label for="fileToUpload">
+                <div
+                  className="profile-pic"
+                  id="profilePic"
+                  style={{
+                    backgroundImage: `url( ${url ? url : fallBackImage} )`,
+                  }}
+                >
+                  <span class="glyphicon glyphicon-camera"></span>
+                  <span>Change Image</span>
+                </div>
+              </label>
+              <input
+                value={formik.values.fileToUpload}
+                type="File"
+                name="fileToUpload"
+                id="fileToUpload"
+                onChange={uploadImg}
               />
-            ) : null}
-            {role === "company" ? (
-              <TextField
-                label="Website"
-                placeholder="Website"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                name="website"
-                value={formik.values.website}
-                onChange={formik.handleChange("website")}
-              />
-            ) : null}
-            {props.jobPost ? null : (
-              <div className="updateImgDiv">
-                <label for="fileToUpload">
-                  <div
-                    className="profile-pic"
-                    id="profilePic"
-                    style={{
-                      backgroundImage: `url( ${url ? url : fallImage} )`,
-                    }}
-                  >
-                    <span class="glyphicon glyphicon-camera"></span>
-                    <span>Change Image</span>
-                  </div>
-                </label>
-                <input
-                  value={formik.values.fileToUpload}
-                  type="File"
-                  name="fileToUpload"
-                  id="fileToUpload"
-                  onChange={uploadImg}
-                />
-              </div>
-            )}
-            {/* <button type="submit">Update</button> */}
-            <Button
-              type="submit"
-              size="small"
-              variant="contained"
-              color="primary"
-            >
-              Update
-            </Button>
-          </form>
-        </div>
+            </div>
+          )}
+          {/* <button type="submit">Update</button> */}
+          <Button
+            type="submit"
+            size="small"
+            variant="contained"
+            color="primary"
+          >
+            Update
+          </Button>
+        </form>
       </div>
     </div>
   );
