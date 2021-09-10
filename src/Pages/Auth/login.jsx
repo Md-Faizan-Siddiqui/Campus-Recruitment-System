@@ -34,10 +34,12 @@ import Loader from "../../Components/loader";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    // marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -63,12 +65,12 @@ export default function SignIn() {
   const [errMessage, setErrMessage] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
-  const [state, setState] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const userLogin = (e) => {
     setErrMessage("");
     setMessage("");
-    setState(true);
+    setLoader(true);
     e.preventDefault();
     auth
       .signInWithEmailAndPassword(email, password)
@@ -76,7 +78,7 @@ export default function SignIn() {
         var user = userCredential.user;
         setMessage("Login Success!");
         console.log("user", user);
-        setState(false);
+        setLoader(false);
         dispatch(
           userDetails({
             loginUser: user,
@@ -90,7 +92,7 @@ export default function SignIn() {
         var errorCode = error.code;
         var errorMessage = error.message;
         setErrMessage(errorMessage);
-        setState(false);
+        setLoader(false);
         console.log(errorMessage);
         console.log(errorCode);
       });
@@ -143,8 +145,9 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={loader ? true : false}
           >
-            {state === true ? <Loader /> : "LogIn"}
+            {loader === true ? <Loader /> : "LogIn"}
           </Button>
           <Grid container>
             <Grid item xs>
@@ -163,9 +166,6 @@ export default function SignIn() {
       {message || errMessage ? (
         <Alert errMessage={errMessage} message={message} />
       ) : null}
-      {/* <Box mt={8}>
-        <Copyright />
-      </Box> */}
     </Container>
   );
 }

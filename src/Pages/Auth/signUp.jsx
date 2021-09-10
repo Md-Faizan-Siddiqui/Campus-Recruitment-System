@@ -3,7 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -17,18 +16,15 @@ import Loader from "../../Components/loader";
 import RadioBtn from "../../Components/radioButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { CountryDropdown } from 'react-country-region-selector';
-
-// import PhoneInput from 'react-phone-number-input'
-// import { useDispatch, useSelector } from "react-redux";
-// import { userDetails } from "../Redux/Action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
     flexDirection: "column",
+    display: "flex",
     alignItems: "center",
+    // justifyContent: "center",
+    // height: "100vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -45,15 +41,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  // const [phone, setPhone] = useState("")
-  // const [role, setRole] = useState("")
-  const [errMessage, setErrMessage] = useState("");
   const history = useHistory();
+  const [message, setMessage] = useState("");
+  const [errMessage, setErrMessage] = useState("");
   const [loader, setLoader] = useState(false);
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -98,11 +88,9 @@ export default function SignUp() {
     onSubmit: (values) => {
       const { email, password, name, role, phone } = values;
       console.log("values are ", values);
-      // const userSignUp = (e) => {
       setErrMessage("");
       setMessage("");
       setLoader(true);
-      // e.preventDefault();
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -133,7 +121,6 @@ export default function SignUp() {
             });
         })
         .catch((error) => {
-          // var errorCode = error.code;
           var errorMessage = error.message;
           setErrMessage(errorMessage);
           setLoader(false);
@@ -247,6 +234,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={loader ? true : false}
           >
             {loader === true ? <Loader /> : "Sign Up"}
           </Button>

@@ -1,7 +1,7 @@
 import SignUp from '../src/Pages/Auth/signUp';
 import SignIn from '../src/Pages/Auth/login';
 import Navbar from './Components/navbar';
-import Loader from './Components/loader'
+// import Loader from './Components/loader'
 import Profile from '../src/Pages/SharedPages/Profile';
 import Vacancies from '../src/Pages/Student/vacancies';
 import Companies from '../src/Pages/Student/companies';
@@ -16,14 +16,16 @@ import PageNotFound from './Pages/pageNotFound';
 
 function App() {
   const user = useSelector((state) => state.addUser)
-  const loader = useSelector((state) => state.addUser.isLoader)
+  const reduxLoader = useSelector((state) => state.addUser.isLoader)
   const dispatch = useDispatch()
   const [userData, setUserData] = useState({});
+  // const [loader, setLoader] = useState(false);
   console.log(userData)
 
   // get current user and dispatch
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
+      // setLoader(true)
       if (user) {
         database
           .ref("/CRA")
@@ -38,9 +40,11 @@ function App() {
                   isLoader: false,
                 })
               )
+              // setLoader(false)
             } else {
               setUserData([]);
               console.log("No data available");
+              // setLoader(false)
             }
           });
       }
@@ -74,9 +78,9 @@ function App() {
 
   // get and dispatch end...
 
-  if (loader === true) {
-    return <Loader />
-  }
+  // if (!user.loginStatus && loader === false) {
+  //   return <Loader />
+  // }
   console.log("login status", user.loginStatus);
 
   return (

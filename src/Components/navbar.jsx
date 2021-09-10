@@ -182,10 +182,10 @@ export default function ButtonAppBar() {
           <div className={classes.navBtn}>
             {user.loginStatus === false ? (
               <>
-                <Link to="/" className={classes.btnColor}>
+                <Link to="/signup" className={classes.btnColor}>
                   <Button className={classes.btnColor}>SignUp</Button>
                 </Link>
-                <Link to="/login" className={classes.btnColor}>
+                <Link to="/" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Login</Button>
                 </Link>
               </>

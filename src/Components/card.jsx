@@ -10,6 +10,7 @@ import { List, ListItem, Grid } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
 import JobPost from "../Pages/Company/jobPost";
+import Loader from "./loader";
 
 const useStyles = makeStyles({
   root: {
@@ -63,6 +64,7 @@ export default function OutlinedCard({
   allJobs,
   companyPostJob, //jobPost
 }) {
+  const [loader, setLoader] = useState(false);
   const state = useSelector((state) => state);
   const classes = useStyles();
   const student = state.addUser.loginUser.role === "student";
@@ -87,9 +89,9 @@ export default function OutlinedCard({
     "Card Data=====>",
     cardData
   );
-  console.log("allJobs===>", allJobs, companyPostJob);
-  console.log("Campus Data====>", campusData);
-  console.log("Card Data====>", cardData);
+  // console.log("allJobs===>", allJobs, companyPostJob);
+  // console.log("Campus Data====>", campusData);
+  // console.log("Card Data====>", cardData);
 
   return (
     <Grid container justifyContent="center">
