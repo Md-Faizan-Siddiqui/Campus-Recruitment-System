@@ -20,7 +20,8 @@ function App() {
   const dispatch = useDispatch()
   const [userData, setUserData] = useState({});
   // const [loader, setLoader] = useState(false);
-  console.log(userData)
+  // console.log(userData)
+  console.log("reduxLoader====>>>", reduxLoader)
 
   // get current user and dispatch
   useEffect(() => {
@@ -50,7 +51,7 @@ function App() {
       }
     });
   }, []);
-  console.log(userData)
+  console.log("userData=====>>>", userData)
 
   // get all user from database and dispatch in redux..
 
@@ -81,7 +82,7 @@ function App() {
   // if (!user.loginStatus && loader === false) {
   //   return <Loader />
   // }
-  console.log("login status", user.loginStatus);
+  // console.log("login status", user.loginStatus);
 
   return (
     <div className="App">
