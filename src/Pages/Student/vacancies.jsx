@@ -31,25 +31,6 @@ function Vacancies() {
         }
       });
     console.log("jobs state===>", jobs);
-    // database
-    //   .ref("/CRA")
-    //   .child("jobs/")
-    //   .get()
-    //   .then((snapshot) => {
-    //     if (snapshot.exists()) {
-    //       console.log(snapshot.val());
-    //       dispatch(
-    //         userDetails({
-    //           allJobs: snapshot.val(),
-    //         })
-    //       );
-    //     } else {
-    //       console.log("No data available");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   }, []);
 
   const allJobs = Object.values(user.allJobs);

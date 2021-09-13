@@ -38,7 +38,12 @@ function ProfileUpdate(props) {
       experience: user.loginUser.experience ? user.loginUser.experience : "",
       website: user.loginUser.website ? user.loginUser.website : "",
     },
-    validationSchema: updateFormValidationStudent,
+    validationSchema:
+      role === "Student"
+        ? updateFormValidationStudent
+        : role === "company"
+        ? updateFormValidationCompany
+        : null,
     // validationSchema: Yup.object({
     //   // name 1
     //   name: Yup.string()
@@ -303,19 +308,26 @@ function ProfileUpdate(props) {
           />
         ) : null}
         {role === "company" ? (
-          <TextField
-            label="Website"
-            placeholder="Website"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-            name="website"
-            value={formik.values.website}
-            onChange={formik.handleChange("website")}
-          />
+          <>
+            <TextField
+              label="Website"
+              placeholder="Website"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="website"
+              value={formik.values.website}
+              onChange={formik.handleChange("website")}
+            />
+            {formik.errors.website && formik.touched.website && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.website}
+              </p>
+            )}
+          </>
         ) : null}
         {props.jobPost ? null : (
           <div className="updateImgDiv">

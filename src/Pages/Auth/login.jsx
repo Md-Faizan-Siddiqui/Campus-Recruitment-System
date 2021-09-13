@@ -1,40 +1,24 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-// import Link from '@material-ui/core/Link';
-import Grid from "@material-ui/core/Grid";
-// import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../Config/firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "../../Redux/Action/userAction";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import Alert from "../../Components/snackBar";
 import Loader from "../../Components/loader";
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
+import { LoginFormValidation } from "../../Validation/validation";
+import { useFormik } from "formik";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    // marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -46,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -57,47 +41,53 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   useSelector((state) => state.addUser);
-  //   console.log("redux user", user);
-  // const [name, setName] = useState("")
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [errMessage, setErrMessage] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   const [loader, setLoader] = useState(false);
 
-  const userLogin = (e) => {
-    setErrMessage("");
-    setMessage("");
-    setLoader(true);
-    e.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        var user = userCredential.user;
-        setMessage("Login Success!");
-        console.log("user", user);
-        setLoader(false);
-        dispatch(
-          userDetails({
-            loginUser: user,
-            loginStatus: true,
-            // role:
-          })
-        );
-        history.push("/");
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        setErrMessage(errorMessage);
-        setLoader(false);
-        console.log(errorMessage);
-        console.log(errorCode);
-      });
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginFormValidation,
 
+    onSubmit: (values) => {
+      const { email, password } = values;
+      console.log("values are ", values);
+      setErrMessage("");
+      setMessage("");
+      setLoader(true);
+      // e.preventDefault();
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          var user = userCredential.user;
+          setMessage("Login Success!");
+          console.log("user", user);
+          setLoader(false);
+          dispatch(
+            userDetails({
+              loginUser: user,
+              loginStatus: true,
+            })
+          );
+          history.push("/");
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          setErrMessage(errorMessage);
+          setLoader(false);
+          console.log(errorMessage);
+          console.log(errorCode);
+        });
+    },
+  });
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -108,7 +98,11 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate onSubmit={userLogin}>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={formik.handleSubmit}
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -119,9 +113,14 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formik.values.email}
+            onChange={formik.handleChange("email")}
           />
+          {formik.errors.email && formik.touched.email && (
+            <p style={{ color: "red", marginLeft: "5px" }}>
+              {formik.errors.email}
+            </p>
+          )}
           <TextField
             variant="outlined"
             margin="normal"
@@ -132,13 +131,18 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formik.values.password}
+            onChange={formik.handleChange("password")}
           />
-          <FormControlLabel
+          {formik.errors.password && formik.touched.password && (
+            <p style={{ color: "red", marginLeft: "5px" }}>
+              {formik.errors.password}
+            </p>
+          )}
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth

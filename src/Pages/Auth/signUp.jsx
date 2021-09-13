@@ -15,7 +15,8 @@ import Alert from "../../Components/snackBar";
 import Loader from "../../Components/loader";
 import RadioBtn from "../../Components/radioButton";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+// import * as Yup from "yup";
+import { SignUpFormValidation } from "../../Validation/validation";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,8 +46,8 @@ export default function SignUp() {
   const [message, setMessage] = useState("");
   const [errMessage, setErrMessage] = useState("");
   const [loader, setLoader] = useState(false);
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  // const phoneRegExp =
+  //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   // const loader = useSelector(state => state.addUser.isLoader)
   // const dispatch = useDispatch()
@@ -69,21 +70,24 @@ export default function SignUp() {
       password: "",
       role: "",
     },
-    validationSchema: Yup.object({
-      name: Yup.string()
-        .max(30, "Must be 30 characters or less")
-        .required("Required"),
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is Required"),
-      password: Yup.string()
-        .min(6, "Password must be at least 6 charaters")
-        .required("Password is Required"),
-      role: Yup.mixed()
-        .required("Selection is Required")
-        .oneOf(["company", "student"]),
-      phone: Yup.string().matches(phoneRegExp, "Phone number is not valid"),
-    }),
+    validationSchema: SignUpFormValidation,
+    // validationSchema: Yup.object({
+    //   name: Yup.string()
+    //     .max(30, "Must be 30 characters or less")
+    //     .required("Name is Required"),
+    //   email: Yup.string()
+    //     .email("Invalid email address")
+    //     .required("Email is Required"),
+    //   password: Yup.string()
+    //     .min(6, "Password must be at least 6 charaters")
+    //     .required("Password is Required"),
+    //   role: Yup.mixed()
+    //     .required("Selection is Required")
+    //     .oneOf(["company", "student"]),
+    //   phone: Yup.string()
+    //     .matches(phoneRegExp, "Phone number is not valid")
+    //     .required("Phone number is Required"),
+    // }),
 
     onSubmit: (values) => {
       const { email, password, name, role, phone } = values;

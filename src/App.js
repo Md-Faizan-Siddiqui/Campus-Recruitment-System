@@ -21,7 +21,7 @@ function App() {
   const [userData, setUserData] = useState({});
   // const [loader, setLoader] = useState(false);
   // console.log(userData)
-  console.log("reduxLoader====>>>", reduxLoader)
+  // console.log("reduxLoader====>>>", reduxLoader)
 
   // get current user and dispatch
   useEffect(() => {
@@ -59,7 +59,7 @@ function App() {
             }
           });
       }
-      else{
+      else {
         dispatch(
           userDetails({
             isLoader: false
@@ -80,10 +80,32 @@ function App() {
           .child("users")
           .on("value", (snapshot) => {
             if (snapshot.exists()) {
-              console.log(snapshot.val());
+              console.log("snapshot", snapshot.val());
               dispatch(
                 userDetails({
                   allUsers: snapshot.val(),
+                })
+              );
+            } else {
+              console.log("No data available");
+            }
+          });
+      }
+    });
+  }, []);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        database
+          .ref("/CRA")
+          .child("jobs")
+          .on("value", (snapshot) => {
+            if (snapshot.exists()) {
+              console.log("jobs", snapshot.val());
+              // debugger;
+              dispatch(
+                userDetails({
+                  allJobs: snapshot.val(),
                 })
               );
             } else {
