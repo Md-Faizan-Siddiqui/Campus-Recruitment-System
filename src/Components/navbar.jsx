@@ -149,6 +149,7 @@ export default function ButtonAppBar() {
           userDetails({
             loginUser: null,
             loginStatus: false,
+            isLoader: false,
           })
         );
       })

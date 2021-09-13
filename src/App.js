@@ -1,7 +1,7 @@
 import SignUp from '../src/Pages/Auth/signUp';
 import SignIn from '../src/Pages/Auth/login';
 import Navbar from './Components/navbar';
-// import Loader from './Components/loader'
+import Loader from './Components/loader'
 import Profile from '../src/Pages/SharedPages/Profile';
 import Vacancies from '../src/Pages/Student/vacancies';
 import Companies from '../src/Pages/Student/companies';
@@ -25,6 +25,11 @@ function App() {
 
   // get current user and dispatch
   useEffect(() => {
+    dispatch(
+      userDetails({
+        isLoader: true
+      })
+    )
     auth.onAuthStateChanged((user) => {
       // setLoader(true)
       if (user) {
@@ -45,9 +50,21 @@ function App() {
             } else {
               setUserData([]);
               console.log("No data available");
+              dispatch(
+                userDetails({
+                  isLoader: false
+                })
+              )
               // setLoader(false)
             }
           });
+      }
+      else{
+        dispatch(
+          userDetails({
+            isLoader: false
+          })
+        )
       }
     });
   }, []);
@@ -79,9 +96,9 @@ function App() {
 
   // get and dispatch end...
 
-  // if (!user.loginStatus && loader === false) {
-  //   return <Loader />
-  // }
+  if (!user.loginStatus && user.isLoader === true) {
+    return <Loader />
+  }
   // console.log("login status", user.loginStatus);
 
   return (
