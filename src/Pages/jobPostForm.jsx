@@ -4,15 +4,12 @@ import { useFormik } from "formik";
 import { TextField } from "@material-ui/core";
 import { database } from "../Config/firebaseConfig";
 import { Button } from "@material-ui/core";
-import { date } from "yup/lib/locale";
-
-// import "../Style/student.css";
 
 function JobPostForm(props) {
   console.log("props====>", props);
   const user = useSelector((state) => state.addUser);
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  // const phoneRegExp =
+  //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const formik = useFormik({
     initialValues: {
       email: user.loginUser.email,
@@ -87,6 +84,31 @@ function JobPostForm(props) {
         .catch((err) => {
           console.log("error=====>", err);
         });
+      ///////////////////////////
+      // database
+      //   .ref(`/CRA/allCompanyJobs/`)
+      //   // .child("jobs/" + user.loginUser.id)
+      //   .set({
+      //     jobId: key,
+      //     name: name,
+      //     phone: phone,
+      //     email: email,
+      //     jobTitle: jobTitle,
+      //     jobDescription: jobDescription,
+      //     website: website,
+      //     jobType: jobType,
+      //     lastDate: lastDate,
+      //     experience: experience,
+      //     education: education,
+      //     salary: salary,
+      //   })
+      //   .then((res) => {
+      //     //   console.log("updated=====>", res);
+      //     props.handleClose();
+      //   })
+      //   .catch((err) => {
+      //     console.log("error=====>", err);
+      //   });
     },
   });
   return (

@@ -28,23 +28,23 @@ function JobPost() {
         }
       });
   }, []);
-  useEffect(() => {
-    database
-      .ref("/CRA")
-      .child(`jobs/`)
-      .on("value", (snapshot) => {
-        if (snapshot.exists()) {
-          console.log("jobs", snapshot.val());
-          dispatch(
-            userDetails({
-              allJobs: snapshot.val(),
-            })
-          );
-        } else {
-          console.log("No data available");
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   database
+  //     .ref("/CRA")
+  //     .child(`allCompanyJobs/`)
+  //     .on("value", (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         console.log("jobs", snapshot.val());
+  //         dispatch(
+  //           userDetails({
+  //             allJobs: snapshot.val(),
+  //           })
+  //         );
+  //       } else {
+  //         console.log("No data available");
+  //       }
+  //     });
+  // }, []);
 
   const deleteData = (key) => {
     console.log(key);

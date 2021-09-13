@@ -93,28 +93,28 @@ function App() {
       }
     });
   }, []);
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        database
-          .ref("/CRA")
-          .child("jobs")
-          .on("value", (snapshot) => {
-            if (snapshot.exists()) {
-              console.log("jobs", snapshot.val());
-              // debugger;
-              dispatch(
-                userDetails({
-                  allJobs: snapshot.val(),
-                })
-              );
-            } else {
-              console.log("No data available");
-            }
-          });
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       database
+  //         .ref("/CRA")
+  //         .child("jobs")
+  //         .on("value", (snapshot) => {
+  //           if (snapshot.exists()) {
+  //             console.log("jobs", snapshot.val());
+  //             // debugger;
+  //             dispatch(
+  //               userDetails({
+  //                 allJobs: snapshot.val(),
+  //               })
+  //             );
+  //           } else {
+  //             console.log("No data available");
+  //           }
+  //         });
+  //     }
+  //   });
+  // }, []);
 
   // get and dispatch end...
 

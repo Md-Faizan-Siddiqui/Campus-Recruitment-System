@@ -21,11 +21,11 @@ function Vacancies() {
             console.log("after map====>", data);
             setJobs(data);
           });
-          // dispatch(
-          //   userDetails({
-          //     allJobs: snapshot.val(),
-          //   })
-          // );
+          dispatch(
+            userDetails({
+              allJobs: snapshot.val(),
+            })
+          );
         } else {
           console.log("No data available");
         }
@@ -33,7 +33,9 @@ function Vacancies() {
     console.log("jobs state===>", jobs);
   }, []);
 
-  const allJobs = Object.values(user.allJobs);
+  const allJobs = Object.values(user?.allJobs)
+    .map((val, ind) => Object.values(val))
+    .flat(1);
   console.log("allJobs====>", allJobs);
 
   return (
@@ -41,6 +43,7 @@ function Vacancies() {
       <h1>Vacancies</h1>
       {allJobs &&
         allJobs?.reverse().map((data, index) => {
+          console.log("data", data);
           return <OutlinedCard cardData={data} btnText={"Apply Now"} apply />;
         })}
     </div>
@@ -48,22 +51,3 @@ function Vacancies() {
 }
 
 export default Vacancies;
-
-// useEffect(() => {
-//   console.log(uid, 'uid');
-//   if (uid) {
-//       var starCountRef = database.ref('/JOBSDATA/CompanyData/' + uid + "/");
-//       starCountRef.on('value', (snapshot) => {
-//           const data = snapshot.val();
-//           console.log("data=====>",data)
-//           setArray(data ? data : []);
-//           data && Object.values(data).map((value1, index1) => {
-//               value1["pushKey"] = Object.keys(data)[index1];
-
-//               arr.push(value1);
-//               setUserKey(value1.pushKey)
-
-//           });
-//       });
-//   }
-// }, [uid]);

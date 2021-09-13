@@ -186,32 +186,44 @@ export default function OutlinedCard({
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob ? `Job Title : ${cardData?.jobTitle}` : null}
+                  {companyPostJob || apply
+                    ? `Job Title : ${cardData?.jobTitle}`
+                    : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob
+                  {companyPostJob || apply
                     ? `Job Description : ${cardData?.jobDescription}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob ? `Job Type : ${cardData?.jobType}` : null}
+                  {companyPostJob || apply
+                    ? `Job Type : ${cardData?.jobType}`
+                    : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob
+                  {companyPostJob || apply
                     ? `Experience : ${cardData?.experience}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob ? `Website : ${cardData?.website}` : null}
+                  {companyPostJob || apply
+                    ? `Website : ${cardData?.website}`
+                    : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob ? `Salary : ${cardData?.salary}` : null}
+                  {companyPostJob || apply
+                    ? `Salary : ${cardData?.salary}`
+                    : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob ? `Last Date : ${cardData?.lastDate}` : null}
+                  {companyPostJob || apply
+                    ? `Last Date : ${cardData?.lastDate}`
+                    : null}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {companyPostJob ? `Education : ${cardData?.education}` : null}
+                  {companyPostJob || apply
+                    ? `Education : ${cardData?.education}`
+                    : null}
                 </Typography>
               </div>
             </div>
