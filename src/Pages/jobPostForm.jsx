@@ -8,8 +8,6 @@ import { Button } from "@material-ui/core";
 function JobPostForm(props) {
   console.log("props====>", props);
   const user = useSelector((state) => state.addUser);
-  // const phoneRegExp =
-  //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const formik = useFormik({
     initialValues: {
       email: user.loginUser.email,
@@ -26,23 +24,6 @@ function JobPostForm(props) {
         ? user.loginUser.jobDescription
         : "",
     },
-    // validationSchema: Yup.object({
-    //   name: Yup.string()
-    //     .max(30, "Must be 30 characters or less")
-    //     .required("Required"),
-    //   email: Yup.string()
-    //     .email("Invalid email address")
-    //     .required("Email is Required"),
-    //   //   role: Yup.mixed()
-    //   //     .required("Selection is Required")
-    //   //     .oneOf(["company", "student"]),
-    //   dob: Yup.string().required("Required"),
-    //   phone: Yup.string().matches(phoneRegExp, "Phone number is not valid"),
-    //   cgpa: Yup.string().required("Invalid CGPA"),
-    //   education: Yup.string().required("Required"),
-    //   skills: Yup.string().required("Required"),
-    //   experience: Yup.string().required("Required"),
-    // }),
 
     onSubmit: (values) => {
       const {
@@ -62,7 +43,6 @@ function JobPostForm(props) {
       const key = Date.now();
       database
         .ref(`/CRA/jobs/${user.loginUser.id}/${key}`)
-        // .child("jobs/" + user.loginUser.id)
         .set({
           jobId: key,
           name: name,
@@ -78,7 +58,6 @@ function JobPostForm(props) {
           salary: salary,
         })
         .then((res) => {
-          //   console.log("updated=====>", res);
           props.handleClose();
         })
         .catch((err) => {
