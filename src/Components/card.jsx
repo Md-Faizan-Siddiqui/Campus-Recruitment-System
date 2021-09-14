@@ -77,18 +77,18 @@ export default function OutlinedCard({
   // console.log("student", student);
   // console.log("company", company);
   // console.log("admin", admin);
-  console.log(
-    "Campus Data=====>",
-    campusData,
-    "Update Btn=====>",
-    updateBtn,
-    "Apply=====>",
-    apply,
-    "Details=====>",
-    details,
-    "Card Data=====>",
-    cardData
-  );
+  // console.log(
+  //   "Campus Data=====>",
+  //   campusData,
+  //   "Update Btn=====>",
+  //   updateBtn,
+  //   "Apply=====>",
+  //   apply,
+  //   "Details=====>",
+  //   details,
+  //   "Card Data=====>",
+  //   cardData
+  // );
   // console.log("allJobs===>", allJobs, companyPostJob);
   // console.log("Campus Data====>", campusData);
   // console.log("Card Data====>", cardData);
@@ -138,9 +138,8 @@ export default function OutlinedCard({
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.education
-                    ? `Education : ${
-                        campusData.education || cardData?.education
-                      }`
+                    ? `Education : ${campusData.education || cardData?.education
+                    }`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
@@ -155,9 +154,8 @@ export default function OutlinedCard({
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.experience
-                    ? `Experience : ${
-                        campusData.experience || cardData?.experience
-                      }`
+                    ? `Experience : ${campusData.experience || cardData?.experience
+                    }`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">

@@ -68,7 +68,7 @@ export default function SignIn() {
         .then((userCredential) => {
           var user = userCredential.user;
           setMessage("Login Success!");
-          console.log("user", user);
+          // console.log("user", user);
           setLoader(false);
           dispatch(
             userDetails({
@@ -76,7 +76,7 @@ export default function SignIn() {
               loginStatus: true,
             })
           );
-          history.push("/");
+          // history.push("/");
         })
         .catch((error) => {
           var errorCode = error.code;

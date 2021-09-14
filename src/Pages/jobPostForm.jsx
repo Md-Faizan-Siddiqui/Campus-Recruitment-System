@@ -6,7 +6,7 @@ import { database } from "../Config/firebaseConfig";
 import { Button } from "@material-ui/core";
 
 function JobPostForm(props) {
-  console.log("props====>", props);
+  // console.log("props====>", props);
   const user = useSelector((state) => state.addUser);
   const formik = useFormik({
     initialValues: {
@@ -39,7 +39,7 @@ function JobPostForm(props) {
         education,
         salary,
       } = values;
-      console.log("Values====>", values);
+      // console.log("Values====>", values);
       const key = Date.now();
       database
         .ref(`/CRA/jobs/${user.loginUser.id}/${key}`)
@@ -61,7 +61,7 @@ function JobPostForm(props) {
           props.handleClose();
         })
         .catch((err) => {
-          console.log("error=====>", err);
+          console.log("Error=====>", err);
         });
     },
   });

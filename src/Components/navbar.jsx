@@ -63,7 +63,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const user = useSelector((state) => state.addUser);
   const dispatch = useDispatch();
-  console.log(user?.loginUser?.name);
+  // console.log(user?.loginUser?.name);
 
   // drawer //
   const [state, setState] = useState(false);
@@ -192,7 +192,7 @@ export default function ButtonAppBar() {
               </>
             ) : null}
             {user?.loginStatus === true &&
-            user?.loginUser?.role === "student" ? (
+              user?.loginUser?.role === "student" ? (
               <>
                 <Link to="/" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Vacancies</Button>
@@ -209,7 +209,7 @@ export default function ButtonAppBar() {
               </>
             ) : null}
             {user?.loginStatus === true &&
-            user?.loginUser?.role === "company" ? (
+              user?.loginUser?.role === "company" ? (
               <>
                 <Link to="/" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Students</Button>

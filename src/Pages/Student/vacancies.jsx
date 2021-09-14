@@ -7,7 +7,7 @@ import "../../App.css";
 
 function Vacancies() {
   const user = useSelector((state) => state.addUser);
-  console.log(user);
+  // console.log(user);
   const dispatch = useDispatch();
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
@@ -16,9 +16,9 @@ function Vacancies() {
       .child("jobs/")
       .on("value", (snapshot) => {
         if (snapshot.exists()) {
-          console.log("jobs", snapshot.val());
+          // console.log("jobs", snapshot.val());
           Object.keys(snapshot.val()).map((data, index) => {
-            console.log("after map====>", data);
+            // console.log("after map====>", data);
             setJobs(data);
           });
           dispatch(
@@ -30,13 +30,13 @@ function Vacancies() {
           console.log("No data available");
         }
       });
-    console.log("jobs state===>", jobs);
+    // console.log("jobs state===>", jobs);
   }, []);
 
   const allJobs = Object.values(user?.allJobs)
     .map((val, ind) => Object.values(val))
     .flat(1);
-  console.log("allJobs====>", allJobs);
+  // console.log("allJobs====>", allJobs);
 
   return (
     <div className="marginAdjustment">

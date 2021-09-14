@@ -15,6 +15,7 @@ import { userDetails } from './Redux/Action/userAction';
 import PageNotFound from './Pages/pageNotFound';
 
 function App() {
+  // debugger
   const user = useSelector((state) => state.addUser)
   const reduxLoader = useSelector((state) => state.addUser.isLoader)
   const dispatch = useDispatch()
@@ -46,6 +47,7 @@ function App() {
                   isLoader: false,
                 })
               )
+              // localStorage.setItem("uid", auth.currentUser.uid)
               // setLoader(false)
             } else {
               setUserData([]);
@@ -68,7 +70,7 @@ function App() {
       }
     });
   }, []);
-  console.log("userData=====>>>", userData)
+  // console.log("userData=====>>>", userData)
 
   // get all user from database and dispatch in redux..
 
@@ -80,7 +82,7 @@ function App() {
           .child("users")
           .on("value", (snapshot) => {
             if (snapshot.exists()) {
-              console.log("snapshot", snapshot.val());
+              // console.log("snapshot", snapshot.val());
               dispatch(
                 userDetails({
                   allUsers: snapshot.val(),
@@ -93,28 +95,6 @@ function App() {
       }
     });
   }, []);
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       database
-  //         .ref("/CRA")
-  //         .child("jobs")
-  //         .on("value", (snapshot) => {
-  //           if (snapshot.exists()) {
-  //             console.log("jobs", snapshot.val());
-  //             // debugger;
-  //             dispatch(
-  //               userDetails({
-  //                 allJobs: snapshot.val(),
-  //               })
-  //             );
-  //           } else {
-  //             console.log("No data available");
-  //           }
-  //         });
-  //     }
-  //   });
-  // }, []);
 
   // get and dispatch end...
 

@@ -15,7 +15,6 @@ import Alert from "../../Components/snackBar";
 import Loader from "../../Components/loader";
 import RadioBtn from "../../Components/radioButton";
 import { useFormik } from "formik";
-// import * as Yup from "yup";
 import { SignUpFormValidation } from "../../Validation/validation";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     display: "flex",
     alignItems: "center",
-    // justifyContent: "center",
-    // height: "100vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -46,21 +43,6 @@ export default function SignUp() {
   const [message, setMessage] = useState("");
   const [errMessage, setErrMessage] = useState("");
   const [loader, setLoader] = useState(false);
-  // const phoneRegExp =
-  //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
-  // const loader = useSelector(state => state.addUser.isLoader)
-  // const dispatch = useDispatch()
-
-  // console.log(email);
-  // console.log(password);
-
-  // useEffect(() => {
-  //   dispatch(userDetails({
-  //     isLoader: false,
-  //   }))
-  // }, [])
-  // console.log(name);
 
   const formik = useFormik({
     initialValues: {
@@ -71,34 +53,17 @@ export default function SignUp() {
       role: "",
     },
     validationSchema: SignUpFormValidation,
-    // validationSchema: Yup.object({
-    //   name: Yup.string()
-    //     .max(30, "Must be 30 characters or less")
-    //     .required("Name is Required"),
-    //   email: Yup.string()
-    //     .email("Invalid email address")
-    //     .required("Email is Required"),
-    //   password: Yup.string()
-    //     .min(6, "Password must be at least 6 charaters")
-    //     .required("Password is Required"),
-    //   role: Yup.mixed()
-    //     .required("Selection is Required")
-    //     .oneOf(["company", "student"]),
-    //   phone: Yup.string()
-    //     .matches(phoneRegExp, "Phone number is not valid")
-    //     .required("Phone number is Required"),
-    // }),
 
     onSubmit: (values) => {
       const { email, password, name, role, phone } = values;
-      console.log("values are ", values);
+      // console.log("values are ", values);
       setErrMessage("");
       setMessage("");
       setLoader(true);
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          console.log(userCredential);
+          // console.log(userCredential);
           database
             .ref("/CRA")
             .child("users/" + userCredential.user.uid)
@@ -116,7 +81,7 @@ export default function SignUp() {
               var user = userCredential;
               setLoader(false);
               setMessage("User Created Successful");
-              console.log("user", user);
+              // console.log("user", user);
             })
             .catch((err) => {
               console.log(err.message);

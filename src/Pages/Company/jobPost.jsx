@@ -10,14 +10,14 @@ import "../../App.css";
 function JobPost() {
   const user = useSelector((state) => state.addUser);
   const dispatch = useDispatch();
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     database
       .ref("/CRA")
       .child(`jobs/${user.loginUser.id}`)
       .on("value", (snapshot) => {
         if (snapshot.exists()) {
-          console.log("jobs", snapshot.val());
+          // console.log("jobs", snapshot.val());
           dispatch(
             userDetails({
               allJobs: snapshot.val(),
@@ -28,23 +28,6 @@ function JobPost() {
         }
       });
   }, []);
-  // useEffect(() => {
-  //   database
-  //     .ref("/CRA")
-  //     .child(`allCompanyJobs/`)
-  //     .on("value", (snapshot) => {
-  //       if (snapshot.exists()) {
-  //         console.log("jobs", snapshot.val());
-  //         dispatch(
-  //           userDetails({
-  //             allJobs: snapshot.val(),
-  //           })
-  //         );
-  //       } else {
-  //         console.log("No data available");
-  //       }
-  //     });
-  // }, []);
 
   const deleteData = (key) => {
     console.log(key);
@@ -52,7 +35,7 @@ function JobPost() {
   };
 
   const myPostedJobs = Object.values(user.allJobs);
-  console.log("My Posted Jobs====>", myPostedJobs);
+  // console.log("My Posted Jobs====>", myPostedJobs);
 
   return (
     <div className="marginAdjustment">
@@ -60,7 +43,7 @@ function JobPost() {
       <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
       {myPostedJobs &&
         myPostedJobs?.reverse().map((data, index) => {
-          console.log("data", data.jobId);
+          // console.log("data", data.jobId);
           return (
             <OutlinedCard
               cardData={data}
