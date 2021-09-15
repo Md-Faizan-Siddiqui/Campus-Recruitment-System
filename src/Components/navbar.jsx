@@ -126,6 +126,9 @@ export default function ButtonAppBar() {
           <Link to="/" className={classes.toggleBtnColor}>
             <ListItem button>Students</ListItem>
           </Link>
+          <Link to="/companies" className={classes.toggleBtnColor}>
+            <ListItem button>Companies</ListItem>
+          </Link>
           <Link to="/jobpost" className={classes.toggleBtnColor}>
             <ListItem button>Jobs</ListItem>
           </Link>
@@ -152,6 +155,8 @@ export default function ButtonAppBar() {
             isLoader: false,
           })
         );
+        localStorage.removeItem("UID")
+        localStorage.removeItem("ROLE")
       })
       .catch((error) => {
         console.log(error);
@@ -228,10 +233,13 @@ export default function ButtonAppBar() {
             {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
               <>
                 <Link to="/" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Students</Button>
-                </Link>
-                <Link to="/jobpost" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Jobs</Button>
+                </Link>
+                <Link to="/companies" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Companies</Button>
+                </Link>
+                <Link to="/students" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Students</Button>
                 </Link>
                 <Link to="/profile" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Profile</Button>

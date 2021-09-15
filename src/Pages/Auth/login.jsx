@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  useSelector((state) => state.addUser);
+  const abc = useSelector((state) => state);
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -48,6 +48,7 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loader, setLoader] = useState(false);
+  console.log("abc===>", abc)
 
   const formik = useFormik({
     initialValues: {
@@ -68,7 +69,7 @@ export default function SignIn() {
         .then((userCredential) => {
           var user = userCredential.user;
           setMessage("Login Success!");
-          // console.log("user", user);
+          console.log("user", user);
           setLoader(false);
           dispatch(
             userDetails({
@@ -77,6 +78,7 @@ export default function SignIn() {
             })
           );
           // history.push("/");
+          // localStorage.setItem("UID", auth.currentUser.uid)
         })
         .catch((error) => {
           var errorCode = error.code;

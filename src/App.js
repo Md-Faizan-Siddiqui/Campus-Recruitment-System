@@ -20,6 +20,8 @@ function App() {
   const reduxLoader = useSelector((state) => state.addUser.isLoader)
   const dispatch = useDispatch()
   const [userData, setUserData] = useState({});
+  const [UID, setUID] = useState()
+  // console.log("UID", UID)
   // const [loader, setLoader] = useState(false);
   // console.log(userData)
   // console.log("reduxLoader====>>>", reduxLoader)
@@ -31,6 +33,7 @@ function App() {
         isLoader: true
       })
     )
+    // setUID(localStorage.getItem("UID"))
     auth.onAuthStateChanged((user) => {
       // setLoader(true)
       if (user) {
@@ -39,6 +42,7 @@ function App() {
           .child("users/" + auth.currentUser.uid)
           .on("value", (snapshot) => {
             if (snapshot.exists()) {
+              console.log("snapshot====>", snapshot.val())
               setUserData(snapshot.val());
               dispatch(
                 userDetails({
@@ -47,7 +51,7 @@ function App() {
                   isLoader: false,
                 })
               )
-              // localStorage.setItem("uid", auth.currentUser.uid)
+              // if(UID){}
               // setLoader(false)
             } else {
               setUserData([]);
@@ -95,6 +99,7 @@ function App() {
       }
     });
   }, []);
+  // console.log(window.location.pathname)
 
   // get and dispatch end...
 
@@ -133,7 +138,10 @@ function App() {
         {user?.loginUser?.role === "admin" ?
           <>
             <Switch>
-              <Route exact path='/' component={Profile} />
+              <Route exact path='/' component={Vacancies} />
+              <Route path='/companies' component={Companies} />
+              <Route exact path='/students' component={Students} />
+              <Route path='/profile' component={Profile} />
               {/* <Route path='*' component={PageNotFound} /> */}
               {/* <Route path='*' >
                 <PageNotFound />

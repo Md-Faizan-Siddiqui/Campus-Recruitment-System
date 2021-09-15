@@ -7,7 +7,6 @@ import { database, Storage } from "../../Config/firebaseConfig";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import fallBackImage from "../../Images/images.png";
-// import * as Yup from "yup";
 import { Button } from "@material-ui/core";
 import { updateFormValidationStudent } from "../../Validation/validation";
 import { updateFormValidationCompany } from "../../Validation/validation";
@@ -24,8 +23,6 @@ function ProfileUpdate(props) {
   // console.log("url====>", url);
   // console.log("Login User ID===>", user.loginUser.id);
 
-  // const phoneRegExp =
-  //   /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/;
   const formik = useFormik({
     initialValues: {
       email: user.loginUser.email,
@@ -39,53 +36,16 @@ function ProfileUpdate(props) {
       website: user.loginUser.website ? user.loginUser.website : "",
     },
     validationSchema:
-      role === "Student"
+      role === "student"
         ? updateFormValidationStudent
         : role === "company"
-        ? updateFormValidationCompany
-        : null,
-    // validationSchema: Yup.object({
-    //   // name 1
-    //   name: Yup.string()
-    //     .max(30, "Must be 30 characters or less")
-    //     .required("Required Name"),
-    //   // cgpa 2
-    //   cgpa: Yup.number()
-    //     .min(0.1, "Invalid CGPA")
-    //     .max(4.0, "Invalid CGPA")
-    //     .required("Required CGPA"),
-    //   //education 3
-    //   education: Yup.mixed()
-    //     .oneOf(["Matric", "Inter", "Graduate", "Master's"])
-    //     .required("Required Education"),
-    //   //phone 4
-    //   phone: Yup.string()
-    //     .matches(phoneRegExp, "Invalid Phone Number")
-    //     .required("Required Phone Number"),
-    //   // dob 5
-    //   dob: Yup.date()
-    //     .max(
-    //       new Date(Date.now() - 568111068000), // Task completed after 2.5 hours
-    //       "You must be at least 18 years"
-    //     )
-    //     .required("Required"),
-    //   // skills 6
-    //   skills: Yup.string().required("Required"),
-    //   // experience 7
-    //   experience: Yup.string().required("Required"),
-    //   // email: Yup.string()
-    //   //   .email("Invalid email address")
-    //   //   .required("Email is Required"),
-    //   //   role: Yup.mixed()
-    //   //     .required("Selection is Required")
-    //   //     .oneOf(["company", "student"]),
-    // }),
+          ? updateFormValidationCompany
+          : null,
 
     onSubmit: (values) => {
       const { dob, education, cgpa, skills, name, experience, phone, website } =
         values;
       // console.log("Values====>", values);
-      // alert("Running");
 
       database
         .ref("/CRA")
@@ -93,23 +53,23 @@ function ProfileUpdate(props) {
         .update(
           role === "student"
             ? {
-                dob: dob,
-                education: education,
-                cgpa: cgpa,
-                skills: skills,
-                name: name,
-                phone: phone,
-                experience: experience,
-                fileToUpload: url,
-              }
+              dob: dob,
+              education: education,
+              cgpa: cgpa,
+              skills: skills,
+              name: name,
+              phone: phone,
+              experience: experience,
+              fileToUpload: url,
+            }
             : role === "company"
-            ? {
+              ? {
                 name: name,
                 phone: phone,
                 fileToUpload: url,
                 website: website,
               }
-            : null
+              : null
         )
         .then((res) => {
           console.log(res);

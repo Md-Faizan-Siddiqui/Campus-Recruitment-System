@@ -67,9 +67,9 @@ export default function OutlinedCard({
   const [loader, setLoader] = useState(false);
   const state = useSelector((state) => state);
   const classes = useStyles();
-  const student = state.addUser.loginUser.role === "student";
-  const company = state.addUser.loginUser.role === "company";
-  const admin = state.addUser.loginUser.role === "admin";
+  const student = state?.addUser?.loginUser?.role === "student";
+  const company = state?.addUser?.loginUser?.role === "company";
+  const admin = state?.addUser?.loginUser?.role === "admin";
 
   // console.log(state.addUser.loginUser.role);
   // console.log("campusData=====>", campusData);
