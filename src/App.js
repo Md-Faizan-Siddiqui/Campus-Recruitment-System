@@ -128,7 +128,7 @@ function App() {
               <Route exact path='/' component={Vacancies} />
               <Route path='/profile' component={Profile} />
               <Route path='/companies' component={Companies} />
-              {/* <Route path='*' component={PageNotFound} /> */}
+              <Route path='*' component={PageNotFound} />
               {/* <Route path='*' >
                 <PageNotFound />
               </Route> */}
@@ -141,8 +141,8 @@ function App() {
               <Route exact path='/' component={Vacancies} />
               <Route path='/companies' component={Companies} />
               <Route exact path='/students' component={Students} />
-              <Route path='/profile' component={Profile} />
-              {/* <Route path='*' component={PageNotFound} /> */}
+              {/* <Route path='/profile' component={Profile} /> */}
+              <Route path='*' component={PageNotFound} />
               {/* <Route path='*' >
                 <PageNotFound />
               </Route> */}
@@ -155,7 +155,7 @@ function App() {
               <Route exact path='/' component={Students} />
               <Route path='/profile' component={Profile} />
               <Route path='/jobpost' component={JobPost} />
-              {/* <Route path='*' component={PageNotFound} /> */}
+              <Route path='*' component={PageNotFound} />
               {/* <Route path='*' >
                 <PageNotFound />
               </Route> */}

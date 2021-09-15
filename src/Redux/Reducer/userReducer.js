@@ -1,7 +1,7 @@
 let initialState = {
     loginUser: null,
     loginStatus: false,
-    isLoader: false,
+    isLoader: true,
     role: null,
     allUsers: [],
     allJobs: []

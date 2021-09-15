@@ -124,17 +124,17 @@ export default function ButtonAppBar() {
       {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
         <>
           <Link to="/" className={classes.toggleBtnColor}>
-            <ListItem button>Students</ListItem>
+            <ListItem button>Jobs</ListItem>
           </Link>
           <Link to="/companies" className={classes.toggleBtnColor}>
             <ListItem button>Companies</ListItem>
           </Link>
-          <Link to="/jobpost" className={classes.toggleBtnColor}>
-            <ListItem button>Jobs</ListItem>
+          <Link to="/students" className={classes.toggleBtnColor}>
+            <ListItem button>Students</ListItem>
           </Link>
-          <Link to="/profile" className={classes.toggleBtnColor}>
+          {/* <Link to="/profile" className={classes.toggleBtnColor}>
             <ListItem button>Profile</ListItem>
-          </Link>
+          </Link> */}
           <ListItem className={classes.toggleBtnColor} onClick={logout} button>
             Logout
           </ListItem>
@@ -241,9 +241,9 @@ export default function ButtonAppBar() {
                 <Link to="/students" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Students</Button>
                 </Link>
-                <Link to="/profile" className={classes.btnColor}>
+                {/* <Link to="/profile" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Profile</Button>
-                </Link>
+                </Link> */}
                 <Button className={classes.btnColor} onClick={logout}>
                   Logout
                 </Button>

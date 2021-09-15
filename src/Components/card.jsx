@@ -98,7 +98,7 @@ export default function OutlinedCard({
       <Grid item xl={3} md={4} sm={12} xs={12} style={{ maxWidth: "100%" }}>
         <Card className={classes.root} variant="outlined">
           <CardContent>
-            {companyPostJob || apply ? null : (
+            {companyPostJob || apply || admin ? null : (
               <div className={classes.main_img_div}>
                 <div className={classes.profileImg}>
                   <img
