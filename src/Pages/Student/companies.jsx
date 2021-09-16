@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../../Components/card";
 import "../../App.css";
+import { List, ListItem, Grid } from "@material-ui/core";
 
 function Companies() {
   // get data from redux..
@@ -19,18 +20,22 @@ function Companies() {
   return (
     <div className="marginAdjustment">
       <h1>Companies</h1>
-      {allCompanies &&
-        allCompanies.map((data, index) => {
-          return (
-            <OutlinedCard
-              campusData={data}
-              details
-              image
-              formTitle={"Company Details"}
-              companyDetails
-            />
-          );
-        })}
+      <Grid container justifyContent="center">
+          {allCompanies &&
+            allCompanies.map((data, index) => {
+              return (
+                <Grid item xl={3} md={4} sm={6} xs={10}  >
+                <OutlinedCard
+                  campusData={data}
+                  details
+                  image
+                  formTitle={"Company Details"}
+                  companyDetails
+                />
+        </Grid>
+              );
+            })}
+      </Grid>
     </div>
   );
 }

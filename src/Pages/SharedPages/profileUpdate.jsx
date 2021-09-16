@@ -18,11 +18,6 @@ function ProfileUpdate(props) {
   const role = user.loginUser.role;
   const history = useHistory();
 
-  // console.log("user===>", user);
-  // console.log("role====>", role);
-  // console.log("url====>", url);
-  // console.log("Login User ID===>", user.loginUser.id);
-
   const formik = useFormik({
     initialValues: {
       email: user.loginUser.email,
@@ -45,7 +40,6 @@ function ProfileUpdate(props) {
     onSubmit: (values) => {
       const { dob, education, cgpa, skills, name, experience, phone, website } =
         values;
-      // console.log("Values====>", values);
 
       database
         .ref("/CRA")
@@ -97,7 +91,6 @@ function ProfileUpdate(props) {
         console.log(err);
       });
   };
-  // console.log("user======>", user.loginUser.fileToUpload);
 
   useEffect(() => {
     setUrl(props.cardData?.fileToUpload);
@@ -105,7 +98,6 @@ function ProfileUpdate(props) {
 
   return (
     <div className="main_div">
-      {/* <div className="form_div"> */}
       <form onSubmit={formik.handleSubmit}>
         {props.jobPost ? null : (
           <>
@@ -312,13 +304,11 @@ function ProfileUpdate(props) {
             />
           </div>
         )}
-        {/* <button type="submit">Update</button> */}
         <Button type="submit" size="small" variant="contained" color="primary">
           Update
         </Button>
       </form>
     </div>
-    // </div>
   );
 }
 

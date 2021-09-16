@@ -56,14 +56,12 @@ export default function SignUp() {
 
     onSubmit: (values) => {
       const { email, password, name, role, phone } = values;
-      // console.log("values are ", values);
       setErrMessage("");
       setMessage("");
       setLoader(true);
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // console.log(userCredential);
           database
             .ref("/CRA")
             .child("users/" + userCredential.user.uid)
@@ -81,7 +79,6 @@ export default function SignUp() {
               var user = userCredential;
               setLoader(false);
               setMessage("User Created Successful");
-              // console.log("user", user);
             })
             .catch((err) => {
               console.log(err.message);

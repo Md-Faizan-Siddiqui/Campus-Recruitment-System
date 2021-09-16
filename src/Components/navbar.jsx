@@ -14,13 +14,13 @@ import { userDetails } from "../Redux/Action/userAction";
 import { Drawer } from "@material-ui/core";
 import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
+import BusinessRoundedIcon from '@material-ui/icons/BusinessRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
     display: "none",
     [theme.breakpoints.down("xs")]: {
       display: "block",
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3f51b5",
     color: "white",
     margin: 0,
-    padding: "15px",
+    padding: "17px",
     fontSize: "18px",
   },
   toggleLogoutBtn: {
@@ -63,7 +63,6 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const user = useSelector((state) => state.addUser);
   const dispatch = useDispatch();
-  // console.log(user?.loginUser?.name);
 
   // drawer //
   const [state, setState] = useState(false);
@@ -90,7 +89,7 @@ export default function ButtonAppBar() {
               <ListItem button>Vacancies</ListItem>
             </Link>
             <Link to="/companies" className={classes.toggleBtnColor}>
-              <ListItem button>Companies</ListItem>
+              <ListItem button>Companies <BusinessRoundedIcon /> </ListItem>
             </Link>
             <Link to="/profile" className={classes.toggleBtnColor}>
               <ListItem button>Profile</ListItem>
@@ -132,9 +131,6 @@ export default function ButtonAppBar() {
           <Link to="/students" className={classes.toggleBtnColor}>
             <ListItem button>Students</ListItem>
           </Link>
-          {/* <Link to="/profile" className={classes.toggleBtnColor}>
-            <ListItem button>Profile</ListItem>
-          </Link> */}
           <ListItem className={classes.toggleBtnColor} onClick={logout} button>
             Logout
           </ListItem>
@@ -170,7 +166,6 @@ export default function ButtonAppBar() {
         {list()}
       </Drawer>
       {/* drawer */}
-
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
@@ -241,9 +236,6 @@ export default function ButtonAppBar() {
                 <Link to="/students" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Students</Button>
                 </Link>
-                {/* <Link to="/profile" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Profile</Button>
-                </Link> */}
                 <Button className={classes.btnColor} onClick={logout}>
                   Logout
                 </Button>

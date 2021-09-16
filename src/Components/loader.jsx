@@ -3,7 +3,7 @@ export default function App() {
     return (
         <Loader
             type="Bars"
-            color="#00BFFF"
+            color="#3f51b5"
             height={15}
             width={15} />
     );
