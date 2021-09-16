@@ -9,8 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import { List, ListItem, Grid } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
-import JobPost from "../Pages/Company/jobPost";
-import Loader from "./loader";
 
 const useStyles = makeStyles({
   root: {
@@ -61,41 +59,20 @@ export default function OutlinedCard({
   formTitle,
   companyDetails,
   studentDetails,
-  allJobs,
   companyPostJob, //jobPost
 }) {
-  const [loader, setLoader] = useState(false);
+  console.log("Card Data====> in card", cardData)
+  console.log("Campus Data====> in card", campusData)
   const state = useSelector((state) => state);
   const classes = useStyles();
   const student = state?.addUser?.loginUser?.role === "student";
   const company = state?.addUser?.loginUser?.role === "company";
   const admin = state?.addUser?.loginUser?.role === "admin";
 
-  // console.log(state.addUser.loginUser.role);
-  // console.log("campusData=====>", campusData);
-  // console.log("cardData=====>", cardData);
-  // console.log("student", student);
-  // console.log("company", company);
-  // console.log("admin", admin);
-  // console.log(
-  //   "Campus Data=====>",
-  //   campusData,
-  //   "Update Btn=====>",
-  //   updateBtn,
-  //   "Apply=====>",
-  //   apply,
-  //   "Details=====>",
-  //   details,
-  //   "Card Data=====>",
-  //   cardData
-  // );
-  // console.log("allJobs===>", allJobs, companyPostJob);
-  // console.log("Campus Data====>", campusData);
-  // console.log("Card Data====>", cardData);
-
+  // console.log(campusData);
   return (
     <Grid container justifyContent="center">
-      <Grid item xl={3} md={4} sm={12} xs={12} style={{ maxWidth: "100%" }}>
+      <Grid item xl={3} md={4} sm={6} xs={10} style={{ maxWidth: "100%" }} >
         <Card className={classes.root} variant="outlined">
           <CardContent>
             {companyPostJob || apply || admin ? null : (
@@ -128,33 +105,33 @@ export default function OutlinedCard({
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.jobTitle
-                    ? `Available Jobs : ${campusData.jobTitle}`
+                    ? `Available Jobs : ${campusData?.jobTitle}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.dob
-                    ? `Date Of Birth : ${campusData.dob || cardData?.dob}`
+                    ? `Date Of Birth : ${campusData?.dob || cardData?.dob}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.education
-                    ? `Education : ${campusData.education || cardData?.education
+                    ? `Education : ${campusData?.education || cardData?.education
                     }`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.cgpa
-                    ? `CGPA : ${campusData.cgpa || cardData?.cgpa}`
+                    ? `CGPA : ${campusData?.cgpa || cardData?.cgpa}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.skills
-                    ? `Skills : ${campusData.skills || cardData?.skills}`
+                    ? `Skills : ${campusData?.skills || cardData?.skills}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.experience
-                    ? `Experience : ${campusData.experience || cardData?.experience
+                    ? `Experience : ${campusData?.experience || cardData?.experience
                     }`
                     : null}
                 </Typography>
@@ -165,22 +142,22 @@ export default function OutlinedCard({
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.description
-                    ? `Job Description : ${campusData.description}`
+                    ? `Job Description : ${campusData?.description}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.lastDate
-                    ? `Last Date : ${campusData.lastDate}`
+                    ? `Last Date : ${campusData?.lastDate}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {student && campusData?.salary
-                    ? `Salary : ${campusData.salary}`
+                    ? `Salary : ${campusData?.salary}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {company && campusData?.website
-                    ? `Website : ${campusData.website}`
+                    ? `Website : ${campusData?.website}`
                     : null}
                 </Typography>
                 <Typography variant="body2" component="p">
@@ -259,20 +236,18 @@ export default function OutlinedCard({
                 </div>
               </div>
             ) : null}
-            {apply || companyPostJob ? (
+            {(company || student) && (apply || companyPostJob) ? (
               <div className={classes.modal_div}>
-                <div>
-                  <CardActions>
-                    <Button
-                      size="small"
-                      variant="contained"
-                      color="primary"
-                      onClick={deleteData ? deleteData : null}
-                    >
-                      {companyPostJob || apply ? btnText : null}
-                    </Button>
-                  </CardActions>
-                </div>
+                <CardActions>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                    onClick={deleteData ? deleteData : null}
+                  >
+                    {companyPostJob || apply ? btnText : null}
+                  </Button>
+                </CardActions>
               </div>
             ) : null}
           </CardContent>

@@ -10,7 +10,6 @@ let initialState = {
 const addUser = (state = initialState, action) => {
     switch (action.type) {
         case "ADD_USER":
-            // console.log("action", action)
             return {
                 ...state,
                 ...action.payload

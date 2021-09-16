@@ -40,15 +40,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const abc = useSelector((state) => state);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [errMessage, setErrMessage] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   const [loader, setLoader] = useState(false);
-  console.log("abc===>", abc)
 
   const formik = useFormik({
     initialValues: {
@@ -63,7 +59,6 @@ export default function SignIn() {
       setErrMessage("");
       setMessage("");
       setLoader(true);
-      // e.preventDefault();
       auth
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -77,8 +72,6 @@ export default function SignIn() {
               loginStatus: true,
             })
           );
-          // history.push("/");
-          // localStorage.setItem("UID", auth.currentUser.uid)
         })
         .catch((error) => {
           var errorCode = error.code;
@@ -141,10 +134,6 @@ export default function SignIn() {
               {formik.errors.password}
             </p>
           )}
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <Button
             type="submit"
             fullWidth

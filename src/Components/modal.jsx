@@ -11,9 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import ProfileUpdate from "../Pages/SharedPages/profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
-import { useSelector } from "react-redux";
-import { yellow } from "@material-ui/core/colors";
-import JobPost from "../Pages/Company/jobPost";
 import JobPostForm from "../Pages/jobPostForm";
 
 const styles = (theme) => ({
@@ -67,14 +64,11 @@ export default function CustomizedDialogs({
   campusData,
   btnText,
   jobPost,
-  details,
   companyDetails,
   studentDetails,
 }) {
-  console.log("Campus Data", campusData);
-  const state = useSelector((state) => state);
-  // console.log(state.addUser.allUsers);
-  console.log(cardData, "<======cardData");
+  console.log("Campus Data======>", campusData);
+  console.log("Card Data======>", cardData);
 
   const [open, setOpen] = React.useState(false);
 
@@ -124,11 +118,6 @@ export default function CustomizedDialogs({
               />
             )}
           </DialogContent>
-          {/* <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Update
-          </Button>
-        </DialogActions> */}
         </Dialog>
       )}
     </div>

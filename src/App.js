@@ -15,16 +15,8 @@ import { userDetails } from './Redux/Action/userAction';
 import PageNotFound from './Pages/pageNotFound';
 
 function App() {
-  // debugger
   const user = useSelector((state) => state.addUser)
-  const reduxLoader = useSelector((state) => state.addUser.isLoader)
   const dispatch = useDispatch()
-  const [userData, setUserData] = useState({});
-  const [UID, setUID] = useState()
-  // console.log("UID", UID)
-  // const [loader, setLoader] = useState(false);
-  // console.log(userData)
-  // console.log("reduxLoader====>>>", reduxLoader)
 
   // get current user and dispatch
   useEffect(() => {
@@ -33,9 +25,7 @@ function App() {
         isLoader: true
       })
     )
-    // setUID(localStorage.getItem("UID"))
     auth.onAuthStateChanged((user) => {
-      // setLoader(true)
       if (user) {
         database
           .ref("/CRA")
@@ -43,7 +33,6 @@ function App() {
           .on("value", (snapshot) => {
             if (snapshot.exists()) {
               console.log("snapshot====>", snapshot.val())
-              setUserData(snapshot.val());
               dispatch(
                 userDetails({
                   loginUser: snapshot.val(),
@@ -51,17 +40,13 @@ function App() {
                   isLoader: false,
                 })
               )
-              // if(UID){}
-              // setLoader(false)
             } else {
-              setUserData([]);
               console.log("No data available");
               dispatch(
                 userDetails({
                   isLoader: false
                 })
               )
-              // setLoader(false)
             }
           });
       }
@@ -74,9 +59,6 @@ function App() {
       }
     });
   }, []);
-  // console.log("userData=====>>>", userData)
-
-  // get all user from database and dispatch in redux..
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -86,7 +68,6 @@ function App() {
           .child("users")
           .on("value", (snapshot) => {
             if (snapshot.exists()) {
-              // console.log("snapshot", snapshot.val());
               dispatch(
                 userDetails({
                   allUsers: snapshot.val(),
@@ -99,14 +80,12 @@ function App() {
       }
     });
   }, []);
-  // console.log(window.location.pathname)
 
   // get and dispatch end...
 
   if (!user.loginStatus && user.isLoader === true) {
     return <Loader />
   }
-  // console.log("login status", user.loginStatus);
 
   return (
     <div className="App">
@@ -129,9 +108,6 @@ function App() {
               <Route path='/profile' component={Profile} />
               <Route path='/companies' component={Companies} />
               <Route path='*' component={PageNotFound} />
-              {/* <Route path='*' >
-                <PageNotFound />
-              </Route> */}
             </Switch>
           </> : null}
 
@@ -141,11 +117,7 @@ function App() {
               <Route exact path='/' component={Vacancies} />
               <Route path='/companies' component={Companies} />
               <Route exact path='/students' component={Students} />
-              {/* <Route path='/profile' component={Profile} /> */}
               <Route path='*' component={PageNotFound} />
-              {/* <Route path='*' >
-                <PageNotFound />
-              </Route> */}
             </Switch>
           </> : null}
 
@@ -156,9 +128,6 @@ function App() {
               <Route path='/profile' component={Profile} />
               <Route path='/jobpost' component={JobPost} />
               <Route path='*' component={PageNotFound} />
-              {/* <Route path='*' >
-                <PageNotFound />
-              </Route> */}
             </Switch>
           </> : null}
       </BrowserRouter>
