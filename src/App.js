@@ -1,7 +1,6 @@
 import SignUp from '../src/Pages/Auth/signUp';
 import SignIn from '../src/Pages/Auth/login';
 import Navbar from './Components/navbar';
-import Loader from './Components/loader'
 import Profile from '../src/Pages/SharedPages/Profile';
 import Vacancies from '../src/Pages/Student/vacancies';
 import Companies from '../src/Pages/Student/companies';
@@ -13,6 +12,8 @@ import { useEffect, useState } from 'react';
 import { auth, database } from './Config/firebaseConfig';
 import { userDetails } from './Redux/Action/userAction';
 import PageNotFound from './Pages/pageNotFound';
+import Loader from "react-loader-spinner";
+import "./App.css"
 
 function App() {
   const user = useSelector((state) => state.addUser)
@@ -84,7 +85,11 @@ function App() {
   // get and dispatch end...
 
   if (!user.loginStatus && user.isLoader === true) {
-    return <Loader />
+    return (
+      <div className="loader_div">
+        <Loader width="100px" height="100px" color="#3f51b5" type="Bars" />
+      </div>
+    )
   }
 
   return (
@@ -134,5 +139,5 @@ function App() {
     </div>
   );
 }
-  
+
 export default App;

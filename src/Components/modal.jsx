@@ -60,7 +60,7 @@ const DialogActions = withStyles((theme) => ({
 export default function CustomizedDialogs({
   formTitle,
   icons,
-  cardData,
+  // cardData,
   campusData,
   btnText,
   jobPost,
@@ -68,7 +68,7 @@ export default function CustomizedDialogs({
   studentDetails,
 }) {
   console.log("Campus Data======>", campusData);
-  console.log("Card Data======>", cardData);
+  // console.log("Card Data======>", cardData);
 
   const [open, setOpen] = React.useState(false);
 
@@ -107,13 +107,13 @@ export default function CustomizedDialogs({
           </DialogTitle>
           <DialogContent dividers>
             {icons ? (
-              <ProfileUpdate cardData={cardData} handleClose={handleClose} />
+              <ProfileUpdate campusData={campusData} handleClose={handleClose} />//cardData={cardData}
             ) : jobPost ? (
               <JobPostForm handleClose={handleClose} />
             ) : (
               <OutlinedCard
                 campusData={campusData}
-                cardData={cardData}
+                // cardData={cardData}
                 handleClose={handleClose}
               />
             )}

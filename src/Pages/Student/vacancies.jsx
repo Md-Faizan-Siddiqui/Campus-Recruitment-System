@@ -37,13 +37,13 @@ function Vacancies() {
   return (
     <div className="marginAdjustment">
       <h1>Vacancies</h1>
-      <Grid container justifyContent="center">
+      <Grid container>
         {allJobs &&
           allJobs?.reverse().map((data, index) => {
             console.log("data", data);
             return (
-              <Grid item xl={3} md={4} sm={6} xs={10}  >
-                <OutlinedCard cardData={data} btnText={"Apply Now"} apply />
+              <Grid item xl={3} md={4} sm={6} xs={12}  >
+                <OutlinedCard campusData={data} btnText={"Apply Now"} apply />
               </Grid>
             )
           })}
@@ -54,3 +54,4 @@ function Vacancies() {
 }
 
 export default Vacancies;
+//cardData

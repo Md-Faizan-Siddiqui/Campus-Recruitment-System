@@ -12,10 +12,10 @@ import { Link, useHistory } from "react-router-dom";
 import { auth, database } from "../../Config/firebaseConfig";
 import { useState } from "react";
 import Alert from "../../Components/snackBar";
-import Loader from "../../Components/loader";
 import RadioBtn from "../../Components/radioButton";
 import { useFormik } from "formik";
 import { SignUpFormValidation } from "../../Validation/validation";
+import Loader from "react-loader-spinner";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -202,7 +202,7 @@ export default function SignUp() {
             className={classes.submit}
             disabled={loader ? true : false}
           >
-            {loader === true ? <Loader /> : "Sign Up"}
+            {loader === true ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars" /> : "Sign Up"}
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>

@@ -37,13 +37,13 @@ function JobPost() {
     <div className="marginAdjustment">
       <h1>Job Post</h1>
       <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
-      <Grid container justifyContent="center">
+      <Grid container>
         {myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
             return (
-              <Grid item xl={3} md={4} sm={6} xs={10}  >
+              <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard
-                  cardData={data}
+                  campusData={data}
                   btnText={"delete"}
                   deleteData={() => deleteData(data.jobId)}
                   companyPostJob

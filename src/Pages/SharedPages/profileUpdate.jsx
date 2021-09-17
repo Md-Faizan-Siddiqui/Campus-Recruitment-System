@@ -93,7 +93,7 @@ function ProfileUpdate(props) {
   };
 
   useEffect(() => {
-    setUrl(props.cardData?.fileToUpload);
+    setUrl(props.campusData?.fileToUpload);
   }, []);
 
   return (

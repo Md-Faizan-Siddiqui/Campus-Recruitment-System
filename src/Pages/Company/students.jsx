@@ -12,15 +12,15 @@ function Students() {
   return (
     <div className="marginAdjustment">
       <h1>Students</h1>
-      <Grid container justifyContent="center">
+      <Grid container>
         {allStudents &&
           allStudents.map((data, index) => {
             return (
-              <Grid item xl={3} md={4} sm={6} xs={10}  >
+              <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard
                   campusData={data}
                   details
-                  image
+                  // showImg
                   formTitle={"Student Details"}
                   studentDetails
                 />

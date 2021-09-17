@@ -12,10 +12,11 @@ function Profile() {
     <div className="marginAdjustment">
       <h1>{user.loginUser.role} Profile</h1>
       <Grid container justifyContent="center">
-        <Grid item xl={3} md={4} sm={6} xs={10}  >
+        <Grid item xl={3} md={4} sm={6} xs={12}  >
           <OutlinedCard
             campusData={user.loginUser}
             updateBtn
+            showImg
             formTitle={"Registration Form"}
           />
         </Grid>

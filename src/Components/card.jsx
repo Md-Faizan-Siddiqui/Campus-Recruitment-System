@@ -49,19 +49,18 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
+  showImg,//student profile
   deleteData, //jobPost
   btnText, //jobPost, vacancies
-  campusData,
+  campusData, //student
   updateBtn,
   apply, // vacancies
-  details,
-  cardData, // vacancies
-  formTitle,
+  details,//student
+  formTitle,//student
   companyDetails,
-  studentDetails,
+  studentDetails,//student
   companyPostJob, //jobPost
 }) {
-  console.log("Card Data====> in card", cardData)
   console.log("Campus Data====> in card", campusData)
   const state = useSelector((state) => state);
   const classes = useStyles();
@@ -72,7 +71,7 @@ export default function OutlinedCard({
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        {companyPostJob || apply || admin ? null : (
+        {/* {companyPostJob || apply || admin ? null : (
           <div className={classes.main_img_div}>
             <div className={classes.profileImg}>
               <img
@@ -86,56 +85,52 @@ export default function OutlinedCard({
               />
             </div>
           </div>
-        )}
+        )} */}
+        {showImg ? <div className={classes.main_img_div}>
+          <div className={classes.profileImg}>
+            <img
+              className={classes.imgTag}
+              src={
+                campusData?.fileToUpload
+                  ? campusData.fileToUpload
+                  : fallBackImage
+              }
+              alt="profilePic"
+            />
+          </div>
+        </div> : null}
         <div className={classes.card_content1}>
           <div>
             {companyPostJob ? <h1>Posted Job</h1> : null}
             <Typography variant="body2" component="p">
               {details
                 ? null
-                : `Name : ${campusData?.name || cardData?.name}`}
+                : `Name : ${campusData?.name}`}
             </Typography>
             <Typography variant="body2" component="p">
               {details
                 ? null
-                : `Email : ${campusData?.email || cardData?.email}`}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {student && campusData?.jobTitle
-                ? `Available Jobs : ${campusData?.jobTitle}`
-                : null}
+                : `Email : ${campusData?.email}`}
             </Typography>
             <Typography variant="body2" component="p">
               {student && campusData?.dob
-                ? `Date Of Birth : ${campusData?.dob || cardData?.dob}`
-                : null}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {student && campusData?.education
-                ? `Education : ${campusData?.education || cardData?.education
-                }`
+                ? `Date Of Birth : ${campusData?.dob}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
               {student && campusData?.cgpa
-                ? `CGPA : ${campusData?.cgpa || cardData?.cgpa}`
+                ? `CGPA : ${campusData?.cgpa}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
               {student && campusData?.skills
-                ? `Skills : ${campusData?.skills || cardData?.skills}`
-                : null}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {student && campusData?.experience
-                ? `Experience : ${campusData?.experience || cardData?.experience
-                }`
+                ? `Skills : ${campusData?.skills}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
               {(company || student) && details
                 ? null
-                : `Phone : ${campusData?.phone || cardData?.phone}`}
+                : `Phone : ${campusData?.phone}`}
             </Typography>
             <Typography variant="body2" component="p">
               {student && campusData?.description
@@ -143,58 +138,43 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {student && campusData?.lastDate
-                ? `Last Date : ${campusData?.lastDate}`
+              {companyPostJob || apply
+                ? `Job Title : ${campusData?.jobTitle}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {student && campusData?.salary
-                ? `Salary : ${campusData?.salary}`
+              {companyPostJob || apply
+                ? `Job Description : ${campusData?.jobDescription}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {company && campusData?.website
+              {companyPostJob || apply
+                ? `Job Type : ${campusData?.jobType}`
+                : null}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {companyPostJob || apply
+                ? `Experience : ${campusData?.experience}`
+                : null}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {companyPostJob || apply
                 ? `Website : ${campusData?.website}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
               {companyPostJob || apply
-                ? `Job Title : ${cardData?.jobTitle}`
+                ? `Salary : ${campusData?.salary}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
               {companyPostJob || apply
-                ? `Job Description : ${cardData?.jobDescription}`
+                ? `Last Date : ${campusData?.lastDate}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {companyPostJob || apply
-                ? `Job Type : ${cardData?.jobType}`
-                : null}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {companyPostJob || apply
-                ? `Experience : ${cardData?.experience}`
-                : null}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {companyPostJob || apply
-                ? `Website : ${cardData?.website}`
-                : null}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {companyPostJob || apply
-                ? `Salary : ${cardData?.salary}`
-                : null}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {companyPostJob || apply
-                ? `Last Date : ${cardData?.lastDate}`
-                : null}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {companyPostJob || apply
-                ? `Education : ${cardData?.education}`
+              {(student && campusData?.education) || companyPostJob || apply
+                ? `Education : ${campusData?.education}`
                 : null}
             </Typography>
           </div>
@@ -210,7 +190,6 @@ export default function OutlinedCard({
               <CardActions>
                 <CustomizedDialogs
                   campusData={campusData}
-                  cardData={campusData}
                   formTitle={formTitle}
                   companyDetails={companyDetails}
                   studentDetails={studentDetails}
@@ -224,7 +203,7 @@ export default function OutlinedCard({
             <div>
               <CardActions>
                 <CustomizedDialogs
-                  cardData={campusData}
+                  campusData={campusData}
                   icons
                   details={details}
                   formTitle={formTitle}

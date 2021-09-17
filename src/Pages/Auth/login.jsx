@@ -13,9 +13,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Alert from "../../Components/snackBar";
-import Loader from "../../Components/loader";
 import { LoginFormValidation } from "../../Validation/validation";
 import { useFormik } from "formik";
+import Loader from "react-loader-spinner";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -142,7 +142,8 @@ export default function SignIn() {
             className={classes.submit}
             disabled={loader ? true : false}
           >
-            {loader === true ? <Loader /> : "LogIn"}
+            {loader === true ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars" />
+              : "LogIn"}
           </Button>
           <Grid container>
             <Grid item xs>

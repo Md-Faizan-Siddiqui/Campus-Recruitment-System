@@ -20,11 +20,11 @@ function Companies() {
   return (
     <div className="marginAdjustment">
       <h1>Companies</h1>
-      <Grid container justifyContent="center">
-          {allCompanies &&
-            allCompanies.map((data, index) => {
-              return (
-                <Grid item xl={3} md={4} sm={6} xs={10}  >
+      <Grid container>
+        {allCompanies &&
+          allCompanies.map((data, index) => {
+            return (
+              <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard
                   campusData={data}
                   details
@@ -32,9 +32,9 @@ function Companies() {
                   formTitle={"Company Details"}
                   companyDetails
                 />
-        </Grid>
-              );
-            })}
+              </Grid>
+            );
+          })}
       </Grid>
     </div>
   );
