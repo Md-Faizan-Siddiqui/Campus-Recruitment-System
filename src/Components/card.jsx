@@ -52,7 +52,7 @@ export default function OutlinedCard({
   showImg,//student profile
   deleteData, //jobPost
   btnText, //jobPost, vacancies
-  campusData, //student
+  campusData, //student, company,
   updateBtn,
   apply, // vacancies
   details,//student
@@ -60,6 +60,7 @@ export default function OutlinedCard({
   companyDetails,
   studentDetails,//student
   companyPostJob, //jobPost
+  web
 }) {
   console.log("Campus Data====> in card", campusData)
   const state = useSelector((state) => state);
@@ -113,17 +114,17 @@ export default function OutlinedCard({
                 : `Email : ${campusData?.email}`}
             </Typography>
             <Typography variant="body2" component="p">
-              {student && campusData?.dob
+              {(company && web) || (student && campusData?.dob)
                 ? `Date Of Birth : ${campusData?.dob}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {student && campusData?.cgpa
+              {(company && web) || (student && campusData?.cgpa)
                 ? `CGPA : ${campusData?.cgpa}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {student && campusData?.skills
+              {(company && web) || (student && campusData?.skills)
                 ? `Skills : ${campusData?.skills}`
                 : null}
             </Typography>
@@ -158,7 +159,7 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {companyPostJob || apply
+              {(company && updateBtn) || (student && web) || (companyPostJob || apply)
                 ? `Website : ${campusData?.website}`
                 : null}
             </Typography>
@@ -173,7 +174,7 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(student && campusData?.education) || companyPostJob || apply
+              {(company && web) || (student && campusData?.education) || companyPostJob || apply
                 ? `Education : ${campusData?.education}`
                 : null}
             </Typography>

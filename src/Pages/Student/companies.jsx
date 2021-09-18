@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../../Components/card";
 import "../../App.css";
-import { List, ListItem, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 function Companies() {
   // get data from redux..

@@ -67,7 +67,7 @@ export default function CustomizedDialogs({
   companyDetails,
   studentDetails,
 }) {
-  console.log("Campus Data======>", campusData);
+  console.log("Campus Data======>in Modal", campusData);
   // console.log("Card Data======>", cardData);
 
   const [open, setOpen] = React.useState(false);
@@ -110,13 +110,18 @@ export default function CustomizedDialogs({
               <ProfileUpdate campusData={campusData} handleClose={handleClose} />//cardData={cardData}
             ) : jobPost ? (
               <JobPostForm handleClose={handleClose} />
-            ) : (
-              <OutlinedCard
-                campusData={campusData}
-                // cardData={cardData}
-                handleClose={handleClose}
-              />
-            )}
+            ) :
+              (
+                <OutlinedCard
+                  SSDC
+                  showImg
+                  web
+                  campusData={campusData}
+                  // cardData={cardData}
+                  handleClose={handleClose}
+                />
+              )
+            }
           </DialogContent>
         </Dialog>
       )}
