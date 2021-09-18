@@ -129,7 +129,7 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(company || student) && details
+              {(company || student || admin) && details
                 ? null
                 : `Phone : ${campusData?.phone}`}
             </Typography>
@@ -159,7 +159,7 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(company && updateBtn) || (student && web) || (companyPostJob || apply)
+              {(company && updateBtn) || (student && web) || (admin && web) || (companyPostJob || apply)
                 ? `Website : ${campusData?.website}`
                 : null}
             </Typography>
@@ -180,7 +180,7 @@ export default function OutlinedCard({
             </Typography>
           </div>
         </div>
-        {(company || student) && details ? (
+        {(company || student || admin) && details ? (
           <div className={classes.show_C_S_Data}>
             <div>
               <List>
@@ -213,7 +213,7 @@ export default function OutlinedCard({
             </div>
           </div>
         ) : null}
-        {(company || student) && (apply || companyPostJob) ? (
+        {(admin || company || student) && (apply || companyPostJob) ? (
           <div className={classes.modal_div}>
             <CardActions>
               <Button
@@ -222,7 +222,7 @@ export default function OutlinedCard({
                 color="primary"
                 onClick={deleteData ? deleteData : null}
               >
-                {companyPostJob || apply ? btnText : null}
+                {admin ? "Block" : companyPostJob || apply ? btnText : null}
               </Button>
             </CardActions>
           </div>

@@ -113,7 +113,6 @@ export default function CustomizedDialogs({
             ) :
               (
                 <OutlinedCard
-                  SSDC
                   showImg
                   web
                   campusData={campusData}

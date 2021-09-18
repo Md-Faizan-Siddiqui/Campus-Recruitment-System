@@ -54,4 +54,3 @@ function Vacancies() {
 }
 
 export default Vacancies;
-//cardData
