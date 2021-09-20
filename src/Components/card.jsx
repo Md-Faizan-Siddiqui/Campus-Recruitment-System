@@ -49,6 +49,8 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
+  disableState,//vacancies
+  disableFunc, // vacancies
   showImg,//student profile
   deleteData, //jobPost
   btnText, //jobPost, vacancies
@@ -60,7 +62,7 @@ export default function OutlinedCard({
   companyDetails,
   studentDetails,//student
   companyPostJob, //jobPost
-  web
+  web,
 }) {
   console.log("Campus Data====> in card", campusData)
   const state = useSelector((state) => state);
@@ -219,8 +221,9 @@ export default function OutlinedCard({
               <Button
                 size="small"
                 variant="contained"
-                color="primary"
-                onClick={deleteData ? deleteData : null}
+                color="primary" 
+                disabled={campusData.block}
+                onClick={deleteData ? deleteData : admin ? disableFunc : null}
               >
                 {admin ? "Block" : companyPostJob || apply ? btnText : null}
               </Button>

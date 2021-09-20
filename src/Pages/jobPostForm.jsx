@@ -54,6 +54,8 @@ function JobPostForm(props) {
           experience: experience,
           education: education,
           salary: salary,
+          block: false,
+          userId: user.loginUser.id,
         })
         .then((res) => {
           props.handleClose();
