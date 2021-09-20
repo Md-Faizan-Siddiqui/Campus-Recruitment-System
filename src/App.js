@@ -13,6 +13,7 @@ import { auth, database } from './Config/firebaseConfig';
 import { userDetails } from './Redux/Action/userAction';
 import PageNotFound from './Pages/pageNotFound';
 import Loader from "react-loader-spinner";
+import AdminProfile from './Pages/Admin/adminProfile';
 import "./App.css"
 
 function App() {
@@ -120,8 +121,9 @@ function App() {
           <>
             <Switch>
               <Route exact path='/' component={Vacancies} />
+              {/* <Route path='/adminProfile' component={AdminProfile} /> */}
               <Route path='/companies' component={Companies} />
-              <Route exact path='/students' component={Students} />
+              <Route path='/students' component={Students} />
               <Route path='*' component={PageNotFound} />
             </Switch>
           </> : null}

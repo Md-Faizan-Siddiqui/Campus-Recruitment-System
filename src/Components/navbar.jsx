@@ -236,6 +236,9 @@ export default function ButtonAppBar() {
                 <Link to="/students" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Students</Button>
                 </Link>
+                {/* <Link to="/adminProfile" className={classes.btnColor}>
+                  <Button className={classes.btnColor}>Profile</Button>
+                </Link> */}
                 <Button className={classes.btnColor} onClick={logout}>
                   Logout
                 </Button>
