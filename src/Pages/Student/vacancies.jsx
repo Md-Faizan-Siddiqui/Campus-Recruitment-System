@@ -11,8 +11,6 @@ function Vacancies() {
   console.log(user)
   const dispatch = useDispatch();
   const [jobs, setJobs] = useState([]);
-  const [disable, setDisable] = useState(false)
-  console.log(disable)
   useEffect(() => {
     database
       .ref("/CRA")
@@ -34,12 +32,16 @@ function Vacancies() {
       });
   }, []);
 
-  const disableFunc = async ({ userid, jobid }) => {
-    alert("running disable function")
-    setDisable(prev => !prev)
-    const res =  await database.ref(`/CRA/jobs/${userid}/${jobid}`).update({ block: disable })
-    console.log("res",res)
-    console.log(userid, jobid, "data")
+  const disableFunc = ({ userid, jobid, block }) => {
+    if (block === false) {
+      const res = database.ref(`/CRA/jobs/${userid}/${jobid}`).update({ block: true })
+    } else {
+      const res = database.ref(`/CRA/jobs/${userid}/${jobid}`).update({ block: false })
+    }
+  }
+
+  const applyFunc = () => {
+    alert("run apply function")
   }
 
   const allJobs = Object.values(user?.allJobs)
@@ -59,11 +61,13 @@ function Vacancies() {
                   campusData={data}
                   btnText={"Apply Now"}
                   apply
+                  applyFunc={() => applyFunc()}
                   disableFunc={() => disableFunc({
                     userid: data.userId,
                     jobid: data.jobId,
+                    block: data.block,
                   })}
-                  disableState={disable} />
+                />
               </Grid>
             )
           })}

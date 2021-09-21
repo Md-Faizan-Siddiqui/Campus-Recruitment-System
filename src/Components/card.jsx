@@ -49,7 +49,7 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
-  disableState,//vacancies
+  applyFunc, // vacancies
   disableFunc, // vacancies
   showImg,//student profile
   deleteData, //jobPost
@@ -104,7 +104,13 @@ export default function OutlinedCard({
         </div> : null}
         <div className={classes.card_content1}>
           <div>
-            {companyPostJob ? <h1>Posted Job</h1> : null}
+            {companyPostJob ? <h2>Posted Job</h2> : null}
+            {student && apply ? <h2>Vacancies</h2> : null}
+            {/* {admin ? <h2>Company Posted Jobs</h2> : null} */}
+            {/* <Typography variant="body2" component="p">
+              {(student && apply) || !campusData.lengths ? "No Data To Show"
+                : null}
+            </Typography> */}
             <Typography variant="body2" component="p">
               {details
                 ? null
@@ -156,7 +162,7 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {companyPostJob || apply
+              {(student && campusData.experience) || companyPostJob || apply
                 ? `Experience : ${campusData?.experience}`
                 : null}
             </Typography>
@@ -221,11 +227,14 @@ export default function OutlinedCard({
               <Button
                 size="small"
                 variant="contained"
-                color="primary" 
-                disabled={campusData.block}
-                onClick={deleteData ? deleteData : admin ? disableFunc : null}
+                color="primary"
+                disabled={student ? campusData.block : false}
+                onClick={deleteData ? deleteData : admin ? disableFunc : student ? applyFunc : null}
               >
-                {admin ? "Block" : companyPostJob || apply ? btnText : null}
+                {admin && campusData.block === true ? "Unblock"
+                  : admin && campusData.block === false ? "Block"
+                    : companyPostJob || apply ? btnText
+                      : null}
               </Button>
             </CardActions>
           </div>
