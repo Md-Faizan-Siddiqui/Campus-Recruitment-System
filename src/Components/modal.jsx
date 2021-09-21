@@ -58,6 +58,7 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function CustomizedDialogs({
+  student,//card
   formTitle,
   icons,
   campusData,
@@ -66,7 +67,13 @@ export default function CustomizedDialogs({
   companyDetails,
   studentDetails,
 }) {
+  console.log("Form Title======>in Modal", formTitle);
+  console.log("Icons======>in Modal", icons);
   console.log("Campus Data======>in Modal", campusData);
+  console.log("Btn Text======>in Modal", btnText);
+  console.log("Job Post======>in Modal", jobPost);
+  console.log("Company Details======>in Modal", companyDetails);
+  console.log("Student Details======>in Modal", studentDetails);
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -82,6 +89,7 @@ export default function CustomizedDialogs({
           variant="contained"
           color="primary"
           size="small"
+          disabled={student ? campusData.block : false}
           onClick={handleClickOpen}
         >
           {btnText ? btnText : "Edit Profile"}
@@ -104,7 +112,10 @@ export default function CustomizedDialogs({
           </DialogTitle>
           <DialogContent dividers>
             {icons ? (
-              <ProfileUpdate campusData={campusData} handleClose={handleClose} />
+              <ProfileUpdate
+                campusData={campusData}
+                handleClose={handleClose}
+                icons={icons} />
             ) : jobPost ? (
               <JobPostForm handleClose={handleClose} />
             ) :

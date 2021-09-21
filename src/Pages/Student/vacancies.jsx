@@ -58,6 +58,7 @@ function Vacancies() {
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard
+                  formTitle={"Update Resume"}
                   campusData={data}
                   btnText={"Apply Now"}
                   apply

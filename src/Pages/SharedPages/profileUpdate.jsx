@@ -303,12 +303,13 @@ function ProfileUpdate(props) {
               onChange={uploadImg}
             />
           </div>
-        )}
-        <Button type="submit" size="small" variant="contained" color="primary">
+        )
+        }
+        < Button type="submit" size="small" variant="contained" color="primary">
           Update
         </Button>
       </form>
-    </div>
+    </div >
   );
 }
 

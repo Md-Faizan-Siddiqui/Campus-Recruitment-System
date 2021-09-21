@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React } from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { List, ListItem, Grid } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
 
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
-  applyFunc, // vacancies
+  // applyFunc, // vacancies
   disableFunc, // vacancies
   showImg,//student profile
   deleteData, //jobPost
@@ -74,21 +74,6 @@ export default function OutlinedCard({
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        {/* {companyPostJob || apply || admin ? null : (
-          <div className={classes.main_img_div}>
-            <div className={classes.profileImg}>
-              <img
-                className={classes.imgTag}
-                src={
-                  campusData?.fileToUpload
-                    ? campusData.fileToUpload
-                    : fallBackImage
-                }
-                alt="profilePic"
-              />
-            </div>
-          </div>
-        )} */}
         {showImg ? <div className={classes.main_img_div}>
           <div className={classes.profileImg}>
             <img
@@ -106,11 +91,6 @@ export default function OutlinedCard({
           <div>
             {companyPostJob ? <h2>Posted Job</h2> : null}
             {student && apply ? <h2>Vacancies</h2> : null}
-            {/* {admin ? <h2>Company Posted Jobs</h2> : null} */}
-            {/* <Typography variant="body2" component="p">
-              {(student && apply) || !campusData.lengths ? "No Data To Show"
-                : null}
-            </Typography> */}
             <Typography variant="body2" component="p">
               {details
                 ? null
@@ -207,29 +187,32 @@ export default function OutlinedCard({
             </div>
           </div>
         ) : null}
-        {updateBtn ? (
+        {(student && apply) || updateBtn ? (
           <div className={classes.modal_div}>
             <div>
               <CardActions>
                 <CustomizedDialogs
                   campusData={campusData}
                   icons
+                  student={student}
+                  // apply={apply}
                   details={details}
                   formTitle={formTitle}
+                  btnText={btnText}
                 />
               </CardActions>
             </div>
           </div>
         ) : null}
-        {(admin || company || student) && (apply || companyPostJob) ? (
+        {(admin || company) && (apply || companyPostJob) ? (
           <div className={classes.modal_div}>
             <CardActions>
               <Button
                 size="small"
                 variant="contained"
                 color="primary"
-                disabled={student ? campusData.block : false}
-                onClick={deleteData ? deleteData : admin ? disableFunc : student ? applyFunc : null}
+                // disabled={student ? campusData.block : false}
+                onClick={deleteData ? deleteData : admin ? disableFunc : null}
               >
                 {admin && campusData.block === true ? "Unblock"
                   : admin && campusData.block === false ? "Block"

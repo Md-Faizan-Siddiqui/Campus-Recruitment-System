@@ -1,5 +1,4 @@
 import React from "react";
-import errorImage from "../Images/404error.jpg";
 import "../App.css"
 
 function PageNotFound() {

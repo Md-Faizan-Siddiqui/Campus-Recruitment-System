@@ -8,12 +8,11 @@ import Students from '../src/Pages/Company/students';
 import JobPost from './Pages/Company/jobPost';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { auth, database } from './Config/firebaseConfig';
 import { userDetails } from './Redux/Action/userAction';
 import PageNotFound from './Pages/pageNotFound';
 import Loader from "react-loader-spinner";
-import AdminProfile from './Pages/Admin/adminProfile';
 import "./App.css"
 
 function App() {
