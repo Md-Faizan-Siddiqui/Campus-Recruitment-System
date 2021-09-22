@@ -151,7 +151,6 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <>
             <TextField
-              type="text"
               label="Education"
               placeholder="Education"
               fullWidth

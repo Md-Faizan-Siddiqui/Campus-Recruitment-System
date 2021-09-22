@@ -38,7 +38,7 @@ export const updateFormValidationCompany = Yup.object({
     .required("Required Phone Number"),
   website: Yup.string()
     .matches(urlRegExp, "Invalid Website")
-    .required("Required Website"),
+    .required("Website is Required"),
 });
 
 export const SignUpFormValidation = Yup.object({
@@ -66,4 +66,39 @@ export const LoginFormValidation = Yup.object({
   password: Yup.string()
     .min(6, "Password must be at least 6 charaters")
     .required("Password is Required"),
+});
+
+export const JobPostFormValidation = Yup.object({
+  name: Yup.string()
+    .max(30, "Must be 30 characters or less")
+    .required("Name is Required"),
+  phone: Yup.string()
+    .matches(phoneRegExp, "Phone number is not valid")
+    .required("Phone number is Required"),
+  jobTitle: Yup.string()
+    .max(30, "Must be 30 characters or less")
+    .required("Job Title is Required"),
+  jobDescription: Yup.string()
+    .max(250, "Must be 250 characters or less")
+    .required("Job Description is Required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is Required"),
+  website: Yup.string()
+    .matches(urlRegExp, "Invalid Website")
+    .required("Website is Required"),
+  jobType: Yup.mixed()
+    .oneOf(["Full Time", "Part Time"])
+    .required("Job Type is Required"),
+  lastDate: Yup.date()
+    .min(new Date(Date.now()), "Last Date must not be in the past")
+    .max(new Date(Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 20),
+      "Last date should not be exceed from 20 days")
+    .required("Date is Required"),
+  salary: Yup.number()
+    .positive("Salary must be a positive number")
+    .required("Salary is Required"),
+  education: Yup.mixed()
+    .oneOf(["Matric", "Inter", "Graduate", "Master's"])
+    .required("Required Education"),
 });

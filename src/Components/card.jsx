@@ -195,7 +195,6 @@ export default function OutlinedCard({
                   campusData={campusData}
                   icons
                   student={student}
-                  // apply={apply}
                   details={details}
                   formTitle={formTitle}
                   btnText={btnText}
@@ -211,7 +210,6 @@ export default function OutlinedCard({
                 size="small"
                 variant="contained"
                 color="primary"
-                // disabled={student ? campusData.block : false}
                 onClick={deleteData ? deleteData : admin ? disableFunc : null}
               >
                 {admin && campusData.block === true ? "Unblock"

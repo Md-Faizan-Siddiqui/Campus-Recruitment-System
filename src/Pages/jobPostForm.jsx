@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
-import { TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@material-ui/core";
 import { database } from "../Config/firebaseConfig";
 import { Button } from "@material-ui/core";
+import { JobPostFormValidation } from "../Validation/validation"
 
 function JobPostForm(props) {
   const user = useSelector((state) => state.addUser);
@@ -23,6 +24,8 @@ function JobPostForm(props) {
         ? user.loginUser.jobDescription
         : "",
     },
+
+    validationSchema: JobPostFormValidation,
 
     onSubmit: (values) => {
       const {
@@ -109,6 +112,7 @@ function JobPostForm(props) {
               </p>
             )}
             <TextField
+              type="text"
               label="Job Title"
               placeholder="Job Title"
               fullWidth
@@ -121,11 +125,19 @@ function JobPostForm(props) {
               value={formik.values.jobTitle}
               onChange={formik.handleChange("jobTitle")}
             />
+            {formik.errors.jobTitle && formik.touched.jobTitle && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.jobTitle}
+              </p>
+            )}
             <TextField
+              type="text"
               label="Job Description"
               placeholder="Job Description"
               fullWidth
               margin="normal"
+              multiline
+              rowsMax={4}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -134,7 +146,13 @@ function JobPostForm(props) {
               value={formik.values.jobDescription}
               onChange={formik.handleChange("jobDescription")}
             />
+            {formik.errors.jobDescription && formik.touched.jobDescription && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.jobDescription}
+              </p>
+            )}
             <TextField
+              type="email"
               label="Email"
               placeholder="Email"
               fullWidth
@@ -147,6 +165,11 @@ function JobPostForm(props) {
               value={formik.values.email}
               onChange={formik.handleChange("email")}
             />
+            {formik.errors.email && formik.touched.email && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.email}
+              </p>
+            )}
             <TextField
               label="Website"
               placeholder="Website"
@@ -160,6 +183,11 @@ function JobPostForm(props) {
               value={formik.values.website}
               onChange={formik.handleChange("website")}
             />
+            {formik.errors.website && formik.touched.website && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.website}
+              </p>
+            )}
             <TextField
               label="Job Type"
               placeholder="Job Type"
@@ -172,7 +200,18 @@ function JobPostForm(props) {
               name="jobType"
               value={formik.values.jobType}
               onChange={formik.handleChange("jobType")}
-            />
+              id="select"
+              select
+            >
+              <MenuItem value="">Select One</MenuItem>
+              <MenuItem value="Full Time">Full Time</MenuItem>
+              <MenuItem value="Part Time">Part Time</MenuItem>
+            </TextField>
+            {formik.errors.jobType && formik.touched.jobType && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.jobType}
+              </p>
+            )}
             <TextField
               type="date"
               label="Last Date"
@@ -187,6 +226,11 @@ function JobPostForm(props) {
               value={formik.values.lastDate}
               onChange={formik.handleChange("lastDate")}
             />
+            {formik.errors.lastDate && formik.touched.lastDate && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.lastDate}
+              </p>
+            )}
             <TextField
               type="number"
               label="Salary"
@@ -201,6 +245,37 @@ function JobPostForm(props) {
               value={formik.values.salary}
               onChange={formik.handleChange("salary")}
             />
+            {formik.errors.salary && formik.touched.salary && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.salary}
+              </p>
+            )}
+            <TextField
+              label="Education"
+              placeholder="Education"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="education"
+              value={formik.values.education}
+              onChange={formik.handleChange("education")}
+              id="select"
+              select
+            >
+              <MenuItem value="">Select One</MenuItem>
+              <MenuItem value="Matric">Matric</MenuItem>
+              <MenuItem value="Inter">Inter</MenuItem>
+              <MenuItem value="Graduate">Graduate</MenuItem>
+              <MenuItem value="Master's">Master's</MenuItem>
+            </TextField>
+            {formik.errors.education && formik.touched.education && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.education}
+              </p>
+            )}
             <TextField
               label="Experience"
               placeholder="Experience"
@@ -214,20 +289,11 @@ function JobPostForm(props) {
               value={formik.values.experience}
               onChange={formik.handleChange("experience")}
             />
-            <TextField
-              type="text"
-              label="Education"
-              placeholder="Education"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="education"
-              value={formik.values.education}
-              onChange={formik.handleChange("education")}
-            />
+            {formik.errors.experience && formik.touched.experience && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.experience}
+              </p>
+            )}
             <Button
               type="submit"
               size="small"
