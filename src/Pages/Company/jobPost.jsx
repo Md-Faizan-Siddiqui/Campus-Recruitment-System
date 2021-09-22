@@ -38,7 +38,8 @@ function JobPost() {
       <h1>Job Post</h1>
       <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
       <Grid container>
-        {myPostedJobs &&
+        {myPostedJobs.length === 0 ? "No Data Found" :
+          myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >

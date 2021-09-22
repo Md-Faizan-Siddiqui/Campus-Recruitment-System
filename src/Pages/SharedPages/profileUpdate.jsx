@@ -99,30 +99,32 @@ function ProfileUpdate(props) {
   return (
     <div className="main_div">
       <form onSubmit={formik.handleSubmit}>
-        {props.jobPost ? null : (
-          <>
-            <TextField
-              type="text"
-              label="Name"
-              placeholder="Name"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              autoFocus
-              variant="outlined"
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange("name")}
-            />
-            {formik.errors.name && formik.touched.name && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.name}
-              </p>
-            )}
-          </>
-        )}
+        {
+          props.jobPost ? null : (
+            <>
+              <TextField
+                type="text"
+                label="Name"
+                placeholder="Name"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                autoFocus
+                variant="outlined"
+                name="name"
+                value={formik.values.name}
+                onChange={formik.handleChange("name")}
+              />
+              {formik.errors.name && formik.touched.name && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.name}
+                </p>
+              )}
+            </>
+          )
+        }
         {role === "student" ? (
           <>
             <TextField
@@ -242,8 +244,8 @@ function ProfileUpdate(props) {
                 {formik.errors.skills}
               </p>
             )}
-          </>
-        ) : null}
+          </>)
+          : null}
         {role === "student" ? (
           <TextField
             label="Experience"
@@ -303,8 +305,7 @@ function ProfileUpdate(props) {
               onChange={uploadImg}
             />
           </div>
-        )
-        }
+        )}
         < Button type="submit" size="small" variant="contained" color="primary">
           Update
         </Button>
