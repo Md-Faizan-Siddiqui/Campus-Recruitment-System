@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { List, ListItem } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
+import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 
 const useStyles = makeStyles({
   root: {
@@ -75,6 +76,7 @@ export default function OutlinedCard({
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
+        {/* < PersonOutlineRoundedIcon /> */}
         {showImg ? <div className={classes.main_img_div}>
           <div className={classes.profileImg}>
             <img
@@ -178,12 +180,12 @@ export default function OutlinedCard({
             </div>
             <div>
               <CardActions>
-                <CustomizedDialogs
+                {/* <CustomizedDialogs
                   campusData={campusData}
                   formTitle={formTitle}
                   companyDetails={companyDetails}
                   studentDetails={studentDetails}
-                />
+                /> */}
               </CardActions>
             </div>
           </div>

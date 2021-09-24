@@ -11,9 +11,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../Config/firebaseConfig";
 import { userDetails } from "../Redux/Action/userAction";
-import { Drawer } from "@material-ui/core";
-import { List } from "@material-ui/core";
-import { ListItem } from "@material-ui/core";
+import { List, ListItem, Drawer } from "@material-ui/core";
 import BusinessRoundedIcon from '@material-ui/icons/BusinessRounded';
 
 const useStyles = makeStyles((theme) => ({
