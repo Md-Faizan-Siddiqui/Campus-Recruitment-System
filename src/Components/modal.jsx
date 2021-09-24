@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -12,6 +12,7 @@ import ProfileUpdate from "../Pages/SharedPages/profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
 import JobPostForm from "../Pages/jobPostForm";
+import ApplyForm from "../Pages/Student/applyForm";
 
 const styles = (theme) => ({
   root: {
@@ -25,7 +26,6 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
 });
-
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -118,17 +118,19 @@ export default function CustomizedDialogs({
                 handleClose={handleClose}
                 icons={icons}
               />
-            ) : jobPost ? (
-              <JobPostForm handleClose={handleClose} />
-            ) :
-              (
-                <OutlinedCard
-                  showImg
-                  web
-                  campusData={campusData}
-                  handleClose={handleClose}
-                />
-              )
+            )
+              // : modal === true ? <ApplyForm />
+              : jobPost ? (
+                <JobPostForm handleClose={handleClose} />
+              ) :
+                (
+                  <OutlinedCard
+                    showImg
+                    web
+                    campusData={campusData}
+                    handleClose={handleClose}
+                  />
+                )
             }
           </DialogContent>
         </Dialog>

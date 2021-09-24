@@ -32,6 +32,7 @@ form input[type="file"] {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+  /* border: 1px solid black; */
 }
 .updateImgDiv label {
   border-radius: 50%;

@@ -49,6 +49,7 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
+  modal,
   // applyFunc, // vacancies
   disableFunc, // vacancies
   showImg,//student profile
@@ -194,6 +195,7 @@ export default function OutlinedCard({
                 <CustomizedDialogs
                   campusData={campusData}
                   icons
+                  mo
                   student={student}
                   details={details}
                   formTitle={formTitle}

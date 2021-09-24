@@ -7,6 +7,7 @@ import { Grid } from "@material-ui/core";
 import "../../App.css";
 
 function Vacancies() {
+  const [modal, setModal] = useState(true)
   const user = useSelector((state) => state.addUser);
   console.log(user)
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function Vacancies() {
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard
+                  modal={modal}
                   formTitle={"Update Resume"}
                   campusData={data}
                   btnText={"Apply Now"}

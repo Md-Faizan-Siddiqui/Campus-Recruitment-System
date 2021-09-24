@@ -79,7 +79,7 @@ function ProfileUpdate(props) {
     console.log(e.target.files[0]);
     let images = e.target.files[0];
     const uniqueName = Date.now();
-    Storage.ref("images/" + images.name + uniqueName)
+    Storage.ref("images/" + images?.name + uniqueName)
       .put(images)
       .then((snapshot) => {
         snapshot.ref.getDownloadURL().then((URL) => {
@@ -292,6 +292,7 @@ function ProfileUpdate(props) {
                   backgroundImage: `url( ${url ? url : fallBackImage} )`,
                 }}
               >
+                {/* <img src={url ? url : fallBackImage} /> */}
                 <span class="glyphicon glyphicon-camera"></span>
                 <span>Change Image</span>
               </div>
@@ -314,3 +315,12 @@ function ProfileUpdate(props) {
 }
 
 export default ProfileUpdate;
+
+
+// const previewImage = async (e) => {
+//   setUploadStatus(true);
+//   setFormSubmited(false);
+//   const fileSampleUrl = await URL?.createObjectURL(e?.target?.files[0]);
+//   setImage(fileSampleUrl);
+//   setDisableBtn(true);
+// };

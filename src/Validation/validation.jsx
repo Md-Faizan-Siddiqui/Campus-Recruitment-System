@@ -8,97 +8,101 @@ const urlRegExp =
 export const updateFormValidationStudent = Yup.object({
   name: Yup.string()
     .max(30, "Must be 30 characters or less")
-    .required("Required Name"),
+    .required("Required"),
   cgpa: Yup.number()
-    .min(0.1, "Invalid CGPA")
-    .max(4.0, "Invalid CGPA")
-    .required("Required CGPA"),
+    .positive("CGPA must be a positive number")
+    // .min(0.1, "Invalid CGPA")
+    .max(4.0, "CGPA should not be exceed from 4. Invalid CGPA")
+    .required("Required"),
   education: Yup.mixed()
     .oneOf(["Matric", "Inter", "Graduate", "Master's"])
-    .required("Required Education"),
+    .required("Required"),
   phone: Yup.string()
     .matches(phoneRegExp, "Invalid Phone Number")
-    .required("Required Phone Number"),
+    .required("Required"),
   dob: Yup.date()
     .max(
       new Date(Date.now() - 568111068000), // Task completed after 2.5 hours
-      "You must be at least 18 years"
-    )
+      "You must be at least 18 years")
     .required("Required"),
-  skills: Yup.string().required("Required"),
-  experience: Yup.string().required("Required"),
+  skills: Yup.string()
+    .required("Required"),
+  experience: Yup.string()
+    .required("Required"),
 });
 
 export const updateFormValidationCompany = Yup.object({
   name: Yup.string()
     .max(30, "Must be 30 characters or less")
-    .required("Required Name"),
+    .required("Required"),
   phone: Yup.string()
     .matches(phoneRegExp, "Invalid Phone Number")
-    .required("Required Phone Number"),
+    .required("Required"),
   website: Yup.string()
     .matches(urlRegExp, "Invalid Website")
-    .required("Website is Required"),
+    .required("Required"),
 });
 
 export const SignUpFormValidation = Yup.object({
   name: Yup.string()
     .max(30, "Must be 30 characters or less")
-    .required("Name is Required"),
+    .required("Required"),
   email: Yup.string()
     .email("Invalid email address")
-    .required("Email is Required"),
+    .required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 charaters")
-    .required("Password is Required"),
+    .required("Required"),
   role: Yup.mixed()
-    .required("Selection is Required")
+    .required("Required")
     .oneOf(["company", "student"]),
   phone: Yup.string()
     .matches(phoneRegExp, "Phone number is not valid")
-    .required("Phone number is Required"),
+    .required("Required"),
 });
 
 export const LoginFormValidation = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
-    .required("Email is Required"),
+    .required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 charaters")
-    .required("Password is Required"),
+    .required("Required"),
 });
 
 export const JobPostFormValidation = Yup.object({
   name: Yup.string()
     .max(30, "Must be 30 characters or less")
-    .required("Name is Required"),
+    .required("Required"),
   phone: Yup.string()
     .matches(phoneRegExp, "Phone number is not valid")
-    .required("Phone number is Required"),
+    .required("Required"),
   jobTitle: Yup.string()
     .max(30, "Must be 30 characters or less")
-    .required("Job Title is Required"),
+    .required("Required"),
   jobDescription: Yup.string()
     .max(250, "Must be 250 characters or less")
-    .required("Job Description is Required"),
+    .required("Required"),
   email: Yup.string()
     .email("Invalid email address")
-    .required("Email is Required"),
+    .required("Required"),
   website: Yup.string()
     .matches(urlRegExp, "Invalid Website")
-    .required("Website is Required"),
+    .required("Required"),
   jobType: Yup.mixed()
     .oneOf(["Full Time", "Part Time"])
-    .required("Job Type is Required"),
+    .required("Required"),
   lastDate: Yup.date()
     .min(new Date(Date.now()), "Last Date must not be in the past")
     .max(new Date(Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 20),
       "Last date should not be exceed from 20 days")
-    .required("Date is Required"),
+    .required("Required"),
   salary: Yup.number()
     .positive("Salary must be a positive number")
-    .required("Salary is Required"),
+    .required("Required"),
   education: Yup.mixed()
     .oneOf(["Matric", "Inter", "Graduate", "Master's"])
-    .required("Required Education"),
+    .required("Required"),
+  experience: Yup.string()
+    .required("Required"),
 });
