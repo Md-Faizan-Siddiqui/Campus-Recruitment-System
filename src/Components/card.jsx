@@ -105,17 +105,17 @@ export default function OutlinedCard({
                 : `Email : ${campusData?.email}`}
             </Typography>
             <Typography variant="body2" component="p">
-              {(company && web) || (student && campusData?.dob)
+              {(admin && campusData.cgpa) || (company && web) || (student && campusData?.dob)
                 ? `Date Of Birth : ${campusData?.dob}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(company && web) || (student && campusData?.cgpa)
+              {(admin && campusData.cgpa) || (company && web) || (student && campusData?.cgpa)
                 ? `CGPA : ${campusData?.cgpa}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(company && web) || (student && campusData?.skills)
+              {(admin && campusData.cgpa) || (company && web) || (student && campusData?.skills)
                 ? `Skills : ${campusData?.skills}`
                 : null}
             </Typography>
@@ -145,12 +145,12 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(student && campusData.experience) || companyPostJob || apply
+              {(admin && campusData.cgpa) || (company && web) || (student && campusData.experience) || companyPostJob || apply
                 ? `Experience : ${campusData?.experience}`
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(company && updateBtn) || (student && web) || (admin && web) || (companyPostJob || apply)
+              {(company && updateBtn) || (student && campusData.website) || (admin && campusData.website) || (companyPostJob || apply)
                 ? `Website : ${campusData?.website}`
                 : null}
             </Typography>
@@ -165,7 +165,7 @@ export default function OutlinedCard({
                 : null}
             </Typography>
             <Typography variant="body2" component="p">
-              {(company && web) || (student && campusData?.education) || companyPostJob || apply
+              {(admin && campusData.cgpa) || (company && web) || (student && campusData?.education) || companyPostJob || apply
                 ? `Education : ${campusData?.education}`
                 : null}
             </Typography>

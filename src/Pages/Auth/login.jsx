@@ -70,6 +70,7 @@ export default function SignIn() {
             userDetails({
               loginUser: user,
               loginStatus: true,
+              role: user.loginUser.role,
             })
           );
         })

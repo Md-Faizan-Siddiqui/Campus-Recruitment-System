@@ -18,7 +18,8 @@ function Students() {
   const allStudents = Object.values(allUsers)?.filter(
     (userData) => userData.role === "student"
   );
-
+  console.log(allStudents)
+  console.log(allUsers)
   const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: "#3f51b5",
@@ -76,7 +77,7 @@ function Students() {
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Companies</StyledTableCell>
+                  <StyledTableCell>Students</StyledTableCell>
                   <StyledTableCell></StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -92,9 +93,8 @@ function Students() {
                           <CustomizedDialogs
                             campusData={data}
                             details
-                            image
-                            formTitle={"Company Details"}
-                            companyDetails />
+                            formTitle={"Student Details"}
+                            studentDetails />
                         </StyledTableCell>
                       </StyledTableRow>
                     );

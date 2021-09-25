@@ -2,7 +2,7 @@ import "../../App.css";
 import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../../Components/card";
-import { Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
@@ -15,9 +15,9 @@ import CustomizedDialogs from "../../Components/modal";
 
 function Companies() {
   // get data from redux..
-
   const allUsers = useSelector((state) => state.addUser.allUsers);
   console.log(allUsers, "allUsers");
+
 
   // filter companies..
 
@@ -106,7 +106,10 @@ function Companies() {
                             companyDetails />
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          Block
+                          <Button
+                            size="small"
+                            variant="contained"
+                            color="primary">Block</Button>
                         </StyledTableCell>
                       </StyledTableRow>
                     );
