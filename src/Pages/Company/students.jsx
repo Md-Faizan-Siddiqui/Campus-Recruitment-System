@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../../Components/card";
 import "../../App.css";
-import { Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
@@ -14,10 +14,13 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CustomizedDialogs from "../../Components/modal";
 
 function Students() {
-  const allUsers = useSelector((state) => state.addUser.allUsers);
-  const allStudents = Object.values(allUsers)?.filter(
+  // const role = useSelector((state) => state.addUser.loginUser.role);
+  // console.log("Role===>in students", role)
+  const allUsers = useSelector((state) => state.addUser);
+  const allStudents = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "student"
   );
+  console.log("role====>in students", allUsers.loginUser.role)
   console.log(allStudents)
   console.log(allUsers)
   const StyledTableCell = withStyles((theme) => ({
@@ -79,6 +82,8 @@ function Students() {
                 <TableRow>
                   <StyledTableCell>Students</StyledTableCell>
                   <StyledTableCell></StyledTableCell>
+                  {allUsers.loginUser.role === "admin" ?
+                    <StyledTableCell></StyledTableCell> : null}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -96,6 +101,15 @@ function Students() {
                             formTitle={"Student Details"}
                             studentDetails />
                         </StyledTableCell>
+                        {allUsers.loginUser.role === "admin" ?
+                          <StyledTableCell align="right">
+                            <Button
+                              size="small"
+                              variant="contained"
+                              color="primary">Block</Button>
+                          </StyledTableCell>
+                          : null
+                        }
                       </StyledTableRow>
                     );
                   })}

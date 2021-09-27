@@ -7,7 +7,6 @@ import { Grid } from "@material-ui/core";
 import "../../App.css";
 
 function Vacancies() {
-  const [modal, setModal] = useState(true)
   const user = useSelector((state) => state.addUser);
   console.log(user)
   const dispatch = useDispatch();
@@ -41,8 +40,14 @@ function Vacancies() {
     }
   }
 
-  const applyFunc = () => {
+  const applyFunc = ({ jobId, userId }) => {
+    // const key = Date.now();
     alert("run apply function")
+    database
+      .ref(`/CRA/jobs/${userId}/${jobId}`)
+      .update({
+        applicantUserId: user.loginUser.id,
+      }).then(() => { alert("sucess") }).catch(() => { alert("err") })
   }
 
   const allJobs = Object.values(user?.allJobs)
@@ -59,12 +64,13 @@ function Vacancies() {
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard
-                  modal={modal}
-                  formTitle={"Update Resume"}
                   campusData={data}
                   btnText={"Apply Now"}
                   apply
-                  applyFunc={() => applyFunc()}
+                  applyFunc={() => applyFunc({
+                    jobId: data.jobId,
+                    userId: data.userId,
+                  })}
                   disableFunc={() => disableFunc({
                     userid: data.userId,
                     jobid: data.jobId,

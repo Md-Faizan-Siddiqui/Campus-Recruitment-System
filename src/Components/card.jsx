@@ -9,7 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import { List, ListItem } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
-import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 
 const useStyles = makeStyles({
   root: {
@@ -50,8 +49,7 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
-  modal,
-  // applyFunc, // vacancies
+  applyFunc, // vacancies
   disableFunc, // vacancies
   showImg,//student profile
   deleteData, //jobPost
@@ -61,8 +59,6 @@ export default function OutlinedCard({
   apply, // vacancies
   details,//student
   formTitle,//student
-  companyDetails,
-  studentDetails,//student
   companyPostJob, //jobPost
   web,
 }) {
@@ -190,14 +186,13 @@ export default function OutlinedCard({
             </div>
           </div>
         ) : null}
-        {(student && apply) || updateBtn ? (
+        {updateBtn ? ( //(student && apply) ||
           <div className={classes.modal_div}>
             <div>
               <CardActions>
                 <CustomizedDialogs
                   campusData={campusData}
                   icons
-                  mo
                   student={student}
                   details={details}
                   formTitle={formTitle}
@@ -207,14 +202,23 @@ export default function OutlinedCard({
             </div>
           </div>
         ) : null}
-        {(admin || company) && (apply || companyPostJob) ? (
+        {(admin || company || student) && (apply || companyPostJob) ? (
           <div className={classes.modal_div}>
             <CardActions>
+              {company && companyPostJob ? <div>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary">Applied Candidate's</Button>
+              </div> : null}
               <Button
                 size="small"
                 variant="contained"
                 color="primary"
-                onClick={deleteData ? deleteData : admin ? disableFunc : null}
+                onClick={deleteData ? deleteData
+                  : admin ? disableFunc
+                    : student ? applyFunc
+                      : null}
               >
                 {admin && campusData.block === true ? "Unblock"
                   : admin && campusData.block === false ? "Block"

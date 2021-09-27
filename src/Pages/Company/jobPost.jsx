@@ -36,6 +36,7 @@ function JobPost() {
   return (
     <div className="marginAdjustment">
       <h1>Job Post</h1>
+      {/* <FloatingActionButtonZoom /> */}
       <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
       <Grid container>
         {myPostedJobs.length === 0 ? "No Data Found" :

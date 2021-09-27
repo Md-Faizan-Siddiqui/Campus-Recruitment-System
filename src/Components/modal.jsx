@@ -13,6 +13,7 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
 import JobPostForm from "../Pages/jobPostForm";
 import ApplyForm from "../Pages/Student/applyForm";
+import FixedBtn from "../Components/editButton";
 
 const styles = (theme) => ({
   root: {
@@ -119,7 +120,6 @@ export default function CustomizedDialogs({
                 icons={icons}
               />
             )
-              // : modal === true ? <ApplyForm />
               : jobPost ? (
                 <JobPostForm handleClose={handleClose} />
               ) :

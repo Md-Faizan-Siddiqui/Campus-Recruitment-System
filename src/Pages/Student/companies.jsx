@@ -15,13 +15,13 @@ import CustomizedDialogs from "../../Components/modal";
 
 function Companies() {
   // get data from redux..
-  const allUsers = useSelector((state) => state.addUser.allUsers);
+  const allUsers = useSelector((state) => state.addUser);
   console.log(allUsers, "allUsers");
 
 
   // filter companies..
 
-  const allCompanies = Object.values(allUsers)?.filter(
+  const allCompanies = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "company"
   );
   console.log(allCompanies);
@@ -86,7 +86,8 @@ function Companies() {
                 <TableRow>
                   <StyledTableCell>Companies</StyledTableCell>
                   <StyledTableCell></StyledTableCell>
-                  <StyledTableCell></StyledTableCell>
+                  {allUsers.loginUser.role === "admin" ?
+                    <StyledTableCell></StyledTableCell> : null}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -105,12 +106,15 @@ function Companies() {
                             formTitle={"Company Details"}
                             companyDetails />
                         </StyledTableCell>
-                        <StyledTableCell align="right">
-                          <Button
-                            size="small"
-                            variant="contained"
-                            color="primary">Block</Button>
-                        </StyledTableCell>
+                        {allUsers.loginUser.role === "admin" ?
+                          <StyledTableCell align="right">
+                            <Button
+                              size="small"
+                              variant="contained"
+                              color="primary">Block</Button>
+                          </StyledTableCell>
+                          : null
+                        }
                       </StyledTableRow>
                     );
                   })}
