@@ -7,7 +7,6 @@ import OutlinedCard from "../../Components/card";
 import CustomizedDialogs from "../../Components/modal";
 import "../../App.css";
 import { Grid } from "@material-ui/core";
-import FloatingActionButtonZoom from "../../Components/editButton";
 
 function JobPost() {
   const user = useSelector((state) => state.addUser);
@@ -34,14 +33,15 @@ function JobPost() {
     database.ref(`/CRA/jobs/${user.loginUser.id}/${key}`).remove();
   };
   const myPostedJobs = Object.values(user.allJobs);
+  console.log(myPostedJobs)
   return (
     <div className="marginAdjustment">
       <h1>Job Post</h1>
-      {/* <FloatingActionButtonZoom /> */}
-      <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost fixedbtn />
+      <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
       <Grid container>
-        {myPostedJobs.length === 0 ? "No Data Found" :
-          myPostedJobs &&
+        {/* {myPostedJobs.length === 0 ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars" />: */}
+        {myPostedJobs.length === 0 ? "Data Not Found"
+          : myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >

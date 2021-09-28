@@ -44,15 +44,23 @@ function Vacancies() {
     // const key = Date.now();
     alert("run apply function")
     database
-      .ref(`/CRA/jobs/${userId}/${jobId}`)
-      .update({
-        applicantUserId: user.loginUser.id,
-      }).then(() => { alert("sucess") }).catch(() => { alert("err") })
+      .ref(`/CRA/jobs/${userId}/${jobId}/applicantUserId`)
+      .push(user.loginUser.id)
+      .then(() => { console.log("Sucess") })
+      .catch(() => { console.log("Error") })
   }
 
   const allJobs = Object.values(user?.allJobs)
     .map((val, ind) => Object.values(val))
     .flat(1);
+
+  // applied btn disable kerwana h....
+  // console.log("All Jobs", allJobs.filter((data) => {
+  //   console.log("Data", data?.applicantUserId.map((data, index)=>{
+  //     return
+  //   }))
+  // }))
+
 
   return (
     <div className="marginAdjustment">

@@ -61,6 +61,8 @@ export default function OutlinedCard({
   formTitle,//student
   companyPostJob, //jobPost
   web,
+  studentDetails,
+  companyDetails,
 }) {
   console.log("Campus Data====> in card", campusData)
   const state = useSelector((state) => state);
@@ -167,7 +169,7 @@ export default function OutlinedCard({
             </Typography>
           </div>
         </div>
-        {(company || student || admin) && details ? (
+        {/* {(company || student || admin) && details ? (
           <div className={classes.show_C_S_Data}>
             <div>
               <List>
@@ -176,16 +178,16 @@ export default function OutlinedCard({
             </div>
             <div>
               <CardActions>
-                {/* <CustomizedDialogs
+                <CustomizedDialogs
                   campusData={campusData}
                   formTitle={formTitle}
                   companyDetails={companyDetails}
                   studentDetails={studentDetails}
-                /> */}
+                />
               </CardActions>
             </div>
           </div>
-        ) : null}
+        ) : null} */}
         {updateBtn ? ( //(student && apply) ||
           <div className={classes.modal_div}>
             <div>

@@ -59,7 +59,6 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function CustomizedDialogs({
-  fixedbtn,
   student,//card
   formTitle,
   icons,

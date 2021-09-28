@@ -87,7 +87,7 @@ function App() {
   if (!user.loginStatus && user.isLoader === true) {
     return (
       <div className="loader_div">
-        <Loader width="100px" height="100px" color="#3f51b5" type="Bars" />
+        <Loader width="50px" height="50px" color="#3f51b5" type="Bars" />
       </div>
     )
   }
