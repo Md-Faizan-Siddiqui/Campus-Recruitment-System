@@ -59,6 +59,7 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function CustomizedDialogs({
+  fixedbtn,
   student,//card
   formTitle,
   icons,
@@ -86,21 +87,23 @@ export default function CustomizedDialogs({
   };
   return (
     <div>
-      {icons || btnText ? (
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          disabled={student ? campusData.block : false}
-          onClick={handleClickOpen}
-        >
-          {btnText ? btnText : "Edit Profile"}
-        </Button>
-      ) : (
-        <Button onClick={handleClickOpen}>
-          <InfoOutlinedIcon color="primary" />
-        </Button>
-      )}
+      {jobPost ? <FixedBtn onClick={handleClickOpen} />
+        : icons || btnText ? (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            // disabled={student ? campusData.block : false}
+            onClick={handleClickOpen}
+          >
+            {btnText ? btnText : "Edit Profile"}
+          </Button>
+        )
+          : (
+            <Button onClick={handleClickOpen}>
+              <InfoOutlinedIcon color="primary" />
+            </Button>
+          )}
       {open && (
         <Dialog
           onClose={handleClose}

@@ -7,6 +7,7 @@ import OutlinedCard from "../../Components/card";
 import CustomizedDialogs from "../../Components/modal";
 import "../../App.css";
 import { Grid } from "@material-ui/core";
+import FloatingActionButtonZoom from "../../Components/editButton";
 
 function JobPost() {
   const user = useSelector((state) => state.addUser);
@@ -37,7 +38,7 @@ function JobPost() {
     <div className="marginAdjustment">
       <h1>Job Post</h1>
       {/* <FloatingActionButtonZoom /> */}
-      <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
+      <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost fixedbtn />
       <Grid container>
         {myPostedJobs.length === 0 ? "No Data Found" :
           myPostedJobs &&

@@ -223,6 +223,28 @@ function ProfileUpdate(props) {
             )}
           </>
         ) : null}
+        {/* {role === "student" ? (
+          <>
+            <Select
+              label="Skills"
+              placeholder="Skills"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="skills"
+              value={formik.values.skills}
+              onChange={formik.handleChange("skills")}
+            />
+            {formik.errors.skills && formik.touched.skills && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.skills}
+              </p>
+            )}
+          </>)
+          : null} */}
         {role === "student" ? (
           <>
             <TextField
@@ -246,19 +268,26 @@ function ProfileUpdate(props) {
           </>)
           : null}
         {role === "student" ? (
-          <TextField
-            label="Experience"
-            placeholder="Experience"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-            name="experience"
-            value={formik.values.experience}
-            onChange={formik.handleChange("experience")}
-          />
+          <>
+            <TextField
+              label="Experience"
+              placeholder="Experience"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="experience"
+              value={formik.values.experience}
+              onChange={formik.handleChange("experience")}
+            />
+            {formik.errors.experience && formik.touched.experience && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.experience}
+              </p>
+            )}
+          </>
         ) : null}
         {role === "company" ? (
           <>

@@ -215,6 +215,7 @@ export default function OutlinedCard({
                 size="small"
                 variant="contained"
                 color="primary"
+                disabled={student ? campusData.block : false}
                 onClick={deleteData ? deleteData
                   : admin ? disableFunc
                     : student ? applyFunc
