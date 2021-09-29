@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { List, ListItem } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
+import { textAlign } from "@mui/material/node_modules/@mui/system";
 
 const useStyles = makeStyles({
   root: {
@@ -75,7 +76,7 @@ export default function OutlinedCard({
     <Card className={classes.root} variant="outlined">
       <CardContent>
         {/* < PersonOutlineRoundedIcon /> */}
-        {showImg ? <div className={classes.main_img_div}>
+        {showImg ? <> <div className={classes.main_img_div}>
           <div className={classes.profileImg}>
             <img
               className={classes.imgTag}
@@ -87,7 +88,9 @@ export default function OutlinedCard({
               alt="profilePic"
             />
           </div>
-        </div> : null}
+        </div>
+          {/* <h1 style={{ textAlign: "center" }}>{campusData?.name}</h1> */}
+        </> : null}
         <div className={classes.card_content1}>
           <div>
             {companyPostJob ? <h2>Posted Job</h2> : null}
@@ -232,6 +235,6 @@ export default function OutlinedCard({
           </div>
         ) : null}
       </CardContent>
-    </Card>
+    </Card >
   );
 }
