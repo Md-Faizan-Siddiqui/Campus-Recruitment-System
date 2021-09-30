@@ -9,7 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import { List, ListItem } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
-import { textAlign } from "@mui/material/node_modules/@mui/system";
 
 const useStyles = makeStyles({
   root: {
