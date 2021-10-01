@@ -12,6 +12,7 @@ import CastForEducationOutlinedIcon from '@mui/icons-material/CastForEducationOu
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import { GiSkills } from "react-icons/gi";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const useStyles = makeStyles({
     root: {
@@ -78,21 +79,18 @@ function UserProfileCard({ campusData }) {
                             <p>{campusData.education}</p>
                         </div>
                     </div>
-                    <div><FacebookOutlinedIcon color="#3b5998" /></div>
+                    <div style={{ display: "flex", justifyContent: "Center" }}>
+                        <div style={{ margin: "20px" }}>
+                            <FacebookOutlinedIcon color="#3b5998" />
+                        </div>
+                        <div style={{ margin: "20px" }}>
+                            <GitHubIcon color="#3b5998" />
+                        </div>
+                    </div>
                 </Card>
             </Grid>
         </Grid>
     )
 }
-{/* <Grid container justifyContent="center">
-    <Grid item xl={3} md={4} sm={6} xs={12}  >
-        <OutlinedCard
-            campusData={user.loginUser}
-            updateBtn
-            showImg
-            formTitle={"Registration Form"}
-        />
-    </Grid>
-</Grid> */}
 
 export default UserProfileCard

@@ -43,6 +43,7 @@ function JobPost() {
         {myPostedJobs.length === 0 ? "Data Not Found"
           : myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
+            // console.log("data", data)
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard

@@ -210,10 +210,18 @@ export default function OutlinedCard({
           <div className={classes.modal_div}>
             <CardActions>
               {company && companyPostJob ? <div>
-                <Button
+                <CustomizedDialogs
+                  appliedCandidate
                   size="small"
                   variant="contained"
-                  color="primary">Applied Candidate's</Button>
+                  color="primary"
+                  btnText="Applied Candidate's"
+                  formTitle={"Applied Candidate's"}
+                />
+                {/* <Button
+                  size="small"
+                  variant="contained"
+                  color="primary">Applied Candidate's</Button> */}
               </div> : null}
               <Button
                 size="small"

@@ -14,6 +14,7 @@ import OutlinedCard from "./card";
 import JobPostForm from "../Pages/jobPostForm";
 import ApplyForm from "../Pages/Student/applyForm";
 import FixedBtn from "../Components/editButton";
+import Accordion from "./accordion"
 
 const styles = (theme) => ({
   root: {
@@ -68,6 +69,7 @@ export default function CustomizedDialogs({
   jobPost,
   companyDetails,
   studentDetails,
+  appliedCandidate
 }) {
   console.log("Form Title======>in Modal", formTitle);
   console.log("Icons======>in Modal", icons);
@@ -110,7 +112,7 @@ export default function CustomizedDialogs({
           open={open}
         >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            {icons || studentDetails || companyDetails || jobPost
+            {icons || studentDetails || companyDetails || jobPost || appliedCandidate
               ? formTitle
               : null}
           </DialogTitle>
@@ -124,8 +126,9 @@ export default function CustomizedDialogs({
             )
               : jobPost ? (
                 <JobPostForm handleClose={handleClose} />
-              ) :
-                (
+              ) : appliedCandidate ?
+                <Accordion />
+                : (
                   <OutlinedCard
                     showImg
                     web

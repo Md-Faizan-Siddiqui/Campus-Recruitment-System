@@ -7,6 +7,7 @@ import { Grid } from "@material-ui/core";
 import "../../App.css";
 
 function Vacancies() {
+  const [applicantIDstate, setapplicantIDstate] = useState([])
   const user = useSelector((state) => state.addUser);
   console.log(user)
   const dispatch = useDispatch();
@@ -45,7 +46,9 @@ function Vacancies() {
     alert("run apply function")
     database
       .ref(`/CRA/jobs/${userId}/${jobId}/applicantUserId`)
-      .push(user.loginUser.id)
+      .push({
+        id: user.loginUser.id,
+      })
       .then(() => { console.log("Sucess") })
       .catch(() => { console.log("Error") })
   }
@@ -54,12 +57,40 @@ function Vacancies() {
     .map((val, ind) => Object.values(val))
     .flat(1);
 
+  console.log("alljobs", allJobs)
+
+
+
+
   // applied btn disable kerwana h....
+  // const appliedJobs = allJobs
+  // console.log("jobs====>", appliedJobs)
+
+  // Object.keys(allJobs).map((data, ind) => {
+  //   if (allJobs[data]?.applicantUserId !== undefined || null) {
+  //     const applicantID = Object.keys(allJobs[data]?.applicantUserId);
+  //     applicantID?.map((applicants, ind) => {
+  //       const temp1 = allJobs[data]?.applicantUserId[applicants]?.id
+  //       setapplicantIDstate(temp1)
+  //       console.log("temp1", temp1)
+  //     })
+  //     // Object.keys(allJobs[data]?.applicantUserId).map((applicants, ind) => {
+  //     //   console.log(allJobs[data]?.applicantUserId[applicants]?.id)
+  //     // })
+  //     console.log("applicantIDstate", applicantIDstate)
+  //     console.log("applicantID", applicantID)
+  //     // console.log("temp", temp)
+  //   }
+  //   // console.log(allJobs[data].applicantUserId, "data")
+  // })
+
   // console.log("All Jobs", allJobs.filter((data) => {
-  //   console.log("Data", data?.applicantUserId.map((data, index)=>{
+  //   console.log("Data", data?.applicantUserId.map((data, index) => {
   //     return
   //   }))
   // }))
+
+  { }
 
 
   return (
@@ -68,7 +99,7 @@ function Vacancies() {
       <Grid container>
         {allJobs &&
           allJobs?.reverse().map((data, index) => {
-            console.log("data====hassam", data);
+            console.log("data====>in vacancies", data);
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard
