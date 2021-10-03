@@ -13,6 +13,8 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import { GiSkills } from "react-icons/gi";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GitHubIcon from '@mui/icons-material/GitHub';
+// import HttpIcon from '@mui/icons-material/Http';
+import LanguageIcon from '@mui/icons-material/Language';
 
 const useStyles = makeStyles({
     root: {
@@ -24,7 +26,7 @@ function UserProfileCard({ campusData }) {
     const classes = useStyles();
     return (
         <Grid container className="grid">
-            <Grid item xl={8} lg={5} md={6} sm={12} xs={12} >
+            <Grid item xl={8} lg={5} md={6} sm={8} xs={12} >
                 <Card className={classes.root} style={{ padding: "0 30px 30px 30px", marginTop: "100px" }}>
 
                     <div className="pImgDiv">
@@ -78,7 +80,13 @@ function UserProfileCard({ campusData }) {
                             <CastForEducationOutlinedIcon color="primary" fontSize="small" style={{ marginTop: "3px", marginRight: "10px" }} />
                             <p>{campusData.education}</p>
                         </div>
+
+                        <div className="iconOrData">
+                            <LanguageIcon color="primary" fontSize="small" style={{ marginTop: "3px", marginRight: "10px" }} />
+                            <p>{campusData.website}</p>
+                        </div>
                     </div>
+
                     <div style={{ display: "flex", justifyContent: "Center" }}>
                         <div style={{ margin: "20px" }}>
                             <FacebookOutlinedIcon color="#3b5998" />

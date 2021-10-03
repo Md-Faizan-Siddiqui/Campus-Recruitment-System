@@ -215,7 +215,7 @@ export default function OutlinedCard({
                   size="small"
                   variant="contained"
                   color="primary"
-                  btnText="Applied Candidate's"
+                  btnText="Applicants"
                   formTitle={"Applied Candidate's"}
                 />
                 {/* <Button

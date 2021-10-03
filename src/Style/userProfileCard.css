@@ -40,15 +40,23 @@ p {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  /* justify-content: "center"; */
-  /* align-items: "center"; */
+  justify-content: "center";
+  align-items: center;
+  text-align: left;
 }
 .iconOrData {
+  width: 60%;
   font-weight: bold;
   display: flex;
   line-height: 30px;
-  align-items: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 .pInfoDiv h1 {
   color: #3f51b5;
+}
+@media screen and (min-width: 280px) {
+  .iconOrData {
+    width: 100%;
+  }
 }
