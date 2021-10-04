@@ -12,9 +12,9 @@ import ProfileUpdate from "../Pages/SharedPages/profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
 import JobPostForm from "../Pages/jobPostForm";
-import ApplyForm from "../Pages/Student/applyForm";
 import FixedBtn from "../Components/editButton";
 import Accordion from "./accordion"
+import ApplyForm from "../Pages/Student/applyForm";
 
 const styles = (theme) => ({
   root: {
@@ -100,11 +100,13 @@ export default function CustomizedDialogs({
             {btnText ? btnText : "Edit Profile"}
           </Button>
         )
-          : (
+          :
+          (
             <Button onClick={handleClickOpen}>
               <InfoOutlinedIcon color="primary" />
             </Button>
-          )}
+          )
+      }
       {open && (
         <Dialog
           onClose={handleClose}
@@ -117,6 +119,7 @@ export default function CustomizedDialogs({
               : null}
           </DialogTitle>
           <DialogContent dividers>
+            {console.log("abc", campusData)}
             {icons ? (
               <ProfileUpdate
                 campusData={campusData}

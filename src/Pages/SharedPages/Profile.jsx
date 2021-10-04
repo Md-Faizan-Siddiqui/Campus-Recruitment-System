@@ -1,7 +1,7 @@
+import "../../App.css";
 import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../../Components/card";
-import "../../App.css";
 import { Grid } from "@material-ui/core";
 import UserProfileCard from "../../Components/userProfileCard"
 
@@ -14,8 +14,12 @@ function Profile() {
       {/* <h1>{user.loginUser.role} Profile</h1> */}
       <UserProfileCard
         campusData={user.loginUser}
+        btnText={"edit profile"}
+        formTitle={"Registration Form"}
+      // showImg
+      // updateBtn
       />
-      <Grid container justifyContent="center">
+      {/* <Grid container justifyContent="center">
         <Grid item xl={3} md={4} sm={6} xs={12}  >
           <OutlinedCard
             campusData={user.loginUser}
@@ -24,7 +28,7 @@ function Profile() {
             formTitle={"Registration Form"}
           />
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 }

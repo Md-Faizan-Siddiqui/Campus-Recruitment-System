@@ -94,6 +94,7 @@ function ProfileUpdate(props) {
 
   useEffect(() => {
     setUrl(props.campusData?.fileToUpload);
+    // console.log("props", props.campusData.fileToUpload)
   }, []);
 
   return (
@@ -311,6 +312,7 @@ function ProfileUpdate(props) {
             )}
           </>
         ) : null}
+        {console.log("URL is ", url)}
         {props.jobPost ? null : (
           <div className="updateImgDiv">
             <label for="fileToUpload">

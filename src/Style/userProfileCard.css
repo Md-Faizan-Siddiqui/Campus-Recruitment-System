@@ -45,11 +45,12 @@ p {
   text-align: left;
 }
 .iconOrData {
+  /* text-align: center; */
   width: 60%;
   font-weight: bold;
   display: flex;
   line-height: 30px;
-  /* align-items: center; */
+  align-items: center;
   /* justify-content: center; */
 }
 .pInfoDiv h1 {
