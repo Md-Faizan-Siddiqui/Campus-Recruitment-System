@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
-const phoneRegExp =
-  /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/;
+const phoneRegExp = /^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$/;
+// /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/;
 const urlRegExp =
   /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
 
@@ -52,6 +52,7 @@ export const SignUpFormValidation = Yup.object({
     .required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 charaters")
+    .max(16, "Password must be 16 charaters or less")
     .required("Required"),
   role: Yup.mixed()
     .required("Required")
@@ -67,6 +68,7 @@ export const LoginFormValidation = Yup.object({
     .required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 charaters")
+    .max(16, "Password must be 16 charaters or less")
     .required("Required"),
 });
 

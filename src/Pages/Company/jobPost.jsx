@@ -37,7 +37,7 @@ function JobPost() {
   return (
     <div className="marginAdjustment">
       <h1>Job Post</h1>
-      <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
+      {/* <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost /> */}
       <Grid container>
         {/* {myPostedJobs.length === 0 ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars" />: */}
         {myPostedJobs.length === 0 ? "Data Not Found"

@@ -60,6 +60,7 @@ export default function OutlinedCard({
   details,//student
   formTitle,//student
   companyPostJob, //jobPost
+  disableApply,
   web,
   studentDetails,
   companyDetails,
@@ -212,6 +213,7 @@ export default function OutlinedCard({
               {company && companyPostJob ? <div>
                 <CustomizedDialogs
                   appliedCandidate
+                  campusData={campusData}
                   size="small"
                   variant="contained"
                   color="primary"
@@ -227,7 +229,7 @@ export default function OutlinedCard({
                 size="small"
                 variant="contained"
                 color="primary"
-                disabled={student ? campusData.block : false}
+                disabled={disableApply && student}
                 onClick={deleteData ? deleteData
                   : admin ? disableFunc
                     : student ? applyFunc

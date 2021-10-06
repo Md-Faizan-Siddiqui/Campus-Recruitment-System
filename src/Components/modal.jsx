@@ -130,7 +130,7 @@ export default function CustomizedDialogs({
               : jobPost ? (
                 <JobPostForm handleClose={handleClose} />
               ) : appliedCandidate ?
-                <Accordion />
+                <Accordion campusData={campusData} />
                 : (
                   <OutlinedCard
                     showImg

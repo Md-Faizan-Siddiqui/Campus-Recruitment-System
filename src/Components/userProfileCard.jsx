@@ -3,6 +3,10 @@ import "../Style/userProfileCard.css";
 import fallBackImage from "../Images/images.png";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Grid } from '@material-ui/core';
+import { GiSkills } from "react-icons/gi";
+// import HttpIcon from '@mui/icons-material/Http';
+import { useSelector } from "react-redux";
+import CustomizedDialogs from "./modal"
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
@@ -10,13 +14,9 @@ import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import CastForEducationOutlinedIcon from '@mui/icons-material/CastForEducationOutlined';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import { GiSkills } from "react-icons/gi";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GitHubIcon from '@mui/icons-material/GitHub';
-// import HttpIcon from '@mui/icons-material/Http';
 import LanguageIcon from '@mui/icons-material/Language';
-import { useSelector } from "react-redux";
-import CustomizedDialogs from "./modal"
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -43,7 +43,7 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
 
     return (
         <Grid container className="grid">
-            <Grid item xl={8} lg={5} md={6} sm={8} xs={12} >
+            <Grid item xl={8} lg={5} md={6} sm={10} xs={12} >
                 <Card className={classes.root} style={{ padding: "0 30px 30px 30px", marginTop: "100px" }}>
 
                     <div className="pImgDiv">
@@ -109,20 +109,20 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                                 : null}
                     </div>
 
-                    <div style={{ display: "flex", justifyContent: "Center" }}>
-                        <div style={{ margin: "20px" }}>
-                            <FacebookOutlinedIcon style={{ color: "#3b5998" }} />
-                        </div>
-                        <div style={{ margin: "20px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <div style={{ margin: "20px 0 20px 0" }}>
                             <GitHubIcon style={{ color: "#171515" }} />
                         </div>
-                        <div style={{ margin: "20px" }}>
+                        <div style={{ margin: "20px 0 20px 0" }}>
+                            <FacebookOutlinedIcon style={{ color: "#3b5998" }} />
+                        </div>
+                        <div style={{ margin: "20px 0 20px 0" }}>
                             <LinkedInIcon style={{ color: "#0077b5" }} />
                         </div>
-                        <div style={{ margin: "20px" }}>
+                        <div style={{ margin: "20px 0 20px 0" }}>
                             <TwitterIcon style={{ color: "#00acee" }} />
                         </div>
-                        <div style={{ margin: "20px" }}>
+                        <div style={{ margin: "20px 0 20px 0" }}>
                             <InstagramIcon style={{ color: "#3f729b" }} />
                         </div>
                     </div>
