@@ -5,11 +5,11 @@ import { userDetails } from "../../Redux/Action/userAction";
 import OutlinedCard from "../../Components/card";
 import { Grid } from "@material-ui/core";
 import "../../App.css";
-import Alert from "../../Components/snackBar"
+import CustomizedSnackbars from "../../Components/snackBar"
 
 function Vacancies() {
-  const [applicantIDstate, setapplicantIDstate] = useState("");
   const user = useSelector((state) => state.addUser);
+  const [alert, setAlert] = useState(false)
   console.log(user);
   const dispatch = useDispatch();
   const [jobs, setJobs] = useState([]);
@@ -54,6 +54,8 @@ function Vacancies() {
       })
       .then(() => {
         console.log("Sucess");
+        setAlert(true)
+        // setAlert(false)
       })
       .catch(() => {
         console.log("Error");
@@ -108,6 +110,9 @@ function Vacancies() {
             );
           })}
       </Grid>
+      {alert ?
+        <CustomizedSnackbars setAlert={setAlert} message={"Sucessfully Applied"} errMessage={"Unexpected Error"} />
+        : null}
     </div>
   );
 }
