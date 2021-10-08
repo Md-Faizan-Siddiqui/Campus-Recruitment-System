@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import OutlinedCard from "../../Components/card";
 import { Grid } from "@material-ui/core";
-import UserProfileCard from "../../Components/userProfileCard"
+import UserProfileCard from "./userProfileCard"
 
 function Profile() {
   const user = useSelector((state) => state.addUser);

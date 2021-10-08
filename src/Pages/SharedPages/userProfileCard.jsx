@@ -1,12 +1,12 @@
 import React from 'react';
-import "../Style/userProfileCard.css";
-import fallBackImage from "../Images/images.png";
+import "../../Style/userProfileCard.css";
+import fallBackImage from "../../Images/images.png";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Grid } from '@material-ui/core';
 import { GiSkills } from "react-icons/gi";
 // import HttpIcon from '@mui/icons-material/Http';
 import { useSelector } from "react-redux";
-import CustomizedDialogs from "./modal"
+import CustomizedDialogs from "../../Components/modal"
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
@@ -20,7 +20,6 @@ import LanguageIcon from '@mui/icons-material/Language';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
-
 
 const useStyles = makeStyles({
     root: {

@@ -7,3 +7,40 @@
   align-items: center;
   height: 100vh;
 }
+.companyLogo {
+  width: 65px;
+  height: 65px;
+  margin: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+}
+.companyLogo img {
+  width: 100%;
+  height: 100%;
+}
+.mainChild {
+  display: flex;
+  align-items: center;
+}
+.cName {
+  line-height: 10px;
+}
+.main {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+.icon {
+  margin: 23px 10px 0 0;
+}
+.cName span {
+  font-weight: bold;
+  color: #8e8e8e;
+}
+.btnDiv {
+  margin-top: 20px;
+}
+.btnDiv button {
+  margin-right: 5px;
+}

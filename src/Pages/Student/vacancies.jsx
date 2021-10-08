@@ -1,11 +1,12 @@
+import "../../App.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { userDetails } from "../../Redux/Action/userAction";
 import OutlinedCard from "../../Components/card";
 import { Grid } from "@material-ui/core";
-import "../../App.css";
 import CustomizedSnackbars from "../../Components/snackBar"
+import VacanciesCard from "../../Components/vacanciesCard"
 
 function Vacancies() {
   const user = useSelector((state) => state.addUser);
@@ -70,7 +71,8 @@ function Vacancies() {
 
   return (
     <div className="marginAdjustment">
-      <h1>Vacancies</h1>
+      {/* <h1>Vacancies</h1> */}
+      <VacanciesCard />
       <Grid container>
         {allJobs &&
           allJobs?.reverse().map((data, index) => {
