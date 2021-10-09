@@ -10,6 +10,7 @@ import fallBackImage from "../../Images/images.png";
 import { Button } from "@material-ui/core";
 import { updateFormValidationStudent } from "../../Validation/validation";
 import { updateFormValidationCompany } from "../../Validation/validation";
+import GroupedSelect from "../../Components/multySelect";
 
 function ProfileUpdate(props) {
   console.log("props====>", props);
@@ -29,6 +30,8 @@ function ProfileUpdate(props) {
       skills: user.loginUser.skills ? user.loginUser.skills : "",
       experience: user.loginUser.experience ? user.loginUser.experience : "",
       website: user.loginUser.website ? user.loginUser.website : "",
+      city: user.loginUser.city ? user.loginUser.city : "",
+      bio: user.loginUser.bio ? user.loginUser.bio : "",
     },
     validationSchema:
       role === "student"
@@ -38,7 +41,7 @@ function ProfileUpdate(props) {
           : null,
 
     onSubmit: (values) => {
-      const { dob, education, cgpa, skills, name, experience, phone, website } =
+      const { dob, education, cgpa, skills, name, experience, phone, website, city, bio } =
         values;
 
       database
@@ -55,6 +58,8 @@ function ProfileUpdate(props) {
               phone: phone,
               experience: experience,
               fileToUpload: url,
+              city: city,
+              bio: bio,
             }
             : role === "company"
               ? {
@@ -145,6 +150,54 @@ function ProfileUpdate(props) {
             {formik.errors.cgpa && formik.touched.cgpa && (
               <p style={{ color: "red", marginLeft: "5px" }}>
                 {formik.errors.cgpa}
+              </p>
+            )}
+          </>
+        ) : null}
+        {/* add location */}
+        {role === "student" ? (
+          <>
+            <TextField
+              type="text"
+              label="City"
+              placeholder="City"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="city"
+              value={formik.values.city}
+              onChange={formik.handleChange("city")}
+            />
+            {formik.errors.city && formik.touched.city && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.city}
+              </p>
+            )}
+          </>
+        ) : null}
+        {/* add bio */}
+        {role === "student" ? (
+          <>
+            <TextField
+              type="text"
+              label="Bio"
+              placeholder="Bio"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="bio"
+              value={formik.values.bio}
+              onChange={formik.handleChange("bio")}
+            />
+            {formik.errors.bio && formik.touched.bio && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.bio}
               </p>
             )}
           </>
@@ -270,7 +323,7 @@ function ProfileUpdate(props) {
           : null}
         {role === "student" ? (
           <>
-            <TextField
+            <GroupedSelect
               label="Experience"
               placeholder="Experience"
               fullWidth
@@ -289,6 +342,26 @@ function ProfileUpdate(props) {
               </p>
             )}
           </>
+          // <>
+          //   <TextField
+          //     label="Experience"
+          //     placeholder="Experience"
+          //     fullWidth
+          //     margin="normal"
+          //     InputLabelProps={{
+          //       shrink: true,
+          //     }}
+          //     variant="outlined"
+          //     name="experience"
+          //     value={formik.values.experience}
+          //     onChange={formik.handleChange("experience")}
+          //   />
+          //   {formik.errors.experience && formik.touched.experience && (
+          //     <p style={{ color: "red", marginLeft: "5px" }}>
+          //       {formik.errors.experience}
+          //     </p>
+          //   )}
+          // </>
         ) : null}
         {role === "company" ? (
           <>

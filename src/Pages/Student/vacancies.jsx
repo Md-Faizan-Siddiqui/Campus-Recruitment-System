@@ -72,7 +72,7 @@ function Vacancies() {
   return (
     <div className="marginAdjustment">
       {/* <h1>Vacancies</h1> */}
-      <VacanciesCard />
+      {/* <VacanciesCard campusData={data} /> */}
       <Grid container>
         {allJobs &&
           allJobs?.reverse().map((data, index) => {
@@ -120,3 +120,51 @@ function Vacancies() {
 }
 
 export default Vacancies;
+
+
+
+
+
+
+// <Grid container>
+//         {allJobs &&
+//           allJobs?.reverse().map((data, index) => {
+//             const condition = data?.applicantUserId &&
+//               Object.values(data?.applicantUserId).find((item) => item?.id === user.loginUser.id)
+//             return (
+//               <Grid item xl={4} lg={6} md={6} sm={6} xs={12}>
+//                 <VacanciesCard
+//                   campusData={data}
+//                   btnText={
+//                     data?.block
+//                       ? "Blocked"
+//                       : condition
+//                         ? "Applied"
+//                         : "Apply Now"
+//                   }
+//                   apply
+//                   disableApply={
+//                     data?.block ||
+//                     condition
+//                   }
+//                   applyFunc={() =>
+//                     applyFunc({
+//                       jobId: data.jobId,
+//                       userId: data.userId,
+//                     })
+//                   }
+//                   disableFunc={() =>
+//                     disableFunc({
+//                       userid: data.userId,
+//                       jobid: data.jobId,
+//                       block: data.block,
+//                     })
+//                   }
+//                 />
+//               </Grid>
+//             );
+//           })}
+//       </Grid>
+
+
+

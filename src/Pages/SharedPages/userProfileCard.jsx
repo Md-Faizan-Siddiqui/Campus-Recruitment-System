@@ -53,12 +53,16 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                     <div className="pInfoDiv">
 
                         <h1>{campusData.name}</h1>
-                        <h4>MERN Stack Developer</h4>
+                        {role === "student" ?
+                            <>
+                                <h4>{campusData.bio}</h4>
 
-                        <div className="iconDiv">
-                            <LocationOnOutlinedIcon color="primary" fontSize="small" />
-                            <p>Karachi, Pakistan</p>
-                        </div>
+                                <div className="iconDiv">
+                                    <LocationOnOutlinedIcon color="primary" fontSize="small" />
+                                    <p>{campusData.city}</p>
+                                </div>
+                            </>
+                            : null}
                     </div>
 
                     <div className="detailsMain">

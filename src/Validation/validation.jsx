@@ -29,6 +29,12 @@ export const updateFormValidationStudent = Yup.object({
     .required("Required"),
   experience: Yup.string()
     .required("Required"),
+  city: Yup.string()
+    .max(30, "Invalid City")
+    .required("Required"),
+  bio: Yup.string()
+    .max(30, "Must be 30 characters or less")
+    .required("Required"),
 });
 
 export const updateFormValidationCompany = Yup.object({

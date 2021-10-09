@@ -10,7 +10,7 @@
 .companyLogo {
   width: 65px;
   height: 65px;
-  margin: 10px;
+  margin: 10px 10px 10px 0;
   border-radius: 50%;
   overflow: hidden;
   display: inline-block;
@@ -24,7 +24,7 @@
   align-items: center;
 }
 .cName {
-  line-height: 10px;
+  line-height: 15px;
 }
 .main {
   display: flex;
@@ -39,8 +39,27 @@
   color: #8e8e8e;
 }
 .btnDiv {
-  margin-top: 20px;
+  margin: 30px 0 20px 0;
 }
 .btnDiv button {
   margin-right: 5px;
+}
+.selectTag {
+  color: #787f88;
+  background-color: #e6ebf8;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 0 5px 0 0;
+}
+.cName h1 {
+  color: #3f51b5;
+}
+.bottom {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #dde6f3;
+  margin: 0px -10px -10px -10px;
+  padding: 10px 30px 10px 35px;
 }
