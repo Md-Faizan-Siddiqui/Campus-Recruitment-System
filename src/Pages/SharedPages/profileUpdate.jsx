@@ -28,7 +28,8 @@ function ProfileUpdate(props) {
       cgpa: user.loginUser.cgpa ? user.loginUser.cgpa : "",
       education: user.loginUser.education ? user.loginUser.education : "",
       skills: user.loginUser.skills ? user.loginUser.skills : "",
-      experience: user.loginUser.experience ? user.loginUser.experience : "",
+      experienceYears: user.loginUser.experienceYears ? user.loginUser.experienceYears : "",
+      experienceMonths: user.loginUser.experienceMonths ? user.loginUser.experienceMonths : "",
       website: user.loginUser.website ? user.loginUser.website : "",
       city: user.loginUser.city ? user.loginUser.city : "",
       bio: user.loginUser.bio ? user.loginUser.bio : "",
@@ -41,7 +42,7 @@ function ProfileUpdate(props) {
           : null,
 
     onSubmit: (values) => {
-      const { dob, education, cgpa, skills, name, experience, phone, website, city, bio } =
+      const { dob, education, cgpa, skills, name, experience, phone, website, city, bio, experienceMonths, experienceYears } =
         values;
 
       database
@@ -56,7 +57,8 @@ function ProfileUpdate(props) {
               skills: skills,
               name: name,
               phone: phone,
-              experience: experience,
+              experienceMonths: experienceMonths,
+              experienceYears: experienceYears,
               fileToUpload: url,
               city: city,
               bio: bio,
@@ -322,28 +324,8 @@ function ProfileUpdate(props) {
           </>)
           : null}
         {role === "student" ? (
-          <>
-            <GroupedSelect
-              label="Experience"
-              placeholder="Experience"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="experience"
-              value={formik.values.experience}
-              onChange={formik.handleChange("experience")}
-            />
-            {formik.errors.experience && formik.touched.experience && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.experience}
-              </p>
-            )}
-          </>
           // <>
-          //   <TextField
+          //   <GroupedSelect
           //     label="Experience"
           //     placeholder="Experience"
           //     fullWidth
@@ -353,7 +335,8 @@ function ProfileUpdate(props) {
           //     }}
           //     variant="outlined"
           //     name="experience"
-          //     value={formik.values.experience}
+          //     monthValue={formik.values.experience.months}
+          //     yearValue={formik.values.experience.years}
           //     onChange={formik.handleChange("experience")}
           //   />
           //   {formik.errors.experience && formik.touched.experience && (
@@ -362,6 +345,77 @@ function ProfileUpdate(props) {
           //     </p>
           //   )}
           // </>
+          <div style={{ display: "flex" }}>
+            <TextField
+              select
+              id="select"
+              label="Experience Years"
+              placeholder="Experience Years"
+              // width={1}
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="experience Years"
+              value={formik.values.experienceYears}
+              onChange={formik.handleChange("experienceYears")}
+            >
+              <MenuItem value="Fresh">Fresh</MenuItem>
+              <MenuItem value="1 Year">1 Year</MenuItem>
+              <MenuItem value="2 Years">2 Years</MenuItem>
+              <MenuItem value="3 Years">3 Years</MenuItem>
+              <MenuItem value="4 Years">4 Years</MenuItem>
+              <MenuItem value="5 Years">5 Years</MenuItem>
+              <MenuItem value="6 Years">6 Years</MenuItem>
+              <MenuItem value="7 Years">7 Years</MenuItem>
+              <MenuItem value="8 Years">8 Years</MenuItem>
+              <MenuItem value="9 Years">9 Years</MenuItem>
+              <MenuItem value="10 Years">10 Years</MenuItem>
+            </TextField>
+            {formik.errors.experienceYears && formik.touched.experienceYears && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.experienceYears}
+              </p>
+            )}
+            <TextField
+              select
+              id="select"
+              label="Experience Months"
+              placeholder="Experience Months"
+              // width={1}
+              fullWidth
+              disabled={formik.values.experienceYears === "Fresh" ? true : false}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="experienceMonths"
+              value={formik.values.experienceMonths}
+              onChange={formik.handleChange("experienceMonths")}
+            >
+              <MenuItem value="">Select One</MenuItem>
+              <MenuItem value="1 Month">1 Month</MenuItem>
+              <MenuItem value="2 Months">2 Months</MenuItem>
+              <MenuItem value="3 Months">3 Months</MenuItem>
+              <MenuItem value="4 Months">4 Months</MenuItem>
+              <MenuItem value="5 Months">5 Months</MenuItem>
+              <MenuItem value="6 Months">6 Months</MenuItem>
+              <MenuItem value="7 Months">7 Months</MenuItem>
+              <MenuItem value="8 Months">8 Months</MenuItem>
+              <MenuItem value="9 Months">9 Months</MenuItem>
+              <MenuItem value="10 Months">10 Months</MenuItem>
+              <MenuItem value="11 Months">11 Months</MenuItem>
+              <MenuItem value="12 Months">12 Months</MenuItem>
+            </TextField>
+            {formik.errors.experienceMonths && formik.touched.experienceMonths && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.experienceMonths}
+              </p>
+            )}
+          </div>
         ) : null}
         {role === "company" ? (
           <>
@@ -384,36 +438,39 @@ function ProfileUpdate(props) {
               </p>
             )}
           </>
-        ) : null}
+        ) : null
+        }
         {console.log("URL is ", url)}
-        {props.jobPost ? null : (
-          <div className="updateImgDiv">
-            <label for="fileToUpload">
-              <div
-                className="profile-pic"
-                id="profilePic"
-                style={{
-                  backgroundImage: `url( ${url ? url : fallBackImage} )`,
-                }}
-              >
-                {/* <img src={url ? url : fallBackImage} /> */}
-                <span class="glyphicon glyphicon-camera"></span>
-                <span>Change Image</span>
-              </div>
-            </label>
-            <input
-              value={formik.values.fileToUpload}
-              type="File"
-              name="fileToUpload"
-              id="fileToUpload"
-              onChange={uploadImg}
-            />
-          </div>
-        )}
+        {
+          props.jobPost ? null : (
+            <div className="updateImgDiv">
+              <label for="fileToUpload">
+                <div
+                  className="profile-pic"
+                  id="profilePic"
+                  style={{
+                    backgroundImage: `url( ${url ? url : fallBackImage} )`,
+                  }}
+                >
+                  {/* <img src={url ? url : fallBackImage} /> */}
+                  <span class="glyphicon glyphicon-camera"></span>
+                  <span>Change Image</span>
+                </div>
+              </label>
+              <input
+                value={formik.values.fileToUpload}
+                type="File"
+                name="fileToUpload"
+                id="fileToUpload"
+                onChange={uploadImg}
+              />
+            </div>
+          )
+        }
         < Button type="submit" size="small" variant="contained" color="primary">
           Update
         </Button>
-      </form>
+      </form >
     </div >
   );
 }

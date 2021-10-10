@@ -94,7 +94,7 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
 
                                 <div className="iconOrData">
                                     <WorkOutlineIcon className={classes.icon} fontSize="small" />
-                                    <p>{campusData.experience}</p>
+                                    <p>{campusData.experienceYears + " " + campusData.experienceMonths}</p>
                                 </div>
 
                                 <div className="iconOrData">

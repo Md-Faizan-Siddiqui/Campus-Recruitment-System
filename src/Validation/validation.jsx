@@ -27,8 +27,10 @@ export const updateFormValidationStudent = Yup.object({
     .required("Required"),
   skills: Yup.string()
     .required("Required"),
-  experience: Yup.string()
+  experienceYears: Yup.string()
     .required("Required"),
+  // experienceMonths: Yup.string()
+  //   .required("Required"),
   city: Yup.string()
     .max(30, "Invalid City")
     .required("Required"),
