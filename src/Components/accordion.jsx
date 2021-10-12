@@ -20,6 +20,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useSelector } from 'react-redux';
+import { useState } from "react"
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -58,26 +59,31 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function CustomizedAccordions({ campusData }) {
+    console.log("campusData in accordian", campusData)
     const allUsers = useSelector(state => state.addUser.allUsers)
     console.log("All Users in accordian", allUsers)
+    // const [applicantId, setApplicantId] = useState([])
 
     const [expanded, setExpanded] = React.useState('');
+    // const temp = campusData
 
-    console.log("campusData in accordian", campusData)
-    const temp = campusData
-
-    Object.keys(temp?.applicantUserId).map((applicants, ind) => {
-        console.log(temp?.applicantUserId[applicants]?.id)
+    let tempdata = [];
+    Object.keys(campusData?.applicantUserId).map((applicants, ind) => {
+        const user = Object.values(allUsers).filter(user => user.id === campusData?.applicantUserId[applicants]?.id)
+        tempdata.push(user);
+        console.log("users", user)
     })
+    // setApplicantId(tempdata)
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
+    // const testing = allUsers.filter()
     const user = Object.values(allUsers)
-
+    console.log("Applicant State", tempdata)
     return (
         <div>
-            {user.map((value, index) => {
+            {tempdata.flat().map((value, index) => {
                 console.log("index", index, "value", value)
                 return (
                     <>
@@ -86,7 +92,13 @@ export default function CustomizedAccordions({ campusData }) {
                                 <Typography>{value.name}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <h1>student details show krwana h..</h1>
+                                <p>{value.phone}</p>
+                                {/* <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+                                    at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+                                    as opposed to using 'Content here, content here', making it look like readable English. Many desktop
+                                    publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
+                                    'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the
+                                    years, sometimes by accident, sometimes on purpose (injected humour and the like).</p> */}
                             </AccordionDetails>
                         </Accordion>
                     </>)

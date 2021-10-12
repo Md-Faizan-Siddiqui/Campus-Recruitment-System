@@ -65,3 +65,14 @@ p {
     margin: 0;
   }
 } */
+.detailsParents {
+  display: flex;
+  justify-content: center;
+}
+.socialIcons {
+  display: flex;
+  justify-content: center;
+}
+.iconStyle {
+  margin: 20px 10px 20px 10px;
+}

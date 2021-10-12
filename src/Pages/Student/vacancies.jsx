@@ -13,7 +13,7 @@ function Vacancies() {
   const [alert, setAlert] = useState(false)
   console.log(user);
   const dispatch = useDispatch();
-  const [jobs, setJobs] = useState([]);
+  // const [jobs, setJobs] = useState([]);
   useEffect(() => {
     database
       .ref("/CRA")
@@ -22,7 +22,7 @@ function Vacancies() {
         console.log("snapshot====>", snapshot.val());
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).map((data, index) => {
-            setJobs(data);
+            // setJobs(data);
           });
           dispatch(
             userDetails({
@@ -56,7 +56,6 @@ function Vacancies() {
       .then(() => {
         console.log("Sucess");
         setAlert(true)
-        // setAlert(false)
       })
       .catch(() => {
         console.log("Error");
@@ -71,8 +70,7 @@ function Vacancies() {
 
   return (
     <div className="marginAdjustment">
-      {/* <h1>Vacancies</h1> */}
-      {/* <VacanciesCard campusData={data} /> */}
+      <h1>Vacancies</h1>
       <Grid container>
         {allJobs &&
           allJobs?.reverse().map((data, index) => {
@@ -80,6 +78,7 @@ function Vacancies() {
               Object.values(data?.applicantUserId).find((item) => item?.id === user.loginUser.id)
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}>
+                <VacanciesCard campusData={data} />
                 <OutlinedCard
                   campusData={data}
                   btnText={
@@ -120,51 +119,6 @@ function Vacancies() {
 }
 
 export default Vacancies;
-
-
-
-
-
-
-// <Grid container>
-//         {allJobs &&
-//           allJobs?.reverse().map((data, index) => {
-//             const condition = data?.applicantUserId &&
-//               Object.values(data?.applicantUserId).find((item) => item?.id === user.loginUser.id)
-//             return (
-//               <Grid item xl={4} lg={6} md={6} sm={6} xs={12}>
-//                 <VacanciesCard
-//                   campusData={data}
-//                   btnText={
-//                     data?.block
-//                       ? "Blocked"
-//                       : condition
-//                         ? "Applied"
-//                         : "Apply Now"
-//                   }
-//                   apply
-//                   disableApply={
-//                     data?.block ||
-//                     condition
-//                   }
-//                   applyFunc={() =>
-//                     applyFunc({
-//                       jobId: data.jobId,
-//                       userId: data.userId,
-//                     })
-//                   }
-//                   disableFunc={() =>
-//                     disableFunc({
-//                       userid: data.userId,
-//                       jobid: data.jobId,
-//                       block: data.block,
-//                     })
-//                   }
-//                 />
-//               </Grid>
-//             );
-//           })}
-//       </Grid>
 
 
 

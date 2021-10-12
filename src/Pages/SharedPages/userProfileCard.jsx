@@ -64,68 +64,69 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                             </>
                             : null}
                     </div>
+                    <div className="detailsParents">
+                        <div className="detailsMain">
+                            <div className="iconOrData">
+                                <EmailOutlinedIcon className={classes.icon} fontSize="small" />
+                                <p>{campusData.email}</p>
+                            </div>
 
-                    <div className="detailsMain">
-                        <div className="iconOrData">
-                            <EmailOutlinedIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.email}</p>
-                        </div>
-
-                        <div className="iconOrData">
-                            <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.phone}</p>
-                        </div>
-                        {role === "student" ?
-                            <>
-                                <div className="iconOrData">
-                                    <DateRangeOutlinedIcon className={classes.icon} fontSize="small" />
-                                    <p>{campusData.dob}</p>
-                                </div>
-
-                                <div className="iconOrData">
-                                    <CalculateOutlinedIcon className={classes.icon} fontSize="small" />
-                                    <p>{campusData.cgpa}</p>
-                                </div>
-
-                                <div className="iconOrData">
-                                    <GiSkills fontSize="large" className={classes.icon} />
-                                    <p>{campusData.skills}</p>
-                                </div>
-
-                                <div className="iconOrData">
-                                    <WorkOutlineIcon className={classes.icon} fontSize="small" />
-                                    <p>{campusData.experienceYears + " " + campusData.experienceMonths}</p>
-                                </div>
-
-                                <div className="iconOrData">
-                                    <CastForEducationOutlinedIcon className={classes.icon} fontSize="small" />
-                                    <p>{campusData.education}</p>
-                                </div>
-                            </>
-                            : role === "company" ?
+                            <div className="iconOrData">
+                                <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
+                                <p>{campusData.phone}</p>
+                            </div>
+                            {role === "student" ?
                                 <>
                                     <div className="iconOrData">
-                                        <LanguageIcon className={classes.icon} fontSize="small" />
-                                        <p>{campusData.website}</p>
+                                        <DateRangeOutlinedIcon className={classes.icon} fontSize="small" />
+                                        <p>{campusData.dob}</p>
+                                    </div>
+
+                                    <div className="iconOrData">
+                                        <CalculateOutlinedIcon className={classes.icon} fontSize="small" />
+                                        <p>{campusData.cgpa}</p>
+                                    </div>
+
+                                    <div className="iconOrData">
+                                        <GiSkills fontSize="large" className={classes.icon} />
+                                        <p>{campusData.skills}</p>
+                                    </div>
+
+                                    <div className="iconOrData">
+                                        <WorkOutlineIcon className={classes.icon} fontSize="small" />
+                                        <p>{campusData.experienceYears + " " + campusData.experienceMonths}</p>
+                                    </div>
+
+                                    <div className="iconOrData">
+                                        <CastForEducationOutlinedIcon className={classes.icon} fontSize="small" />
+                                        <p>{campusData.education}</p>
                                     </div>
                                 </>
-                                : null}
+                                : role === "company" ?
+                                    <>
+                                        <div className="iconOrData">
+                                            <LanguageIcon className={classes.icon} fontSize="small" />
+                                            <p>{campusData.website}</p>
+                                        </div>
+                                    </>
+                                    : null}
+                        </div>
                     </div>
 
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <div style={{ margin: "20px 0 20px 0" }}>
+                    <div className="socialIcons" >
+                        <div className="iconStyle" >
                             <GitHubIcon style={{ color: "#171515" }} />
                         </div>
-                        <div style={{ margin: "20px 0 20px 0" }}>
+                        <div className="iconStyle">
                             <FacebookOutlinedIcon style={{ color: "#3b5998" }} />
                         </div>
-                        <div style={{ margin: "20px 0 20px 0" }}>
+                        <div className="iconStyle">
                             <LinkedInIcon style={{ color: "#0077b5" }} />
                         </div>
-                        <div style={{ margin: "20px 0 20px 0" }}>
+                        <div className="iconStyle">
                             <TwitterIcon style={{ color: "#00acee" }} />
                         </div>
-                        <div style={{ margin: "20px 0 20px 0" }}>
+                        <div className="iconStyle">
                             <InstagramIcon style={{ color: "#3f729b" }} />
                         </div>
                     </div>

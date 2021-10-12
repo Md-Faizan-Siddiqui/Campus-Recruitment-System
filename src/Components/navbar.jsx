@@ -15,6 +15,9 @@ import { List, ListItem, Drawer } from "@material-ui/core";
 import BusinessRoundedIcon from '@material-ui/icons/BusinessRounded';
 
 const useStyles = makeStyles((theme) => ({
+  regular: {
+    minHeight: "64px"
+  },
   root: {
     flexGrow: 1,
   },
@@ -165,7 +168,7 @@ export default function ButtonAppBar() {
       </Drawer>
       {/* drawer */}
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar classes={{ regular: classes.regular }}>
           <IconButton
             edge="start"
             className={classes.menuButton}

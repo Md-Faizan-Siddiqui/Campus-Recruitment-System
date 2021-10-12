@@ -73,13 +73,7 @@ function Companies() {
       </Grid> */}
 
       <Grid container justifyContent="center">
-        <Grid
-          xs={11}
-          md={11}
-          sm={11}
-          xl={11}
-          item
-        >
+        <Grid xs={11} sm={11} md={11} lg={11} xl={11} item>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
               <TableHead>

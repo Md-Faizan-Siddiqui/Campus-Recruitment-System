@@ -1,16 +1,13 @@
 import "../App.css";
-import { Button, Grid } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { Card } from '@mui/material';
 import React from 'react';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import MuiDialogContent from "@material-ui/core/DialogContent";
 import DialogContent from '@material-ui/core/DialogContent';
 
 export default function VacanciesCard({ campusData }) {
     return (
         <div>
-            {/* <Grid container>
-                <Grid item xl={3} md={4} sm={6} xs={12}> */}
             <Card style={{ margin: "10px", padding: "10px" }}>
                 <DialogContent >
                     <div className="main">
@@ -42,8 +39,6 @@ export default function VacanciesCard({ campusData }) {
                     <Button size="small" variant="contained" color="primary">details</Button>
                 </div>
             </Card>
-            {/* </Grid>
-            </Grid> */}
         </div>
     )
 }
