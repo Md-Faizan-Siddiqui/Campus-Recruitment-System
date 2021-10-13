@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-// import "../Style/nav.css";
-import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../Config/firebaseConfig";
 import { userDetails } from "../Redux/Action/userAction";
-import { List, ListItem, Drawer } from "@material-ui/core";
-import BusinessRoundedIcon from '@material-ui/icons/BusinessRounded';
+import { List, ListItem, Drawer, ListItemText, ListItemIcon } from "@material-ui/core";
+import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded';
+import { FaUserGraduate } from "react-icons/fa";
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import WorkRoundedIcon from '@mui/icons-material/WorkRounded';
 
 const useStyles = makeStyles((theme) => ({
   regular: {
@@ -51,13 +54,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3f51b5",
     color: "white",
     margin: 0,
-    padding: "17px",
     fontSize: "18px",
+    minHeight: "64px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   toggleLogoutBtn: {
     color: "white",
     backgroundColor: "#3f51b5",
   },
+  iconStyle: {
+    fontSize: "20px",
+    color: "#3f51b5"
+  }
 }));
 
 export default function ButtonAppBar() {
@@ -86,55 +96,90 @@ export default function ButtonAppBar() {
       {user?.loginStatus === true && user?.loginUser?.role === "student" ? (
         <>
           <List>
-            <Link to="/" className={classes.toggleBtnColor}>
-              <ListItem button>Vacancies</ListItem>
-            </Link>
-            <Link to="/companies" className={classes.toggleBtnColor}>
-              <ListItem button>Companies <BusinessRoundedIcon /> </ListItem>
-            </Link>
-            <Link to="/profile" className={classes.toggleBtnColor}>
-              <ListItem button>Profile</ListItem>
-            </Link>
-            <ListItem
-              className={classes.toggleBtnColor}
-              onClick={logout}
-              button
-            >
-              Logout
+            <ListItem component={Link} to={"/"} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <WorkRoundedIcon className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Vacancies</ListItemText>
+            </ListItem>
+            <ListItem component={Link} to={"/companies"} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <BusinessRoundedIcon className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Companies</ListItemText>
+            </ListItem>
+            <ListItem component={Link} to={"/profile"} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <PersonRoundedIcon className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Profile</ListItemText>
+            </ListItem>
+            <ListItem onClick={logout} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <LogoutIcon className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Logout</ListItemText>
             </ListItem>
           </List>
         </>
       ) : null}
       {user?.loginStatus === true && user?.loginUser?.role === "company" ? (
         <>
-          <Link to="/" className={classes.toggleBtnColor}>
-            <ListItem button>Students</ListItem>
-          </Link>
-          <Link to="/jobpost" className={classes.toggleBtnColor}>
-            <ListItem button>Jobs</ListItem>
-          </Link>
-          <Link to="/profile" className={classes.toggleBtnColor}>
-            <ListItem button>Profile</ListItem>
-          </Link>
-          <ListItem className={classes.toggleBtnColor} onClick={logout} button>
-            Logout
-          </ListItem>
+          <List>
+            <ListItem component={Link} to={"/"} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <FaUserGraduate className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Students</ListItemText>
+            </ListItem>
+            <ListItem component={Link} to={"/jobpost"} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <WorkRoundedIcon className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Jobs</ListItemText>
+            </ListItem>
+            <ListItem component={Link} to={"/profile"} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <PersonRoundedIcon className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Profile</ListItemText>
+            </ListItem>
+            <ListItem onClick={logout} className={classes.toggleBtnColor}>
+              <ListItemIcon>
+                <LogoutIcon className={classes.iconStyle} />
+              </ListItemIcon>
+              <ListItemText>Logout</ListItemText>
+            </ListItem>
+          </List>
         </>
       ) : null}
       {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
-        <>
-          <Link to="/" className={classes.toggleBtnColor}>
-            <ListItem button>Jobs</ListItem>
-          </Link>
-          <Link to="/companies" className={classes.toggleBtnColor}>
-            <ListItem button>Companies</ListItem>
-          </Link>
-          <Link to="/students" className={classes.toggleBtnColor}>
-            <ListItem button>Students</ListItem>
-          </Link>
-          <ListItem className={classes.toggleBtnColor} onClick={logout} button>
-            Logout
+        <><List>
+          <ListItem component={Link} to={"/"} className={classes.toggleBtnColor}>
+            <ListItemIcon>
+              <WorkRoundedIcon className={classes.iconStyle} />
+            </ListItemIcon>
+            <ListItemText>Jobs</ListItemText>
           </ListItem>
+          <ListItem component={Link} to={"/companies"} className={classes.toggleBtnColor}>
+            <ListItemIcon>
+              <BusinessRoundedIcon className={classes.iconStyle} />
+            </ListItemIcon>
+            <ListItemText>Companies</ListItemText>
+          </ListItem>
+          <ListItem component={Link} to={"/students"} className={classes.toggleBtnColor}>
+            <ListItemIcon>
+              <FaUserGraduate className={classes.iconStyle} />
+            </ListItemIcon>
+            <ListItemText>Students</ListItemText>
+          </ListItem>
+          <ListItem onClick={logout} className={classes.toggleBtnColor}>
+            <ListItemIcon>
+              <LogoutIcon className={classes.iconStyle} />
+            </ListItemIcon>
+            <ListItemText>Logout</ListItemText>
+          </ListItem>
+        </List>
         </>
       ) : null}
     </div>
@@ -237,9 +282,6 @@ export default function ButtonAppBar() {
                 <Link to="/students" className={classes.btnColor}>
                   <Button className={classes.btnColor}>Students</Button>
                 </Link>
-                {/* <Link to="/adminProfile" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Profile</Button>
-                </Link> */}
                 <Button className={classes.btnColor} onClick={logout}>
                   Logout
                 </Button>
