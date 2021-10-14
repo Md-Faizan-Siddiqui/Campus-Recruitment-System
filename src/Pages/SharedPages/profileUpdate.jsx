@@ -10,12 +10,12 @@ import fallBackImage from "../../Images/images.png";
 import { Button } from "@material-ui/core";
 import { updateFormValidationStudent } from "../../Validation/validation";
 import { updateFormValidationCompany } from "../../Validation/validation";
-import GroupedSelect from "../../Components/multySelect";
 
 function ProfileUpdate(props) {
   console.log("props====>", props);
   const user = useSelector((state) => state.addUser);
   const [url, setUrl] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const role = user.loginUser.role;
   const history = useHistory();
 
@@ -44,6 +44,8 @@ function ProfileUpdate(props) {
     onSubmit: (values) => {
       const { dob, education, cgpa, skills, name, experience, phone, website, city, bio, experienceMonths, experienceYears } =
         values;
+      console.log("submit")
+      setDisabled(true)
 
       database
         .ref("/CRA")
@@ -74,6 +76,7 @@ function ProfileUpdate(props) {
         )
         .then((res) => {
           console.log(res);
+          setDisabled(false)
           props.handleClose();
         })
         .catch((err) => {
@@ -103,35 +106,33 @@ function ProfileUpdate(props) {
     setUrl(props.campusData?.fileToUpload);
     // console.log("props", props.campusData.fileToUpload)
   }, []);
-
   return (
     <div className="main_div">
       <form onSubmit={formik.handleSubmit}>
-        {
-          props.jobPost ? null : (
-            <>
-              <TextField
-                type="text"
-                label="Name"
-                placeholder="Name"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                autoFocus
-                variant="outlined"
-                name="name"
-                value={formik.values.name}
-                onChange={formik.handleChange("name")}
-              />
-              {formik.errors.name && formik.touched.name && (
-                <p style={{ color: "red", marginLeft: "5px" }}>
-                  {formik.errors.name}
-                </p>
-              )}
-            </>
-          )
+        {props.jobPost ? null : (
+          <>
+            <TextField
+              type="text"
+              label="Name"
+              placeholder="Name"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              autoFocus
+              variant="outlined"
+              name="name"
+              value={formik.values.name}
+              onChange={formik.handleChange("name")}
+            />
+            {formik.errors.name && formik.touched.name && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.name}
+              </p>
+            )}
+          </>
+        )
         }
         {role === "student" ? (
           <>
@@ -160,6 +161,7 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <>
             <TextField
+              // pattern=".*\S+.*"
               type="text"
               label="City"
               placeholder="City"
@@ -279,28 +281,6 @@ function ProfileUpdate(props) {
             )}
           </>
         ) : null}
-        {/* {role === "student" ? (
-          <>
-            <Select
-              label="Skills"
-              placeholder="Skills"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="skills"
-              value={formik.values.skills}
-              onChange={formik.handleChange("skills")}
-            />
-            {formik.errors.skills && formik.touched.skills && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.skills}
-              </p>
-            )}
-          </>)
-          : null} */}
         {role === "student" ? (
           <>
             <TextField
@@ -324,27 +304,6 @@ function ProfileUpdate(props) {
           </>)
           : null}
         {role === "student" ? (
-          // <>
-          //   <GroupedSelect
-          //     label="Experience"
-          //     placeholder="Experience"
-          //     fullWidth
-          //     margin="normal"
-          //     InputLabelProps={{
-          //       shrink: true,
-          //     }}
-          //     variant="outlined"
-          //     name="experience"
-          //     monthValue={formik.values.experience.months}
-          //     yearValue={formik.values.experience.years}
-          //     onChange={formik.handleChange("experience")}
-          //   />
-          //   {formik.errors.experience && formik.touched.experience && (
-          //     <p style={{ color: "red", marginLeft: "5px" }}>
-          //       {formik.errors.experience}
-          //     </p>
-          //   )}
-          // </>
           <div style={{ display: "flex" }}>
             <TextField
               select
@@ -408,7 +367,6 @@ function ProfileUpdate(props) {
               <MenuItem value="9 Months">9 Months</MenuItem>
               <MenuItem value="10 Months">10 Months</MenuItem>
               <MenuItem value="11 Months">11 Months</MenuItem>
-              <MenuItem value="12 Months">12 Months</MenuItem>
             </TextField>
             {formik.errors.experienceMonths && formik.touched.experienceMonths && (
               <p style={{ color: "red", marginLeft: "5px" }}>
@@ -467,7 +425,13 @@ function ProfileUpdate(props) {
             </div>
           )
         }
-        < Button type="submit" size="small" variant="contained" color="primary">
+        < Button
+          type="submit"
+          size="small"
+          variant="contained"
+          color="primary"
+          disabled={disabled}
+        >
           Update
         </Button>
       </form >
@@ -476,12 +440,3 @@ function ProfileUpdate(props) {
 }
 
 export default ProfileUpdate;
-
-
-// const previewImage = async (e) => {
-//   setUploadStatus(true);
-//   setFormSubmited(false);
-//   const fileSampleUrl = await URL?.createObjectURL(e?.target?.files[0]);
-//   setImage(fileSampleUrl);
-//   setDisableBtn(true);
-// };

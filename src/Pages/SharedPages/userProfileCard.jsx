@@ -42,7 +42,7 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
 
     return (
         <Grid container className="grid">
-            <Grid item xl={8} lg={5} md={6} sm={10} xs={12} >
+            <Grid item xl={3} lg={5} md={6} sm={6} xs={12} >
                 <Card className={classes.root} style={{ padding: "0 30px 30px 30px", marginTop: "100px" }}>
 
                     <div className="pImgDiv">

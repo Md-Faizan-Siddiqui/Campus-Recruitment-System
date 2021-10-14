@@ -49,6 +49,7 @@ const useStyles = makeStyles({
 });
 
 export default function OutlinedCard({
+  // jobPost,
   applyFunc, // vacancies
   disableFunc, // vacancies
   showImg,//student profile
@@ -76,21 +77,23 @@ export default function OutlinedCard({
     <Card className={classes.root} variant="outlined">
       <CardContent>
         {/* < PersonOutlineRoundedIcon /> */}
-        {showImg ? <> <div className={classes.main_img_div}>
-          <div className={classes.profileImg}>
-            <img
-              className={classes.imgTag}
-              src={
-                campusData?.fileToUpload
-                  ? campusData.fileToUpload
-                  : fallBackImage
-              }
-              alt="profilePic"
-            />
-          </div>
-        </div>
-          {/* <h1 style={{ textAlign: "center" }}>{campusData?.name}</h1> */}
-        </> : null}
+        {showImg ?
+          <>
+            <div className={classes.main_img_div}>
+              <div className={classes.profileImg}>
+                <img
+                  className={classes.imgTag}
+                  src={
+                    campusData?.fileToUpload
+                      ? campusData.fileToUpload
+                      : fallBackImage
+                  }
+                  alt="profilePic"
+                />
+              </div>
+            </div>
+            {/* <h1 style={{ textAlign: "center" }}>{campusData?.name}</h1> */}
+          </> : null}
         <div className={classes.card_content1}>
           <div>
             {companyPostJob ? <h2>Posted Job</h2> : null}
@@ -202,6 +205,7 @@ export default function OutlinedCard({
                   details={details}
                   formTitle={formTitle}
                   btnText={btnText}
+                // jobPost={jobPost}
                 />
               </CardActions>
             </div>
@@ -212,6 +216,7 @@ export default function OutlinedCard({
             <CardActions>
               {company && companyPostJob ? <div>
                 <CustomizedDialogs
+                  // jobPost={jobPost}
                   appliedCandidate
                   campusData={campusData}
                   size="small"

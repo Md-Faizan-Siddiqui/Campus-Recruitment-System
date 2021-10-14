@@ -1,12 +1,12 @@
+import "../../App.css";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { userDetails } from "../../Redux/Action/userAction";
+import { Grid } from "@material-ui/core";
 import OutlinedCard from "../../Components/card";
 import CustomizedDialogs from "../../Components/modal";
-import "../../App.css";
-import { Grid } from "@material-ui/core";
 
 function JobPost() {
   const user = useSelector((state) => state.addUser);
@@ -23,6 +23,11 @@ function JobPost() {
             })
           );
         } else {
+          dispatch(
+            userDetails({
+              allJobs: {},
+            })
+          );
           console.log("No data available");
         }
       });
@@ -37,13 +42,11 @@ function JobPost() {
   return (
     <div className="marginAdjustment">
       <h1>Job Post</h1>
-      {/* <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost /> */}
+      <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
       <Grid container>
-        {/* {myPostedJobs.length === 0 ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars" />: */}
         {myPostedJobs.length === 0 ? "Data Not Found"
           : myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
-            // console.log("data", data)
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >
                 <OutlinedCard

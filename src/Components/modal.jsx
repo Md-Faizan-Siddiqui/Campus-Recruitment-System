@@ -12,9 +12,8 @@ import ProfileUpdate from "../Pages/SharedPages/profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import OutlinedCard from "./card";
 import JobPostForm from "../Pages/jobPostForm";
-import FixedBtn from "../Components/editButton";
+import EditButton from "../Components/editButton";
 import Accordion from "./accordion"
-import ApplyForm from "../Pages/Student/applyForm";
 
 const styles = (theme) => ({
   root: {
@@ -88,7 +87,7 @@ export default function CustomizedDialogs({
   };
   return (
     <div>
-      {jobPost ? <FixedBtn onClick={handleClickOpen} />
+      {jobPost ? <EditButton onClick={handleClickOpen} />
         : icons || btnText ? (
           <Button
             variant="contained"

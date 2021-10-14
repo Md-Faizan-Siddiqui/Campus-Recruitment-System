@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { userDetails } from "../../Redux/Action/userAction";
-import OutlinedCard from "../../Components/card";
 import { Grid } from "@material-ui/core";
+import OutlinedCard from "../../Components/card";
 import CustomizedSnackbars from "../../Components/snackBar"
 import VacanciesCard from "../../Components/vacanciesCard"
 
@@ -36,6 +36,7 @@ function Vacancies() {
   }, []);
 
   const disableFunc = ({ userid, jobid, block }) => {
+    console.log('block func')
     if (block === false) {
       const res = database
         .ref(`/CRA/jobs/${userid}/${jobid}`)
@@ -78,7 +79,7 @@ function Vacancies() {
               Object.values(data?.applicantUserId).find((item) => item?.id === user.loginUser.id)
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}>
-                <VacanciesCard campusData={data} />
+                {/* <VacanciesCard campusData={data} /> */}
                 <OutlinedCard
                   campusData={data}
                   btnText={

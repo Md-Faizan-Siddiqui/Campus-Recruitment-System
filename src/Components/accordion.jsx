@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -19,7 +20,6 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { useSelector } from 'react-redux';
 import { useState } from "react"
 
 const Accordion = styled((props) => (
@@ -68,11 +68,13 @@ export default function CustomizedAccordions({ campusData }) {
     // const temp = campusData
 
     let tempdata = [];
-    Object.keys(campusData?.applicantUserId).map((applicants, ind) => {
-        const user = Object.values(allUsers).filter(user => user.id === campusData?.applicantUserId[applicants]?.id)
-        tempdata.push(user);
-        console.log("users", user)
-    })
+    if (campusData?.applicantUserId) {
+        Object.keys(campusData?.applicantUserId).map((applicants, ind) => {
+            const user = Object.values(allUsers).filter(user => user.id === campusData?.applicantUserId[applicants]?.id)
+            tempdata.push(user);
+            console.log("users", user)
+        })
+    }
     // setApplicantId(tempdata)
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -83,6 +85,7 @@ export default function CustomizedAccordions({ campusData }) {
     console.log("Applicant State", tempdata)
     return (
         <div>
+            {tempdata.length == 0 && "No data found"}
             {tempdata.flat().map((value, index) => {
                 console.log("index", index, "value", value)
                 return (
@@ -93,12 +96,6 @@ export default function CustomizedAccordions({ campusData }) {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <p>{value.phone}</p>
-                                {/* <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
-                                    at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-                                    as opposed to using 'Content here, content here', making it look like readable English. Many desktop
-                                    publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
-                                    'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the
-                                    years, sometimes by accident, sometimes on purpose (injected humour and the like).</p> */}
                             </AccordionDetails>
                         </Accordion>
                     </>)

@@ -18,7 +18,6 @@ function Companies() {
   const allUsers = useSelector((state) => state.addUser);
   console.log(allUsers, "allUsers");
 
-
   // filter companies..
 
   const allCompanies = Object.values(allUsers.allUsers)?.filter(
