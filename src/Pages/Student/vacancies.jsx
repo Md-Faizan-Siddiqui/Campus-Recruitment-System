@@ -79,7 +79,7 @@ function Vacancies() {
               Object.values(data?.applicantUserId).find((item) => item?.id === user.loginUser.id)
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}>
-                {/* <VacanciesCard campusData={data} /> */}
+                <VacanciesCard campusData={data} />
                 <OutlinedCard
                   campusData={data}
                   btnText={

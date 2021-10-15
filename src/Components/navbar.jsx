@@ -8,14 +8,15 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../Config/firebaseConfig";
 import { userDetails } from "../Redux/Action/userAction";
+import { auth } from "../Config/firebaseConfig";
 import { List, ListItem, Drawer, ListItemText, ListItemIcon } from "@material-ui/core";
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded';
 import { FaUserGraduate } from "react-icons/fa";
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import WorkRoundedIcon from '@mui/icons-material/WorkRounded';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 const useStyles = makeStyles((theme) => ({
   regular: {
@@ -67,7 +68,15 @@ const useStyles = makeStyles((theme) => ({
   iconStyle: {
     fontSize: "20px",
     color: "#3f51b5"
-  }
+  },
+  powerBtnMobleScreen: {
+    color: "white",
+    // textDecoration: "none",
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+    },
+  },
 }));
 
 export default function ButtonAppBar() {
@@ -114,12 +123,12 @@ export default function ButtonAppBar() {
               </ListItemIcon>
               <ListItemText>Profile</ListItemText>
             </ListItem>
-            <ListItem onClick={logout} className={classes.toggleBtnColor}>
+            {/* <ListItem onClick={logout} className={classes.toggleBtnColor}>
               <ListItemIcon>
                 <LogoutIcon className={classes.iconStyle} />
               </ListItemIcon>
               <ListItemText>Logout</ListItemText>
-            </ListItem>
+            </ListItem> */}
           </List>
         </>
       ) : null}
@@ -144,12 +153,12 @@ export default function ButtonAppBar() {
               </ListItemIcon>
               <ListItemText>Profile</ListItemText>
             </ListItem>
-            <ListItem onClick={logout} className={classes.toggleBtnColor}>
+            {/* <ListItem onClick={logout} className={classes.toggleBtnColor}>
               <ListItemIcon>
                 <LogoutIcon className={classes.iconStyle} />
               </ListItemIcon>
               <ListItemText>Logout</ListItemText>
-            </ListItem>
+            </ListItem> */}
           </List>
         </>
       ) : null}
@@ -173,12 +182,12 @@ export default function ButtonAppBar() {
             </ListItemIcon>
             <ListItemText>Students</ListItemText>
           </ListItem>
-          <ListItem onClick={logout} className={classes.toggleBtnColor}>
+          {/* <ListItem onClick={logout} className={classes.toggleBtnColor}>
             <ListItemIcon>
               <LogoutIcon className={classes.iconStyle} />
             </ListItemIcon>
             <ListItemText>Logout</ListItemText>
-          </ListItem>
+          </ListItem> */}
         </List>
         </>
       ) : null}
@@ -204,7 +213,7 @@ export default function ButtonAppBar() {
         console.log(error);
       });
   };
-  console.log(user?.loginUser?.role);
+  // console.log(user?.loginUser?.role);
   return (
     <div className={classes.root}>
       {/* drawer */}
@@ -214,29 +223,31 @@ export default function ButtonAppBar() {
       {/* drawer */}
       <AppBar position="fixed">
         <Toolbar classes={{ regular: classes.regular }}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
+          {user.loginStatus === false ? null :
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+            >
+              <MenuIcon />
+              {/* <PowerSettingsNewIcon /> */}
+            </IconButton>}
           <Typography variant="h6" className={classes.title}>
             CRS
           </Typography>
+          {user.loginStatus === false ? (
+            <>
+              <Link to="/signup" className={classes.btnColor}>
+                <Button className={classes.btnColor}>SignUp</Button>
+              </Link>
+              <Link to="/" className={classes.btnColor}>
+                <Button className={classes.btnColor}>Login</Button>
+              </Link>
+            </>
+          ) : null}
           <div className={classes.navBtn}>
-            {user.loginStatus === false ? (
-              <>
-                <Link to="/signup" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>SignUp</Button>
-                </Link>
-                <Link to="/" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Login</Button>
-                </Link>
-              </>
-            ) : null}
             {user?.loginStatus === true &&
               user?.loginUser?.role === "student" ? (
               <>
@@ -250,7 +261,7 @@ export default function ButtonAppBar() {
                   <Button className={classes.btnColor}>Profile</Button>
                 </Link>
                 <Button className={classes.btnColor} onClick={logout}>
-                  Logout
+                  <PowerSettingsNewIcon />
                 </Button>
               </>
             ) : null}
@@ -267,7 +278,7 @@ export default function ButtonAppBar() {
                   <Button className={classes.btnColor}>Profile</Button>
                 </Link>
                 <Button className={classes.btnColor} onClick={logout}>
-                  Logout
+                  <PowerSettingsNewIcon />
                 </Button>
               </>
             ) : null}
@@ -283,11 +294,15 @@ export default function ButtonAppBar() {
                   <Button className={classes.btnColor}>Students</Button>
                 </Link>
                 <Button className={classes.btnColor} onClick={logout}>
-                  Logout
+                  <PowerSettingsNewIcon />
                 </Button>
               </>
             ) : null}
           </div>
+          {user.loginStatus === false ? null :
+            <Button size="small" className={classes.powerBtnMobleScreen} onClick={logout}>
+              <PowerSettingsNewIcon />
+            </Button>}
         </Toolbar>
       </AppBar>
     </div>

@@ -204,8 +204,9 @@ function JobPostForm(props) {
               select
             >
               <MenuItem value="">Select One</MenuItem>
-              <MenuItem value="Full Time">Full Time</MenuItem>
+              <MenuItem value="Internship">Internship</MenuItem>
               <MenuItem value="Part Time">Part Time</MenuItem>
+              <MenuItem value="Full Time">Full Time</MenuItem>
             </TextField>
             {formik.errors.jobType && formik.touched.jobType && (
               <p style={{ color: "red", marginLeft: "5px" }}>

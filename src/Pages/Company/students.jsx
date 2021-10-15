@@ -12,6 +12,7 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CustomizedDialogs from "../../Components/modal";
+import { database } from "../../Config/firebaseConfig";
 
 function Students() {
   // const role = useSelector((state) => state.addUser.loginUser.role);
@@ -48,6 +49,31 @@ function Students() {
   });
 
   const classes = useStyles();
+
+  const userBlock = (blockUserId, block) => {
+    // alert("User Block Function")
+    console.log("Block User Id=====>", blockUserId)
+    console.log("User Block=====>", block)
+    if (block === false) {
+      database
+        .ref("/CRA")
+        .child("users/" + blockUserId)
+        .update(
+          { block: true, }
+        ).then((res) => {
+          console.log("then =====>")
+        }).catch((res) => {
+          console.log("catch ====>")
+        })
+    } else {
+      database
+        .ref("/CRA")
+        .child("users/" + blockUserId)
+        .update(
+          { block: false, }
+        )
+    }
+  }
 
   return (
     <div className="marginAdjustment">
@@ -106,7 +132,10 @@ function Students() {
                             <Button
                               size="small"
                               variant="contained"
-                              color="primary">Block</Button>
+                              color="primary"
+                              onClick={() => userBlock(data.id, data.block)}>
+                              {data.block === true ? "Unblock" : "Block"}
+                            </Button>
                           </StyledTableCell>
                           : null
                         }

@@ -76,7 +76,6 @@ export default function OutlinedCard({
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        {/* < PersonOutlineRoundedIcon /> */}
         {showImg ?
           <>
             <div className={classes.main_img_div}>

@@ -33,14 +33,35 @@ function App() {
           .child("users/" + auth.currentUser.uid)
           .on("value", (snapshot) => {
             if (snapshot.exists()) {
-              console.log("snapshot====>", snapshot.val())
-              dispatch(
-                userDetails({
-                  loginUser: snapshot.val(),
-                  loginStatus: true,
-                  isLoader: false,
-                })
-              )
+              const snapshotData = snapshot.val();
+              if (snapshotData.block === true) {
+                auth
+                  .signOut()
+                  .then(() => {
+                    console.log("testing")
+                    dispatch(
+                      userDetails({
+                        loginUser: null,
+                        loginStatus: false,
+                        isLoader: false,
+                      })
+                    );
+                    localStorage.removeItem("UID")
+                    localStorage.removeItem("ROLE")
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              } else {
+                console.log("snapshot====>", snapshot.val())
+                dispatch(
+                  userDetails({
+                    loginUser: snapshot.val(),
+                    loginStatus: true,
+                    isLoader: false,
+                  })
+                )
+              }
             } else {
               console.log("No data available");
               dispatch(

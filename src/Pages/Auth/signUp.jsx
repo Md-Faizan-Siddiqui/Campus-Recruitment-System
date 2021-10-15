@@ -72,6 +72,7 @@ export default function SignUp() {
               role: role,
               phone: phone,
               password: password,
+              block: false,
             })
             .then((res) => {
               console.log("res", res);
