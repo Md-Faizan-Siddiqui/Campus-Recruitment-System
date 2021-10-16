@@ -19,18 +19,17 @@
   width: 100%;
   height: 100%;
 }
-.mainChild {
+/* .mainChild {
   display: flex;
   align-items: center;
-}
+} */
 .cName {
   line-height: 15px;
 }
-.main {
+/* .main {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
-}
+} */
 .icon {
   margin: 23px 10px 0 0;
 }
