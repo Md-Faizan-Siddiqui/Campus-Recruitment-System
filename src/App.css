@@ -8,7 +8,7 @@
   height: 100vh;
 }
 .companyLogo {
-  width: 65px;
+  min-width: 65px;
   height: 65px;
   margin: 10px 10px 10px 0;
   border-radius: 50%;
@@ -19,19 +19,31 @@
   width: 100%;
   height: 100%;
 }
-/* .mainChild {
+.mainChild {
   display: flex;
   align-items: center;
-} */
+}
 .cName {
   line-height: 15px;
 }
-/* .main {
+.main {
   display: flex;
   justify-content: space-between;
-} */
+}
 .icon {
   margin: 23px 10px 0 0;
+  border: none;
+  min-width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: #3f51b5
+}
+.fillColor{
+  /* background-color: red; */
+  /* fill:red; */
 }
 .cName span {
   font-weight: bold;
@@ -58,6 +70,34 @@
   justify-content: space-between;
   align-items: center;
   background-color: #dde6f3;
+  /* margin: 0px -10px -10px -10px;
+  padding: 10px 30px 10px 35px; */
   margin: 0px -10px -10px -10px;
-  padding: 10px 30px 10px 35px;
+  padding: 10px 10px 10px 10px;
+}
+@media screen and (min-width: 280px) {
+  .cName {
+    line-height: 100%;
+  }
+  .cName h1 {
+    font-size: 22px;
+  }
+  .cName span h3 {
+    font-size: 16px;
+  }
+  .cName h2 {
+    font-size: 18px;
+  }
+  .cName span {
+    font-size: 14px;
+  }
+  .bottom {
+    margin: 0px -10px -10px -10px;
+    padding: 10px 10px 10px 10px;
+  }
+}
+@media screen and (min-width: 960px) {
+  .cName {
+    line-height: 100%;
+  }
 }

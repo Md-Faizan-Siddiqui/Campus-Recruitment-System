@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomizedSnackbars = ({ errMessage, message, setAlert }) => {
+const CustomizedSnackbars = ({ errMessage, message, setAlert=()=>{} }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 

@@ -113,7 +113,7 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                         </div>
                     </div>
 
-                    <div className="socialIcons" >
+                    {/* <div className="socialIcons" >
                         <div className="iconStyle" >
                             <GitHubIcon style={{ color: "#171515" }} />
                         </div>
@@ -129,7 +129,7 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                         <div className="iconStyle">
                             <InstagramIcon style={{ color: "#3f729b" }} />
                         </div>
-                    </div>
+                    </div> */}
                     <CustomizedDialogs
                         campusData={campusData}
                         icons

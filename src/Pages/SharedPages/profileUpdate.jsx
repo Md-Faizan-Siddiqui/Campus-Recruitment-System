@@ -420,6 +420,7 @@ function ProfileUpdate(props) {
                 type="File"
                 name="fileToUpload"
                 id="fileToUpload"
+                accept=".jpg,.jpeg,.png,.gif" 
                 onChange={uploadImg}
               />
             </div>
