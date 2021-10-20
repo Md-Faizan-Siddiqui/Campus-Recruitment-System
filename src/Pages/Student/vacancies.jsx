@@ -11,7 +11,6 @@ import VacanciesCard from "../../Components/vacanciesCard"
 function Vacancies() {
   const user = useSelector((state) => state.addUser);
   const [alert, setAlert] = useState(false)
-  console.log(user);
   const dispatch = useDispatch();
   // const [jobs, setJobs] = useState([]);
   useEffect(() => {
@@ -71,14 +70,14 @@ function Vacancies() {
 
   return (
     <div className="marginAdjustment">
-      <h1>Vacancies</h1>
-      <Grid container>
+      {/* <h1>Vacancies</h1> */}
+        <Grid container>
         {allJobs &&
           allJobs?.reverse().map((data, index) => {
             const condition = data?.applicantUserId &&
               Object.values(data?.applicantUserId).find((item) => item?.id === user.loginUser.id)
             return (
-              <Grid item xl={3} md={4} sm={6} xs={12}>
+              <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
                 <VacanciesCard campusData={data} />
                 <OutlinedCard
                   campusData={data}

@@ -123,7 +123,7 @@ export const JobPostFormValidation = Yup.object({
     .matches(urlRegExp, "Invalid Website")
     .required("Required"),
   jobType: Yup.mixed()
-    .oneOf(["Full Time", "Part Time"])
+    .oneOf(["Full Time", "Part Time", "Internship"])
     .required("Required"),
   lastDate: Yup.date()
     .min(new Date(Date.now()), "Last Date must not be in the past")

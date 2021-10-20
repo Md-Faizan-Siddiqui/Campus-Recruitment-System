@@ -2,53 +2,77 @@ import "../App.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from '@material-ui/core';
 import { Card } from '@mui/material';
-import React from 'react';
-// import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import React, { useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import JobDetails from "./jobDetails"
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ theme, iconColor }) => ({
     root: {
-        // [theme.breakpoints.down("sm")]: {
-        // },
+        "&:first-child": {
+            padding: "0",
+        },
         padding: "0",
+    },
+    button: {
+        // textDecoration: "none",
+        padding: "8px 15px",
+        fontSize: "12px",
+        fontWeight: "bold",
+        color: "#26ae61",
+        borderColor: "#3c52b2",
+        border: "2px solid",
+        backgroundColor: '#fff',
+        color: '#3c52b2',
+        '&:hover': {
+            borderColor: "#3c52b2",
+            border: "2px solid",
+            backgroundColor: '#3c52b2',
+            color: '#fff',
+        },
+    },
+    colorFill: {
+        color: "#ffff",
+        '&:hover': {
+            color: "red"
+        },
     }
 }));
 export default function VacanciesCard({ campusData }) {
+    // const [iconColor, setIconColor] = useState("")
+    console.log("Campus Data In Vacancies Card", campusData)
     const classes = useStyles();
     return (
-        <div>
-            <Card style={{ margin: "10px", padding: "10px" }}>
-                <DialogContent classes={{ root: classes.root }} >
-                    <div className="main">
-                        <div className="mainChild">
-                            <div className="companyLogo">
-                                <img src="https://1.bp.blogspot.com/-QEJHSCZ29Z8/XILObl4OjnI/AAAAAAAAIfo/eA1agAsDotIVQDHl9h7pJ9hnvLOHF2U8ACK4BGAYYCw/s1600/icon%2Bslack%2Bvector.png" alt="company logo" />
-                            </div>
-                            <div className="cName">
-                                <h1>{campusData.name}</h1>
-                                <span><h3>London, UK</h3></span>
-                            </div>
-                        </div>
-                        <div className="icon">
-                            <FavoriteIcon className="fillColor" fontSize="small" style={{color:"white"}}/>
-                        </div>
+        <Card style={{ margin: "10px", padding: "10px" }}>
+            <DialogContent classes={{ root: classes.root }} >
+                <div className="jobTypeIcon" >
+                    <div className="jobType">
+                        <span>{campusData.jobType}</span>
                     </div>
-                    <div className="cName">
-                        <h2>Sr.Userexperience Designer</h2>
-                        <span>$75k - $105k</span>
+                    <div className="icon">
+                        <FavoriteIcon className={classes.colorFill} fontSize="small" />
                     </div>
-                    <div className="btnDiv">
-                        <span className="selectTag">Full Time</span>
-                        <span className="selectTag">Senior</span>
-                        <span className="selectTag">UX/UI</span>
-                    </div>
-                </DialogContent>
-                <div className="bottom">
-                    <p>Posted: 2 day ago</p>
-                    <Button size="small" variant="contained" color="primary">details</Button>
                 </div>
-            </Card>
-        </div>
+                <div className="companyImg">
+                    <div className="companyLogo">
+                        <img src={campusData.companyLogo} alt="company logo" />
+                    </div>
+                    <div className="companyImg">
+                        <h2>{campusData.jobTitle}</h2>
+                        <p>{campusData.city}</p>
+                    </div>
+                </div>
+                <Link to="/jobdetails" style={{textDecoration:"none"}}>
+                    <div className="bottom">
+                        <Button className={classes.button}
+                            size="small"
+                            variant="outlined"
+                            color="primary"
+                        >apply now</Button>
+                    </div>
+                </Link>
+            </DialogContent>
+        </Card>
     )
 }

@@ -8,6 +8,7 @@ import { JobPostFormValidation } from "../Validation/validation"
 
 function JobPostForm(props) {
   const user = useSelector((state) => state.addUser);
+  console.log("Job post", user.loginUser.fileToUpload)
   const formik = useFormik({
     initialValues: {
       email: user.loginUser.email,
@@ -20,6 +21,7 @@ function JobPostForm(props) {
       jobType: user.loginUser.jobType ? user.loginUser.jobType : "",
       lastDate: user.loginUser.lastDate ? user.loginUser.lastDate : "",
       salary: user.loginUser.salary ? user.loginUser.salary : "",
+      city: user.loginUser.city ? user.loginUser.city : "",
       jobDescription: user.loginUser.jobDescription
         ? user.loginUser.jobDescription
         : "",
@@ -40,6 +42,7 @@ function JobPostForm(props) {
         experience,
         education,
         salary,
+        city,
       } = values;
       const key = Date.now();
       database
@@ -58,7 +61,9 @@ function JobPostForm(props) {
           education: education,
           salary: salary,
           block: false,
+          city:city,
           userId: user.loginUser.id,
+          companyLogo:user.loginUser.fileToUpload,
         })
         .then((res) => {
           props.handleClose();
@@ -186,6 +191,25 @@ function JobPostForm(props) {
             {formik.errors.website && formik.touched.website && (
               <p style={{ color: "red", marginLeft: "5px" }}>
                 {formik.errors.website}
+              </p>
+            )}
+            <TextField
+              type="text"
+              label="City"
+              placeholder="City"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              name="city"
+              value={formik.values.city}
+              onChange={formik.handleChange("city")}
+            />
+            {formik.errors.city && formik.touched.city && (
+              <p style={{ color: "red", marginLeft: "5px" }}>
+                {formik.errors.city}
               </p>
             )}
             <TextField

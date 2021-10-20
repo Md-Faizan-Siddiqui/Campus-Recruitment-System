@@ -14,6 +14,7 @@ import { userDetails } from "./Redux/Action/userAction";
 import PageNotFound from "./Pages/pageNotFound";
 import Loader from "react-loader-spinner";
 import "./App.css";
+import JobDetails from "./Components/jobDetails";
 
 function App() {
   const user = useSelector((state) => state.addUser)
@@ -135,6 +136,7 @@ function App() {
               <Route exact path="/" component={Vacancies} />
               <Route path="/profile" component={Profile} />
               <Route path="/companies" component={Companies} />
+              <Route path="/jobdetails" component={JobDetails} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </>
@@ -147,6 +149,7 @@ function App() {
               {/* <Route path='/adminProfile' component={AdminProfile} /> */}
               <Route path="/companies" component={Companies} />
               <Route path="/students" component={Students} />
+              <Route path="/jobdetails" component={JobDetails} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </>
@@ -158,6 +161,7 @@ function App() {
               <Route exact path="/" component={Students} />
               <Route path="/profile" component={Profile} />
               <Route path="/jobpost" component={JobPost} />
+              <Route path="/jobdetails" component={JobDetails} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </>
