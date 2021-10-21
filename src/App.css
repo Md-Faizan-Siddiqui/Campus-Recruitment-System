@@ -82,3 +82,23 @@
   align-items: center;
   color: #ffff;
 }
+.jobTitle{
+  /* border-radius: 4px;
+  padding: 0 10px;
+  border: 1px solid #eaeff5;
+  font-size: 12px;
+  line-height: 23px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  background-color: #a8b1e0;
+  color: #3f51b5; */
+  color: #3f51b5;
+    background: #a8b1e0;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    text-align: center;
+}

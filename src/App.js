@@ -19,7 +19,26 @@ import JobDetails from "./Components/jobDetails";
 function App() {
   const user = useSelector((state) => state.addUser)
   const dispatch = useDispatch()
-
+  // dispatch alljobs
+  useEffect(() => {
+    database
+      .ref("/CRA")
+      .child("jobs/")
+      .on("value", (snapshot) => {
+        console.log("snapshot====>", snapshot.val());
+        if (snapshot.exists()) {
+          Object.keys(snapshot.val()).map((data, index) => {
+          });
+          dispatch(
+            userDetails({
+              allJobs: snapshot.val(),
+            })
+          );
+        } else {
+          console.log("No data available");
+        }
+      });
+  }, []);
   // get current user and dispatch
   useEffect(() => {
     dispatch(
@@ -136,7 +155,7 @@ function App() {
               <Route exact path="/" component={Vacancies} />
               <Route path="/profile" component={Profile} />
               <Route path="/companies" component={Companies} />
-              <Route path="/jobdetails" component={JobDetails} />
+              <Route path="/jobdetails/:id" component={JobDetails} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </>

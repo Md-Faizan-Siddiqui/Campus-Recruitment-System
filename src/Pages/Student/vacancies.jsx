@@ -13,26 +13,26 @@ function Vacancies() {
   const [alert, setAlert] = useState(false)
   const dispatch = useDispatch();
   // const [jobs, setJobs] = useState([]);
-  useEffect(() => {
-    database
-      .ref("/CRA")
-      .child("jobs/")
-      .on("value", (snapshot) => {
-        console.log("snapshot====>", snapshot.val());
-        if (snapshot.exists()) {
-          Object.keys(snapshot.val()).map((data, index) => {
-            // setJobs(data);
-          });
-          dispatch(
-            userDetails({
-              allJobs: snapshot.val(),
-            })
-          );
-        } else {
-          console.log("No data available");
-        }
-      });
-  }, []);
+
+  // useEffect(() => {
+  //   database
+  //     .ref("/CRA")
+  //     .child("jobs/")
+  //     .on("value", (snapshot) => {
+  //       console.log("snapshot====>", snapshot.val());
+  //       if (snapshot.exists()) {
+  //         Object.keys(snapshot.val()).map((data, index) => {
+  //         });
+  //         dispatch(
+  //           userDetails({
+  //             allJobs: snapshot.val(),
+  //           })
+  //         );
+  //       } else {
+  //         console.log("No data available");
+  //       }
+  //     });
+  // }, []);
 
   const disableFunc = ({ userid, jobid, block }) => {
     console.log('block func')

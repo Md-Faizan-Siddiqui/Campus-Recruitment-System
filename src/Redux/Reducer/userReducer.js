@@ -4,7 +4,8 @@ let initialState = {
     isLoader: true,
     role: null,
     allUsers: [],
-    allJobs: []
+    allJobs: [],
+    // jobDetail: {}
 }
 
 const addUser = (state = initialState, action) => {

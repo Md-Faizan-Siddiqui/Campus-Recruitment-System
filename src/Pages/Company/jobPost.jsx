@@ -11,33 +11,33 @@ import CustomizedDialogs from "../../Components/modal";
 function JobPost() {
   const user = useSelector((state) => state.addUser);
   const dispatch = useDispatch();
-  useEffect(() => {
-    database
-      .ref("/CRA")
-      .child(`jobs/${user.loginUser.id}`)
-      .on("value", (snapshot) => {
-        if (snapshot.exists()) {
-          dispatch(
-            userDetails({
-              allJobs: snapshot.val(),
-            })
-          );
-        } else {
-          dispatch(
-            userDetails({
-              allJobs: {},
-            })
-          );
-          console.log("No data available");
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   database
+  //     .ref("/CRA")
+  //     .child(`jobs/${user.loginUser.id}`)
+  //     .on("value", (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         dispatch(
+  //           userDetails({
+  //             allJobs: snapshot.val(),
+  //           })
+  //         );
+  //       } else {
+  //         dispatch(
+  //           userDetails({
+  //             allJobs: {},
+  //           })
+  //         );
+  //         console.log("No data available");
+  //       }
+  //     });
+  // }, []);
 
   const deleteData = (key) => {
     console.log(key);
     database.ref(`/CRA/jobs/${user.loginUser.id}/${key}`).remove();
   };
-  const myPostedJobs = Object.values(user.allJobs);
+  const myPostedJobs = Object.values(user.allJobs[user?.loginUser?.id]);
   console.log(myPostedJobs)
   return (
     <div className="marginAdjustment">
