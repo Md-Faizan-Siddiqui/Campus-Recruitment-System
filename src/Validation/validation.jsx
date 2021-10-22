@@ -60,6 +60,10 @@ export const updateFormValidationCompany = Yup.object({
     .trim()
     .matches(urlRegExp, "Invalid Website")
     .required("Required"),
+  city: Yup.string()
+    .trim()
+    .max(30, "Invalid City")
+    .required("Required"),
 });
 
 export const SignUpFormValidation = Yup.object({

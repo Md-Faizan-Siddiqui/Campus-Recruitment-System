@@ -71,6 +71,8 @@ function ProfileUpdate(props) {
                 phone: phone,
                 fileToUpload: url,
                 website: website,
+                city: city,
+
               }
               : null
         )
@@ -158,7 +160,7 @@ function ProfileUpdate(props) {
           </>
         ) : null}
         {/* add location */}
-        {role === "student" ? (
+        {props.jobPost ? null : (
           <>
             <TextField
               // pattern=".*\S+.*"
@@ -181,7 +183,7 @@ function ProfileUpdate(props) {
               </p>
             )}
           </>
-        ) : null}
+        )}
         {/* add bio */}
         {role === "student" ? (
           <>
@@ -420,7 +422,7 @@ function ProfileUpdate(props) {
                 type="File"
                 name="fileToUpload"
                 id="fileToUpload"
-                accept=".jpg,.jpeg,.png,.gif" 
+                accept=".jpg,.jpeg,.png,.gif"
                 onChange={uploadImg}
               />
             </div>

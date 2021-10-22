@@ -57,12 +57,12 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                             <>
                                 <h4>{campusData.bio}</h4>
 
+                            </>
+                            : null}
                                 <div className="iconDiv">
                                     <LocationOnOutlinedIcon color="primary" fontSize="small" />
                                     <p>{campusData.city}</p>
                                 </div>
-                            </>
-                            : null}
                     </div>
                     <div className="detailsParents">
                         <div className="detailsMain">
