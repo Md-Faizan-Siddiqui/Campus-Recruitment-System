@@ -7,9 +7,12 @@ import { userDetails } from "../../Redux/Action/userAction";
 import { Grid } from "@material-ui/core";
 import OutlinedCard from "../../Components/card";
 import CustomizedDialogs from "../../Components/modal";
+import VacanciesCard from "../../Components/vacanciesCard";
 
 function JobPost() {
   const user = useSelector((state) => state.addUser);
+  const role = user.loginUser.role;
+  console.log("Role in Job Post",role)
   const dispatch = useDispatch();
   // useEffect(() => {
   //   database
@@ -49,12 +52,18 @@ function JobPost() {
           myPostedJobs?.reverse().map((data, index) => {
             return (
               <Grid item xl={3} md={4} sm={6} xs={12}  >
-                <OutlinedCard
+                <VacanciesCard
                   campusData={data}
                   btnText={"delete"}
                   deleteData={() => deleteData(data.jobId)}
                   companyPostJob
-                />
+                  role={role} />
+                {/* <OutlinedCard
+                  campusData={data}
+                  btnText={"delete"}
+                  deleteData={() => deleteData(data.jobId)}
+                  companyPostJob
+                /> */}
               </Grid>
             );
           })}

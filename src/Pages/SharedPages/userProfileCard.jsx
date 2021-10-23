@@ -1,10 +1,9 @@
-import React from 'react';
 import "../../Style/userProfileCard.css";
+import React from 'react';
 import fallBackImage from "../../Images/images.png";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Grid } from '@material-ui/core';
 import { GiSkills } from "react-icons/gi";
-// import HttpIcon from '@mui/icons-material/Http';
 import { useSelector } from "react-redux";
 import CustomizedDialogs from "../../Components/modal"
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
@@ -14,9 +13,9 @@ import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import CastForEducationOutlinedIcon from '@mui/icons-material/CastForEducationOutlined';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import LanguageIcon from '@mui/icons-material/Language';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import LanguageIcon from '@mui/icons-material/Language';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -59,10 +58,10 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
 
                             </>
                             : null}
-                                <div className="iconDiv">
-                                    <LocationOnOutlinedIcon color="primary" fontSize="small" />
-                                    <p>{campusData.city}</p>
-                                </div>
+                        <div className="iconDiv">
+                            <LocationOnOutlinedIcon color="primary" fontSize="small" />
+                            <p>{campusData.city}</p>
+                        </div>
                     </div>
                     <div className="detailsParents">
                         <div className="detailsMain">
@@ -130,14 +129,14 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                             <InstagramIcon style={{ color: "#3f729b" }} />
                         </div>
                     </div> */}
-                    <CustomizedDialogs
-                        campusData={campusData}
-                        icons
-                        // student={student}
-                        // details={details}
-                        formTitle={formTitle}
-                        btnText={btnText}
-                    />
+                    <div className="editBtn">
+                        <CustomizedDialogs
+                            campusData={campusData}
+                            icons
+                            formTitle={formTitle}
+                            btnText={btnText}
+                        />
+                    </div>
                 </Card>
             </Grid>
         </Grid>

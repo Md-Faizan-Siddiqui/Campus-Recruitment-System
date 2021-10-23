@@ -1,5 +1,5 @@
-import React from 'react';
 import "../App.css";
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Grid } from '@mui/material';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         borderBottom: "1px solid #eaeff5",
         display: "flex",
         alignItems: "center",
-        padding: "0px 20px",
+        padding: "0px 20px 10px 20px",
     },
     openingHour: {
         color: "#334e6f",
@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
     },
     description: {
         margin: "20px 0",
+        color:"#707f8c",
     },
 }));
 const Item = styled(Paper)(({ theme }) => ({
@@ -77,13 +78,16 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function JobDetails(props) {
-    const jobs = useSelector(state => state.addUser.allJobs)
+    const user = useSelector(state => state.addUser)
+    const jobs = user.allJobs;
+    const role = user.loginUser.role;
     console.log("Data in Job", Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1))
     const allJobsArr = Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1)
     console.log("All Jobs Arr", allJobsArr)
     const jobDetail = allJobsArr?.find(item => item.jobId === +props.match.params.id) || {}
 
-    console.log("Data in Job Details", jobDetail)
+    console.log("Role in Job Details", role)
+    console.log("Data in Job Details", props)
     console.log(props.match.params, "hs")
     const classes = useStyles();
     return (
@@ -96,19 +100,15 @@ export default function JobDetails(props) {
                     <VacanciesCard
                         campusData={jobDetail}
                         jobDetail
-                        lg={3} />
+                        role={role}
+                        />
                     <Card className={classes.root} >
                         <DialogContent >
                             <div className={classes.descriptionHeader}>
                                 <span>Job Description</span>
                             </div>
                             <div className={classes.description}>
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when
-                                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                                    of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                                    Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,
-                                    and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions
-                                    have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                                <p>{jobDetail.jobDescription}</p>
                             </div>
                         </DialogContent>
                     </Card>

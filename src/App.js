@@ -180,7 +180,7 @@ function App() {
               <Route exact path="/" component={Students} />
               <Route path="/profile" component={Profile} />
               <Route path="/jobpost" component={JobPost} />
-              {/* <Route path="/jobdetails" component={JobDetails} /> */}
+              <Route path="/jobdetails/:id" component={JobDetails} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </>

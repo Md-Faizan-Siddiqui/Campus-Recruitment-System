@@ -1,9 +1,8 @@
 import "../../App.css";
 import React from "react";
 import { useSelector } from "react-redux";
-import OutlinedCard from "../../Components/card";
-import { Grid } from "@material-ui/core";
 import UserProfileCard from "./userProfileCard"
+import EditIcon from '@mui/icons-material/Edit';
 
 function Profile() {
   const user = useSelector((state) => state.addUser);
@@ -11,24 +10,12 @@ function Profile() {
 
   return (
     <div className="marginAdjustment">
-      {/* <h1>{user.loginUser.role} Profile</h1> */}
       <UserProfileCard
         campusData={user.loginUser}
-        btnText={"edit profile"}
+        // btnText={"edit profile"}
+        btnText={<EditIcon/>}
         formTitle={"Registration Form"}
-      // showImg
-      // updateBtn
       />
-      {/* <Grid container justifyContent="center">
-        <Grid item xl={3} md={4} sm={6} xs={12}  >
-          <OutlinedCard
-            campusData={user.loginUser}
-            updateBtn
-            showImg
-            formTitle={"Registration Form"}
-          />
-        </Grid>
-      </Grid> */}
     </div>
   );
 }

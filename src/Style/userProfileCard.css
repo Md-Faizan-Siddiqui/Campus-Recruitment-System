@@ -9,8 +9,10 @@
   border-radius: 50%;
   display: flex;
   justify-content: center;
+  /* border: 2px dotted #3f51b5; */
 }
 .pImgDiv img {
+  /* border: 2px dotted #3f51b5; */
   width: 150px;
   border: 5px solid #ffff;
   height: 150px;
@@ -75,4 +77,8 @@ p {
 }
 .iconStyle {
   margin: 20px 10px 20px 10px;
+}
+.editBtn{
+  display: flex;
+  justify-content: end;
 }
