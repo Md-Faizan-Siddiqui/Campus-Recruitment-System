@@ -48,6 +48,22 @@ function Companies() {
     table: {
       // minWidth: 700,
     },
+    button: {
+      margin: "10px",
+      padding: "8px 15px",
+      fontSize: "12px",
+      fontWeight: "bold",
+      borderColor: "#3c52b2",
+      border: "2px solid",
+      backgroundColor: '#fff',
+      color: '#3c52b2',
+      '&:hover': {
+          borderColor: "#3c52b2",
+          border: "2px solid",
+          backgroundColor: '#3c52b2',
+          color: '#fff',
+      },
+  },
   });
 
   const classes = useStyles();
@@ -129,8 +145,9 @@ function Companies() {
                         {allUsers.loginUser.role === "admin" ?
                           <StyledTableCell align="right">
                             <Button
+                            className={classes.button}
                               size="small"
-                              variant="contained"
+                              variant="outlined"
                               color="primary"
                               onClick={() => userBlock(data.id, data.block)}>
                                 {data.block === true ? "Unblock" : "Block"}

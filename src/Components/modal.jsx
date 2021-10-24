@@ -14,6 +14,7 @@ import OutlinedCard from "./card";
 import JobPostForm from "../Pages/jobPostForm";
 import EditButton from "../Components/editButton";
 import Accordion from "./accordion"
+import { makeStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
   root: {
@@ -26,7 +27,26 @@ const styles = (theme) => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
+  
 });
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: "10px",
+    padding: "8px 15px",
+    fontSize: "12px",
+    fontWeight: "bold",
+    borderColor: "#3c52b2",
+    border: "2px solid",
+    backgroundColor: '#fff',
+    color: '#3c52b2',
+    '&:hover': {
+        borderColor: "#3c52b2",
+        border: "2px solid",
+        backgroundColor: '#3c52b2',
+        color: '#fff',
+    },
+},
+}));
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -77,6 +97,7 @@ export default function CustomizedDialogs({
   console.log("Job Post======>in Modal", jobPost);
   console.log("Company Details======>in Modal", companyDetails);
   console.log("Student Details======>in Modal", studentDetails);
+  const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -90,7 +111,8 @@ export default function CustomizedDialogs({
       {jobPost ? <EditButton onClick={handleClickOpen} />
         : icons || btnText ? (
           <Button
-            variant="contained"
+          className={classes.button}
+            variant="outlined"
             color="primary"
             size="small"
             // disabled={student ? campusData.block : false}

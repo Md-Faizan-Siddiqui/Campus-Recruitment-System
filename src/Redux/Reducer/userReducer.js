@@ -5,7 +5,6 @@ let initialState = {
     role: null,
     allUsers: [],
     allJobs: [],
-    // jobDetail: {}
 }
 
 const addUser = (state = initialState, action) => {

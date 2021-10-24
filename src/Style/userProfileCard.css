@@ -3,25 +3,20 @@
   justify-content: center;
   align-items: center;
   height: 90vh;
-  /* margin-top: 120px; */
 }
 .pImgDiv {
   border-radius: 50%;
   display: flex;
   justify-content: center;
-  /* border: 2px dotted #3f51b5; */
 }
 .pImgDiv img {
-  /* border: 2px dotted #3f51b5; */
   width: 150px;
   border: 5px solid #ffff;
   height: 150px;
   border-radius: 50%;
   margin-top: -75px;
   position: absolute;
-  /* box-shadow: 0 5px 20px 0px #3f51b5; */
   box-shadow: 0 0 20px 0px #3f51b5;
-  /* box-shadow: 0 0 5px 5px #3f51b5; */
 }
 .pInfoDiv {
   margin-top: 100px;
@@ -39,34 +34,17 @@ p {
   align-items: center;
 }
 .detailsMain {
-  /* width: 50%; */
-  /* margin: 0 auto; */
   margin-top: 20px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: "center"; */
-  /* align-items: center; */
-  /* text-align: left; */
 }
 .iconOrData {
-  /* width: 60%; */
-  /* text-align: left; */
   font-weight: bold;
   display: flex;
   line-height: 30px;
   align-items: center;
-  /* justify-content: center; */
 }
 .pInfoDiv h1 {
   color: #3f51b5;
 }
-/* @media screen and (max-width: 521px) {
-  .iconOrData {
-    background-color: red;
-    width: 90%;
-    margin: 0;
-  }
-} */
 .detailsParents {
   display: flex;
   justify-content: center;

@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { List, ListItem } from "@material-ui/core";
 import CustomizedDialogs from "./modal";
 import fallBackImage from "../Images/images.png";
 
@@ -62,9 +61,7 @@ export default function OutlinedCard({
   formTitle,//student
   companyPostJob, //jobPost
   disableApply,
-  web,
-  studentDetails,
-  companyDetails,
+  web
 }) {
   console.log("Campus Data====> in card", campusData)
   const state = useSelector((state) => state);

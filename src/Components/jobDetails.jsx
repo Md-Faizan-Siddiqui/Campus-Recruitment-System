@@ -1,14 +1,15 @@
 import "../App.css";
-import React from 'react';
+import React, { useState } from 'react';
+import { database } from "../Config/firebaseConfig";
+import { useSelector } from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Grid } from '@mui/material';
-import DialogContent from '@material-ui/core/DialogContent';
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
-import VacanciesCard from './vacanciesCard';
+import DialogContent from '@material-ui/core/DialogContent';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import Paper from '@mui/material/Paper';
+import VacanciesCard from './vacanciesCard';
+import CustomizedSnackbars from "../Components/snackBar"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -67,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     },
     description: {
         margin: "20px 0",
-        color:"#707f8c",
+        color: "#707f8c",
     },
 }));
 const Item = styled(Paper)(({ theme }) => ({
@@ -78,18 +79,37 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function JobDetails(props) {
+    const classes = useStyles();
     const user = useSelector(state => state.addUser)
+    const [alert, setAlert] = useState(false)
     const jobs = user.allJobs;
     const role = user.loginUser.role;
-    console.log("Data in Job", Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1))
     const allJobsArr = Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1)
-    console.log("All Jobs Arr", allJobsArr)
     const jobDetail = allJobsArr?.find(item => item.jobId === +props.match.params.id) || {}
 
+    // console.log("Data in Job", Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1))
+    console.log("All Jobs Arr", allJobsArr)
     console.log("Role in Job Details", role)
-    console.log("Data in Job Details", props)
+    console.log("Data in Job Details", jobDetail)
     console.log(props.match.params, "hs")
-    const classes = useStyles();
+
+    const applyFunc = ({ jobId, userId }) => {
+        database
+            .ref(`/CRA/jobs/${userId}/${jobId}/applicantUserId`)
+            .push({
+                id: user.loginUser.id,
+            })
+            .then(() => {
+                console.log("Sucess");
+                setAlert(true)
+            })
+            .catch(() => {
+                console.log("Error");
+            });
+    };
+
+    const condition = jobDetail?.applicantUserId &&
+        Object.values(jobDetail?.applicantUserId).find((item) => item?.id === user.loginUser.id)
     return (
         <div className="marginAdjustment">
             <div className="background">
@@ -100,8 +120,25 @@ export default function JobDetails(props) {
                     <VacanciesCard
                         campusData={jobDetail}
                         jobDetail
-                        role={role}
-                        />
+                        block={jobDetail.block}
+                        btnText={
+                            jobDetail?.block
+                                ? "Blocked"
+                                : condition
+                                    ? "Applied"
+                                    : "Apply Now"
+                        }
+                        disableApply={
+                            jobDetail?.block ||
+                            condition
+                        }
+                        applyFunc={() =>
+                            applyFunc({
+                                jobId: jobDetail.jobId,
+                                userId: jobDetail.userId,
+                            })
+                        }
+                    />
                     <Card className={classes.root} >
                         <DialogContent >
                             <div className={classes.descriptionHeader}>
@@ -153,6 +190,9 @@ export default function JobDetails(props) {
                     </Card>
                 </Grid>
             </Grid>
+            {alert ?
+                <CustomizedSnackbars setAlert={setAlert} message={"Sucessfully Applied"} errMessage={"Unexpected Error"} />
+                : null}
         </div>
     )
 }
