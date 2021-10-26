@@ -13,6 +13,7 @@ import TableBody from "@material-ui/core/TableBody";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CustomizedDialogs from "../../Components/modal";
 import { database } from "../../Config/firebaseConfig"
+// import VacanciesCard from "../../Components/vacanciesCard";
 
 function Companies() {
   // get data from redux..

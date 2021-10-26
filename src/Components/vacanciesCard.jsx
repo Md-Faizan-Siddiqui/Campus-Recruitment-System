@@ -5,6 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button } from '@material-ui/core';
 import { Card } from '@mui/material';
 import { Link } from "react-router-dom";
+import { ImOffice } from "react-icons/im";
+import { GiSkills } from "react-icons/gi";
+import { FaGraduationCap } from "react-icons/fa";
 import DialogContent from '@material-ui/core/DialogContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
@@ -13,9 +16,6 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
-import { ImOffice } from "react-icons/im";
-import { GiSkills } from "react-icons/gi";
-import { FaGraduationCap } from "react-icons/fa";
 import CustomizedDialogs from "./modal"
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         padding: "0",
     },
     button: {
-        margin: "10px",
+        margin: "10px 5px 0px 5px",
         padding: "8px 15px",
         fontSize: "12px",
         fontWeight: "bold",
@@ -49,7 +49,9 @@ const useStyles = makeStyles((theme) => ({
     },
     firstChildJobDetails: {
         width: "40%",
-        marginBottom: "5px",
+        marginBottom: "20px",
+        // display: "flex",
+        // justifyContent: "center",
         [theme.breakpoints.down("sm")]: {
             width: "100%",
         },
@@ -66,9 +68,6 @@ const useStyles = makeStyles((theme) => ({
             boxSizing: "border-box",
         },
     },
-    secondChildDetail: {
-
-    },
     dialogContent: {
         display: "flex",
         [theme.breakpoints.down("sm")]: {
@@ -79,6 +78,22 @@ const useStyles = makeStyles((theme) => ({
         color: '#1976d2',
         marginTop: "3px",
         marginRight: "10px",
+    },
+    appliedOrBlock: {
+        borderRadius: "4px",
+        padding: "0 10px",
+        border: "1px solid #eaeff5",
+        fontSize: "12px",
+        lineHeight: "23px",
+        textTransform: "uppercase",
+        alignItems: "center",
+        backgroundColor: "#a8b1e0",
+        color: "#3f51b5",
+        display: "flex",
+        width: "12%",
+        justifyContent: "center",
+        position: "absolute",
+        left: "0",
     },
     dataOrIcon: {
         fontWeight: "bold",
@@ -115,9 +130,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 export default function VacanciesCard({
+    modal,
+    showImg,
+    web,
     campusData,
     jobDetail,
-    role,
     btnText,
     deleteData,
     applyFunc,
@@ -130,11 +147,15 @@ export default function VacanciesCard({
     const student = user?.addUser?.loginUser?.role === "student";
     const company = user?.addUser?.loginUser?.role === "company";
     const admin = user?.addUser?.loginUser?.role === "admin";
+
+    const condition = campusData?.applicantUserId &&
+        Object.values(campusData?.applicantUserId).find((item) => item?.id === user.addUser.loginUser.id)
+    console.log("condition", campusData)
     return (
         <Card style={{ margin: "10px", padding: "10px" }}>
             <DialogContent classes={{ root: classes.root }} className={jobDetail ? classes.dialogContent : ""}>
                 <div className={jobDetail ? classes.firstChildJobDetails : ""}>
-                    {jobDetail ? null
+                    {jobDetail || modal ? null
                         :
                         <div className="jobTypeIcon" >
                             <div className="jobType">
@@ -147,7 +168,7 @@ export default function VacanciesCard({
                     }
                     <div className="companyImg">
                         <div className="companyLogo">
-                            <img src={campusData.companyLogo} alt="company logo" />
+                            <img src={campusData.fileToUpload} alt="company logo" />
                         </div>
                         <div className="companyImg">
                             {jobDetail ?
@@ -161,7 +182,7 @@ export default function VacanciesCard({
                     </div>
                     {jobDetail && (admin || company) ? null :
                         <div className="bottom">
-                            {((!student && (company || admin)) || (student && jobDetail)) &&
+                            {((!student && !modal && (company || admin)) || (student && jobDetail)) &&
                                 <Button className={classes.button}
                                     size="small"
                                     variant="outlined"
@@ -177,21 +198,26 @@ export default function VacanciesCard({
                                             : companyPostJob || jobDetail || apply ? btnText
                                                 : null}</Button>
                             }
-                            {jobDetail ? null :
+                            {jobDetail || modal ? null :
                                 <Link to={"/jobdetails/" + campusData?.jobId} style={{ textDecoration: "none" }}>
                                     <Button
                                         className={classes.button}
                                         size="small"
                                         variant="outlined"
                                         color="primary"
-                                        >Details</Button>
+                                    >Details</Button>
                                 </Link>
                             }
-                            {company && <CustomizedDialogs 
-                            appliedCandidate
-                            campusData={campusData}
-                            btnText="Applicants"
-                            formTitle={"Applied Candidate's"}/>}
+                            {company && <CustomizedDialogs
+                                appliedCandidate
+                                campusData={campusData}
+                                btnText="Applicants"
+                                formTitle={"Applied Candidate's"} />}
+                            {student && (condition || campusData.block) && !jobDetail ?
+                                <div className={classes.appliedOrBlock}>
+                                    <span>{condition ? "Applied!" : campusData?.block ? "Blocked!" : ""}</span>
+                                </div>
+                                : null}
                         </div>}
                 </div>
                 {jobDetail ?
@@ -234,6 +260,25 @@ export default function VacanciesCard({
                         </div>
                     </div>
                     : null}
+
+                { modal ? <div className={classes.secondChild}>
+                    <div className={classes.dataOrIcon}>
+                        <ImOffice className={classes.icon} />
+                        <p>{campusData.name}</p>
+                    </div>
+                    <div className={classes.dataOrIcon}>
+                            <MailOutlineIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.email}</p>
+                        </div>
+                        <div className={classes.dataOrIcon}>
+                            <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.phone}</p>
+                        </div>
+                        <div className={classes.dataOrIcon}>
+                            <LanguageOutlinedIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.website}</p>
+                        </div>
+                    </div> : null}
             </DialogContent>
         </Card>
     )

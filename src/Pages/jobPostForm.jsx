@@ -63,7 +63,7 @@ function JobPostForm(props) {
           block: false,
           city:city,
           userId: user.loginUser.id,
-          companyLogo:user.loginUser.fileToUpload,
+          fileToUpload:user.loginUser.fileToUpload,
         })
         .then((res) => {
           props.handleClose();

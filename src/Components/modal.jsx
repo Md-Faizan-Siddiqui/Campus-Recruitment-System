@@ -15,6 +15,7 @@ import JobPostForm from "../Pages/jobPostForm";
 import EditButton from "../Components/editButton";
 import Accordion from "./accordion"
 import { makeStyles } from "@material-ui/core/styles";
+import VacanciesCard from "./vacanciesCard";
 
 const styles = (theme) => ({
   root: {
@@ -27,11 +28,11 @@ const styles = (theme) => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-  
+
 });
 const useStyles = makeStyles((theme) => ({
   button: {
-    margin: "10px",
+    margin: "10px 5px 0px 5px",
     padding: "8px 15px",
     fontSize: "12px",
     fontWeight: "bold",
@@ -40,12 +41,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#fff',
     color: '#3c52b2',
     '&:hover': {
-        borderColor: "#3c52b2",
-        border: "2px solid",
-        backgroundColor: '#3c52b2',
-        color: '#fff',
+      borderColor: "#3c52b2",
+      border: "2px solid",
+      backgroundColor: '#3c52b2',
+      color: '#fff',
     },
-},
+  },
 }));
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -111,7 +112,7 @@ export default function CustomizedDialogs({
       {jobPost ? <EditButton onClick={handleClickOpen} />
         : icons || btnText ? (
           <Button
-          className={classes.button}
+            className={classes.button}
             variant="outlined"
             color="primary"
             size="small"
@@ -152,13 +153,20 @@ export default function CustomizedDialogs({
                 <JobPostForm handleClose={handleClose} />
               ) : appliedCandidate ?
                 <Accordion campusData={campusData} />
-                : (
-                  <OutlinedCard
+                : (<>
+                  <VacanciesCard
+                  modal
+                    showImg
+                    web
+                    campusData={campusData}
+                    handleClose={handleClose} />
+                  {/* <OutlinedCard
                     showImg
                     web
                     campusData={campusData}
                     handleClose={handleClose}
-                  />
+                  /> */}
+                </>
                 )
             }
           </DialogContent>
