@@ -10,6 +10,30 @@ import fallBackImage from "../../Images/images.png";
 import { Button } from "@material-ui/core";
 import { updateFormValidationStudent } from "../../Validation/validation";
 import { updateFormValidationCompany } from "../../Validation/validation";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+      margin: "10px 5px 0px 5px",
+      // padding: "8px 15px",
+      fontSize: "12px",
+      fontWeight: "bold",
+      borderColor: "#3c52b2",
+      border: "2px solid",
+      backgroundColor: '#fff',
+      color: '#3c52b2',
+      '&:hover': {
+          borderColor: "#3c52b2",
+          border: "2px solid",
+          backgroundColor: '#3c52b2',
+          color: '#fff',
+      },
+  },
+  editBtn:{
+display:"flex",
+justifyContent:"flex-end"
+  },
+}));
 
 function ProfileUpdate(props) {
   console.log("props====>", props);
@@ -18,6 +42,7 @@ function ProfileUpdate(props) {
   const [disabled, setDisabled] = useState(false);
   const role = user.loginUser.role;
   const history = useHistory();
+  const classes = useStyles();
 
   const formik = useFormik({
     initialValues: {
@@ -428,15 +453,18 @@ function ProfileUpdate(props) {
             </div>
           )
         }
+        <div className={classes.editBtn}>
         < Button
+        className={classes.button}
           type="submit"
           size="small"
-          variant="contained"
+          variant="outlined"
           color="primary"
           disabled={disabled}
         >
           Update
         </Button>
+        </div>
       </form >
     </div >
   );

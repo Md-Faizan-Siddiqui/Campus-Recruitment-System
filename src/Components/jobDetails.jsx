@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         padding: "0px 20px 10px 20px",
+        [theme.breakpoints.down("sm")]: {
+            padding: "0px 0px 10px 0px",
+
+        },
     },
     openingHour: {
         color: "#334e6f",

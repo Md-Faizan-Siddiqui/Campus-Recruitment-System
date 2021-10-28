@@ -51,7 +51,7 @@ function Companies() {
     },
     button: {
       margin: "10px",
-      padding: "8px 15px",
+      // padding: "8px 15px",
       fontSize: "12px",
       fontWeight: "bold",
       borderColor: "#3c52b2",

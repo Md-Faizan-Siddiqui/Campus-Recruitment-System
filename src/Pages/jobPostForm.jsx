@@ -5,10 +5,30 @@ import { MenuItem, TextField } from "@material-ui/core";
 import { database } from "../Config/firebaseConfig";
 import { Button } from "@material-ui/core";
 import { JobPostFormValidation } from "../Validation/validation"
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+      margin: "10px 5px 0px 5px",
+      fontSize: "12px",
+      fontWeight: "bold",
+      borderColor: "#3c52b2",
+      border: "2px solid",
+      backgroundColor: '#fff',
+      color: '#3c52b2',
+      '&:hover': {
+          borderColor: "#3c52b2",
+          border: "2px solid",
+          backgroundColor: '#3c52b2',
+          color: '#fff',
+      },
+  },
+}))
 
 function JobPostForm(props) {
   const user = useSelector((state) => state.addUser);
   console.log("Job post", user.loginUser.fileToUpload)
+  const classes = useStyles();
   const formik = useFormik({
     initialValues: {
       email: user.loginUser.email,
@@ -320,9 +340,10 @@ function JobPostForm(props) {
               </p>
             )}
             <Button
+            className={classes.button}
               type="submit"
               size="small"
-              variant="contained"
+              variant="outlined"
               color="primary"
             >
               Post

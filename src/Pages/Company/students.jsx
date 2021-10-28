@@ -48,7 +48,7 @@ function Students() {
     },
     button: {
       margin: "10px",
-      padding: "8px 15px",
+      // padding: "8px 15px",
       fontSize: "12px",
       fontWeight: "bold",
       borderColor: "#3c52b2",
@@ -62,6 +62,9 @@ function Students() {
           color: '#fff',
       },
   },
+  // tableCell:{
+  //   color:"#3f51b5", 
+  // },
   });
 
   const classes = useStyles();

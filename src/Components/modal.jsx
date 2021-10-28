@@ -16,6 +16,8 @@ import EditButton from "../Components/editButton";
 import Accordion from "./accordion"
 import { makeStyles } from "@material-ui/core/styles";
 import VacanciesCard from "./vacanciesCard";
+import Profile from "../Pages/SharedPages/Profile"
+import { collapseClasses } from "@mui/material";
 
 const styles = (theme) => ({
   root: {
@@ -33,7 +35,7 @@ const styles = (theme) => ({
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: "10px 5px 0px 5px",
-    padding: "8px 15px",
+    // padding: "8px 15px",
     fontSize: "12px",
     fontWeight: "bold",
     borderColor: "#3c52b2",
@@ -47,6 +49,16 @@ const useStyles = makeStyles((theme) => ({
       color: '#fff',
     },
   },
+  secondChild: {
+    borderLeft: "none",
+    borderTop: "1px solid #eaeff5",
+    paddingTop: "20px",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  dialogCardSm: {
+    minWidth: "90%",
+  }
 }));
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -130,7 +142,8 @@ export default function CustomizedDialogs({
           )
       }
       {open && (
-        <Dialog
+        <Dialog 
+        // classes={{ paperWidthSm: classes.dialogCardSm }}
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={open}
@@ -141,7 +154,7 @@ export default function CustomizedDialogs({
               : null}
           </DialogTitle>
           <DialogContent dividers>
-            {console.log("abc", campusData)}
+            {/* {console.log("abc", campusData)} */}
             {icons ? (
               <ProfileUpdate
                 campusData={campusData}
@@ -154,8 +167,15 @@ export default function CustomizedDialogs({
               ) : appliedCandidate ?
                 <Accordion campusData={campusData} />
                 : (<>
+                  {/* <Profile
+                modal
+                showImg
+                web
+                campusData={campusData}
+                handleClose={handleClose}/> */}
                   <VacanciesCard
-                  modal
+                    className={classes.secondChild}
+                    modal
                     showImg
                     web
                     campusData={campusData}

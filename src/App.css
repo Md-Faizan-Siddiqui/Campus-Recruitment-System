@@ -31,13 +31,13 @@
   flex-direction: column;
 }
 .companyImg h2 {
-  margin: 5px;
+  margin: 0 0 0 5px;
   color: #3f51b5;
 }
 .companyImg p {
   font-weight: 500;
   color: #707f8c;
-  margin: 6px 0px 6px 0px;
+  margin: 0px 0px 10px 0px;
 }
 /* .companyImg span {
   color: #707f8c;
@@ -46,6 +46,7 @@
 .jobTypeIcon {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 .jobType {
   border-radius: 4px;

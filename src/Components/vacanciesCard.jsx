@@ -17,6 +17,7 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
 import CustomizedDialogs from "./modal"
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         margin: "10px 5px 0px 5px",
-        padding: "8px 15px",
         fontSize: "12px",
         fontWeight: "bold",
         borderColor: "#3c52b2",
@@ -48,10 +48,12 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     firstChildJobDetails: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
         width: "40%",
         marginBottom: "20px",
-        // display: "flex",
-        // justifyContent: "center",
         [theme.breakpoints.down("sm")]: {
             width: "100%",
         },
@@ -66,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
             paddingTop: "20px",
             width: "100%",
             boxSizing: "border-box",
+            paddingLeft: "0px",
         },
     },
     dialogContent: {
@@ -90,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#a8b1e0",
         color: "#3f51b5",
         display: "flex",
-        width: "12%",
+        width: "17%",
         justifyContent: "center",
         position: "absolute",
         left: "0",
@@ -127,9 +130,28 @@ const useStyles = makeStyles((theme) => ({
         "&:nth-child(9)": {
             color: "#707f8c",
         },
-    }
+    },
+    dtlButton: {
+        borderRadius: "4px",
+        fontSize: "12px",
+        fontWeight: "bold",
+        backgroundColor: '#fff',
+        color: '#3c52b2',
+        display: "flex",
+        justifyContent: "center",
+        width: "20px",
+        height: "20px",
+        alignItems: "center",
+        '&:hover': {
+            border: "2px solid #3c52b2",
+            backgroundColor: '#3c52b2',
+            color: '#fff',
+            cursor: "pointer",
+        },
+    },
 }));
 export default function VacanciesCard({
+    className,
     modal,
     showImg,
     web,
@@ -161,9 +183,17 @@ export default function VacanciesCard({
                             <div className="jobType">
                                 <span>{campusData.jobType}</span>
                             </div>
-                            <div className="icon">
-                                <FavoriteIcon className={classes.colorFill} fontSize="small" />
-                            </div>
+                            {company ? null :
+                                <div className="icon">
+                                    <FavoriteIcon className={classes.colorFill} fontSize="small" />
+                                </div>
+                            }
+                            {company ?
+                                <div className={classes.dtlButton}
+                                    onClick={deleteData ? deleteData : null}>
+                                    <DeleteIcon fontSize="small" />
+                                </div>
+                                : null}
                         </div>
                     }
                     <div className="companyImg">
@@ -182,16 +212,15 @@ export default function VacanciesCard({
                     </div>
                     {jobDetail && (admin || company) ? null :
                         <div className="bottom">
-                            {((!student && !modal && (company || admin)) || (student && jobDetail)) &&
+                            {((!student && !modal && admin) || (student && jobDetail)) &&
                                 <Button className={classes.button}
                                     size="small"
                                     variant="outlined"
                                     color="primary"
                                     disabled={disableApply && student}
-                                    onClick={deleteData ? deleteData
-                                        : admin ? disableFunc
-                                            : student ? applyFunc
-                                                : null}
+                                    onClick={admin ? disableFunc
+                                        : student ? applyFunc
+                                            : null}
                                 >
                                     {admin && campusData.block === true ? "Unblock"
                                         : admin && campusData.block === false ? "Block"
@@ -208,7 +237,7 @@ export default function VacanciesCard({
                                     >Details</Button>
                                 </Link>
                             }
-                            {company && <CustomizedDialogs
+                            {modal || company && <CustomizedDialogs
                                 appliedCandidate
                                 campusData={campusData}
                                 btnText="Applicants"
@@ -221,7 +250,7 @@ export default function VacanciesCard({
                         </div>}
                 </div>
                 {jobDetail ?
-                    <div className={classes.secondChild}>
+                    <div className={classes.className, classes.secondChild}>
                         <div className={classes.dataOrIcon}>
                             <ImOffice className={classes.icon} />
                             <p>{campusData.name}</p>
@@ -261,24 +290,24 @@ export default function VacanciesCard({
                     </div>
                     : null}
 
-                { modal ? <div className={classes.secondChild}>
+                {modal ? <div className={modal ? classes.className : classes.secondChild}>
                     <div className={classes.dataOrIcon}>
                         <ImOffice className={classes.icon} />
                         <p>{campusData.name}</p>
                     </div>
                     <div className={classes.dataOrIcon}>
-                            <MailOutlineIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.email}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.phone}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <LanguageOutlinedIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.website}</p>
-                        </div>
-                    </div> : null}
+                        <MailOutlineIcon className={classes.icon} fontSize="small" />
+                        <p>{campusData.email}</p>
+                    </div>
+                    <div className={classes.dataOrIcon}>
+                        <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
+                        <p>{campusData.phone}</p>
+                    </div>
+                    <div className={classes.dataOrIcon}>
+                        <LanguageOutlinedIcon className={classes.icon} fontSize="small" />
+                        <p>{campusData.website}</p>
+                    </div>
+                </div> : null}
             </DialogContent>
         </Card>
     )
