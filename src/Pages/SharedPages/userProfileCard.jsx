@@ -14,11 +14,6 @@ import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import CastForEducationOutlinedIcon from '@mui/icons-material/CastForEducationOutlined';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import LanguageIcon from '@mui/icons-material/Language';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
 
 const useStyles = makeStyles({
     root: {
@@ -26,7 +21,6 @@ const useStyles = makeStyles({
     },
     icon: {
         color: '#1976d2',
-        // fontSize: "20px",
         marginTop: "3px",
         marginRight: "10px",
     }
@@ -93,7 +87,7 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
 
                                     <div className="iconOrData">
                                         <WorkOutlineIcon className={classes.icon} fontSize="small" />
-                                        <p>{campusData.experienceYears + " " + campusData.experienceMonths}</p>
+                                        <p>{campusData?.experienceYears + " " + campusData?.experienceMonths}</p>
                                     </div>
 
                                     <div className="iconOrData">
@@ -111,24 +105,6 @@ function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText })
                                     : null}
                         </div>
                     </div>
-
-                    {/* <div className="socialIcons" >
-                        <div className="iconStyle" >
-                            <GitHubIcon style={{ color: "#171515" }} />
-                        </div>
-                        <div className="iconStyle">
-                            <FacebookOutlinedIcon style={{ color: "#3b5998" }} />
-                        </div>
-                        <div className="iconStyle">
-                            <LinkedInIcon style={{ color: "#0077b5" }} />
-                        </div>
-                        <div className="iconStyle">
-                            <TwitterIcon style={{ color: "#00acee" }} />
-                        </div>
-                        <div className="iconStyle">
-                            <InstagramIcon style={{ color: "#3f729b" }} />
-                        </div>
-                    </div> */}
                     <div className="editBtn">
                         <CustomizedDialogs
                             campusData={campusData}

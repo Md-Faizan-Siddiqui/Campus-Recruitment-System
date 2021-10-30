@@ -18,6 +18,10 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
 import CustomizedDialogs from "./modal"
 import DeleteIcon from '@mui/icons-material/Delete';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import fallBackImage from "../Images/images.png"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -151,10 +155,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function VacanciesCard({
-    className,
     modal,
-    showImg,
-    web,
     campusData,
     jobDetail,
     btnText,
@@ -172,7 +173,7 @@ export default function VacanciesCard({
 
     const condition = campusData?.applicantUserId &&
         Object.values(campusData?.applicantUserId).find((item) => item?.id === user.addUser.loginUser.id)
-    console.log("condition", campusData)
+    // console.log("condition", campusData)
     return (
         <Card style={{ margin: "10px", padding: "10px" }}>
             <DialogContent classes={{ root: classes.root }} className={jobDetail ? classes.dialogContent : ""}>
@@ -198,16 +199,21 @@ export default function VacanciesCard({
                     }
                     <div className="companyImg">
                         <div className="companyLogo">
-                            <img src={campusData.fileToUpload} alt="company logo" />
+                            <img src={campusData?.fileToUpload ? campusData.fileToUpload : fallBackImage} alt="company logo" />
                         </div>
                         <div className="companyImg">
                             {jobDetail ?
                                 <div className="jobTitle">
                                     <span><h4>{campusData.jobTitle}</h4></span>
                                 </div> :
-                                <h2>{campusData.jobTitle}</h2>
+                                modal ? <div className="jobTitle">
+                                    <span><h4>{campusData.name}</h4></span>
+                                </div> :
+                                    <h2>{campusData.jobTitle}</h2>
                             }
-                            <p>{campusData.city}</p>
+                            {modal ? null :
+                                <p>{campusData?.city}</p>
+                            }
                         </div>
                     </div>
                     {jobDetail && (admin || company) ? null :
@@ -251,62 +257,112 @@ export default function VacanciesCard({
                 </div>
                 {jobDetail ?
                     <div className={classes.className, classes.secondChild}>
-                        <div className={classes.dataOrIcon}>
-                            <ImOffice className={classes.icon} />
-                            <p>{campusData.name}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <MailOutlineIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.email}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.phone}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <ScheduleIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.jobType}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <GiSkills className={classes.icon} />
-                            <p>{campusData.experience}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <LanguageOutlinedIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.website}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <LocalAtmOutlinedIcon className={classes.icon} fontSize="small" />
-                            <p>Rs. {campusData.salary}/=</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <DateRangeIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.lastDate}</p>
-                        </div>
-                        <div className={classes.dataOrIcon}>
-                            <FaGraduationCap className={classes.icon} fontSize="large" />
-                            <p>{campusData.education}</p>
-                        </div>
+                        {campusData?.name ?
+                            <div className={classes.dataOrIcon}>
+                                <ImOffice className={classes.icon} />
+                                <p>{campusData.name}</p>
+                            </div>
+                            : null}
+                        {campusData?.email ?
+                            <div className={classes.dataOrIcon}>
+                                <MailOutlineIcon className={classes.icon} fontSize="small" />
+                                <p>{campusData.email}</p>
+                            </div>
+                            : null}
+                        {campusData?.website ?
+                            <div className={classes.dataOrIcon}>
+                                <LanguageOutlinedIcon className={classes.icon} fontSize="small" />
+                                <p>{campusData.website}</p>
+                            </div>
+                            : null}
+                        {campusData?.phone ?
+                            <div className={classes.dataOrIcon}>
+                                <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
+                                <p>{campusData.phone}</p>
+                            </div>
+                            : null}
+                        {campusData?.jobType ?
+                            <div className={classes.dataOrIcon}>
+                                <ScheduleIcon className={classes.icon} fontSize="small" />
+                                <p>{campusData.jobType}</p>
+                            </div>
+                            : null}
+                        {campusData?.experience ?
+                            <div className={classes.dataOrIcon}>
+                                <GiSkills className={classes.icon} />
+                                <p>{campusData.experience}</p>
+                            </div>
+                            : null}
+                        {campusData?.salary ?
+                            <div className={classes.dataOrIcon}>
+                                <LocalAtmOutlinedIcon className={classes.icon} fontSize="small" />
+                                <p>Rs. {campusData.salary}/=</p>
+                            </div>
+                            : null}
+                        {campusData?.lastDate ?
+                            <div className={classes.dataOrIcon}>
+                                <DateRangeIcon className={classes.icon} fontSize="small" />
+                                <p>{campusData.lastDate}</p>
+                            </div>
+                            : null}
+                        {campusData?.education ?
+                            <div className={classes.dataOrIcon}>
+                                <FaGraduationCap className={classes.icon} fontSize="large" />
+                                <p>{campusData.education}</p>
+                            </div>
+                            : null}
                     </div>
                     : null}
 
                 {modal ? <div className={modal ? classes.className : classes.secondChild}>
-                    <div className={classes.dataOrIcon}>
-                        <ImOffice className={classes.icon} />
-                        <p>{campusData.name}</p>
-                    </div>
-                    <div className={classes.dataOrIcon}>
-                        <MailOutlineIcon className={classes.icon} fontSize="small" />
-                        <p>{campusData.email}</p>
-                    </div>
-                    <div className={classes.dataOrIcon}>
-                        <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
-                        <p>{campusData.phone}</p>
-                    </div>
-                    <div className={classes.dataOrIcon}>
-                        <LanguageOutlinedIcon className={classes.icon} fontSize="small" />
-                        <p>{campusData.website}</p>
-                    </div>
+                    {campusData?.email ?
+                        <div className={classes.dataOrIcon}>
+                            <MailOutlineIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.email}</p>
+                        </div>
+                        : null}
+                    {campusData?.phone ?
+                        <div className={classes.dataOrIcon}>
+                            <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.phone}</p>
+                        </div>
+                        : null}
+                    {campusData?.city ?
+                        <div className={classes.dataOrIcon}>
+                            <LocationOnOutlinedIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.city}</p>
+                        </div>
+                        : null}
+                    {campusData?.education ?
+                        <div className={classes.dataOrIcon}>
+                            <FaGraduationCap className={classes.icon} fontSize="large" />
+                            <p>{campusData.education}</p>
+                        </div>
+                        : null}
+                    {campusData?.skills ?
+                        <div className={classes.dataOrIcon}>
+                            <GiSkills className={classes.icon} fontSize="large" />
+                            <p>{campusData.skills}</p>
+                        </div>
+                        : null}
+                    {campusData?.dob ?
+                        <div className={classes.dataOrIcon}>
+                            <DateRangeIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.dob}</p>
+                        </div>
+                        : null}
+                    {campusData?.experience ?
+                        <div className={classes.dataOrIcon}>
+                            <WorkOutlineIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.experience}</p>
+                        </div>
+                        : null}
+                    {campusData?.cgpa ?
+                        <div className={classes.dataOrIcon}>
+                            <CalculateOutlinedIcon className={classes.icon} fontSize="small" />
+                            <p>{campusData.cgpa}</p>
+                        </div>
+                        : null}
                 </div> : null}
             </DialogContent>
         </Card>

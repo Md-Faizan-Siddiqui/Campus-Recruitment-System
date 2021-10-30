@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,14 +10,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import ProfileUpdate from "../Pages/SharedPages/profileUpdate";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import OutlinedCard from "./card";
 import JobPostForm from "../Pages/jobPostForm";
 import EditButton from "../Components/editButton";
 import Accordion from "./accordion"
 import { makeStyles } from "@material-ui/core/styles";
 import VacanciesCard from "./vacanciesCard";
-import Profile from "../Pages/SharedPages/Profile"
-import { collapseClasses } from "@mui/material";
 
 const styles = (theme) => ({
   root: {
@@ -35,7 +32,6 @@ const styles = (theme) => ({
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: "10px 5px 0px 5px",
-    // padding: "8px 15px",
     fontSize: "12px",
     fontWeight: "bold",
     borderColor: "#3c52b2",
@@ -58,7 +54,10 @@ const useStyles = makeStyles((theme) => ({
   },
   dialogCardSm: {
     minWidth: "90%",
-  }
+  },
+  widthAdjustment:{
+    minWidth:"250px",
+  },
 }));
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -95,7 +94,6 @@ export default function CustomizedDialogs({
   student,//card
   formTitle,
   icons,
-  // apply,
   campusData,
   btnText,
   jobPost,
@@ -103,15 +101,8 @@ export default function CustomizedDialogs({
   studentDetails,
   appliedCandidate
 }) {
-  console.log("Form Title======>in Modal", formTitle);
-  console.log("Icons======>in Modal", icons);
-  console.log("Campus Data======>in Modal", campusData);
-  console.log("Btn Text======>in Modal", btnText);
-  console.log("Job Post======>in Modal", jobPost);
-  console.log("Company Details======>in Modal", companyDetails);
-  console.log("Student Details======>in Modal", studentDetails);
-  const classes = useStyles();
 
+  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -143,18 +134,16 @@ export default function CustomizedDialogs({
       }
       {open && (
         <Dialog 
-        // classes={{ paperWidthSm: classes.dialogCardSm }}
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={open}
         >
-          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.widthAdjustment}>
             {icons || studentDetails || companyDetails || jobPost || appliedCandidate
               ? formTitle
               : null}
           </DialogTitle>
           <DialogContent dividers>
-            {/* {console.log("abc", campusData)} */}
             {icons ? (
               <ProfileUpdate
                 campusData={campusData}
@@ -167,25 +156,13 @@ export default function CustomizedDialogs({
               ) : appliedCandidate ?
                 <Accordion campusData={campusData} />
                 : (<>
-                  {/* <Profile
-                modal
-                showImg
-                web
-                campusData={campusData}
-                handleClose={handleClose}/> */}
                   <VacanciesCard
                     className={classes.secondChild}
                     modal
-                    showImg
-                    web
+                    // showImg
+                    // web
                     campusData={campusData}
                     handleClose={handleClose} />
-                  {/* <OutlinedCard
-                    showImg
-                    web
-                    campusData={campusData}
-                    handleClose={handleClose}
-                  /> */}
                 </>
                 )
             }

@@ -29,21 +29,23 @@ function Vacancies() {
 
   return (
     <div className="marginAdjustment">
-        <Grid container>
-        {allJobs &&
+      <Grid container >
+        {allJobs.length === 0 ? 
+        (<div className="noData"><p>No Jobs Available</p></div>)
+          : allJobs &&
           allJobs?.reverse().map((data, index) => {
             return (
               <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
-                <VacanciesCard 
-                 apply
-                 campusData={data}
-                 disableFunc={() =>
-                   disableFunc({
-                     userid: data.userId,
-                     jobid: data.jobId,
-                     block: data.block,
-                   })
-                 } 
+                <VacanciesCard
+                  apply
+                  campusData={data}
+                  disableFunc={() =>
+                    disableFunc({
+                      userid: data.userId,
+                      jobid: data.jobId,
+                      block: data.block,
+                    })
+                  }
                 />
               </Grid>
             );

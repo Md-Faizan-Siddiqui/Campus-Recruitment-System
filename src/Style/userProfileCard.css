@@ -48,6 +48,8 @@ p {
 .detailsParents {
   display: flex;
   justify-content: center;
+  border-top: 1px solid #eaeff5;
+  margin-top: 20px;
 }
 .socialIcons {
   display: flex;

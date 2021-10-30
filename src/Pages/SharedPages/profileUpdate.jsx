@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
 display:"flex",
 justifyContent:"flex-end"
   },
+  input:{
+    width:"49%"
+  },
 }));
 
 function ProfileUpdate(props) {
@@ -134,7 +137,8 @@ function ProfileUpdate(props) {
     // console.log("props", props.campusData.fileToUpload)
   }, []);
   return (
-    <div className="main_div">
+      //className="main_div"
+    <div > 
       <form onSubmit={formik.handleSubmit}>
         {props.jobPost ? null : (
           <>
@@ -331,14 +335,15 @@ function ProfileUpdate(props) {
           </>)
           : null}
         {role === "student" ? (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", justifyContent:"space-between"}}>
             <TextField
+            classes={{root:classes.input}}
               select
               id="select"
               label="Experience Years"
               placeholder="Experience Years"
-              // width={1}
-              fullWidth
+              // width="45%"
+              // fullWidth
               margin="normal"
               InputLabelProps={{
                 shrink: true,
@@ -366,12 +371,13 @@ function ProfileUpdate(props) {
               </p>
             )}
             <TextField
+            classes={{root:classes.input}}
               select
               id="select"
               label="Experience Months"
               placeholder="Experience Months"
-              // width={1}
-              fullWidth
+              // width="45%"
+              // fullWidth
               disabled={formik.values.experienceYears === "Fresh" ? true : false}
               margin="normal"
               InputLabelProps={{

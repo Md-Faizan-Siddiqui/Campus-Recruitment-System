@@ -13,7 +13,6 @@ import TableBody from "@material-ui/core/TableBody";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CustomizedDialogs from "../../Components/modal";
 import { database } from "../../Config/firebaseConfig"
-// import VacanciesCard from "../../Components/vacanciesCard";
 
 function Companies() {
   // get data from redux..
@@ -59,12 +58,12 @@ function Companies() {
       backgroundColor: '#fff',
       color: '#3c52b2',
       '&:hover': {
-          borderColor: "#3c52b2",
-          border: "2px solid",
-          backgroundColor: '#3c52b2',
-          color: '#fff',
+        borderColor: "#3c52b2",
+        border: "2px solid",
+        backgroundColor: '#3c52b2',
+        color: '#fff',
       },
-  },
+    },
   });
 
   const classes = useStyles();
@@ -96,24 +95,6 @@ function Companies() {
 
   return (
     <div className="marginAdjustment">
-      <h1>Companies</h1>
-      {/* <Grid container>
-        {allCompanies &&
-          allCompanies.map((data, index) => {
-            return (
-              <Grid item xl={3} md={4} sm={6} xs={12}  >
-                <OutlinedCard
-                  campusData={data}
-                  details
-                  image
-                  formTitle={"Company Details"}
-                  companyDetails
-                />
-              </Grid>
-            );
-          })}
-      </Grid> */}
-
       <Grid container justifyContent="center">
         <Grid xs={11} sm={11} md={11} lg={11} xl={11} item>
           <TableContainer component={Paper}>
@@ -127,7 +108,8 @@ function Companies() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allCompanies &&
+                {allCompanies.length === 0 ? "Companies Not Found"
+                  : allCompanies &&
                   allCompanies.map((data, index) => {
                     // console.log("data in company ===>", data.id)
                     return (
@@ -146,13 +128,13 @@ function Companies() {
                         {allUsers.loginUser.role === "admin" ?
                           <StyledTableCell align="right">
                             <Button
-                            className={classes.button}
+                              className={classes.button}
                               size="small"
                               variant="outlined"
                               color="primary"
                               onClick={() => userBlock(data.id, data.block)}>
-                                {data.block === true ? "Unblock" : "Block"}
-                                </Button>
+                              {data.block === true ? "Unblock" : "Block"}
+                            </Button>
                           </StyledTableCell>
                           : null
                         }

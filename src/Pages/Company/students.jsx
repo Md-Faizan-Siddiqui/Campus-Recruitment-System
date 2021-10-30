@@ -56,15 +56,15 @@ function Students() {
       backgroundColor: '#fff',
       color: '#3c52b2',
       '&:hover': {
-          borderColor: "#3c52b2",
-          border: "2px solid",
-          backgroundColor: '#3c52b2',
-          color: '#fff',
+        borderColor: "#3c52b2",
+        border: "2px solid",
+        backgroundColor: '#3c52b2',
+        color: '#fff',
       },
-  },
-  // tableCell:{
-  //   color:"#3f51b5", 
-  // },
+    },
+    // tableCell:{
+    //   color:"#3f51b5", 
+    // },
   });
 
   const classes = useStyles();
@@ -96,7 +96,6 @@ function Students() {
 
   return (
     <div className="marginAdjustment">
-      <h1>Students</h1>
       <Grid container justifyContent="center">
         <Grid xs={11} md={11} sm={11} xl={11} item>
           <TableContainer component={Paper}>
@@ -110,7 +109,8 @@ function Students() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allStudents &&
+                {allStudents.length === 0 ? "Student Not Found" 
+                :allStudents &&
                   allStudents.map((data, index) => {
                     return (
                       <StyledTableRow >
@@ -127,7 +127,7 @@ function Students() {
                         {allUsers.loginUser.role === "admin" ?
                           <StyledTableCell align="right">
                             <Button
-                            className={classes.button}
+                              className={classes.button}
                               size="small"
                               variant="outlined"
                               color="primary"

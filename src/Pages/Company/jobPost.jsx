@@ -23,10 +23,10 @@ function JobPost() {
 
   return (
     <div className="marginAdjustment">
-      <h1>Job Post</h1>
       <CustomizedDialogs formTitle="Create Job" btnText="Create Job" jobPost />
       <Grid container>
-        {myPostedJobs.length === 0 ? "Data Not Found"
+        {myPostedJobs.length === 0 ? 
+        (<div className="noData"><p>No Jobs Available</p></div>)
           : myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
             return (

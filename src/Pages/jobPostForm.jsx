@@ -94,7 +94,8 @@ function JobPostForm(props) {
     },
   });
   return (
-    <div className="main_div">
+    // className="main_div"
+    <div >
       <div className="form_div">
         <div>
           <form action="" onSubmit={formik.handleSubmit}>

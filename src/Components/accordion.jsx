@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
+import { makeStyles } from "@material-ui/core/styles";
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -11,17 +12,23 @@ import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import CastForEducationOutlinedIcon from '@mui/icons-material/CastForEducationOutlined';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { GiSkills } from "react-icons/gi";
-import LanguageIcon from '@mui/icons-material/Language';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import { useState } from "react"
 
+const useStyles = makeStyles((theme) => ({
+    icon: {
+        color: '#1976d2',
+        marginTop: "3px",
+        marginRight: "10px",
+    },
+    dataOrIcon: {
+        fontWeight: "bold",
+        display: "flex",
+        lineHeight: "30px",
+        alignItems: "center",
+    },
+}))
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -59,13 +66,9 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function CustomizedAccordions({ campusData }) {
-    console.log("campusData in accordian", campusData)
+    const classes = useStyles();
     const allUsers = useSelector(state => state.addUser.allUsers)
-    console.log("All Users in accordian", allUsers)
-    // const [applicantId, setApplicantId] = useState([])
-
     const [expanded, setExpanded] = React.useState('');
-    // const temp = campusData
 
     let tempdata = [];
     if (campusData?.applicantUserId) {
@@ -75,17 +78,15 @@ export default function CustomizedAccordions({ campusData }) {
             console.log("users", user)
         })
     }
-    // setApplicantId(tempdata)
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
-    // const testing = allUsers.filter()
     const user = Object.values(allUsers)
     console.log("Applicant State", tempdata)
     return (
-        <div>
-            {tempdata.length == 0 && "No data found"}
+        <div className={classes.accordionMain}>
+            {tempdata.length == 0 && "No Applied Candidate's"}
             {tempdata.flat().map((value, index) => {
                 console.log("index", index, "value", value)
                 return (
@@ -95,7 +96,53 @@ export default function CustomizedAccordions({ campusData }) {
                                 <Typography>{value.name}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <p>{value.phone}</p>
+                                {value?.email ?
+                                    <div className={classes.dataOrIcon} >
+                                        <EmailOutlinedIcon className={classes.icon} />
+                                        <p>{value.email}</p>
+                                    </div>
+                                    : null}
+                                {value?.phone ?
+                                    <div className={classes.dataOrIcon} >
+                                        <PhoneIphoneOutlinedIcon className={classes.icon} />
+                                        <p>{value.phone}</p>
+                                    </div>
+                                    : null}
+                                {value?.cgpa ?
+                                    <div className={classes.dataOrIcon} >
+                                        <CalculateOutlinedIcon className={classes.icon} />
+                                        <p>{value.cgpa}</p>
+                                    </div>
+                                    : null}
+                                {value?.education ?
+                                    <div className={classes.dataOrIcon} >
+                                        <CastForEducationOutlinedIcon className={classes.icon} />
+                                        <p>{value.education}</p>
+                                    </div>
+                                    : null}
+                                {value?.experience ?
+                                    <div className={classes.dataOrIcon} >
+                                        <WorkOutlineIcon className={classes.icon} />
+                                        <p>{value.experience}</p>
+                                    </div> : null}
+                                {value?.skills ?
+                                    <div className={classes.dataOrIcon} >
+                                        <GiSkills className={classes.icon} />
+                                        <p>{value.skills}</p>
+                                    </div>
+                                    : null}
+                                {value?.dob ?
+                                    <div className={classes.dataOrIcon} >
+                                        <DateRangeOutlinedIcon className={classes.icon} />
+                                        <p>{value.dob}</p>
+                                    </div>
+                                    : null}
+                                {value?.city ?
+                                    <div className={classes.dataOrIcon} >
+                                        <LocationOnOutlinedIcon className={classes.icon} />
+                                        <p>{value.city}</p>
+                                    </div>
+                                    : null}
                             </AccordionDetails>
                         </Accordion>
                     </>)
