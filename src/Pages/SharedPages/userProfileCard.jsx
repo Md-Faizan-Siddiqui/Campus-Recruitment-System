@@ -4,7 +4,6 @@ import fallBackImage from "../../Images/images.png";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Grid } from '@material-ui/core';
 import { GiSkills } from "react-icons/gi";
-import { useSelector } from "react-redux";
 import CustomizedDialogs from "../../Components/modal"
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -27,7 +26,6 @@ const useStyles = makeStyles({
 });
 
 function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText }) {
-    const user = useSelector(state => state)
     const role = campusData.role;
     const classes = useStyles();
 

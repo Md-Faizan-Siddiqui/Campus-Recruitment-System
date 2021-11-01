@@ -81,8 +81,6 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const user = useSelector((state) => state.addUser);
   const dispatch = useDispatch();
-
-  // drawer //
   const [state, setState] = useState(false);
   const toggleDrawer = (open) => (event) => {
     setState(open);
@@ -173,7 +171,6 @@ export default function ButtonAppBar() {
       ) : null}
     </div>
   );
-  // drawer //
 
   const logout = () => {
     auth
@@ -194,11 +191,9 @@ export default function ButtonAppBar() {
   };
   return (
     <div className={classes.root}>
-      {/* drawer */}
       <Drawer anchor={"left"} open={state} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
-      {/* drawer */}
       <AppBar position="fixed">
         <Toolbar classes={{ regular: classes.regular }}>
           {user.loginStatus === false ? null :

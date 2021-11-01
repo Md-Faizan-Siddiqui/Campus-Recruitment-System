@@ -75,7 +75,6 @@ export default function SignUp() {
             })
             .then((res) => {
               history.push("/");
-              var user = userCredential;
               setLoader(false);
               setMessage("User Created Successful");
             })

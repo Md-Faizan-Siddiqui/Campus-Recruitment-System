@@ -34,13 +34,6 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-    return {
-        id: `action-tab-${index}`,
-        'aria-controls': `action-tabpanel-${index}`,
-    };
-}
-
 const useStyles = makeStyles((theme) => ({
 
     fab: {

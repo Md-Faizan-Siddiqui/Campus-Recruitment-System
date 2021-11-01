@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#707f8c",
     },
 }));
-const Item = styled(Paper)(({ theme }) => ({
+ styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
@@ -83,11 +83,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function JobDetails(props) {
+    const [alert, setAlert] = useState(false)
     const classes = useStyles();
     const user = useSelector(state => state.addUser)
-    const [alert, setAlert] = useState(false)
     const jobs = user.allJobs;
-    const role = user.loginUser.role;
     const allJobsArr = Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1)
     const jobDetail = allJobsArr?.find(item => item.jobId === +props.match.params.id) || {}
 

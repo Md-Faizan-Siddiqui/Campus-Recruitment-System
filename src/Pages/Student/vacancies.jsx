@@ -10,11 +10,11 @@ function Vacancies() {
 
   const disableFunc = ({ userid, jobid, block }) => {
     if (block === false) {
-      const res = database
+      database
         .ref(`/CRA/jobs/${userid}/${jobid}`)
         .update({ block: true });
     } else {
-      const res = database
+      database
         .ref(`/CRA/jobs/${userid}/${jobid}`)
         .update({ block: false });
     }
@@ -32,7 +32,7 @@ function Vacancies() {
           : allJobs &&
           allJobs?.reverse().map((data, index) => {
             return (
-              <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
+              <Grid item xl={2} lg={3} md={4} sm={6} xs={12} key={index}>
                 <VacanciesCard
                   apply
                   campusData={data}

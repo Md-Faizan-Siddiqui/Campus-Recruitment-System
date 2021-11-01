@@ -14,9 +14,7 @@ import CustomizedDialogs from "../../Components/modal";
 import { database } from "../../Config/firebaseConfig"
 
 function Companies() {
-  // get data from redux..
   const allUsers = useSelector((state) => state.addUser);
-  // filter companies..
   const allCompanies = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "company"
   );
@@ -100,7 +98,7 @@ function Companies() {
                   : allCompanies &&
                   allCompanies.map((data, index) => {
                     return (
-                      <StyledTableRow >
+                      <StyledTableRow key={index} >
                         <StyledTableCell component="th" scope="row">
                           {data.name}
                         </StyledTableCell>

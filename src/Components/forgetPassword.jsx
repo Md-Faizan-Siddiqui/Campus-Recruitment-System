@@ -61,7 +61,6 @@ export default function ForgetPassword() {
           }, 1000);
         })
         .catch((error) => {
-          var errorCode = error.code;
           var errorMessage = error.message;
           setErrMessage(errorMessage);
           setLoader(false);

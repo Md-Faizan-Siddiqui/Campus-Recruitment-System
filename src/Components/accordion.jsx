@@ -81,14 +81,13 @@ export default function CustomizedAccordions({ campusData }) {
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
-    const user = Object.values(allUsers)
     return (
         <div className={classes.accordionMain}>
             {tempdata.length == 0 && "No Applied Candidate's"}
             {tempdata.flat().map((value, index) => {
                 return (
                     <>
-                        <Accordion Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)} >
+                        <Accordion Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)} key={index} >
                             <AccordionSummary aria-controls="`panel1d-content`" id="panel1d-header">
                                 <Typography>{value.name}</Typography>
                             </AccordionSummary>

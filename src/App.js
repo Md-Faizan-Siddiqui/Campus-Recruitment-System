@@ -27,17 +27,17 @@ function App() {
       .ref("/CRA")
       .child("jobs/")
       .on("value", (snapshot) => {
-        console.log("snapshot====>", snapshot.val());
+        // console.log("snapshot====>", snapshot.val());
         if (snapshot.exists()) {
-          Object.keys(snapshot.val()).map((data, index) => {
-          });
+          // Object.keys(snapshot.val()).map((data, index) => {
+          // });
           dispatch(
             userDetails({
               allJobs: snapshot.val(),
             })
           );
         } else {
-          console.log("No data available");
+          // console.log("No data available");
         }
       });
   }, []);
@@ -60,7 +60,7 @@ function App() {
                 auth
                   .signOut()
                   .then(() => {
-                    console.log("testing")
+                    // console.log("testing")
                     dispatch(
                       userDetails({
                         loginUser: null,
@@ -72,10 +72,10 @@ function App() {
                     localStorage.removeItem("ROLE")
                   })
                   .catch((error) => {
-                    console.log(error);
+                    // console.log(error);
                   });
               } else {
-                console.log("snapshot====>", snapshot.val())
+                // console.log("snapshot====>", snapshot.val())
                 dispatch(
                   userDetails({
                     loginUser: snapshot.val(),
@@ -85,7 +85,7 @@ function App() {
                 )
               }
             } else {
-              console.log("No data available");
+              // console.log("No data available");
               dispatch(
                 userDetails({
                   isLoader: false
@@ -118,7 +118,7 @@ function App() {
                 })
               );
             } else {
-              console.log("No data available");
+              // console.log("No data available");
             }
           });
       }

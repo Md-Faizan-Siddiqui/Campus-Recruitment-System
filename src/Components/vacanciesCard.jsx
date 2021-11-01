@@ -22,6 +22,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import fallBackImage from "../Images/images.png"
+import cx from "classnames"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -255,7 +256,7 @@ export default function VacanciesCard({
                         </div>}
                 </div>
                 {jobDetail ?
-                    <div className={classes.className, classes.secondChild}>
+                    <div className={cx(classes.className, classes.secondChild)}>
                         {campusData?.name ?
                             <div className={classes.dataOrIcon}>
                                 <ImOffice className={classes.icon} />

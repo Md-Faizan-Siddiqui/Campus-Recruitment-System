@@ -97,7 +97,7 @@ function Students() {
                 :allStudents &&
                   allStudents.map((data, index) => {
                     return (
-                      <StyledTableRow >
+                      <StyledTableRow key={index} >
                         <StyledTableCell component="th" scope="row">
                           {data.name}
                         </StyledTableCell>

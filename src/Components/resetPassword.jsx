@@ -53,8 +53,8 @@ export default function ResetPassword() {
 
             const queryParams = new URLSearchParams(window.location.search)
             const oobCode = queryParams.get("oobCode")
-            auth.
-                confirmPasswordReset(oobCode, password)
+            auth
+            .confirmPasswordReset(oobCode, password)
                 .then(() => {
                     setMessage("Password Change Successfully!");
                     setLoader(false);
@@ -63,7 +63,6 @@ export default function ResetPassword() {
                     }, 1000);
                 })
                 .catch((error) => {
-                    var errorCode = error.code;
                     var errorMessage = error.message;
                     setErrMessage(errorMessage);
                     setLoader(false);

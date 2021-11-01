@@ -8,7 +8,6 @@ import VacanciesCard from "../../Components/vacanciesCard";
 
 function JobPost() {
   const user = useSelector((state) => state.addUser);
-  const role = user.loginUser.role;
   let myPostedJobs = []
 
   const deleteData = (key) => {
@@ -30,7 +29,7 @@ function JobPost() {
           : myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
             return (
-              <Grid item xl={3} md={4} sm={6} xs={12}  >
+              <Grid item xl={3} md={4} sm={6} xs={12} key={index} >
                 <VacanciesCard
                   campusData={data}
                   btnText={"delete"}
