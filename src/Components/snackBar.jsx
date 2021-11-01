@@ -25,7 +25,6 @@ const CustomizedSnackbars = ({ errMessage, message, setAlert=()=>{} }) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 

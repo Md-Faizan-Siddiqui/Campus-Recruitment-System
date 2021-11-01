@@ -15,6 +15,8 @@ import PageNotFound from "./Pages/pageNotFound";
 import Loader from "react-loader-spinner";
 import "./App.css";
 import JobDetails from "./Components/jobDetails";
+import ForgetPassword from "./Components/forgetPassword"
+import ResetPassword from "./Components/resetPassword"
 
 function App() {
   const user = useSelector((state) => state.addUser)
@@ -143,6 +145,8 @@ function App() {
             <Switch>
               <Route exact path="/" component={SignIn} />
               <Route path="/signup" component={SignUp} />
+              <Route path="/forgetPassword" component={ForgetPassword} />
+              <Route path="/resetPassword" component={ResetPassword} />
               <Route path="*">
                 <Redirect to="/" />
               </Route>

@@ -91,12 +91,6 @@ export default function JobDetails(props) {
     const allJobsArr = Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1)
     const jobDetail = allJobsArr?.find(item => item.jobId === +props.match.params.id) || {}
 
-    // console.log("Data in Job", Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1))
-    console.log("All Jobs Arr", allJobsArr)
-    console.log("Role in Job Details", role)
-    console.log("Data in Job Details", jobDetail)
-    console.log(props.match.params, "hs")
-
     const applyFunc = ({ jobId, userId }) => {
         database
             .ref(`/CRA/jobs/${userId}/${jobId}/applicantUserId`)
@@ -104,11 +98,9 @@ export default function JobDetails(props) {
                 id: user.loginUser.id,
             })
             .then(() => {
-                console.log("Sucess");
                 setAlert(true)
             })
             .catch(() => {
-                console.log("Error");
             });
     };
 

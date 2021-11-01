@@ -173,7 +173,6 @@ export default function VacanciesCard({
 
     const condition = campusData?.applicantUserId &&
         Object.values(campusData?.applicantUserId).find((item) => item?.id === user.addUser.loginUser.id)
-    // console.log("condition", campusData)
     return (
         <Card style={{ margin: "10px", padding: "10px" }}>
             <DialogContent classes={{ root: classes.root }} className={jobDetail ? classes.dialogContent : ""}>

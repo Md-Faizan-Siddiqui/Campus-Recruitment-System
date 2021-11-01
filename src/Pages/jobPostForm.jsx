@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 function JobPostForm(props) {
   const user = useSelector((state) => state.addUser);
-  console.log("Job post", user.loginUser.fileToUpload)
   const classes = useStyles();
   const formik = useFormik({
     initialValues: {
@@ -89,12 +88,10 @@ function JobPostForm(props) {
           props.handleClose();
         })
         .catch((err) => {
-          console.log("Error=====>", err);
         });
     },
   });
   return (
-    // className="main_div"
     <div >
       <div className="form_div">
         <div>

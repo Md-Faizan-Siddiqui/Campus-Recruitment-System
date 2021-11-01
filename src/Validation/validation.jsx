@@ -1,7 +1,6 @@
 import * as Yup from "yup";
 
 const phoneRegExp = /^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$/;
-// /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/;
 const urlRegExp =
   /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
 
@@ -12,7 +11,6 @@ export const updateFormValidationStudent = Yup.object({
     .required("Required"),
   cgpa: Yup.number()
     .positive("CGPA must be a positive number")
-    // .min(0.1, "Invalid CGPA")
     .max(4.0, "CGPA should not be exceed from 4. Invalid CGPA")
     .required("Required"),
   education: Yup.mixed()
@@ -33,14 +31,10 @@ export const updateFormValidationStudent = Yup.object({
   experienceYears: Yup.string()
     .trim()
     .required("Required"),
-  // experienceMonths: Yup.string()
-  //   .required("Required"),
   city: Yup.string()
     .trim()
     .max(30, "Invalid City")
     .required("Required"),
-  // .nullable()
-  // .default(null),
   bio: Yup.string()
     .trim()
     .max(30, "Must be 30 characters or less")

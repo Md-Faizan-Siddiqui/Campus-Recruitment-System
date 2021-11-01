@@ -75,7 +75,6 @@ export default function CustomizedAccordions({ campusData }) {
         Object.keys(campusData?.applicantUserId).map((applicants, ind) => {
             const user = Object.values(allUsers).filter(user => user.id === campusData?.applicantUserId[applicants]?.id)
             tempdata.push(user);
-            console.log("users", user)
         })
     }
 
@@ -83,12 +82,10 @@ export default function CustomizedAccordions({ campusData }) {
         setExpanded(newExpanded ? panel : false);
     };
     const user = Object.values(allUsers)
-    console.log("Applicant State", tempdata)
     return (
         <div className={classes.accordionMain}>
             {tempdata.length == 0 && "No Applied Candidate's"}
             {tempdata.flat().map((value, index) => {
-                console.log("index", index, "value", value)
                 return (
                     <>
                         <Accordion Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)} >

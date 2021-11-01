@@ -9,7 +9,6 @@ function Vacancies() {
   const user = useSelector((state) => state.addUser);
 
   const disableFunc = ({ userid, jobid, block }) => {
-    console.log('block func')
     if (block === false) {
       const res = database
         .ref(`/CRA/jobs/${userid}/${jobid}`)
@@ -24,8 +23,6 @@ function Vacancies() {
   const allJobs = Object.values(user?.allJobs)
     .map((val, ind) => Object.values(val))
     .flat(1);
-
-  console.log("alljobs", allJobs);
 
   return (
     <div className="marginAdjustment">

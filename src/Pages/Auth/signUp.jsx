@@ -71,18 +71,15 @@ export default function SignUp() {
               email: email,
               role: role,
               phone: phone,
-              // password: password,
               block: false,
             })
             .then((res) => {
-              console.log("res", res);
               history.push("/");
               var user = userCredential;
               setLoader(false);
               setMessage("User Created Successful");
             })
             .catch((err) => {
-              console.log(err.message);
               setErrMessage(err.message);
               setLoader(false);
             });

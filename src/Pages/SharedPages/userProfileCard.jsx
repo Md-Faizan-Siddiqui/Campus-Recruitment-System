@@ -28,9 +28,7 @@ const useStyles = makeStyles({
 
 function UserProfileCard({ campusData, formTitle, showImg, updateBtn, btnText }) {
     const user = useSelector(state => state)
-    console.log("Redux Data", user.addUser.loginUser.role);
     const role = campusData.role;
-    console.log("campusData", role);
     const classes = useStyles();
 
     return (

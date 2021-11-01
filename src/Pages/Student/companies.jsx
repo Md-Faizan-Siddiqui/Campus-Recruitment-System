@@ -1,7 +1,6 @@
 import "../../App.css";
 import React from "react";
 import { useSelector } from "react-redux";
-import OutlinedCard from "../../Components/card";
 import { Button, Grid } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -17,14 +16,10 @@ import { database } from "../../Config/firebaseConfig"
 function Companies() {
   // get data from redux..
   const allUsers = useSelector((state) => state.addUser);
-  console.log(allUsers, "allUsers");
-
   // filter companies..
-
   const allCompanies = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "company"
   );
-  console.log(allCompanies);
 
   const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -46,11 +41,9 @@ function Companies() {
 
   const useStyles = makeStyles({
     table: {
-      // minWidth: 700,
     },
     button: {
       margin: "10px",
-      // padding: "8px 15px",
       fontSize: "12px",
       fontWeight: "bold",
       borderColor: "#3c52b2",
@@ -69,9 +62,6 @@ function Companies() {
   const classes = useStyles();
 
   const userBlock = (blockUserId, block) => {
-    // alert("User Block Function")
-    console.log("Block User Id=====>", blockUserId)
-    console.log("User Block=====>", block)
     if (block === false) {
       database
         .ref("/CRA")
@@ -79,9 +69,7 @@ function Companies() {
         .update(
           { block: true, }
         ).then((res) => {
-          console.log("then =====>")
         }).catch((res) => {
-          console.log("catch ====>")
         })
     } else {
       database
@@ -111,7 +99,6 @@ function Companies() {
                 {allCompanies.length === 0 ? "Companies Not Found"
                   : allCompanies &&
                   allCompanies.map((data, index) => {
-                    // console.log("data in company ===>", data.id)
                     return (
                       <StyledTableRow >
                         <StyledTableCell component="th" scope="row">

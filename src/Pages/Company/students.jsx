@@ -1,7 +1,6 @@
+import "../../App.css";
 import React from "react";
 import { useSelector } from "react-redux";
-import OutlinedCard from "../../Components/card";
-import "../../App.css";
 import { Button, Grid } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -15,15 +14,10 @@ import CustomizedDialogs from "../../Components/modal";
 import { database } from "../../Config/firebaseConfig";
 
 function Students() {
-  // const role = useSelector((state) => state.addUser.loginUser.role);
-  // console.log("Role===>in students", role)
   const allUsers = useSelector((state) => state.addUser);
   const allStudents = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "student"
   );
-  console.log("role====>in students", allUsers.loginUser.role)
-  console.log(allStudents)
-  console.log(allUsers)
   const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: "#3f51b5",
@@ -44,11 +38,9 @@ function Students() {
 
   const useStyles = makeStyles({
     table: {
-      // minWidth: 700,
     },
     button: {
       margin: "10px",
-      // padding: "8px 15px",
       fontSize: "12px",
       fontWeight: "bold",
       borderColor: "#3c52b2",
@@ -62,17 +54,11 @@ function Students() {
         color: '#fff',
       },
     },
-    // tableCell:{
-    //   color:"#3f51b5", 
-    // },
   });
 
   const classes = useStyles();
 
   const userBlock = (blockUserId, block) => {
-    // alert("User Block Function")
-    console.log("Block User Id=====>", blockUserId)
-    console.log("User Block=====>", block)
     if (block === false) {
       database
         .ref("/CRA")
@@ -80,9 +66,7 @@ function Students() {
         .update(
           { block: true, }
         ).then((res) => {
-          console.log("then =====>")
         }).catch((res) => {
-          console.log("catch ====>")
         })
     } else {
       database

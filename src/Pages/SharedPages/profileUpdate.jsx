@@ -5,7 +5,6 @@ import { MenuItem, TextField } from "@material-ui/core";
 import { useFormik } from "formik";
 import { database, Storage } from "../../Config/firebaseConfig";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
 import fallBackImage from "../../Images/images.png";
 import { Button } from "@material-ui/core";
 import { updateFormValidationStudent } from "../../Validation/validation";
@@ -15,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   button: {
       margin: "10px 5px 0px 5px",
-      // padding: "8px 15px",
       fontSize: "12px",
       fontWeight: "bold",
       borderColor: "#3c52b2",
@@ -39,12 +37,10 @@ justifyContent:"flex-end"
 }));
 
 function ProfileUpdate(props) {
-  console.log("props====>", props);
   const user = useSelector((state) => state.addUser);
   const [url, setUrl] = useState("");
   const [disabled, setDisabled] = useState(false);
   const role = user.loginUser.role;
-  const history = useHistory();
   const classes = useStyles();
 
   const formik = useFormik({
@@ -70,9 +66,8 @@ function ProfileUpdate(props) {
           : null,
 
     onSubmit: (values) => {
-      const { dob, education, cgpa, skills, name, experience, phone, website, city, bio, experienceMonths, experienceYears } =
+      const { dob, education, cgpa, skills, name, phone, website, city, bio, experienceMonths, experienceYears } =
         values;
-      console.log("submit")
       setDisabled(true)
 
       database
@@ -105,18 +100,15 @@ function ProfileUpdate(props) {
               : null
         )
         .then((res) => {
-          console.log(res);
           setDisabled(false)
           props.handleClose();
         })
         .catch((err) => {
-          console.log(err);
         });
     },
   });
 
   const uploadImg = (e) => {
-    console.log(e.target.files[0]);
     let images = e.target.files[0];
     const uniqueName = Date.now();
     Storage.ref("images/" + images?.name + uniqueName)
@@ -124,20 +116,16 @@ function ProfileUpdate(props) {
       .then((snapshot) => {
         snapshot.ref.getDownloadURL().then((URL) => {
           setUrl(URL);
-          console.log(URL);
         });
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 
   useEffect(() => {
     setUrl(props.campusData?.fileToUpload);
-    // console.log("props", props.campusData.fileToUpload)
   }, []);
   return (
-      //className="main_div"
     <div > 
       <form onSubmit={formik.handleSubmit}>
         {props.jobPost ? null : (
@@ -188,11 +176,9 @@ function ProfileUpdate(props) {
             )}
           </>
         ) : null}
-        {/* add location */}
         {props.jobPost ? null : (
           <>
             <TextField
-              // pattern=".*\S+.*"
               type="text"
               label="City"
               placeholder="City"
@@ -213,7 +199,6 @@ function ProfileUpdate(props) {
             )}
           </>
         )}
-        {/* add bio */}
         {role === "student" ? (
           <>
             <TextField
@@ -342,8 +327,6 @@ function ProfileUpdate(props) {
               id="select"
               label="Experience Years"
               placeholder="Experience Years"
-              // width="45%"
-              // fullWidth
               margin="normal"
               InputLabelProps={{
                 shrink: true,
@@ -376,8 +359,6 @@ function ProfileUpdate(props) {
               id="select"
               label="Experience Months"
               placeholder="Experience Months"
-              // width="45%"
-              // fullWidth
               disabled={formik.values.experienceYears === "Fresh" ? true : false}
               margin="normal"
               InputLabelProps={{
@@ -431,7 +412,6 @@ function ProfileUpdate(props) {
           </>
         ) : null
         }
-        {console.log("URL is ", url)}
         {
           props.jobPost ? null : (
             <div className="updateImgDiv">
@@ -443,7 +423,6 @@ function ProfileUpdate(props) {
                     backgroundImage: `url( ${url ? url : fallBackImage} )`,
                   }}
                 >
-                  {/* <img src={url ? url : fallBackImage} /> */}
                   <span class="glyphicon glyphicon-camera"></span>
                   <span>Change Image</span>
                 </div>

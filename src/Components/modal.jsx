@@ -91,7 +91,6 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function CustomizedDialogs({
-  student,//card
   formTitle,
   icons,
   campusData,
@@ -119,7 +118,6 @@ export default function CustomizedDialogs({
             variant="outlined"
             color="primary"
             size="small"
-            // disabled={student ? campusData.block : false}
             onClick={handleClickOpen}
           >
             {btnText ? btnText : "Edit Profile"}
@@ -159,8 +157,6 @@ export default function CustomizedDialogs({
                   <VacanciesCard
                     className={classes.secondChild}
                     modal
-                    // showImg
-                    // web
                     campusData={campusData}
                     handleClose={handleClose} />
                 </>

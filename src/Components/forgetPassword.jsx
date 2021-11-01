@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import { auth } from "../../Config/firebaseConfig";
-import { useDispatch } from "react-redux";
-import { userDetails } from "../../Redux/Action/userAction";
-import Avatar from "@material-ui/core/Avatar";
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "../Config/firebaseConfig";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Alert from "../../Components/snackBar";
-import { LoginFormValidation } from "../../Validation/validation";
+import Alert from "../Components/snackBar";
 import { useFormik } from "formik";
 import Loader from "react-loader-spinner";
 
@@ -38,40 +33,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function ForgetPassword() {
   const classes = useStyles();
   const [message, setMessage] = useState("");
   const [errMessage, setErrMessage] = useState("");
-  const dispatch = useDispatch();
+  const history = useHistory();
   const [loader, setLoader] = useState(false);
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
-    validationSchema: LoginFormValidation,
 
     onSubmit: (values) => {
-      const { email, password } = values;
+      const { email } = values;
       setErrMessage("");
       setMessage("");
       setLoader(true);
+
       auth
-        .signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          var user = userCredential.user;
-          setMessage("Login Success!");
+        .sendPasswordResetEmail(email)
+        .then(() => {
+          setMessage("Send Email Successfully!");
           setLoader(false);
-          dispatch(
-            userDetails({
-              loginUser: user,
-              loginStatus: true,
-              role: user.loginUser.role,
-            })
-          );
+          setTimeout(() => {
+            history.push("/")
+          }, 1000);
         })
         .catch((error) => {
+          var errorCode = error.code;
           var errorMessage = error.message;
           setErrMessage(errorMessage);
           setLoader(false);
@@ -82,11 +72,8 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography component="h1" variant="h5">
-          Login
+          Forget Password
         </Typography>
         <form
           className={classes.form}
@@ -111,24 +98,6 @@ export default function SignIn() {
               {formik.errors.email}
             </p>
           )}
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={formik.values.password}
-            onChange={formik.handleChange("password")}
-          />
-          {formik.errors.password && formik.touched.password && (
-            <p style={{ color: "red", marginLeft: "5px" }}>
-              {formik.errors.password}
-            </p>
-          )}
           <Button
             type="submit"
             fullWidth
@@ -138,18 +107,12 @@ export default function SignIn() {
             disabled={loader ? true : false}
           >
             {loader === true ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars" />
-              : "LogIn"}
+              : "Send Email"}
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link to="forgetPassword" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-            Don't have an account?
-              <Link to="signup" variant="body2">
-                {" Sign Up"}
+              <Link to="login" variant="body2">
+                {"Sign In"}
               </Link>
             </Grid>
           </Grid>

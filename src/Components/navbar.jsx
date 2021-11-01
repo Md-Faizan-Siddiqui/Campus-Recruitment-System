@@ -13,7 +13,6 @@ import { auth } from "../Config/firebaseConfig";
 import { List, ListItem, Drawer, ListItemText, ListItemIcon } from "@material-ui/core";
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded';
 import { FaUserGraduate } from "react-icons/fa";
-import LogoutIcon from '@mui/icons-material/Logout';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import WorkRoundedIcon from '@mui/icons-material/WorkRounded';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
@@ -71,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
   },
   powerBtnMobleScreen: {
     color: "white",
-    // textDecoration: "none",
     display: "none",
     [theme.breakpoints.down("xs")]: {
       display: "flex",
@@ -123,12 +121,6 @@ export default function ButtonAppBar() {
               </ListItemIcon>
               <ListItemText>Profile</ListItemText>
             </ListItem>
-            {/* <ListItem onClick={logout} className={classes.toggleBtnColor}>
-              <ListItemIcon>
-                <LogoutIcon className={classes.iconStyle} />
-              </ListItemIcon>
-              <ListItemText>Logout</ListItemText>
-            </ListItem> */}
           </List>
         </>
       ) : null}
@@ -153,12 +145,6 @@ export default function ButtonAppBar() {
               </ListItemIcon>
               <ListItemText>Profile</ListItemText>
             </ListItem>
-            {/* <ListItem onClick={logout} className={classes.toggleBtnColor}>
-              <ListItemIcon>
-                <LogoutIcon className={classes.iconStyle} />
-              </ListItemIcon>
-              <ListItemText>Logout</ListItemText>
-            </ListItem> */}
           </List>
         </>
       ) : null}
@@ -182,12 +168,6 @@ export default function ButtonAppBar() {
             </ListItemIcon>
             <ListItemText>Students</ListItemText>
           </ListItem>
-          {/* <ListItem onClick={logout} className={classes.toggleBtnColor}>
-            <ListItemIcon>
-              <LogoutIcon className={classes.iconStyle} />
-            </ListItemIcon>
-            <ListItemText>Logout</ListItemText>
-          </ListItem> */}
         </List>
         </>
       ) : null}
@@ -210,10 +190,8 @@ export default function ButtonAppBar() {
         localStorage.removeItem("ROLE")
       })
       .catch((error) => {
-        console.log(error);
       });
   };
-  // console.log(user?.loginUser?.role);
   return (
     <div className={classes.root}>
       {/* drawer */}
@@ -232,7 +210,6 @@ export default function ButtonAppBar() {
               onClick={toggleDrawer(true)}
             >
               <MenuIcon />
-              {/* <PowerSettingsNewIcon /> */}
             </IconButton>}
           <Typography variant="h6" className={classes.title}>
             CRS
