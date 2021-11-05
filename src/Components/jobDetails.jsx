@@ -89,6 +89,7 @@ export default function JobDetails(props) {
     const jobs = user.allJobs;
     const allJobsArr = Object.values(jobs).map(item => Object.values(item).flat(1)).flat(1)
     const jobDetail = allJobsArr?.find(item => item.jobId === +props.match.params.id) || {}
+    const companyDetails= user.cUserDetails;
 
     const applyFunc = ({ jobId, userId }) => {
         database
@@ -113,6 +114,7 @@ export default function JobDetails(props) {
             <Grid container>
                 <Grid item xl={8} lg={8} md={8} sm={6} xs={12}>
                     <VacanciesCard
+                    companyDetails={companyDetails}
                         campusData={jobDetail}
                         jobDetail
                         block={jobDetail.block}

@@ -30,17 +30,12 @@ function JobPostForm(props) {
   const classes = useStyles();
   const formik = useFormik({
     initialValues: {
-      email: user.loginUser.email,
-      name: user.loginUser.name ? user.loginUser.name : "",
-      phone: user.loginUser.phone ? user.loginUser.phone : "",
       education: user.loginUser.education ? user.loginUser.education : "",
       experience: user.loginUser.experience ? user.loginUser.experience : "",
-      website: user.loginUser.website ? user.loginUser.website : "",
       jobTitle: user.loginUser.jobTitle ? user.loginUser.jobTitle : "",
       jobType: user.loginUser.jobType ? user.loginUser.jobType : "",
       lastDate: user.loginUser.lastDate ? user.loginUser.lastDate : "",
       salary: user.loginUser.salary ? user.loginUser.salary : "",
-      city: user.loginUser.city ? user.loginUser.city : "",
       jobDescription: user.loginUser.jobDescription
         ? user.loginUser.jobDescription
         : "",
@@ -50,39 +45,28 @@ function JobPostForm(props) {
 
     onSubmit: (values) => {
       const {
-        name,
-        phone,
-        email,
         jobTitle,
         jobDescription,
-        website,
         jobType,
         lastDate,
         experience,
         education,
         salary,
-        city,
       } = values;
       const key = Date.now();
       database
         .ref(`/CRA/jobs/${user.loginUser.id}/${key}`)
         .set({
           jobId: key,
-          name: name,
-          phone: phone,
-          email: email,
           jobTitle: jobTitle,
           jobDescription: jobDescription,
-          website: website,
           jobType: jobType,
           lastDate: lastDate,
           experience: experience,
           education: education,
           salary: salary,
           block: false,
-          city:city,
           userId: user.loginUser.id,
-          fileToUpload:user.loginUser.fileToUpload,
         })
         .then((res) => {
           props.handleClose();
@@ -96,44 +80,6 @@ function JobPostForm(props) {
       <div className="form_div">
         <div>
           <form action="" onSubmit={formik.handleSubmit}>
-            <TextField
-              type="text"
-              label="Name"
-              placeholder="Name"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              autoFocus
-              variant="outlined"
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange("name")}
-            />
-            {formik.errors.name && formik.touched.name && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.name}
-              </p>
-            )}
-            <TextField
-              label="Phone"
-              placeholder="Phone"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="phone"
-              value={formik.values.phone}
-              onChange={formik.handleChange("phone")}
-            />
-            {formik.errors.phone && formik.touched.phone && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.phone}
-              </p>
-            )}
             <TextField
               type="text"
               label="Job Title"
@@ -172,62 +118,6 @@ function JobPostForm(props) {
             {formik.errors.jobDescription && formik.touched.jobDescription && (
               <p style={{ color: "red", marginLeft: "5px" }}>
                 {formik.errors.jobDescription}
-              </p>
-            )}
-            <TextField
-              type="email"
-              label="Email"
-              placeholder="Email"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange("email")}
-            />
-            {formik.errors.email && formik.touched.email && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.email}
-              </p>
-            )}
-            <TextField
-              label="Website"
-              placeholder="Website"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="website"
-              value={formik.values.website}
-              onChange={formik.handleChange("website")}
-            />
-            {formik.errors.website && formik.touched.website && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.website}
-              </p>
-            )}
-            <TextField
-              type="text"
-              label="City"
-              placeholder="City"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="city"
-              value={formik.values.city}
-              onChange={formik.handleChange("city")}
-            />
-            {formik.errors.city && formik.touched.city && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.city}
               </p>
             )}
             <TextField

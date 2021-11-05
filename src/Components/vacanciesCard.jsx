@@ -1,6 +1,6 @@
 import "../App.css";
-import React from 'react';
-import { useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from '@material-ui/core';
 import { Card } from '@mui/material';
@@ -23,6 +23,8 @@ import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import fallBackImage from "../Images/images.png"
 import cx from "classnames"
+import { database } from "../Config/firebaseConfig"
+import { userDetails } from "../Redux/Action/userAction";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -102,6 +104,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         position: "absolute",
         left: "0",
+        boxSizing: "initial",
     },
     dataOrIcon: {
         fontWeight: "bold",
@@ -156,6 +159,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function VacanciesCard({
+    companyDetails,
     modal,
     campusData,
     jobDetail,
@@ -167,10 +171,15 @@ export default function VacanciesCard({
     companyPostJob,
     apply }) {
     const user = useSelector(state => state);
+    const dispatch = useDispatch()
     const classes = useStyles();
     const student = user?.addUser?.loginUser?.role === "student";
     const company = user?.addUser?.loginUser?.role === "company";
     const admin = user?.addUser?.loginUser?.role === "admin";
+    const allJobs = user.addUser.allJobs;
+    const allUsers = user.addUser.allUsers;
+    const allJobsKey = Object.keys(allJobs);
+    const userId = campusData?.userId || campusData?.id
 
     const condition = campusData?.applicantUserId &&
         Object.values(campusData?.applicantUserId).find((item) => item?.id === user.addUser.loginUser.id)
@@ -199,7 +208,7 @@ export default function VacanciesCard({
                     }
                     <div className="companyImg">
                         <div className="companyLogo">
-                            <img src={campusData?.fileToUpload ? campusData.fileToUpload : fallBackImage} alt="company logo" />
+                            <img src={allUsers[userId]?.fileToUpload || fallBackImage} alt="company logo" />
                         </div>
                         <div className="companyImg">
                             {jobDetail ?
@@ -212,7 +221,7 @@ export default function VacanciesCard({
                                     <h2>{campusData.jobTitle}</h2>
                             }
                             {modal ? null :
-                                <p>{campusData?.city}</p>
+                                <p>{allUsers[userId]?.city}</p>
                             }
                         </div>
                     </div>
@@ -257,28 +266,28 @@ export default function VacanciesCard({
                 </div>
                 {jobDetail ?
                     <div className={cx(classes.className, classes.secondChild)}>
-                        {campusData?.name ?
+                        {companyDetails ?
                             <div className={classes.dataOrIcon}>
                                 <ImOffice className={classes.icon} />
-                                <p>{campusData.name}</p>
+                                <p>{allUsers[userId]?.name}</p>
                             </div>
                             : null}
-                        {campusData?.email ?
+                        {companyDetails ?
                             <div className={classes.dataOrIcon}>
                                 <MailOutlineIcon className={classes.icon} fontSize="small" />
-                                <p>{campusData.email}</p>
+                                <p>{allUsers[userId]?.email}</p>
                             </div>
                             : null}
-                        {campusData?.website ?
+                        {companyDetails ?
                             <div className={classes.dataOrIcon}>
                                 <LanguageOutlinedIcon className={classes.icon} fontSize="small" />
-                                <p>{campusData.website}</p>
+                                <p>{allUsers[userId]?.website}</p>
                             </div>
                             : null}
-                        {campusData?.phone ?
+                        {companyDetails ?
                             <div className={classes.dataOrIcon}>
                                 <PhoneIphoneOutlinedIcon className={classes.icon} fontSize="small" />
-                                <p>{campusData.phone}</p>
+                                <p>{allUsers[userId]?.phone}</p>
                             </div>
                             : null}
                         {campusData?.jobType ?

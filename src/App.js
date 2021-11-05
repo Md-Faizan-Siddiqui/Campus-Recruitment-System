@@ -21,27 +21,20 @@ import ResetPassword from "./Components/resetPassword"
 function App() {
   const user = useSelector((state) => state.addUser)
   const dispatch = useDispatch()
-  // dispatch alljobs
   useEffect(() => {
     database
       .ref("/CRA")
       .child("jobs/")
       .on("value", (snapshot) => {
-        // console.log("snapshot====>", snapshot.val());
         if (snapshot.exists()) {
-          // Object.keys(snapshot.val()).map((data, index) => {
-          // });
           dispatch(
             userDetails({
               allJobs: snapshot.val(),
             })
           );
-        } else {
-          // console.log("No data available");
         }
       });
   }, []);
-  // get current user and dispatch
   useEffect(() => {
     dispatch(
       userDetails({
@@ -57,10 +50,11 @@ function App() {
             if (snapshot.exists()) {
               const snapshotData = snapshot.val();
               if (snapshotData.block === true) {
+                database.ref("/CRA")
+                  .child("users/" + auth.currentUser.uid).off()
                 auth
                   .signOut()
                   .then(() => {
-                    // console.log("testing")
                     dispatch(
                       userDetails({
                         loginUser: null,
@@ -72,20 +66,18 @@ function App() {
                     localStorage.removeItem("ROLE")
                   })
                   .catch((error) => {
-                    // console.log(error);
                   });
               } else {
-                // console.log("snapshot====>", snapshot.val())
                 dispatch(
                   userDetails({
                     loginUser: snapshot.val(),
                     loginStatus: true,
                     isLoader: false,
+                    allUsers:snapshotData,
                   })
                 )
               }
             } else {
-              // console.log("No data available");
               dispatch(
                 userDetails({
                   isLoader: false
@@ -135,13 +127,13 @@ function App() {
     )
   }
 
-
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        {user?.loginStatus === false ? (
+        {!user?.loginStatus || (user?.loginUser?.block && user?.loginStatus) ? (
           <>
+          {console.log("blockeduser ")}
             <Switch>
               <Route exact path="/" component={SignIn} />
               <Route path="/signup" component={SignUp} />

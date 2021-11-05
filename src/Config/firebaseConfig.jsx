@@ -4,15 +4,18 @@ import 'firebase/auth';
 import 'firebase/database'
 import 'firebase/storage';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDL8Nb4HTMhk4HzeMDVDGeuDrli8h5Z_GY",
-    authDomain: "login-signup-with-redux.firebaseapp.com",
-    projectId: "login-signup-with-redux",
-    storageBucket: "login-signup-with-redux.appspot.com",
-    messagingSenderId: "117423462948",
-    appId: "1:117423462948:web:87333bf89a42722df0d6b1",
-    measurementId: "G-7KJTR40MWG"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyBmCSBnamp2RwymF2ctIM-Ut3tGjppMfcE",
+    authDomain: "campus-recruitment-syste-3c034.firebaseapp.com",
+    databaseURL: "https://campus-recruitment-syste-3c034-default-rtdb.firebaseio.com",
+    projectId: "campus-recruitment-syste-3c034",
+    storageBucket: "campus-recruitment-syste-3c034.appspot.com",
+    messagingSenderId: "865674085866",
+    appId: "1:865674085866:web:a4f039b807132123a45e93",
+    measurementId: "G-EG6XF34MV2"
+  };
+
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database();

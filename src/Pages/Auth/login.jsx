@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { auth } from "../../Config/firebaseConfig";
+import { auth, database } from "../../Config/firebaseConfig";
 import { useDispatch } from "react-redux";
 import { userDetails } from "../../Redux/Action/userAction";
 import Avatar from "@material-ui/core/Avatar";
@@ -39,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [message, setMessage] = useState("");
   const [errMessage, setErrMessage] = useState("");
-  const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
   const formik = useFormik({
@@ -60,16 +60,18 @@ export default function SignIn() {
       auth
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          var user = userCredential.user;
-          setMessage("Login Success!");
-          setLoader(false);
-          dispatch(
-            userDetails({
-              loginUser: user,
-              loginStatus: true,
-              role: user.loginUser.role,
+          let user = userCredential.user;
+          database.ref(`/CRA/users/${user?.uid}`).on("value", (snapshot) => {
+            snapshot.val().block ? setErrMessage("You are Blocked") : setMessage("Login Success!");
+            setLoader(false);
+            dispatch(
+              userDetails({
+                loginUser: user,
+                loginStatus: true,
+                role: snapshot.val().role,
+              })
+              );
             })
-          );
         })
         .catch((error) => {
           var errorMessage = error.message;
@@ -147,7 +149,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-            Don't have an account?
+              Don't have an account?
               <Link to="signup" variant="body2">
                 {" Sign Up"}
               </Link>

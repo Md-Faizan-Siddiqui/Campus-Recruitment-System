@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 import Alert from "../Components/snackBar";
 import { useFormik } from "formik";
 import Loader from "react-loader-spinner";
+import {ForgetPasswordValidation} from "../Validation/validation"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,6 +45,7 @@ export default function ForgetPassword() {
     initialValues: {
       email: "",
     },
+    validationSchema: ForgetPasswordValidation,
 
     onSubmit: (values) => {
       const { email } = values;

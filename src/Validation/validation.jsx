@@ -96,14 +96,6 @@ export const LoginFormValidation = Yup.object({
 });
 
 export const JobPostFormValidation = Yup.object({
-  name: Yup.string()
-    .trim()
-    .max(30, "Must be 30 characters or less")
-    .required("Required"),
-  phone: Yup.string()
-    .trim()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("Required"),
   jobTitle: Yup.string()
     .trim()
     .max(30, "Must be 30 characters or less")
@@ -111,14 +103,6 @@ export const JobPostFormValidation = Yup.object({
   jobDescription: Yup.string()
     .trim()
     .max(250, "Must be 250 characters or less")
-    .required("Required"),
-  email: Yup.string()
-    .trim()
-    .email("Invalid email address")
-    .required("Required"),
-  website: Yup.string()
-    .trim()
-    .matches(urlRegExp, "Invalid Website")
     .required("Required"),
   jobType: Yup.mixed()
     .oneOf(["Full Time", "Part Time", "Internship"])
@@ -136,5 +120,18 @@ export const JobPostFormValidation = Yup.object({
     .required("Required"),
   experience: Yup.string()
     .trim()
+    .required("Required"),
+});
+export const ForgetPasswordValidation = Yup.object({
+  email: Yup.string()
+    .trim()
+    .email("Invalid email address")
+    .required("Required"),
+});
+export const ResetPasswordValidation = Yup.object({
+  password: Yup.string()
+    .trim()
+    .min(6, "Password must be at least 6 charaters")
+    .max(16, "Password must be 16 charaters or less")
     .required("Required"),
 });

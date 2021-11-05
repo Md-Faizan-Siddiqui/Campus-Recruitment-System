@@ -13,32 +13,33 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-      margin: "10px 5px 0px 5px",
-      fontSize: "12px",
-      fontWeight: "bold",
+    margin: "10px 5px 0px 5px",
+    fontSize: "12px",
+    fontWeight: "bold",
+    borderColor: "#3c52b2",
+    border: "2px solid",
+    backgroundColor: '#fff',
+    color: '#3c52b2',
+    '&:hover': {
       borderColor: "#3c52b2",
       border: "2px solid",
-      backgroundColor: '#fff',
-      color: '#3c52b2',
-      '&:hover': {
-          borderColor: "#3c52b2",
-          border: "2px solid",
-          backgroundColor: '#3c52b2',
-          color: '#fff',
-      },
+      backgroundColor: '#3c52b2',
+      color: '#fff',
+    },
   },
-  editBtn:{
-display:"flex",
-justifyContent:"flex-end"
+  editBtn: {
+    display: "flex",
+    justifyContent: "flex-end"
   },
-  input:{
-    width:"49%"
+  input: {
+    width: "49%"
   },
 }));
 
 function ProfileUpdate(props) {
   const user = useSelector((state) => state.addUser);
   const [url, setUrl] = useState("");
+  const [state, setState] = useState(false)
   const [disabled, setDisabled] = useState(false);
   const role = user.loginUser.role;
   const classes = useStyles();
@@ -109,6 +110,7 @@ function ProfileUpdate(props) {
   });
 
   const uploadImg = (e) => {
+    setState(true)
     let images = e.target.files[0];
     const uniqueName = Date.now();
     Storage.ref("images/" + images?.name + uniqueName)
@@ -116,6 +118,7 @@ function ProfileUpdate(props) {
       .then((snapshot) => {
         snapshot.ref.getDownloadURL().then((URL) => {
           setUrl(URL);
+          setState(false)
         });
       })
       .catch((err) => {
@@ -126,7 +129,7 @@ function ProfileUpdate(props) {
     setUrl(props.campusData?.fileToUpload);
   }, []);
   return (
-    <div > 
+    <div >
       <form onSubmit={formik.handleSubmit}>
         {props.jobPost ? null : (
           <>
@@ -320,9 +323,9 @@ function ProfileUpdate(props) {
           </>)
           : null}
         {role === "student" ? (
-          <div style={{ display: "flex", justifyContent:"space-between"}}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <TextField
-            classes={{root:classes.input}}
+              classes={{ root: classes.input }}
               select
               id="select"
               label="Experience Years"
@@ -354,7 +357,7 @@ function ProfileUpdate(props) {
               </p>
             )}
             <TextField
-            classes={{root:classes.input}}
+              classes={{ root: classes.input }}
               select
               id="select"
               label="Experience Months"
@@ -439,16 +442,16 @@ function ProfileUpdate(props) {
           )
         }
         <div className={classes.editBtn}>
-        < Button
-        className={classes.button}
-          type="submit"
-          size="small"
-          variant="outlined"
-          color="primary"
-          disabled={disabled}
-        >
-          Update
-        </Button>
+          < Button
+            className={classes.button}
+            type="submit"
+            size="small"
+            variant="outlined"
+            color="primary"
+            disabled={state ? state : disabled}
+          >
+            Update
+          </Button>
         </div>
       </form >
     </div >

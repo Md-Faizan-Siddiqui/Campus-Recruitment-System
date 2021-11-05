@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 import Alert from "../Components/snackBar";
 import { useFormik } from "formik";
 import Loader from "react-loader-spinner";
+import { ResetPasswordValidation } from "../Validation/validation"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -44,6 +45,7 @@ export default function ResetPassword() {
         initialValues: {
             password: "",
         },
+        validationSchema: ResetPasswordValidation,
 
         onSubmit: (values) => {
             const { password } = values;
@@ -54,7 +56,7 @@ export default function ResetPassword() {
             const queryParams = new URLSearchParams(window.location.search)
             const oobCode = queryParams.get("oobCode")
             auth
-            .confirmPasswordReset(oobCode, password)
+                .confirmPasswordReset(oobCode, password)
                 .then(() => {
                     setMessage("Password Change Successfully!");
                     setLoader(false);
