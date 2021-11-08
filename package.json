@@ -16,6 +16,8 @@
     "@testing-library/user-event": "^12.8.3",
     "datejs": "^1.0.0-rc3",
     "DatePicker": "^2.0.0",
+    "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
     "firebase": "^8.8.0",
     "formik": "^2.2.9",
     "react": "^17.0.2",
@@ -33,7 +35,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -e prod -f .env-cmdrc react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
