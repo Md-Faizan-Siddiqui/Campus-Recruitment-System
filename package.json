@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "env-cmd -e prod -f .env-cmdrc react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd -e prod -f .env-cmdrc react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy"
