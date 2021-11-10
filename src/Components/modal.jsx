@@ -51,11 +51,22 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     boxSizing: "border-box",
   },
-  dialogCardSm: {
-    minWidth: "90%",
+  // dialogCardSm: {
+  //   minWidth: "90%",
+  // },
+  widthAdjustment: {
+    minWidth: "250px",
+    [theme.breakpoints.down("sm")]: {
+      minWidth: "168px",
+    },
   },
-  widthAdjustment:{
-    minWidth:"250px",
+  formWidth: {
+    maxWidth:"600px",
+    minWidth: "600px",
+    [theme.breakpoints.down("sm")]: {
+      maxWidth:"250px",
+    minWidth: "250px",
+    },
   },
 }));
 const DialogTitle = withStyles(styles)((props) => {
@@ -123,7 +134,8 @@ export default function CustomizedDialogs({
           )
       }
       {open && (
-        <Dialog 
+        <Dialog
+          classes={{ paperWidthSm: classes.formWidth }}
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={open}

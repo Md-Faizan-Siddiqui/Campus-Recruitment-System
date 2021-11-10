@@ -32,8 +32,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end"
   },
   input: {
-    width: "49%"
+    width: "94%"
   },
+inputSpan:{
+  width: "100%"
+},
 }));
 
 function ProfileUpdate(props) {
@@ -324,6 +327,7 @@ function ProfileUpdate(props) {
           : null}
         {role === "student" ? (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span className={classes.inputSpan}>
             <TextField
               classes={{ root: classes.input }}
               select
@@ -356,6 +360,8 @@ function ProfileUpdate(props) {
                 {formik.errors.experienceYears}
               </p>
             )}
+            </span>
+            <span className={classes.inputSpan}>
             <TextField
               classes={{ root: classes.input }}
               select
@@ -390,6 +396,7 @@ function ProfileUpdate(props) {
                 {formik.errors.experienceMonths}
               </p>
             )}
+            </span>
           </div>
         ) : null}
         {role === "company" ? (

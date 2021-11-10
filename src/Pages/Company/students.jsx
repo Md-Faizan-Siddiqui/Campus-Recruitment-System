@@ -38,6 +38,7 @@ function Students() {
 
   const useStyles = makeStyles({
     table: {
+      paddingRight:"25px"
     },
     button: {
       margin: "10px",
@@ -83,13 +84,13 @@ function Students() {
       <Grid container justifyContent="center">
         <Grid xs={11} md={11} sm={11} xl={11} item>
           <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+            <Table aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Students</StyledTableCell>
-                  <StyledTableCell></StyledTableCell>
+                  <StyledTableCell align="right" className={classes.table}>Details</StyledTableCell>
                   {allUsers.loginUser.role === "admin" ?
-                    <StyledTableCell></StyledTableCell> : null}
+                    <StyledTableCell align="right" className={classes.table}>Block User</StyledTableCell> : null}
                 </TableRow>
               </TableHead>
               <TableBody>

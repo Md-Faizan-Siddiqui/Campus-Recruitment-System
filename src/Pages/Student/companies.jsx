@@ -1,5 +1,5 @@
 import "../../App.css";
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import { Button, Grid } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,9 +11,11 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CustomizedDialogs from "../../Components/modal";
-import { database } from "../../Config/firebaseConfig"
+import { database } from "../../Config/firebaseConfig";
+import Alert from "../../Components/snackBar";
 
 function Companies() {
+  // const [blockState, setBlockState] = useState()
   const allUsers = useSelector((state) => state.addUser);
   const allCompanies = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "company"
@@ -39,6 +41,7 @@ function Companies() {
 
   const useStyles = makeStyles({
     table: {
+      paddingRight: "25px"
     },
     button: {
       margin: "10px",
@@ -67,6 +70,7 @@ function Companies() {
         .update(
           { block: true, }
         ).then((res) => {
+          // setBlockState("Block")
         }).catch((res) => {
         })
     } else {
@@ -75,7 +79,10 @@ function Companies() {
         .child("users/" + blockUserId)
         .update(
           { block: false, }
-        )
+        ).then((res) => {
+          // setBlockState("Unblock")
+        }).catch((res) => {
+        })
     }
   }
 
@@ -84,13 +91,13 @@ function Companies() {
       <Grid container justifyContent="center">
         <Grid xs={11} sm={11} md={11} lg={11} xl={11} item>
           <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+            <Table aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Companies</StyledTableCell>
-                  <StyledTableCell></StyledTableCell>
+                  <StyledTableCell align="right" className={classes.table}>Details</StyledTableCell>
                   {allUsers.loginUser.role === "admin" ?
-                    <StyledTableCell></StyledTableCell> : null}
+                    <StyledTableCell align="right" className={classes.table}>Block User</StyledTableCell> : null}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -131,6 +138,12 @@ function Companies() {
           </TableContainer>
         </Grid>
       </Grid>
+      {/* {blockState ?
+                <Alert message={"Sucessfully Block"} errMessage={"Sucessfully UnBlock"} />
+                : null} */}
+      {/* {blockState? (
+        <Alert message={blockState} handleClose={false} />
+      ) : null} */}
     </div>
   );
 }

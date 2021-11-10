@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  input: {
+    '&::placeholder': {
+      color:"red"
+    },
+  },
 }));
 
 export default function SignUp() {
@@ -145,6 +150,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              className={classes.input}
                 type="text"
                 country="US"
                 variant="outlined"
@@ -154,6 +160,7 @@ export default function SignUp() {
                 label="Phone Number"
                 name="phone"
                 autoComplete="phone"
+                helperText="(eg:+92xxxxxxxxx, 0092xxxxxxxxx, 03xxxxxxxxx)"
                 value={formik.values.phone}
                 onChange={formik.handleChange("phone")}
               />
