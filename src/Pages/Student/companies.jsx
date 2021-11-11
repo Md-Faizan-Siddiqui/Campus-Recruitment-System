@@ -15,7 +15,7 @@ import { database } from "../../Config/firebaseConfig";
 import Alert from "../../Components/snackBar";
 
 function Companies() {
-  // const [blockState, setBlockState] = useState()
+  const [blockState, setBlockState] = useState()
   const allUsers = useSelector((state) => state.addUser);
   const allCompanies = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "company"
@@ -70,7 +70,7 @@ function Companies() {
         .update(
           { block: true, }
         ).then((res) => {
-          // setBlockState("Block")
+          setBlockState("Blocked")
         }).catch((res) => {
         })
     } else {
@@ -80,7 +80,7 @@ function Companies() {
         .update(
           { block: false, }
         ).then((res) => {
-          // setBlockState("Unblock")
+          setBlockState("Unblock")
         }).catch((res) => {
         })
     }
@@ -138,12 +138,9 @@ function Companies() {
           </TableContainer>
         </Grid>
       </Grid>
-      {/* {blockState ?
-                <Alert message={"Sucessfully Block"} errMessage={"Sucessfully UnBlock"} />
-                : null} */}
-      {/* {blockState? (
-        <Alert message={blockState} handleClose={false} />
-      ) : null} */}
+      {blockState? (
+        <Alert setAlert={setBlockState} message={blockState} handleClose={false} />
+      ) : null}
     </div>
   );
 }

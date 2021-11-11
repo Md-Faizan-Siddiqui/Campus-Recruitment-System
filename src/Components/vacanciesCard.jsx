@@ -1,5 +1,5 @@
 import "../App.css";
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from '@material-ui/core';
@@ -170,6 +170,7 @@ export default function VacanciesCard({
     disableFunc,
     companyPostJob,
     apply }) {
+//   const [blockState, setBlockState] = useState()
     const user = useSelector(state => state);
     const dispatch = useDispatch()
     const classes = useStyles();

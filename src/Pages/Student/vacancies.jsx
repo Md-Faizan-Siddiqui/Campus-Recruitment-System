@@ -1,22 +1,34 @@
 import "../../App.css";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { database } from "../../Config/firebaseConfig";
 import { Grid } from "@material-ui/core";
 import VacanciesCard from "../../Components/vacanciesCard"
+import Alert from "../../Components/snackBar";
 
 function Vacancies() {
+  const [blockState, setBlockState] = useState()
   const user = useSelector((state) => state.addUser);
 
   const disableFunc = ({ userid, jobid, block }) => {
     if (block === false) {
       database
         .ref(`/CRA/jobs/${userid}/${jobid}`)
-        .update({ block: true });
+        .update(
+          { block: true }
+          ).then((res) => {
+            setBlockState("Blocked")
+          }).catch((res) => {
+          });
     } else {
       database
         .ref(`/CRA/jobs/${userid}/${jobid}`)
-        .update({ block: false });
+        .update(
+          { block: false }
+          ).then((res) => {
+            setBlockState("Unblock")
+          }).catch((res) => {
+          });
     }
   };
 
@@ -48,6 +60,9 @@ function Vacancies() {
             );
           })}
       </Grid>
+      {blockState? (
+        <Alert setAlert={setBlockState} message={blockState} handleClose={false} />
+      ) : null}
     </div>
   );
 }

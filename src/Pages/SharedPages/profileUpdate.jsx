@@ -10,6 +10,7 @@ import { Button } from "@material-ui/core";
 import { updateFormValidationStudent } from "../../Validation/validation";
 import { updateFormValidationCompany } from "../../Validation/validation";
 import { makeStyles } from "@material-ui/core/styles";
+import Loader from "react-loader-spinner";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -34,14 +35,15 @@ const useStyles = makeStyles((theme) => ({
   input: {
     width: "94%"
   },
-inputSpan:{
-  width: "100%"
-},
+  inputSpan: {
+    width: "100%"
+  },
 }));
 
 function ProfileUpdate(props) {
   const user = useSelector((state) => state.addUser);
   const [url, setUrl] = useState("");
+  const [loader, setLoader] = useState(false);
   const [state, setState] = useState(false)
   const [disabled, setDisabled] = useState(false);
   const role = user.loginUser.role;
@@ -113,8 +115,12 @@ function ProfileUpdate(props) {
   });
 
   const uploadImg = (e) => {
-    setState(true)
     let images = e.target.files[0];
+    console.log("images",images)
+    if(images){
+    setUrl("")
+    setLoader(true)
+    setState(true)
     const uniqueName = Date.now();
     Storage.ref("images/" + images?.name + uniqueName)
       .put(images)
@@ -122,10 +128,11 @@ function ProfileUpdate(props) {
         snapshot.ref.getDownloadURL().then((URL) => {
           setUrl(URL);
           setState(false)
+          setLoader(false)
         });
       })
       .catch((err) => {
-      });
+      });}
   };
 
   useEffect(() => {
@@ -328,74 +335,74 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <span className={classes.inputSpan}>
-            <TextField
-              classes={{ root: classes.input }}
-              select
-              id="select"
-              label="Experience Years"
-              placeholder="Experience Years"
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="experience Years"
-              value={formik.values.experienceYears}
-              onChange={formik.handleChange("experienceYears")}
-            >
-              <MenuItem value="Fresh">Fresh</MenuItem>
-              <MenuItem value="1 Year">1 Year</MenuItem>
-              <MenuItem value="2 Years">2 Years</MenuItem>
-              <MenuItem value="3 Years">3 Years</MenuItem>
-              <MenuItem value="4 Years">4 Years</MenuItem>
-              <MenuItem value="5 Years">5 Years</MenuItem>
-              <MenuItem value="6 Years">6 Years</MenuItem>
-              <MenuItem value="7 Years">7 Years</MenuItem>
-              <MenuItem value="8 Years">8 Years</MenuItem>
-              <MenuItem value="9 Years">9 Years</MenuItem>
-              <MenuItem value="10 Years">10 Years</MenuItem>
-            </TextField>
-            {formik.errors.experienceYears && formik.touched.experienceYears && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.experienceYears}
-              </p>
-            )}
+              <TextField
+                classes={{ root: classes.input }}
+                select
+                id="select"
+                label="Experience Years"
+                placeholder="Experience Years"
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="experience Years"
+                value={formik.values.experienceYears}
+                onChange={formik.handleChange("experienceYears")}
+              >
+                <MenuItem value="Fresh">Fresh</MenuItem>
+                <MenuItem value="1 Year">1 Year</MenuItem>
+                <MenuItem value="2 Years">2 Years</MenuItem>
+                <MenuItem value="3 Years">3 Years</MenuItem>
+                <MenuItem value="4 Years">4 Years</MenuItem>
+                <MenuItem value="5 Years">5 Years</MenuItem>
+                <MenuItem value="6 Years">6 Years</MenuItem>
+                <MenuItem value="7 Years">7 Years</MenuItem>
+                <MenuItem value="8 Years">8 Years</MenuItem>
+                <MenuItem value="9 Years">9 Years</MenuItem>
+                <MenuItem value="10 Years">10 Years</MenuItem>
+              </TextField>
+              {formik.errors.experienceYears && formik.touched.experienceYears && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.experienceYears}
+                </p>
+              )}
             </span>
             <span className={classes.inputSpan}>
-            <TextField
-              classes={{ root: classes.input }}
-              select
-              id="select"
-              label="Experience Months"
-              placeholder="Experience Months"
-              disabled={formik.values.experienceYears === "Fresh" ? true : false}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="experienceMonths"
-              value={formik.values.experienceMonths}
-              onChange={formik.handleChange("experienceMonths")}
-            >
-              <MenuItem value="">Select One</MenuItem>
-              <MenuItem value="1 Month">1 Month</MenuItem>
-              <MenuItem value="2 Months">2 Months</MenuItem>
-              <MenuItem value="3 Months">3 Months</MenuItem>
-              <MenuItem value="4 Months">4 Months</MenuItem>
-              <MenuItem value="5 Months">5 Months</MenuItem>
-              <MenuItem value="6 Months">6 Months</MenuItem>
-              <MenuItem value="7 Months">7 Months</MenuItem>
-              <MenuItem value="8 Months">8 Months</MenuItem>
-              <MenuItem value="9 Months">9 Months</MenuItem>
-              <MenuItem value="10 Months">10 Months</MenuItem>
-              <MenuItem value="11 Months">11 Months</MenuItem>
-            </TextField>
-            {formik.errors.experienceMonths && formik.touched.experienceMonths && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.experienceMonths}
-              </p>
-            )}
+              <TextField
+                classes={{ root: classes.input }}
+                select
+                id="select"
+                label="Experience Months"
+                placeholder="Experience Months"
+                disabled={formik.values.experienceYears === "Fresh" ? true : false}
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                name="experienceMonths"
+                value={formik.values.experienceMonths}
+                onChange={formik.handleChange("experienceMonths")}
+              >
+                <MenuItem value="">Select One</MenuItem>
+                <MenuItem value="1 Month">1 Month</MenuItem>
+                <MenuItem value="2 Months">2 Months</MenuItem>
+                <MenuItem value="3 Months">3 Months</MenuItem>
+                <MenuItem value="4 Months">4 Months</MenuItem>
+                <MenuItem value="5 Months">5 Months</MenuItem>
+                <MenuItem value="6 Months">6 Months</MenuItem>
+                <MenuItem value="7 Months">7 Months</MenuItem>
+                <MenuItem value="8 Months">8 Months</MenuItem>
+                <MenuItem value="9 Months">9 Months</MenuItem>
+                <MenuItem value="10 Months">10 Months</MenuItem>
+                <MenuItem value="11 Months">11 Months</MenuItem>
+              </TextField>
+              {formik.errors.experienceMonths && formik.touched.experienceMonths && (
+                <p style={{ color: "red", marginLeft: "5px" }}>
+                  {formik.errors.experienceMonths}
+                </p>
+              )}
             </span>
           </div>
         ) : null}
@@ -430,11 +437,11 @@ function ProfileUpdate(props) {
                   className="profile-pic"
                   id="profilePic"
                   style={{
-                    backgroundImage: `url( ${url ? url : fallBackImage} )`,
+                    backgroundImage: `url( ${url ? url :loader? "": fallBackImage} )`,
                   }}
                 >
                   <span class="glyphicon glyphicon-camera"></span>
-                  <span>Change Image</span>
+                  <span>{loader ? <Loader width="30px" height="30px" color="#3f51b5" type="Bars" /> : "Change Image"}</span>
                 </div>
               </label>
               <input

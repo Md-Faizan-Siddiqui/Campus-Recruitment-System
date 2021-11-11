@@ -1,5 +1,5 @@
 import "../../App.css";
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import { Button, Grid } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
@@ -12,8 +12,11 @@ import TableBody from "@material-ui/core/TableBody";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CustomizedDialogs from "../../Components/modal";
 import { database } from "../../Config/firebaseConfig";
+import Alert from "../../Components/snackBar";
+
 
 function Students() {
+  const [blockState, setBlockState] = useState()
   const allUsers = useSelector((state) => state.addUser);
   const allStudents = Object.values(allUsers.allUsers)?.filter(
     (userData) => userData.role === "student"
@@ -67,6 +70,7 @@ function Students() {
         .update(
           { block: true, }
         ).then((res) => {
+          setBlockState("Blocked")
         }).catch((res) => {
         })
     } else {
@@ -75,7 +79,10 @@ function Students() {
         .child("users/" + blockUserId)
         .update(
           { block: false, }
-        )
+        ).then((res) => {
+          setBlockState("Unblock")
+        }).catch((res) => {
+        })
     }
   }
 
@@ -130,6 +137,9 @@ function Students() {
           </TableContainer>
         </Grid>
       </Grid>
+      {blockState? (
+        <Alert setAlert={setBlockState} message={blockState} handleClose={false} />
+      ) : null}
     </div>
   );
 }
