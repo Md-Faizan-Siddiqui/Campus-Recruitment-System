@@ -45,7 +45,9 @@ export default function SignIn() {
   const [errMessage, setErrMessage] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const formik = useFormik({
+console.log( "MSG",message, "ERR MSG",errMessage)
+  
+const formik = useFormik({
     initialValues: {
       email: "",
       password: "",

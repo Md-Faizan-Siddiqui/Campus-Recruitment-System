@@ -29,7 +29,7 @@ function JobPost() {
           : myPostedJobs &&
           myPostedJobs?.reverse().map((data, index) => {
             return (
-              <Grid item xl={3} md={4} sm={6} xs={12} key={index} >
+              <Grid item xl={2} lg={3} md={4} sm={6} xs={12} key={index} >
                 <VacanciesCard
                   campusData={data}
                   btnText={"delete"}

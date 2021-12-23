@@ -170,6 +170,7 @@ export default function VacanciesCard({
     disableFunc,
     companyPostJob,
     apply }) {
+        console.log("campusData",campusData)
 //   const [blockState, setBlockState] = useState()
     const user = useSelector(state => state);
     const dispatch = useDispatch()
@@ -297,10 +298,10 @@ export default function VacanciesCard({
                                 <p>{campusData.jobType}</p>
                             </div>
                             : null}
-                        {campusData?.experience ?
+                        {campusData?.experienceYears ?
                             <div className={classes.dataOrIcon}>
                                 <GiSkills className={classes.icon} />
-                                <p>{campusData.experience}</p>
+                                {campusData?.experienceYears && <p>{campusData?.experienceYears + " " + campusData?.experienceMonths}</p>}
                             </div>
                             : null}
                         {campusData?.salary ?
@@ -361,10 +362,10 @@ export default function VacanciesCard({
                             <p>{campusData.dob}</p>
                         </div>
                         : null}
-                    {campusData?.experience ?
+                    {campusData?.experienceYears ?
                         <div className={classes.dataOrIcon}>
                             <WorkOutlineIcon className={classes.icon} fontSize="small" />
-                            <p>{campusData.experience}</p>
+                            {campusData?.experienceYears && <p>{campusData?.experienceYears + " " + campusData?.experienceMonths}</p>}
                         </div>
                         : null}
                     {campusData?.cgpa ?

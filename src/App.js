@@ -1,3 +1,4 @@
+import "./App.css";
 import SignUp from "../src/Pages/Auth/signUp";
 import SignIn from "../src/Pages/Auth/login";
 import Navbar from "./Components/navbar";
@@ -13,7 +14,6 @@ import { auth, database } from "./Config/firebaseConfig";
 import { userDetails } from "./Redux/Action/userAction";
 import PageNotFound from "./Pages/pageNotFound";
 import Loader from "react-loader-spinner";
-import "./App.css";
 import JobDetails from "./Components/jobDetails";
 import ForgetPassword from "./Components/forgetPassword"
 import ResetPassword from "./Components/resetPassword"
@@ -133,7 +133,6 @@ function App() {
         <Navbar />
         {!user?.loginStatus || (user?.loginUser?.block && user?.loginStatus) ? (
           <>
-          {console.log("blockeduser ")}
             <Switch>
               <Route exact path="/" component={SignIn} />
               <Route path="/signup" component={SignUp} />

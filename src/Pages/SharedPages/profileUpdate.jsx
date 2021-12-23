@@ -33,11 +33,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end"
   },
   input: {
-    width: "94%"
+    width: "100%"
   },
   inputSpan: {
     width: "100%"
   },
+  margin: {
+    marginRight: "10px"
+  }
 }));
 
 function ProfileUpdate(props) {
@@ -64,6 +67,7 @@ function ProfileUpdate(props) {
       city: user.loginUser.city ? user.loginUser.city : "",
       bio: user.loginUser.bio ? user.loginUser.bio : "",
     },
+
     validationSchema:
       role === "student"
         ? updateFormValidationStudent
@@ -72,8 +76,19 @@ function ProfileUpdate(props) {
           : null,
 
     onSubmit: (values) => {
-      const { dob, education, cgpa, skills, name, phone, website, city, bio, experienceMonths, experienceYears } =
-        values;
+      const {
+        dob,
+        education,
+        cgpa,
+        skills,
+        name,
+        phone,
+        website,
+        city,
+        bio,
+        experienceMonths,
+        experienceYears
+      } = values;
       setDisabled(true)
 
       database
@@ -110,29 +125,31 @@ function ProfileUpdate(props) {
           props.handleClose();
         })
         .catch((err) => {
+          console.log(err)
         });
     },
   });
 
   const uploadImg = (e) => {
     let images = e.target.files[0];
-    console.log("images",images)
-    if(images){
-    setUrl("")
-    setLoader(true)
-    setState(true)
-    const uniqueName = Date.now();
-    Storage.ref("images/" + images?.name + uniqueName)
-      .put(images)
-      .then((snapshot) => {
-        snapshot.ref.getDownloadURL().then((URL) => {
-          setUrl(URL);
-          setState(false)
-          setLoader(false)
+    // console.log("images",images)
+    if (images) {
+      setUrl("")
+      setLoader(true)
+      setState(true)
+      const uniqueName = Date.now();
+      Storage.ref("images/" + images?.name + uniqueName)
+        .put(images)
+        .then((snapshot) => {
+          snapshot.ref.getDownloadURL().then((URL) => {
+            setUrl(URL);
+            setState(false)
+            setLoader(false)
+          });
+        })
+        .catch((err) => {
         });
-      })
-      .catch((err) => {
-      });}
+    }
   };
 
   useEffect(() => {
@@ -334,7 +351,7 @@ function ProfileUpdate(props) {
           : null}
         {role === "student" ? (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span className={classes.inputSpan}>
+            <span className={`${classes.inputSpan} ${classes.margin}`}>
               <TextField
                 classes={{ root: classes.input }}
                 select
@@ -437,7 +454,7 @@ function ProfileUpdate(props) {
                   className="profile-pic"
                   id="profilePic"
                   style={{
-                    backgroundImage: `url( ${url ? url :loader? "": fallBackImage} )`,
+                    backgroundImage: `url( ${url ? url : loader ? "" : fallBackImage} )`,
                   }}
                 >
                   <span class="glyphicon glyphicon-camera"></span>

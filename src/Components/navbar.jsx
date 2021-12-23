@@ -16,15 +16,15 @@ import { FaUserGraduate } from "react-icons/fa";
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import WorkRoundedIcon from '@mui/icons-material/WorkRounded';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useLocation } from "react-router-dom";
+import cx from "classnames"
 const useStyles = makeStyles((theme) => ({
   regular: {
     minHeight: "64px"
   },
-  root: {
-    flexGrow: 1,
-  },
+  // root: {
+  //   flexGrow: 1,
+  // },
   menuButton: {
     display: "none",
     [theme.breakpoints.down("xs")]: {
@@ -41,7 +41,9 @@ const useStyles = makeStyles((theme) => ({
   },
   btnColor: {
     color: "white",
-    textDecoration: "none",
+    // textDecoration: "none",
+    // padding: "6px 8px",
+    // borderRadius: "4px",
   },
   drawer: {
     width: "200px",
@@ -76,9 +78,27 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
-  btnActive:{
-        
-  }
+  // rootReplace:{
+  //   // padding: "6px 8px",
+  //   textDecoration: "none",
+  //   backgroundColor: "rgba(0, 0, 0, 0.08)",
+  //   borderRadius:"4px",
+  //   '&:hover': {
+  //     borderColor: "red",
+  //     backgroundColor: 'green',
+  //     color: '#fff',
+  //   },
+  // },
+  navBtnStyle:{
+    textDecoration:"none",
+  },
+  btnActive: {
+    margin:"5px",
+    padding: "6px 8px",
+    textDecoration: "none",
+    backgroundColor: "rgba(0, 0, 0, 0.08)",
+    borderRadius: "4px",
+  },
 }));
 
 export default function ButtonAppBar() {
@@ -89,6 +109,10 @@ export default function ButtonAppBar() {
   const toggleDrawer = (open) => (event) => {
     setState(open);
   };
+
+  const location = useLocation()
+  // console.log(location.pathname)
+
   const list = () => (
     <div onClick={toggleDrawer(false)} className={classes.drawer}>
       <p className={classes.toggleHeading}>{user?.loginUser?.name}</p>
@@ -227,14 +251,20 @@ export default function ButtonAppBar() {
             {user?.loginStatus === true &&
               user?.loginUser?.role === "student" ? (
               <>
-                <Link to="/" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Vacancies</Button>
+                <Link to="/" className={classes.navBtnStyle} >
+                  <Button
+                  classes={location.pathname === "/" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor}
+                    className={classes.btnColor}>Vacancies</Button>
                 </Link>
-                <Link to="/companies" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Companies</Button>
+                <Link to="/companies" className={classes.navBtnStyle}>
+                  <Button
+                  classes={location.pathname === "/companies" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor} 
+                  className={classes.btnColor}>Companies</Button>
                 </Link>
-                <Link to="/profile" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Profile</Button>
+                <Link to="/profile" className={classes.navBtnStyle} >
+                  <Button
+                  classes={location.pathname === "/profile" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor} 
+                  className={classes.btnColor}>Profile</Button>
                 </Link>
                 <Button className={classes.btnColor} onClick={logout}>
                   <PowerSettingsNewIcon />
@@ -244,14 +274,20 @@ export default function ButtonAppBar() {
             {user?.loginStatus === true &&
               user?.loginUser?.role === "company" ? (
               <>
-                <Link to="/" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Students</Button>
+                <Link to="/" className={classes.navBtnStyle}>
+                  <Button
+                  classes={location.pathname === "/" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor} 
+                  className={classes.btnColor}>Students</Button>
                 </Link>
-                <Link to="/jobpost" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Jobs</Button>
+                <Link to="/jobpost" className={classes.navBtnStyle}>
+                  <Button
+                  classes={location.pathname === "/jobpost" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor} 
+                  className={classes.btnColor}>Jobs</Button>
                 </Link>
-                <Link to="/profile" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Profile</Button>
+                <Link to="/profile" className={classes.navBtnStyle}>
+                  <Button
+                  classes={location.pathname === "/profile" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor} 
+                  className={classes.btnColor}>Profile</Button>
                 </Link>
                 <Button className={classes.btnColor} onClick={logout}>
                   <PowerSettingsNewIcon />
@@ -260,14 +296,21 @@ export default function ButtonAppBar() {
             ) : null}
             {user?.loginStatus === true && user?.loginUser?.role === "admin" ? (
               <>
-                <Link to="/" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Jobs</Button>
+                <Link to="/" className={classes.navBtnStyle}>
+                  <Button
+                    classes={location.pathname === "/" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor}
+                    className={classes.btnColor}
+                  >Jobs</Button>
                 </Link>
-                <Link to="/companies" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Companies</Button>
+                <Link to="/companies" className={classes.navBtnStyle}>
+                  <Button
+                    classes={location.pathname === "/companies" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor}
+                    className={classes.btnColor}>Companies</Button>
                 </Link>
-                <Link to="/students" className={classes.btnColor}>
-                  <Button className={classes.btnColor}>Students</Button>
+                <Link to="/students" className={classes.navBtnStyle}>
+                  <Button
+                    classes={location.pathname === "/students" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor}
+                    className={classes.btnColor}>Students</Button>
                 </Link>
                 <Button className={classes.btnColor} onClick={logout}>
                   <PowerSettingsNewIcon />

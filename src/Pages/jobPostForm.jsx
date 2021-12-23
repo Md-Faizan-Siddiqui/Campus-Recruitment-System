@@ -9,20 +9,29 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-      margin: "10px 5px 0px 5px",
-      fontSize: "12px",
-      fontWeight: "bold",
+    margin: "10px 5px 0px 5px",
+    fontSize: "12px",
+    fontWeight: "bold",
+    borderColor: "#3c52b2",
+    border: "2px solid",
+    backgroundColor: '#fff',
+    color: '#3c52b2',
+    '&:hover': {
       borderColor: "#3c52b2",
       border: "2px solid",
-      backgroundColor: '#fff',
-      color: '#3c52b2',
-      '&:hover': {
-          borderColor: "#3c52b2",
-          border: "2px solid",
-          backgroundColor: '#3c52b2',
-          color: '#fff',
-      },
+      backgroundColor: '#3c52b2',
+      color: '#fff',
+    },
   },
+  input: {
+    width: "100%"
+  },
+  inputSpan: {
+    width: "100%"
+  },
+  margin: {
+    marginRight: "10px"
+  }
 }))
 
 function JobPostForm(props) {
@@ -31,7 +40,8 @@ function JobPostForm(props) {
   const formik = useFormik({
     initialValues: {
       education: user.loginUser.education ? user.loginUser.education : "",
-      experience: user.loginUser.experience ? user.loginUser.experience : "",
+      experienceYears: user.loginUser.experienceYears ? user.loginUser.experienceYears : "",
+      experienceMonths: user.loginUser.experienceMonths ? user.loginUser.experienceMonths : "",
       jobTitle: user.loginUser.jobTitle ? user.loginUser.jobTitle : "",
       jobType: user.loginUser.jobType ? user.loginUser.jobType : "",
       lastDate: user.loginUser.lastDate ? user.loginUser.lastDate : "",
@@ -49,7 +59,8 @@ function JobPostForm(props) {
         jobDescription,
         jobType,
         lastDate,
-        experience,
+        experienceMonths, 
+        experienceYears,
         education,
         salary,
       } = values;
@@ -62,7 +73,8 @@ function JobPostForm(props) {
           jobDescription: jobDescription,
           jobType: jobType,
           lastDate: lastDate,
-          experience: experience,
+          experienceMonths: experienceMonths,
+          experienceYears: experienceYears,
           education: education,
           salary: salary,
           block: false,
@@ -72,6 +84,7 @@ function JobPostForm(props) {
           props.handleClose();
         })
         .catch((err) => {
+          console.log(err)
         });
     },
   });
@@ -209,7 +222,79 @@ function JobPostForm(props) {
                 {formik.errors.education}
               </p>
             )}
-            <TextField
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span className={`${classes.inputSpan} ${classes.margin}`}>
+                <TextField
+                  classes={{ root: classes.input }}
+                  select
+                  id="select"
+                  label="Experience Years"
+                  placeholder="Experience Years"
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                  name="experience Years"
+                  value={formik.values.experienceYears}
+                  onChange={formik.handleChange("experienceYears")}
+                >
+                  <MenuItem value="Fresh">Fresh</MenuItem>
+                  <MenuItem value="1 Year">1 Year</MenuItem>
+                  <MenuItem value="2 Years">2 Years</MenuItem>
+                  <MenuItem value="3 Years">3 Years</MenuItem>
+                  <MenuItem value="4 Years">4 Years</MenuItem>
+                  <MenuItem value="5 Years">5 Years</MenuItem>
+                  <MenuItem value="6 Years">6 Years</MenuItem>
+                  <MenuItem value="7 Years">7 Years</MenuItem>
+                  <MenuItem value="8 Years">8 Years</MenuItem>
+                  <MenuItem value="9 Years">9 Years</MenuItem>
+                  <MenuItem value="10 Years">10 Years</MenuItem>
+                </TextField>
+                {formik.errors.experienceYears && formik.touched.experienceYears && (
+                  <p style={{ color: "red", marginLeft: "5px" }}>
+                    {formik.errors.experienceYears}
+                  </p>
+                )}
+              </span>
+              <span className={classes.inputSpan}>
+                <TextField
+                  classes={{ root: classes.input }}
+                  select
+                  id="select"
+                  label="Experience Months"
+                  placeholder="Experience Months"
+                  disabled={formik.values.experienceYears === "Fresh" ? true : false}
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                  name="experienceMonths"
+                  value={formik.values.experienceMonths}
+                  onChange={formik.handleChange("experienceMonths")}
+                >
+                  <MenuItem value="">Select One</MenuItem>
+                  <MenuItem value="1 Month">1 Month</MenuItem>
+                  <MenuItem value="2 Months">2 Months</MenuItem>
+                  <MenuItem value="3 Months">3 Months</MenuItem>
+                  <MenuItem value="4 Months">4 Months</MenuItem>
+                  <MenuItem value="5 Months">5 Months</MenuItem>
+                  <MenuItem value="6 Months">6 Months</MenuItem>
+                  <MenuItem value="7 Months">7 Months</MenuItem>
+                  <MenuItem value="8 Months">8 Months</MenuItem>
+                  <MenuItem value="9 Months">9 Months</MenuItem>
+                  <MenuItem value="10 Months">10 Months</MenuItem>
+                  <MenuItem value="11 Months">11 Months</MenuItem>
+                </TextField>
+                {formik.errors.experienceMonths && formik.touched.experienceMonths && (
+                  <p style={{ color: "red", marginLeft: "5px" }}>
+                    {formik.errors.experienceMonths}
+                  </p>
+                )}
+              </span>
+            </div>
+            {/* <TextField
               label="Experience"
               placeholder="Experience"
               fullWidth
@@ -226,9 +311,9 @@ function JobPostForm(props) {
               <p style={{ color: "red", marginLeft: "5px" }}>
                 {formik.errors.experience}
               </p>
-            )}
+            )} */}
             <Button
-            className={classes.button}
+              className={classes.button}
               type="submit"
               size="small"
               variant="outlined"

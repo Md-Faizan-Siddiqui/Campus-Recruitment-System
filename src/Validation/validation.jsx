@@ -102,7 +102,7 @@ export const JobPostFormValidation = Yup.object({
     .required("Required"),
   jobDescription: Yup.string()
     .trim()
-    .max(250, "Must be 250 characters or less")
+    .max(1000, "Must be 1000 characters or less")
     .required("Required"),
   jobType: Yup.mixed()
     .oneOf(["Full Time", "Part Time", "Internship"])
@@ -118,7 +118,10 @@ export const JobPostFormValidation = Yup.object({
   education: Yup.mixed()
     .oneOf(["Matric", "Inter", "Graduate", "Master's"])
     .required("Required"),
-  experience: Yup.string()
+  // experience: Yup.string()
+  //   .trim()
+  //   .required("Required"),
+    experienceYears: Yup.string()
     .trim()
     .required("Required"),
 });
