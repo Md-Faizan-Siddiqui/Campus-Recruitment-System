@@ -118,9 +118,6 @@ export const JobPostFormValidation = Yup.object({
   education: Yup.mixed()
     .oneOf(["Matric", "Inter", "Graduate", "Master's"])
     .required("Required"),
-  // experience: Yup.string()
-  //   .trim()
-  //   .required("Required"),
     experienceYears: Yup.string()
     .trim()
     .required("Required"),

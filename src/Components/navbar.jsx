@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
   regular: {
     minHeight: "64px"
   },
-  // root: {
-  //   flexGrow: 1,
-  // },
   menuButton: {
     display: "none",
     [theme.breakpoints.down("xs")]: {
@@ -41,9 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
   btnColor: {
     color: "white",
-    // textDecoration: "none",
-    // padding: "6px 8px",
-    // borderRadius: "4px",
   },
   drawer: {
     width: "200px",
@@ -78,17 +72,6 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
-  // rootReplace:{
-  //   // padding: "6px 8px",
-  //   textDecoration: "none",
-  //   backgroundColor: "rgba(0, 0, 0, 0.08)",
-  //   borderRadius:"4px",
-  //   '&:hover': {
-  //     borderColor: "red",
-  //     backgroundColor: 'green',
-  //     color: '#fff',
-  //   },
-  // },
   navBtnStyle:{
     textDecoration:"none",
   },
@@ -111,7 +94,6 @@ export default function ButtonAppBar() {
   };
 
   const location = useLocation()
-  // console.log(location.pathname)
 
   const list = () => (
     <div onClick={toggleDrawer(false)} className={classes.drawer}>
@@ -239,11 +221,15 @@ export default function ButtonAppBar() {
           </Typography>
           {user.loginStatus === false ? (
             <>
-              <Link to="/signup" className={classes.btnColor}>
-                <Button className={classes.btnColor}>SignUp</Button>
+              <Link to="/signup" className={classes.navBtnStyle}>
+                <Button
+                classes={location.pathname === "/signup" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor} 
+                className={classes.btnColor}>SignUp</Button>
               </Link>
-              <Link to="/" className={classes.btnColor}>
-                <Button className={classes.btnColor}>Login</Button>
+              <Link to="/" className={classes.navBtnStyle}>
+                <Button
+                classes={location.pathname === "/" ? { root: cx(classes.btnActive, classes.btnColor) } : classes.btnColor} 
+                className={classes.btnColor}>Login</Button>
               </Link>
             </>
           ) : null}

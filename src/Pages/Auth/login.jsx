@@ -45,16 +45,14 @@ export default function SignIn() {
   const [errMessage, setErrMessage] = useState("");
   const [loader, setLoader] = useState(false);
 
-console.log( "MSG",message, "ERR MSG",errMessage)
-  
-const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema: LoginFormValidation,
 
-    onSubmit: (values) => {
+    onSubmit: (values, event) => {
       const { email, password } = values;
       setErrMessage("");
       setMessage("");
@@ -64,16 +62,19 @@ const formik = useFormik({
         .then((userCredential) => {
           let user = userCredential.user;
           database.ref(`/CRA/users/${user?.uid}`).on("value", (snapshot) => {
-            snapshot.val().block ? setErrMessage("You are Blocked") : setMessage("Login Success!");
-            setLoader(false);
-            dispatch(
-              userDetails({
-                loginUser: user,
-                loginStatus: true,
-                role: snapshot.val().role,
-              })
+            if (snapshot.val().block) setErrMessage("You are Blocked")
+            else {
+              setMessage("Login Success!");
+              dispatch(
+                userDetails({
+                  loginUser: user,
+                  loginStatus: true,
+                  role: snapshot.val().role,
+                })
               );
-            })
+            }
+            setLoader(false);
+          })
         })
         .catch((error) => {
           var errorMessage = error.message;
@@ -141,7 +142,7 @@ const formik = useFormik({
             className={classes.submit}
             disabled={loader ? true : false}
           >
-            {loader === true ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars" />
+            {loader === true ? <Loader width="15px" height="15px" color="#3f51b5" type="Bars"/>
               : "LogIn"}
           </Button>
           <Grid container>

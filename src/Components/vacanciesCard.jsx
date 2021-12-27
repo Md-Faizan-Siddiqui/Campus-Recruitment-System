@@ -170,8 +170,7 @@ export default function VacanciesCard({
     disableFunc,
     companyPostJob,
     apply }) {
-        console.log("campusData",campusData)
-//   const [blockState, setBlockState] = useState()
+
     const user = useSelector(state => state);
     const dispatch = useDispatch()
     const classes = useStyles();

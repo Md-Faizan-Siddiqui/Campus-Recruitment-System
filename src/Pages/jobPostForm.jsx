@@ -294,24 +294,6 @@ function JobPostForm(props) {
                 )}
               </span>
             </div>
-            {/* <TextField
-              label="Experience"
-              placeholder="Experience"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              name="experience"
-              value={formik.values.experience}
-              onChange={formik.handleChange("experience")}
-            />
-            {formik.errors.experience && formik.touched.experience && (
-              <p style={{ color: "red", marginLeft: "5px" }}>
-                {formik.errors.experience}
-              </p>
-            )} */}
             <Button
               className={classes.button}
               type="submit"

@@ -110,7 +110,7 @@ function App() {
                 })
               );
             } else {
-              // console.log("No data available");
+              console.log("No data available");
             }
           });
       }
@@ -160,7 +160,6 @@ function App() {
           <>
             <Switch>
               <Route exact path="/" component={Vacancies} />
-              {/* <Route path='/adminProfile' component={AdminProfile} /> */}
               <Route path="/companies" component={Companies} />
               <Route path="/students" component={Students} />
               <Route path="/jobdetails/:id" component={JobDetails} />

@@ -51,9 +51,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     boxSizing: "border-box",
   },
-  // dialogCardSm: {
-  //   minWidth: "90%",
-  // },
   widthAdjustment: {
     minWidth: "250px",
     [theme.breakpoints.down("sm")]: {

@@ -11,6 +11,7 @@ import { updateFormValidationStudent } from "../../Validation/validation";
 import { updateFormValidationCompany } from "../../Validation/validation";
 import { makeStyles } from "@material-ui/core/styles";
 import Loader from "react-loader-spinner";
+import Chip from "../../Components/Chip"
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -132,7 +133,6 @@ function ProfileUpdate(props) {
 
   const uploadImg = (e) => {
     let images = e.target.files[0];
-    // console.log("images",images)
     if (images) {
       setUrl("")
       setLoader(true)
