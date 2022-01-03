@@ -99,6 +99,7 @@ export default function SignIn() {
           onSubmit={formik.handleSubmit}
         >
           <TextField
+          {...formik.getFieldProps('email')}
             variant="outlined"
             margin="normal"
             required
@@ -117,6 +118,7 @@ export default function SignIn() {
             </p>
           )}
           <TextField
+          {...formik.getFieldProps('password')}
             variant="outlined"
             margin="normal"
             required

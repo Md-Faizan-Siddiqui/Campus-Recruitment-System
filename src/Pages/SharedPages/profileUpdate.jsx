@@ -161,6 +161,7 @@ function ProfileUpdate(props) {
         {props.jobPost ? null : (
           <>
             <TextField
+            {...formik.getFieldProps('name')}
               type="text"
               label="Name"
               placeholder="Name"
@@ -186,6 +187,7 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <>
             <TextField
+            {...formik.getFieldProps('cgpa')}
               type="number"
               label="CGPA"
               placeholder="CGPA"
@@ -209,6 +211,7 @@ function ProfileUpdate(props) {
         {props.jobPost ? null : (
           <>
             <TextField
+            {...formik.getFieldProps('city')}
               type="text"
               label="City"
               placeholder="City"
@@ -232,6 +235,7 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <>
             <TextField
+            {...formik.getFieldProps('bio')}
               type="text"
               label="Bio"
               placeholder="Bio"
@@ -255,6 +259,7 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <>
             <TextField
+            {...formik.getFieldProps('education')}
               label="Education"
               placeholder="Education"
               fullWidth
@@ -285,6 +290,7 @@ function ProfileUpdate(props) {
         {props.jobPost ? null : (
           <>
             <TextField
+            {...formik.getFieldProps('phone')}
               label="Phone"
               placeholder="Phone"
               fullWidth
@@ -307,6 +313,7 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <>
             <TextField
+            {...formik.getFieldProps('dob')}
               type="date"
               label="Date Of Birth"
               placeholder="D.O.B"
@@ -330,6 +337,7 @@ function ProfileUpdate(props) {
         {role === "student" ? (
           <>
             <TextField
+            {...formik.getFieldProps('skills')}
               label="Skills"
               placeholder="Skills"
               fullWidth
@@ -353,6 +361,7 @@ function ProfileUpdate(props) {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <span className={`${classes.inputSpan} ${classes.margin}`}>
               <TextField
+              {...formik.getFieldProps('experienceYears')}
                 classes={{ root: classes.input }}
                 select
                 id="select"
@@ -363,7 +372,7 @@ function ProfileUpdate(props) {
                   shrink: true,
                 }}
                 variant="outlined"
-                name="experience Years"
+                name="experienceYears"
                 value={formik.values.experienceYears}
                 onChange={formik.handleChange("experienceYears")}
               >
@@ -387,6 +396,7 @@ function ProfileUpdate(props) {
             </span>
             <span className={classes.inputSpan}>
               <TextField
+              {...formik.getFieldProps('experienceMonths')}
                 classes={{ root: classes.input }}
                 select
                 id="select"
@@ -426,6 +436,7 @@ function ProfileUpdate(props) {
         {role === "company" ? (
           <>
             <TextField
+            {...formik.getFieldProps('website')}
               label="Website"
               placeholder="Website"
               fullWidth
@@ -462,6 +473,7 @@ function ProfileUpdate(props) {
                 </div>
               </label>
               <input
+              {...formik.getFieldProps('fileToUpload')}
                 value={formik.values.fileToUpload}
                 type="File"
                 name="fileToUpload"

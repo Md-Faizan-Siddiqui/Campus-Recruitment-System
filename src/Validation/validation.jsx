@@ -77,6 +77,11 @@ export const SignUpFormValidation = Yup.object({
   role: Yup.mixed()
     .required("Required")
     .oneOf(["company", "student"]),
+    // phone: Yup.string()
+    // .trim()
+    // .min(03000000000, "Password must be at least 6 charaters")
+    // .max(03499999999, "Password must be 16 charaters or less")
+    // .required("Required"),
   phone: Yup.string()
     .trim()
     .matches(phoneRegExp, "Phone number is not valid")

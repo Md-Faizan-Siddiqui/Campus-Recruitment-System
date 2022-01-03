@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import Paper from '@mui/material/Paper';
 import VacanciesCard from './vacanciesCard';
-import CustomizedSnackbars from "../Components/snackBar"
+import Alert from "../Components/snackBar"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -188,7 +188,7 @@ export default function JobDetails(props) {
                 </Grid>
             </Grid>
             {alert ?
-                <CustomizedSnackbars setAlert={setAlert} message={"Sucessfully Applied"} errMessage={"Unexpected Error"} />
+                <Alert setAlert={setAlert} message={"Sucessfully Applied"} errMessage={"Unexpected Error"} />
                 : null}
         </div>
     )

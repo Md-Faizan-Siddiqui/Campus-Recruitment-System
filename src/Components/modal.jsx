@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -14,6 +14,8 @@ import EditButton from "../Components/editButton";
 import Accordion from "./accordion"
 import { makeStyles } from "@material-ui/core/styles";
 import VacanciesCard from "./vacanciesCard";
+import { useSelector } from "react-redux";
+import Alert from "./snackBar"
 
 const styles = (theme) => ({
   root: {
@@ -58,11 +60,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   formWidth: {
-    maxWidth:"600px",
+    maxWidth: "600px",
     minWidth: "600px",
     [theme.breakpoints.down("sm")]: {
-      maxWidth:"250px",
-    minWidth: "250px",
+      maxWidth: "250px",
+      minWidth: "250px",
     },
   },
 }));
@@ -103,8 +105,16 @@ export default function CustomizedDialogs({
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  // const user = useSelector(state => state.addUser.loginUser);
+  // const [errMessage, setErrMessage] = useState("");
+  // console.log("USER", user)
   const handleClickOpen = () => {
     setOpen(true);
+    //   setErrMessage("")
+    // if (!user.city || !user.name || !user.website || !user.phone) {
+    //   setErrMessage("Kindly Update Your Profile!")
+    // } else {
+    // }
   };
   const handleClose = () => {
     setOpen(false);
@@ -166,6 +176,9 @@ export default function CustomizedDialogs({
           </DialogContent>
         </Dialog>
       )}
+      {/* {errMessage ? (
+        <Alert errMessage={errMessage} handleClose={false} />
+      ) : null} */}
     </div>
   );
 }

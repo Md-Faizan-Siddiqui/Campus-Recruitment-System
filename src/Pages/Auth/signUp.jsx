@@ -16,6 +16,7 @@ import RadioBtn from "../../Components/radioButton";
 import { useFormik } from "formik";
 import { SignUpFormValidation } from "../../Validation/validation";
 import Loader from "react-loader-spinner";
+import { circularProgressClasses } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     '&::placeholder': {
-      color:"red"
+      color: "red"
     },
   },
 }));
@@ -95,6 +96,7 @@ export default function SignUp() {
         });
     },
   });
+  console.log("formik Touched", formik.touched.name)
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -113,6 +115,7 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                {...formik.getFieldProps('name')}
                 variant="outlined"
                 required
                 fullWidth
@@ -132,6 +135,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                {...formik.getFieldProps('email')}
                 variant="outlined"
                 required
                 fullWidth
@@ -150,7 +154,8 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-              className={classes.input}
+                {...formik.getFieldProps('phone')}
+                className={classes.input}
                 type="text"
                 country="US"
                 variant="outlined"
@@ -172,6 +177,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                {...formik.getFieldProps('password')}
                 variant="outlined"
                 required
                 fullWidth
@@ -190,7 +196,8 @@ export default function SignUp() {
               )}
             </Grid>
             <Grid item xs={12}>
-              <RadioBtn onChange={formik.handleChange("role")} />
+              <RadioBtn onChange={formik.handleChange("role")}
+                {...formik.getFieldProps('role')}/>
               {formik.errors.role && formik.touched.role && (
                 <p style={{ color: "red", marginLeft: "5px" }}>
                   {formik.errors.role}
@@ -210,8 +217,9 @@ export default function SignUp() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
+              Already have an account?
               <Link to="/" variant="body2">
-                Already have an account? Sign in
+                {" Sign in"}
               </Link>
             </Grid>
           </Grid>

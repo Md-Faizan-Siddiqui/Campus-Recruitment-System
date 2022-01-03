@@ -94,6 +94,7 @@ function JobPostForm(props) {
         <div>
           <form action="" onSubmit={formik.handleSubmit}>
             <TextField
+            {...formik.getFieldProps('jobTitle')}
               type="text"
               label="Job Title"
               placeholder="Job Title"
@@ -113,6 +114,7 @@ function JobPostForm(props) {
               </p>
             )}
             <TextField
+            {...formik.getFieldProps('jobDescription')}
               type="text"
               label="Job Description"
               placeholder="Job Description"
@@ -134,6 +136,7 @@ function JobPostForm(props) {
               </p>
             )}
             <TextField
+            {...formik.getFieldProps('jobType')}
               label="Job Type"
               placeholder="Job Type"
               fullWidth
@@ -159,6 +162,7 @@ function JobPostForm(props) {
               </p>
             )}
             <TextField
+            {...formik.getFieldProps('lastDate')}
               type="date"
               label="Last Date"
               placeholder="Last Date"
@@ -178,6 +182,7 @@ function JobPostForm(props) {
               </p>
             )}
             <TextField
+            {...formik.getFieldProps('salary')}
               type="number"
               label="Salary"
               placeholder="Salary"
@@ -197,6 +202,7 @@ function JobPostForm(props) {
               </p>
             )}
             <TextField
+            {...formik.getFieldProps('education')}
               label="Education"
               placeholder="Education"
               fullWidth
@@ -225,6 +231,7 @@ function JobPostForm(props) {
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <span className={`${classes.inputSpan} ${classes.margin}`}>
                 <TextField
+                {...formik.getFieldProps('experienceYears')}
                   classes={{ root: classes.input }}
                   select
                   id="select"
@@ -235,7 +242,7 @@ function JobPostForm(props) {
                     shrink: true,
                   }}
                   variant="outlined"
-                  name="experience Years"
+                  name="experienceYears"
                   value={formik.values.experienceYears}
                   onChange={formik.handleChange("experienceYears")}
                 >
@@ -259,6 +266,7 @@ function JobPostForm(props) {
               </span>
               <span className={classes.inputSpan}>
                 <TextField
+                {...formik.getFieldProps('experienceMonths')}
                   classes={{ root: classes.input }}
                   select
                   id="select"
